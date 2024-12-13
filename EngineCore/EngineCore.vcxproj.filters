@@ -3,6 +3,7 @@
   <ItemGroup>
     <ClInclude Include="EngineCore.h" />
     <ClInclude Include="PreCompile.h" />
+    <ClInclude Include="IContentsCore.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />

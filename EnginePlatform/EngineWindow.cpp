@@ -2,12 +2,12 @@
 #include "EngineWindow.h"
 #include <EngineBase/EngineDebug.h>
 
-
 HINSTANCE UEngineWindow::hInstance = nullptr;
 std::map<std::string, WNDCLASSEXA> UEngineWindow::WindowClasss;
 int WindowCount = 0;
+bool UEngineWindow::LoopActive = true;
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK UEngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
@@ -19,12 +19,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
-        // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
         EndPaint(hWnd, &ps);
     }
     break;
     case WM_DESTROY:
         --WindowCount;
+        if (0 >= WindowCount)
+        {
+            UEngineWindow::LoopActive = false;
+        }
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
@@ -36,6 +39,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 void UEngineWindow::EngineWindowInit(HINSTANCE _Instance)
 {
     hInstance = _Instance;
+
     WNDCLASSEXA wcex;
     wcex.cbSize = sizeof(WNDCLASSEX);
     wcex.style = CS_HREDRAW | CS_VREDRAW;
@@ -67,7 +71,7 @@ int UEngineWindow::WindowMessageLoop(std::function<void()> _StartFunction, std::
         return 0;
     }
 
-    while (0 != WindowCount)
+    while (true == LoopActive)
     {
         if (0 != PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
@@ -89,10 +93,8 @@ int UEngineWindow::WindowMessageLoop(std::function<void()> _StartFunction, std::
 void UEngineWindow::CreateWindowClass(const WNDCLASSEXA& _Class)
 {
 
-
     std::map<std::string, WNDCLASSEXA>::iterator EndIter = WindowClasss.end();
     std::map<std::string, WNDCLASSEXA>::iterator FindIter = WindowClasss.find(std::string(_Class.lpszClassName));
-
 
     if (EndIter != FindIter)
     {
@@ -157,9 +159,9 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
         return;
     }
 
-
     ShowWindow(WindowHandle, SW_SHOW);
     UpdateWindow(WindowHandle);
+
 }
 
 void UEngineWindow::SetWindowPosAndScale(FVector _Pos, FVector _Scale)
@@ -176,7 +178,6 @@ FVector UEngineWindow::GetMousePos()
     POINT MousePoint;
 
     GetCursorPos(&MousePoint);
-
     ScreenToClient(WindowHandle, &MousePoint);
 
     return FVector(MousePoint.x, MousePoint.y);

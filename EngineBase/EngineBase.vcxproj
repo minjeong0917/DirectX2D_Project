@@ -23,7 +23,11 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineDirectory.h" />
+    <ClInclude Include="EngineFile.h" />
     <ClInclude Include="EngineMath.h" />
+    <ClInclude Include="EnginePath.h" />
+    <ClInclude Include="EngineSerializer.h" />
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="EngineDefine.h" />
   </ItemGroup>
@@ -32,7 +36,11 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EngineDirectory.cpp" />
+    <ClCompile Include="EngineFile.cpp" />
     <ClCompile Include="EngineMath.cpp" />
+    <ClCompile Include="EnginePath.cpp" />
+    <ClCompile Include="EngineSerializer.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PreCompile.h</PrecompiledHeaderFile>
