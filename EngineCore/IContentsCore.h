@@ -19,6 +19,9 @@ public:
 	virtual void EngineStart(UEngineInitData& _Data) = 0 {};
 	virtual void EngineTick(float _DeltaTime) {};
 	virtual void EngineEnd() {};
+
+
+
 };
 
 #define CreateContentsCoreDefine(TYPE) \

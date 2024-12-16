@@ -4,9 +4,13 @@
     <ClInclude Include="EngineCore.h" />
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="IContentsCore.h" />
+    <ClInclude Include="Actor.h" />
+    <ClInclude Include="Level.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
     <ClCompile Include="PreCompile.cpp" />
+    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Level.cpp" />
   </ItemGroup>
 </Project>
