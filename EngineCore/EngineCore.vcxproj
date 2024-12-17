@@ -171,6 +171,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Pawn.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameMode.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="EngineCore.h">
       <SubType>
       </SubType>
@@ -181,9 +189,25 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ActorComponent.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="SceneComponent.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Pawn.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameMode.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -202,6 +226,14 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PreCompile.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="Level.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="ActorComponent.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SceneComponent.cpp">
       <SubType>
       </SubType>
     </ClCompile>
