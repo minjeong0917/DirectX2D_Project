@@ -1,8 +1,10 @@
 #include "PreCompile.h"
 #include "Logo.h"
+#include <EngineCore/Renderer.h>
 
 ALogo::ALogo()
 {
+	std::shared_ptr<URenderer> NewRenderer = CreateDefaultSubObject<URenderer>();
 }
 
 ALogo::~ALogo()

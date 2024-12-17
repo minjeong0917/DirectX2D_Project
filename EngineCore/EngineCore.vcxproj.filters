@@ -24,6 +24,7 @@
     <ClInclude Include="Level.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -46,6 +47,7 @@
     <ClCompile Include="Level.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Interface">
