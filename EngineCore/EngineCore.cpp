@@ -152,6 +152,10 @@ void UEngineCore::EngineFrame()
 
 void UEngineCore::EngineEnd()
 {
+	Device.Release();
+	CurLevel = nullptr;
+	NextLevel = nullptr;
 	LevelMap.clear();
+
 	UEngineDebug::EndConsole();
 }

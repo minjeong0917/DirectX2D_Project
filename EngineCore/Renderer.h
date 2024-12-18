@@ -1,5 +1,13 @@
 #pragma once
 #include "SceneComponent.h"
+struct EngineVertex
+{
+public:
+
+	FVector Pos;
+	FVector Color;
+
+};
 
 // Ό³Έν :
 class URenderer : public USceneComponent
@@ -25,5 +33,10 @@ protected:
 private:
 	virtual void Render(float _DeltaTime);
 
+public:
+	ID3D11Buffer* VertexBuffer = nullptr;
+
+	void InputAssembler1Init();
+	void InputAssembler1Setting();
 };
 
