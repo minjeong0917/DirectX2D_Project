@@ -1,12 +1,10 @@
 #pragma once
 #include "SceneComponent.h"
+
 struct EngineVertex
 {
-public:
-
-	FVector Pos;
-	FVector Color;
-
+	float4 POSITION;
+	float4 COLOR;
 };
 
 // 설명 :
@@ -34,9 +32,47 @@ private:
 	virtual void Render(float _DeltaTime);
 
 public:
-	ID3D11Buffer* VertexBuffer = nullptr;
-
+	// InputAssembler1
+	Microsoft::WRL::ComPtr<ID3D11Buffer> VertexBuffer = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11InputLayout> InputLayOut = nullptr;
 	void InputAssembler1Init();
 	void InputAssembler1Setting();
+	void InputAssembler1LayOut();
+
+	// VertexShader
+	Microsoft::WRL::ComPtr<ID3D11VertexShader> VertexShader = nullptr;
+	void VertexShaderInit();
+	void VertexShaderSetting();
+
+	// 중간 컴파일 결과물
+	Microsoft::WRL::ComPtr<ID3DBlob> VSShaderCodeBlob = nullptr;
+	Microsoft::WRL::ComPtr<ID3DBlob> VSErrorCodeBlob = nullptr;
+
+
+	// InputAssembler2
+	Microsoft::WRL::ComPtr<ID3D11Buffer> IndexBuffer = nullptr;
+	D3D11_PRIMITIVE_TOPOLOGY Topology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+	void InputAssembler2Init();
+	void InputAssembler2Setting();
+
+	// Rasterizer
+	Microsoft::WRL::ComPtr<ID3D11RasterizerState> RasterizerState = nullptr;
+	void RasterizerInit();
+	void RasterizerSetting();
+
+	// ViewPort
+	D3D11_VIEWPORT ViewPortInfo;
+
+	// Pixel Shader
+	Microsoft::WRL::ComPtr<ID3D11PixelShader> PixelShader = nullptr;
+	void PixelShaderInit();
+	void PixelShaderSetting();
+
+	// 중간 컴파일 결과물
+	Microsoft::WRL::ComPtr<ID3DBlob> PSShaderCodeBlob = nullptr;
+	Microsoft::WRL::ComPtr<ID3DBlob> PSErrorCodeBlob = nullptr;
+
+	void OutPutMergeSetting();
+
 };
 

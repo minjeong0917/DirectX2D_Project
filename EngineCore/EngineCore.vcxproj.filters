@@ -24,8 +24,12 @@
     <ClInclude Include="Level.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="EngineGraphicDevice.h" />
+    <ClInclude Include="EngineGraphicDevice.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Object\Component\Contents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -48,8 +52,12 @@
     <ClCompile Include="Level.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="EngineGraphicDevice.cpp" />
+    <ClCompile Include="EngineGraphicDevice.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Object\Component\Contents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Interface">
@@ -63,6 +71,12 @@
     </Filter>
     <Filter Include="Object\Component">
       <UniqueIdentifier>{c8afd55a-cc2b-4b59-83f0-0e990a3c4e47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphic">
+      <UniqueIdentifier>{0f52a43e-0754-437d-8011-06168f9e38ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\Contents">
+      <UniqueIdentifier>{9eaee73b-c4e1-4910-a758-22fbb8bdbb26}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
