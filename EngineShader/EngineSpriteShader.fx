@@ -24,5 +24,6 @@ VertexShaderOutPut VertexToWorld(EngineVertex _Vertex)
 
 float4 PixelToWorld(VertexShaderOutPut _Vertex) : SV_Target0
 {
-    return float4(1.0f, 0.0f, 0.0f, 1.0f);
+    // 색 바로 리턴
+    return float4(0.1f, 0.0f, 0.5f, 1.0f);
 }

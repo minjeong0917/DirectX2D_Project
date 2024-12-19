@@ -70,7 +70,6 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> DXBackBufferTexture = nullptr;
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> RTV = nullptr;
 
-	//FVector ClearColor = FVector::BLUE;
 
 };
 
