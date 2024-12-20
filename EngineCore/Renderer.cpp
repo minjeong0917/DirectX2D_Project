@@ -25,16 +25,57 @@ void URenderer::SetOrder(int _Order)
 	Level->ChangeRenderGroup(0, PrevOrder, RendererPtr);
 }
 
+
 ENGINEAPI void URenderer::BeginPlay()
 {
 	SetOrder(0);
+
 
 	InputAssembler1Init();
 	VertexShaderInit();
 	InputAssembler2Init();
 	RasterizerInit();
 	PixelShaderInit();
+	ShaderResInit();
 
+}
+
+void URenderer::ShaderResInit()
+{
+	D3D11_BUFFER_DESC BufferInfo = { 0 };
+	BufferInfo.ByteWidth = sizeof(FTransform);
+	BufferInfo.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	BufferInfo.CPUAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_WRITE;
+	BufferInfo.Usage = D3D11_USAGE_DYNAMIC;
+
+	if (S_OK != UEngineCore::Device.GetDevice()->CreateBuffer(&BufferInfo, nullptr, &TransformConstBuffer))
+	{
+		MSGASSERT("상수버퍼 생성에 실패했습니다..");
+		return;
+	}
+
+}
+
+void URenderer::ShaderResSetting()
+{
+	FTransform& RendererTrans = GetTransformRef();
+
+	D3D11_MAPPED_SUBRESOURCE Data = {};
+	UEngineCore::Device.GetContext()->Map(TransformConstBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &Data);
+
+	if (nullptr == Data.pData)
+	{
+		MSGASSERT("그래픽카드가 수정을 거부했습니다.");
+	}
+
+	memcpy_s(Data.pData, sizeof(FTransform), &RendererTrans, sizeof(FTransform));
+
+
+	UEngineCore::Device.GetContext()->Unmap(TransformConstBuffer.Get(), 0);
+
+	ID3D11Buffer* ArrPtr[16] = { TransformConstBuffer.Get() };
+
+	UEngineCore::Device.GetContext()->VSSetConstantBuffers(0, 1, ArrPtr);
 }
 
 void URenderer::Render(UEngineCamera* _Camera, float _DeltaTime)
@@ -43,20 +84,19 @@ void URenderer::Render(UEngineCamera* _Camera, float _DeltaTime)
 
 	FTransform& RendererTrans = GetTransformRef();
 
-
 	RendererTrans.View = CameraTrans.View;
 	RendererTrans.Projection = CameraTrans.Projection;
 
 	RendererTrans.WVP = RendererTrans.World * RendererTrans.View * RendererTrans.Projection;
 
 
+	ShaderResSetting();
 	InputAssembler1Setting();
 	VertexShaderSetting();
 	InputAssembler2Setting();
 	RasterizerSetting();
 	PixelShaderSetting();
 	OutPutMergeSetting();
-
 	UEngineCore::Device.GetContext()->DrawIndexed(6, 0, 0);
 
 }
@@ -82,14 +122,11 @@ void URenderer::InputAssembler1Init()
 	BufferInfo.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 
 	BufferInfo.CPUAccessFlags = 0;
-
 	BufferInfo.Usage = D3D11_USAGE_DEFAULT;
-
 
 
 	D3D11_SUBRESOURCE_DATA Data;
 	Data.pSysMem = &Vertexs[0];
-
 
 	if (S_OK != UEngineCore::Device.GetDevice()->CreateBuffer(&BufferInfo, &Data, &VertexBuffer))
 	{
@@ -97,12 +134,12 @@ void URenderer::InputAssembler1Init()
 		return;
 	}
 
+
 }
 
 void URenderer::InputAssembler1Setting()
 {
 	UINT VertexSize = sizeof(EngineVertex);
-
 	UINT Offset = 0;
 
 
@@ -130,7 +167,6 @@ void URenderer::InputAssembler1LayOut()
 		Desc.AlignedByteOffset = 0;
 		Desc.InputSlotClass = D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA;
 
-
 		Desc.SemanticIndex = 0;
 		Desc.InstanceDataStepRate = 0;
 		InputLayOutData.push_back(Desc);
@@ -148,6 +184,7 @@ void URenderer::InputAssembler1LayOut()
 		Desc.InstanceDataStepRate = 0;
 		InputLayOutData.push_back(Desc);
 	}
+
 
 
 	HRESULT Result = UEngineCore::Device.GetDevice()->CreateInputLayout(
@@ -176,7 +213,6 @@ void URenderer::VertexShaderInit()
 
 	std::wstring WPath = UEngineString::AnsiToUnicode(Path);
 
-
 	std::string version = "vs_5_0";
 
 	int Flag0 = 0;
@@ -186,9 +222,7 @@ void URenderer::VertexShaderInit()
 	Flag0 = D3D10_SHADER_DEBUG;
 #endif
 
-
 	Flag0 |= D3DCOMPILE_PACK_MATRIX_ROW_MAJOR;
-
 
 
 	D3DCompileFromFile(
@@ -236,6 +270,7 @@ void URenderer::RasterizerInit()
 
 	Desc.CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
 	Desc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
+
 
 	UEngineCore::Device.GetDevice()->CreateRasterizerState(&Desc, RasterizerState.GetAddressOf());
 
@@ -318,7 +353,7 @@ void URenderer::PixelShaderInit()
 
 	D3DCompileFromFile(
 		WPath.c_str(),
-		nullptr, 
+		nullptr,
 		nullptr,
 		"PixelToWorld",
 		version.c_str(),

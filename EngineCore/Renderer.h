@@ -72,6 +72,11 @@ public:
 	Microsoft::WRL::ComPtr<ID3DBlob> PSShaderCodeBlob = nullptr;
 	Microsoft::WRL::ComPtr<ID3DBlob> PSErrorCodeBlob = nullptr;
 
+
+	Microsoft::WRL::ComPtr<ID3D11Buffer> TransformConstBuffer = nullptr;
+	void ShaderResInit();
+	void ShaderResSetting();
+
 	void OutPutMergeSetting();
 
 };

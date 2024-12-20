@@ -5,8 +5,8 @@
 // Ό³Έν :
 class UActorComponent : public UObject
 {
-	friend AActor;
 public:
+	friend class AActor;
 	// constrcuter destructer
 	UActorComponent();
 	~UActorComponent();
@@ -22,11 +22,9 @@ public:
 	ENGINEAPI virtual void BeginPlay() {}
 
 
-
 protected:
 
 private:
-
 	class AActor* Actor;
 };
 
