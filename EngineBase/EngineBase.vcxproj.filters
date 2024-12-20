@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="PreCompile.h" />
     <ClInclude Include="EnginePath.h">
       <Filter>IO</Filter>
     </ClInclude>
@@ -29,9 +28,11 @@
     <ClInclude Include="EngineString.h">
       <Filter>String</Filter>
     </ClInclude>
+    <ClInclude Include="PreCompile.h">
+      <Filter>PreCompile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PreCompile.cpp" />
     <ClCompile Include="EnginePath.cpp">
       <Filter>IO</Filter>
     </ClCompile>
@@ -56,6 +57,9 @@
     <ClCompile Include="EngineString.cpp">
       <Filter>String</Filter>
     </ClCompile>
+    <ClCompile Include="PreCompile.cpp">
+      <Filter>PreCompile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="IO">
@@ -75,6 +79,9 @@
     </Filter>
     <Filter Include="String">
       <UniqueIdentifier>{47bcc52b-4e50-4046-945e-09d97cf888d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PreCompile">
+      <UniqueIdentifier>{a7fb5927-21e5-4b0d-bfe1-2e5dcebfd90c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

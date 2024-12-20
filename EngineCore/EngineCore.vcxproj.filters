@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="EngineCore.h" />
-    <ClInclude Include="PreCompile.h" />
     <ClInclude Include="IContentsCore.h">
       <Filter>Interface</Filter>
     </ClInclude>
@@ -30,12 +29,21 @@
     <ClInclude Include="Renderer.h">
       <Filter>Object\Component\Contents</Filter>
     </ClInclude>
-    <ClInclude Include="EngineCamera.h" />
-    <ClInclude Include="CameraActor.h" />
+    <ClInclude Include="ThirdParty\DirectxTex\Inc\DirectXTex.h">
+      <Filter>ThirdParty\DirectxTex\Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraActor.h">
+      <Filter>Object\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineCamera.h">
+      <Filter>Object\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="PreCompile.h">
+      <Filter>PreCompile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
-    <ClCompile Include="PreCompile.cpp" />
     <ClCompile Include="ActorComponent.cpp">
       <Filter>Object\Component</Filter>
     </ClCompile>
@@ -60,8 +68,15 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Object\Component\Contents</Filter>
     </ClCompile>
-    <ClCompile Include="EngineCamera.cpp" />
-    <ClCompile Include="CameraActor.cpp" />
+    <ClCompile Include="CameraActor.cpp">
+      <Filter>Object\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineCamera.cpp">
+      <Filter>Object\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="PreCompile.cpp">
+      <Filter>PreCompile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Interface">
@@ -82,5 +97,36 @@
     <Filter Include="Object\Component\Contents">
       <UniqueIdentifier>{9eaee73b-c4e1-4910-a758-22fbb8bdbb26}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{7f3be192-6bdd-4b99-a891-a517336b2099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\DirectxTex">
+      <UniqueIdentifier>{a3a9f495-45fc-4793-a521-236e413520cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\DirectxTex\Debug">
+      <UniqueIdentifier>{5c169b54-09b9-4bb8-bad2-70866b681e4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\DirectxTex\Release">
+      <UniqueIdentifier>{87a3bfb1-c1ea-4b7c-9a79-50575f38ffca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\DirectxTex\Inc">
+      <UniqueIdentifier>{a863241d-4e46-45d8-8cef-0e2914582545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Render">
+      <UniqueIdentifier>{fb9f5fc1-8c93-4b3e-9ff5-1ba47a9ff4e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PreCompile">
+      <UniqueIdentifier>{66398e8d-a639-49f1-b2a8-62991c798f87}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ThirdParty\DirectxTex\Inc\DirectXTex.inl">
+      <Filter>ThirdParty\DirectxTex\Inc</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="ThirdParty\DirectxTex\Debug\DirectXTex.lib">
+      <Filter>ThirdParty\DirectxTex\Debug</Filter>
+    </Library>
   </ItemGroup>
 </Project>

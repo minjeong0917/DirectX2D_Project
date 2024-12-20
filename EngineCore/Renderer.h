@@ -4,6 +4,7 @@
 struct EngineVertex
 {
 	float4 POSITION;
+	float4 TEXCOORD;
 	float4 COLOR;
 };
 
@@ -32,6 +33,12 @@ private:
 	virtual void Render(UEngineCamera* _Camera, float _DeltaTime);
 
 public:
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> Texture2D = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> SRV = nullptr;
+
+	Microsoft::WRL::ComPtr<ID3D11SamplerState> SamplerState = nullptr;
+
+
 	// InputAssembler1
 	Microsoft::WRL::ComPtr<ID3D11Buffer> VertexBuffer = nullptr;
 	Microsoft::WRL::ComPtr<ID3D11InputLayout> InputLayOut = nullptr;
