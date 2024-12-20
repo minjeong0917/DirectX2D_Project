@@ -4,7 +4,9 @@
 
 ALogo::ALogo()
 {
-	std::shared_ptr<URenderer> NewRenderer = CreateDefaultSubObject<URenderer>();
+	LogoRenderer = CreateDefaultSubObject<URenderer>();
+
+	SetActorRelativeScale3D({ 100.0f, 100.0f, 1.0f });
 }
 
 ALogo::~ALogo()

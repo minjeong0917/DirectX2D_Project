@@ -1,14 +1,15 @@
 #pragma once
 #include "SceneComponent.h"
 
-
 class AActor : public UObject
 {
 	friend class ULevel;
+
 public:
 	// constrcuter destructer
 	ENGINEAPI AActor();
 	ENGINEAPI ~AActor();
+
 	// delete Function
 	AActor(const AActor& _Other) = delete;
 	AActor(AActor&& _Other) noexcept = delete;
@@ -21,6 +22,7 @@ public:
 	virtual void LevelChangeStart() {}
 	virtual void LevelChangeEnd() {}
 
+
 	template<typename ComponentType>
 	inline std::shared_ptr<ComponentType> CreateDefaultSubObject()
 	{
@@ -30,6 +32,7 @@ public:
 		{
 			MSGASSERT("액터 컴포넌트를 상속받지 않은 클래스를 CreateDefaultSubObject하려고 했습니다.");
 			return nullptr;
+
 		}
 
 		char* ComMemory = new char[sizeof(ComponentType)];
@@ -40,6 +43,7 @@ public:
 		ComponentType* NewPtr = reinterpret_cast<ComponentType*>(ComMemory);
 
 		std::shared_ptr<ComponentType> NewCom(new(ComMemory) ComponentType());
+
 
 		if (std::is_base_of_v<USceneComponent, ComponentType>)
 		{
@@ -68,12 +72,33 @@ public:
 		return World;
 	}
 
+	void SetActorLocation(const FVector& _Value)
+	{
+		if (nullptr == RootComponent)
+		{
+			return;
+		}
+
+		RootComponent->SetLocation(_Value);
+	}
+
+	void SetActorRelativeScale3D(const FVector& _Scale)
+	{
+		if (nullptr == RootComponent)
+		{
+			return;
+		}
+
+		RootComponent->SetRelativeScale3D(_Scale);
+	}
+
 protected:
 
 private:
 	ULevel* World;
 
 	std::shared_ptr<class USceneComponent> RootComponent = nullptr;
+
 	std::list<std::shared_ptr<class UActorComponent>> ActorComponentList;
 };
 

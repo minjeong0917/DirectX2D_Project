@@ -5,17 +5,21 @@
 #include "IContentsCore.h"
 #include "Level.h"
 
-
 UEngineGraphicDevice UEngineCore::Device;
 UEngineWindow UEngineCore::MainWindow;
 HMODULE UEngineCore::ContentsDLL = nullptr;
 std::shared_ptr<IContentsCore> UEngineCore::Core;
+UEngineInitData UEngineCore::Data;
 
 std::shared_ptr<class ULevel> UEngineCore::NextLevel;
 std::shared_ptr<class ULevel> UEngineCore::CurLevel = nullptr;
 
 std::map<std::string, std::shared_ptr<class ULevel>> UEngineCore::LevelMap;
 
+FVector UEngineCore::GetScreenScale()
+{
+	return Data.WindowSize;
+}
 
 UEngineCore::UEngineCore()
 {
@@ -37,7 +41,6 @@ void UEngineCore::LoadContents(std::string_view _DllName)
 
 	Dir.MoveParentToDirectory("Build");
 	Dir.Move("bin/x64");
-
 #ifdef _DEBUG
 	Dir.Move("Debug");
 #else
@@ -47,7 +50,7 @@ void UEngineCore::LoadContents(std::string_view _DllName)
 	UEngineFile File = Dir.GetFile(_DllName);
 
 	std::string FullPath = File.GetPathToString();
-
+	// 규칙이 생길수밖에 없다.
 	ContentsDLL = LoadLibraryA(FullPath.c_str());
 
 	if (nullptr == ContentsDLL)
@@ -84,26 +87,25 @@ void UEngineCore::EngineStart(HINSTANCE _Instance, std::string_view _DllName)
 	UEngineWindow::WindowMessageLoop(
 		[]()
 		{
-			// 시작할때 하고 싶은것
-			UEngineInitData Data;
 			Device.CreateDeviceAndContext();
 			Core->EngineStart(Data);
 			MainWindow.SetWindowPosAndScale(Data.WindowPos, Data.WindowSize);
 			Device.CreateBackBuffer(MainWindow);
-				
+
 
 
 		},
 		[]()
 		{
-			// 엔진이 돌아갈때 하고 싶은것
 			EngineFrame();
 		},
 		[]()
 		{
-			// 엔진이 끝났을때 하고 싶은것.
+
 			EngineEnd();
 		});
+
+
 
 
 }
@@ -115,7 +117,9 @@ std::shared_ptr<ULevel> UEngineCore::NewLevelCreate(std::string_view _Name)
 	Ptr->SetName(_Name);
 
 	LevelMap.insert({ _Name.data(), Ptr });
+
 	std::cout << "NewLevelCreate" << std::endl;
+
 	return Ptr;
 }
 
@@ -148,14 +152,17 @@ void UEngineCore::EngineFrame()
 
 	CurLevel->Tick(0.0f);
 	CurLevel->Render(0.0f);
+
 }
 
 void UEngineCore::EngineEnd()
 {
 	Device.Release();
+
 	CurLevel = nullptr;
 	NextLevel = nullptr;
 	LevelMap.clear();
 
 	UEngineDebug::EndConsole();
+
 }

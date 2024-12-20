@@ -30,6 +30,8 @@
     <ClInclude Include="Renderer.h">
       <Filter>Object\Component\Contents</Filter>
     </ClInclude>
+    <ClInclude Include="EngineCamera.h" />
+    <ClInclude Include="CameraActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -58,6 +60,8 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Object\Component\Contents</Filter>
     </ClCompile>
+    <ClCompile Include="EngineCamera.cpp" />
+    <ClCompile Include="CameraActor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Interface">

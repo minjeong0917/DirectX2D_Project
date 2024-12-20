@@ -16,9 +16,10 @@ public:
 	ALogo& operator=(ALogo&& _Other) noexcept = delete;
 
 protected:
-
-private:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
+
+private:
+	std::shared_ptr<class URenderer> LogoRenderer;
 };
 

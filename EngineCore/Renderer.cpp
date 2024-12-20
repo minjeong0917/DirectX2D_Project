@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Renderer.h"
 #include <EngineBase/EngineString.h>
+#include <EngineCore/EngineCamera.h>
 
 URenderer::URenderer()
 {
@@ -19,28 +20,43 @@ void URenderer::SetOrder(int _Order)
 	int PrevOrder = GetOrder();
 	UObject::SetOrder(_Order);
 	ULevel* Level = GetActor()->GetWorld();
+
 	std::shared_ptr<URenderer> RendererPtr = GetThis<URenderer>();
-	Level->ChangeRenderGroup(PrevOrder, RendererPtr);
+	Level->ChangeRenderGroup(0, PrevOrder, RendererPtr);
 }
 
 ENGINEAPI void URenderer::BeginPlay()
 {
 	SetOrder(0);
+
 	InputAssembler1Init();
 	VertexShaderInit();
 	InputAssembler2Init();
 	RasterizerInit();
 	PixelShaderInit();
+
 }
 
-void URenderer::Render(float _DeltaTime)
+void URenderer::Render(UEngineCamera* _Camera, float _DeltaTime)
 {
+	FTransform& CameraTrans = _Camera->GetTransformRef();
+
+	FTransform& RendererTrans = GetTransformRef();
+
+
+	RendererTrans.View = CameraTrans.View;
+	RendererTrans.Projection = CameraTrans.Projection;
+
+	RendererTrans.WVP = RendererTrans.World * RendererTrans.View * RendererTrans.Projection;
+
+
 	InputAssembler1Setting();
 	VertexShaderSetting();
 	InputAssembler2Setting();
 	RasterizerSetting();
 	PixelShaderSetting();
 	OutPutMergeSetting();
+
 	UEngineCore::Device.GetContext()->DrawIndexed(6, 0, 0);
 
 }
@@ -53,16 +69,16 @@ void URenderer::InputAssembler1Init()
 	std::vector<EngineVertex> Vertexs;
 	Vertexs.resize(4);
 
-	Vertexs[0] = EngineVertex{ FVector(-0.5f, 0.5f, -0.0f), {} };
-	Vertexs[1] = EngineVertex{ FVector(0.5f, 0.5f, -0.0f), {} };
-	Vertexs[2] = EngineVertex{ FVector(-0.5f, -0.5f, -0.0f), {} };
-	Vertexs[3] = EngineVertex{ FVector(0.5f, -0.5f, -0.0f), {} };
+	Vertexs[0] = EngineVertex{ FVector(-0.5f, 0.5f, -0.0f), {1.0f, 0.0f, 0.0f, 1.0f} };
+	Vertexs[1] = EngineVertex{ FVector(0.5f, 0.5f, -0.0f), {0.0f, 1.0f, 0.0f, 1.0f} };
+	Vertexs[2] = EngineVertex{ FVector(-0.5f, -0.5f, -0.0f), {0.0f, 0.0f, 1.0f, 1.0f} };
+	Vertexs[3] = EngineVertex{ FVector(0.5f, -0.5f, -0.0f), {1.0f, 1.0f, 1.0f, 1.0f} };
 
 
 	D3D11_BUFFER_DESC BufferInfo = { 0 };
 
 	BufferInfo.ByteWidth = sizeof(EngineVertex) * static_cast<int>(Vertexs.size());
-	
+
 	BufferInfo.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 
 	BufferInfo.CPUAccessFlags = 0;
@@ -73,6 +89,7 @@ void URenderer::InputAssembler1Init()
 
 	D3D11_SUBRESOURCE_DATA Data;
 	Data.pSysMem = &Vertexs[0];
+
 
 	if (S_OK != UEngineCore::Device.GetDevice()->CreateBuffer(&BufferInfo, &Data, &VertexBuffer))
 	{
@@ -85,7 +102,10 @@ void URenderer::InputAssembler1Init()
 void URenderer::InputAssembler1Setting()
 {
 	UINT VertexSize = sizeof(EngineVertex);
+
 	UINT Offset = 0;
+
+
 
 
 	ID3D11Buffer* ArrBuffer[1];
@@ -97,7 +117,11 @@ void URenderer::InputAssembler1Setting()
 
 void URenderer::InputAssembler1LayOut()
 {
+
+
 	std::vector<D3D11_INPUT_ELEMENT_DESC> InputLayOutData;
+
+
 	{
 		D3D11_INPUT_ELEMENT_DESC Desc;
 		Desc.SemanticName = "POSITION";
@@ -105,6 +129,8 @@ void URenderer::InputAssembler1LayOut()
 		Desc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
 		Desc.AlignedByteOffset = 0;
 		Desc.InputSlotClass = D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA;
+
+
 		Desc.SemanticIndex = 0;
 		Desc.InstanceDataStepRate = 0;
 		InputLayOutData.push_back(Desc);
@@ -117,10 +143,12 @@ void URenderer::InputAssembler1LayOut()
 		Desc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
 		Desc.AlignedByteOffset = 16;
 		Desc.InputSlotClass = D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA;
+
 		Desc.SemanticIndex = 0;
 		Desc.InstanceDataStepRate = 0;
 		InputLayOutData.push_back(Desc);
 	}
+
 
 	HRESULT Result = UEngineCore::Device.GetDevice()->CreateInputLayout(
 		&InputLayOutData[0],
@@ -148,6 +176,7 @@ void URenderer::VertexShaderInit()
 
 	std::wstring WPath = UEngineString::AnsiToUnicode(Path);
 
+
 	std::string version = "vs_5_0";
 
 	int Flag0 = 0;
@@ -159,6 +188,8 @@ void URenderer::VertexShaderInit()
 
 
 	Flag0 |= D3DCOMPILE_PACK_MATRIX_ROW_MAJOR;
+
+
 
 	D3DCompileFromFile(
 		WPath.c_str(),
@@ -204,7 +235,6 @@ void URenderer::RasterizerInit()
 	D3D11_RASTERIZER_DESC Desc = {};
 
 	Desc.CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
-
 	Desc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
 
 	UEngineCore::Device.GetDevice()->CreateRasterizerState(&Desc, RasterizerState.GetAddressOf());
@@ -254,7 +284,9 @@ void URenderer::InputAssembler2Init()
 void URenderer::InputAssembler2Setting()
 {
 	int Offset = 0;
+
 	UEngineCore::Device.GetContext()->IASetIndexBuffer(IndexBuffer.Get(), DXGI_FORMAT_R32_UINT, Offset);
+
 	UEngineCore::Device.GetContext()->IASetPrimitiveTopology(Topology);
 }
 
@@ -267,8 +299,12 @@ void URenderer::PixelShaderInit()
 	UEngineDirectory CurDir;
 	CurDir.MoveParentToDirectory("EngineShader");
 	UEngineFile File = CurDir.GetFile("EngineSpriteShader.fx");
+
+
 	std::string Path = File.GetPathToString();
+
 	std::wstring WPath = UEngineString::AnsiToUnicode(Path);
+
 	std::string version = "ps_5_0";
 
 	int Flag0 = 0;
