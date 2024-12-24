@@ -30,7 +30,7 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 			return;
 		}
 		Dir.Append("Images");
-		std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
+		std::vector<UEngineFile> ImageFiles = Dir.GetAllFile(true, { ".PNG", ".BMP", ".JPG" });
 		for (size_t i = 0; i < ImageFiles.size(); i++)
 		{
 			std::string FilePath = ImageFiles[i].GetPathToString();

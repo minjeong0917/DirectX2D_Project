@@ -14,6 +14,10 @@ public:
 	ALogo(ALogo&& _Other) noexcept = delete;
 	ALogo& operator=(const ALogo& _Other) = delete;
 	ALogo& operator=(ALogo&& _Other) noexcept = delete;
+	std::shared_ptr<class USpriteRenderer> GetRenderer()
+	{
+		return LogoRenderer;
+	}
 
 protected:
 	void BeginPlay() override;

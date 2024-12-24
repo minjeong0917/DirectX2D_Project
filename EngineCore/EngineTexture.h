@@ -1,8 +1,10 @@
 #pragma once
 #include "EngineResources.h"
 
+#include "ThirdParty/DirectxTex/Inc/DirectXTex.h"
+
 // 설명 :
-class UEngineTexture : public UEngineResources<UEngineTexture>
+class UEngineTexture : public UEngineResources
 {
 public:
 	// constrcuter destructer
@@ -14,6 +16,7 @@ public:
 	UEngineTexture(UEngineTexture&& _Other) noexcept = delete;
 	UEngineTexture& operator=(const UEngineTexture& _Other) = delete;
 	UEngineTexture& operator=(UEngineTexture&& _Other) noexcept = delete;
+
 	static std::shared_ptr<UEngineTexture> Load(std::string_view _Path)
 	{
 		UEnginePath EnginePath = UEnginePath(_Path);
@@ -23,23 +26,18 @@ public:
 		return Load(FileName, _Path);
 	}
 
-	static std::shared_ptr<UEngineTexture> Load(std::string_view _Name, std::string_view _Path)
+	ENGINEAPI static std::shared_ptr<UEngineTexture> Load(std::string_view _Name, std::string_view _Path);
+
+	ID3D11ShaderResourceView* GetSRV()
 	{
-		std::string UpperName = ToUpperName(_Name);
-
-		if (true == Contains(UpperName))
-		{
-			MSGASSERT("이미 로드한 텍스처를 도 로드하려고 했습니다." + UpperName);
-			return nullptr;
-		}
-
-		std::shared_ptr<UEngineTexture> NewTexture = MakeRes(_Name, _Path);
-		NewTexture->ResLoad();
-		return NewTexture;
+		return SRV.Get();
 	}
+
 protected:
 
 private:
 	ENGINEAPI void ResLoad();
 
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> Texture2D = nullptr; 
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> SRV = nullptr; 
 };
