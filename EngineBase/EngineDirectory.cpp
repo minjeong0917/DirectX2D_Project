@@ -2,6 +2,7 @@
 #include "EngineDirectory.h"
 #include "EngineFile.h"
 #include "EngineDebug.h"
+#include "EngineString.h"
 
 UEngineDirectory::UEngineDirectory()
 	: UEnginePath()

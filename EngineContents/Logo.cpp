@@ -1,11 +1,13 @@
 #include "PreCompile.h"
 #include "Logo.h"
 #include <EngineCore/Renderer.h>
+#include <EngineCore/SpriteRenderer.h>
 
 ALogo::ALogo()
 {
-	LogoRenderer = CreateDefaultSubObject<URenderer>();
+	LogoRenderer = CreateDefaultSubObject<USpriteRenderer>();
 
+	// -를 넣을 경우 -> 레지스터에서 cull모드에서 영향 -> Back으로 설정했으면 반시계방향으로 바뀌어 화면에 뜨지 않음..! NONE으로 하면 반대로 뒤집혀서 화면에 뜸..!
 	SetActorRelativeScale3D({ 100.0f, 100.0f, 1.0f });
 }
 
@@ -21,6 +23,6 @@ void ALogo::BeginPlay()
 void ALogo::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
-	AddActorLocation(FVector{ 1.0f, 0.0f, 0.0f });
+	AddActorLocation(FVector{ 0.1f, 0.0f, 0.0f });
 
 }

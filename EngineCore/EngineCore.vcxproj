@@ -214,6 +214,18 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ThirdParty\DirectxTex\Inc\DirectXTex.h" />
+    <ClInclude Include="EngineResources.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EngineTexture.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CameraActor.cpp">
@@ -270,12 +282,24 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EngineResources.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineTexture.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ThirdParty\DirectxTex\Inc\DirectXTex.inl" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="ThirdParty\DirectxTex\Debug\DirectXTex.lib" />
+    <Library Include="ThirdParty\DirectxTex\Debug\DirectXTex_Debug.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

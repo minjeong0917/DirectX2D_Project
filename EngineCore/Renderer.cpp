@@ -5,7 +5,11 @@
 
 #include "ThirdParty/DirectxTex/Inc/DirectXTex.h"
 
-#pragma comment(lib, "DirectXTex.lib")
+#ifdef _DEBUG
+#pragma comment(lib, "DirectXTex_Debug.lib")
+#else
+#pragma comment(lib, "DirectXTex_Release.lib")
+#endif
 
 URenderer::URenderer()
 {
@@ -103,7 +107,7 @@ void URenderer::ShaderResInit()
 		ImageData.GetImages(),
 		ImageData.GetImageCount(),
 		ImageData.GetMetadata(),
-		&SRV
+		SRV.GetAddressOf()
 	))
 	{
 		MSGASSERT(UpperExt + "쉐이더 리소스 뷰 생성에 실패했습니다..");
@@ -112,9 +116,19 @@ void URenderer::ShaderResInit()
 
 	D3D11_SAMPLER_DESC SampInfo = { D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_POINT };
 
-	SampInfo.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
-	SampInfo.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
-	SampInfo.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
+	// X
+	SampInfo.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_BORDER;
+	// Y
+	SampInfo.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_BORDER;
+	// Z
+	SampInfo.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
+
+
+	SampInfo.BorderColor[0] = 0.0f;
+	SampInfo.BorderColor[1] = 0.0f;
+	SampInfo.BorderColor[2] = 0.0f;
+	SampInfo.BorderColor[3] = 0.0f;
+
 
 	UEngineCore::Device.GetDevice()->CreateSamplerState(&SampInfo, &SamplerState);
 
@@ -180,10 +194,10 @@ void URenderer::InputAssembler1Init()
 	std::vector<EngineVertex> Vertexs;
 	Vertexs.resize(4);
 
-	Vertexs[0] = EngineVertex{ FVector(-0.5f, 0.5f, -0.0f), {0.0f, 0.0f}, {1.0f, 0.0f, 0.0f, 1.0f} };
-	Vertexs[1] = EngineVertex{ FVector(0.5f, 0.5f, -0.0f), {1.0f, 0.0f} , {0.0f, 1.0f, 0.0f, 1.0f} };
-	Vertexs[2] = EngineVertex{ FVector(-0.5f, -0.5f, -0.0f), {0.0f, 1.0f} , {0.0f, 0.0f, 1.0f, 1.0f} };
-	Vertexs[3] = EngineVertex{ FVector(0.5f, -0.5f, -0.0f), {1.0f, 1.0f} , {1.0f, 1.0f, 1.0f, 1.0f} };
+	Vertexs[0] = EngineVertex{ FVector(-0.5f, 0.5f, -0.0f), {0.0f , 0.0f }, {1.0f, 0.0f, 0.0f, 1.0f} };
+	Vertexs[1] = EngineVertex{ FVector(0.5f, 0.5f, -0.0f), {1.0f , 0.0f } , {0.0f, 1.0f, 0.0f, 1.0f} };
+	Vertexs[2] = EngineVertex{ FVector(-0.5f, -0.5f, -0.0f), {0.0f , 1.0f } , {0.0f, 0.0f, 1.0f, 1.0f} };
+	Vertexs[3] = EngineVertex{ FVector(0.5f, -0.5f, -0.0f), {1.0f , 1.0f } , {1.0f, 1.0f, 1.0f, 1.0f} };
 
 
 	D3D11_BUFFER_DESC BufferInfo = { 0 };
@@ -197,7 +211,7 @@ void URenderer::InputAssembler1Init()
 	Data.pSysMem = &Vertexs[0];
 
 
-	if (S_OK != UEngineCore::Device.GetDevice()->CreateBuffer(&BufferInfo, &Data, &VertexBuffer))
+	if (S_OK != UEngineCore::Device.GetDevice()->CreateBuffer(&BufferInfo, &Data, VertexBuffer.GetAddressOf()))
 	{
 		MSGASSERT("버텍스 버퍼 생성에 실패했습니다.");
 		return;
@@ -350,7 +364,7 @@ void URenderer::RasterizerInit()
 	D3D11_RASTERIZER_DESC Desc = {};
 
 
-	Desc.CullMode = D3D11_CULL_MODE::D3D11_CULL_BACK;
+	Desc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
 
 
 	Desc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;

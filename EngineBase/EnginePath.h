@@ -12,24 +12,24 @@ public:
 	ENGINEAPI virtual ~UEnginePath();
 
 
-	bool IsExists();
-	void MoveParent();
+	ENGINEAPI bool IsExists();
+	ENGINEAPI void MoveParent();
 
 	ENGINEAPI std::string GetPathToString();
 
-	std::string GetFileName();
-	std::string GetDirectoryName();
+	ENGINEAPI std::string GetFileName();
+	ENGINEAPI std::string GetDirectoryName();
 	ENGINEAPI std::string GetExtension();
 
 	ENGINEAPI bool MoveParentToDirectory(std::string_view _Path);
 
 	ENGINEAPI bool Move(std::string_view _Path);
 
-	bool IsDirectory();
+	ENGINEAPI bool IsDirectory();
 
-	bool IsFile();
+	ENGINEAPI bool IsFile();
 
-	void Append(std::string_view _AppendName);
+	ENGINEAPI void Append(std::string_view _AppendName);
 
 
 protected:

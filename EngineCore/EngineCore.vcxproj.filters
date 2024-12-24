@@ -41,6 +41,9 @@
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
+    <ClInclude Include="EngineResources.h" />
+    <ClInclude Include="EngineTexture.h" />
+    <ClInclude Include="SpriteRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -77,6 +80,9 @@
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
+    <ClCompile Include="EngineResources.cpp" />
+    <ClCompile Include="EngineTexture.cpp" />
+    <ClCompile Include="SpriteRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Interface">
@@ -125,7 +131,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="ThirdParty\DirectxTex\Debug\DirectXTex.lib">
+    <Library Include="ThirdParty\DirectxTex\Debug\DirectXTex_Debug.lib">
       <Filter>ThirdParty\DirectxTex\Debug</Filter>
     </Library>
   </ItemGroup>
