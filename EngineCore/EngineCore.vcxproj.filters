@@ -50,7 +50,39 @@
     <ClInclude Include="EngineTexture.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="EngineSprite.h" />
+    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imstb_rectpack.h">
+      <Filter>GUI\IMGUI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imstb_textedit.h">
+      <Filter>GUI\IMGUI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imstb_truetype.h">
+      <Filter>GUI\IMGUI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imconfig.h">
+      <Filter>GUI\IMGUI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui.h">
+      <Filter>GUI\IMGUI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_impl_dx11.h">
+      <Filter>GUI\IMGUI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_impl_win32.h">
+      <Filter>GUI\IMGUI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_internal.h">
+      <Filter>GUI\IMGUI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineGUI.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineGUIWindow.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineSprite.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -96,7 +128,33 @@
     <ClCompile Include="EngineTexture.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="EngineSprite.cpp" />
+    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui.cpp">
+      <Filter>GUI\IMGUI\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_draw.cpp">
+      <Filter>GUI\IMGUI\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_impl_dx11.cpp">
+      <Filter>GUI\IMGUI\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_impl_win32.cpp">
+      <Filter>GUI\IMGUI\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_tables.cpp">
+      <Filter>GUI\IMGUI\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_widgets.cpp">
+      <Filter>GUI\IMGUI\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineGUI.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineGUIWindow.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSprite.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Interface">
@@ -143,6 +201,18 @@
     </Filter>
     <Filter Include="Resources">
       <UniqueIdentifier>{75055093-4e29-4307-b9e3-2202fe486660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{24ef88e4-8b57-42a3-b0c1-3e77cb246ef7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\IMGUI">
+      <UniqueIdentifier>{811913ca-d811-4d89-b7db-6127d9549559}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\IMGUI\Header">
+      <UniqueIdentifier>{50233312-719e-4aad-b0bd-9032e32385de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\IMGUI\CPP">
+      <UniqueIdentifier>{eaf7749e-f5bb-4b28-8cb9-8c4ba2d83c04}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -167,6 +167,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imconfig.h" />
+    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui.h" />
+    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_impl_dx11.h" />
+    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_impl_win32.h" />
+    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_internal.h" />
+    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imstb_rectpack.h" />
+    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imstb_textedit.h" />
+    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imstb_truetype.h" />
     <ClInclude Include="CameraActor.h">
       <SubType>
       </SubType>
@@ -230,8 +238,22 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineGUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EngineGUIWindow.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui.cpp" />
+    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_draw.cpp" />
+    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_impl_dx11.cpp" />
+    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_impl_win32.cpp" />
+    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_tables.cpp" />
+    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_widgets.cpp" />
     <ClCompile Include="CameraActor.cpp">
       <SubType>
       </SubType>
@@ -299,6 +321,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="EngineSprite.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineGUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineGUIWindow.cpp">
       <SubType>
       </SubType>
     </ClCompile>

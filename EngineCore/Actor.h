@@ -45,17 +45,7 @@ public:
 		std::shared_ptr<ComponentType> NewCom(new(ComMemory) ComponentType());
 
 
-		if (std::is_base_of_v<USceneComponent, ComponentType>)
-		{
-
-			if (nullptr != RootComponent)
-			{
-				MSGASSERT("아직 기하구조를 만들지 않았습니다.");
-			}
-
-			RootComponent = NewCom;
-		}
-		else if (std::is_base_of_v<UActorComponent, ComponentType>)
+		if (std::is_base_of_v<UActorComponent, ComponentType>)
 		{
 			ActorComponentList.push_back(NewCom);
 		}
@@ -100,13 +90,32 @@ public:
 
 		RootComponent->AddLocation(_Value);
 	}
+	void SetActorRotation(const FVector& _Value)
+	{
+		if (nullptr == RootComponent)
+		{
+			return;
+		}
+
+		RootComponent->SetRotation(_Value);
+	}
+
+	void AddActorRotation(const FVector& _Value)
+	{
+		if (nullptr == RootComponent)
+		{
+			return;
+		}
+
+		RootComponent->AddRotation(_Value);
+	}
 
 protected:
+	std::shared_ptr<class USceneComponent> RootComponent = nullptr;
 
 private:
 	ULevel* World;
 
-	std::shared_ptr<class USceneComponent> RootComponent = nullptr;
 
 	std::list<std::shared_ptr<class UActorComponent>> ActorComponentList;
 };

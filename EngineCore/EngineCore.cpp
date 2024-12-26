@@ -5,6 +5,8 @@
 #include "IContentsCore.h"
 #include "Level.h"
 #include "EngineResources.h"
+#include "EngineGUI.h"
+#include <EnginePlatform/EngineInput.h>
 
 UEngineGraphicDevice UEngineCore::Device;
 UEngineWindow UEngineCore::MainWindow;
@@ -94,6 +96,7 @@ void UEngineCore::EngineStart(HINSTANCE _Instance, std::string_view _DllName)
 			MainWindow.SetWindowPosAndScale(Data.WindowPos, Data.WindowSize);
 			Device.CreateBackBuffer(MainWindow);
 
+			UEngineGUI::Init();
 
 
 		},
@@ -155,13 +158,18 @@ void UEngineCore::EngineFrame()
 
 	Timer.TimeCheck();
 	float DeltaTime = Timer.GetDeltaTime();
+	UEngineInput::KeyCheck(DeltaTime);
 
 	CurLevel->Tick(DeltaTime);
 	CurLevel->Render(DeltaTime);
+
 }
 
 void UEngineCore::EngineEnd()
 {
+	UEngineGUI::Release();
+
+
 	Device.Release();
 	UEngineResources::Release();
 
