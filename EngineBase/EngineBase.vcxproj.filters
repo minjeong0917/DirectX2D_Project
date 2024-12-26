@@ -31,6 +31,7 @@
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
+    <ClInclude Include="EngineTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EnginePath.cpp">
@@ -60,6 +61,7 @@
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
+    <ClCompile Include="EngineTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="IO">

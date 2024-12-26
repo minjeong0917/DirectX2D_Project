@@ -3,6 +3,7 @@
 #include <EngineCore/Level.h>
 #include "TitleGameMode.h"
 #include <EngineCore/EngineTexture.h>
+#include <EngineCore/EngineSprite.h>
 
 
 CreateContentsCoreDefine(UContentsCore);
@@ -37,6 +38,8 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 			UEngineTexture::Load(FilePath);
 		}
 	}
+
+	UEngineSprite::CreateSpriteToMeta("plant_01_loop.png", ".sdata");
 
 	UEngineCore::CreateLevel<ATitleGameMode, APawn>("Titlelevel");
 	UEngineCore::OpenLevel("Titlelevel");

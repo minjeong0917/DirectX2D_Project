@@ -5,6 +5,7 @@
 #include "IContentsCore.h"
 #include "Level.h"
 #include <memory>
+#include <EngineBase/EngineTimer.h>
 
 
 // Ό³Έν :
@@ -47,6 +48,8 @@ private:
 
 	static void WindowInit(HINSTANCE _Instance);
 	static void LoadContents(std::string_view _DllName);
+
+	static UEngineTimer Timer;
 
 	static void EngineFrame();
 	static void EngineEnd();

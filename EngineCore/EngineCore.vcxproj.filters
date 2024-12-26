@@ -50,6 +50,7 @@
     <ClInclude Include="EngineTexture.h">
       <Filter>Resources</Filter>
     </ClInclude>
+    <ClInclude Include="EngineSprite.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -95,6 +96,7 @@
     <ClCompile Include="EngineTexture.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
+    <ClCompile Include="EngineSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Interface">

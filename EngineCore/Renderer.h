@@ -1,5 +1,6 @@
 #pragma once
 #include "SceneComponent.h"
+#include "EngineSprite.h"
 
 struct EngineVertex
 {
@@ -7,11 +8,7 @@ struct EngineVertex
 	float4 TEXCOORD;
 	float4 COLOR;
 };
-struct FSpriteData
-{
-	float4 CuttingPos = { 0.0f, 0.0f };
-	float4 CuttingSize = { 1.0f, 1.0f };
-};
+
 // Ό³Έν :
 class URenderer : public USceneComponent
 {
@@ -30,11 +27,7 @@ public:
 
 	void SetOrder(int _Order) override;
 	void SetTexture(std::string_view _Value);
-	void SetSpriteData(float4 _CuttingPos, float4 _CuttingSize)
-	{
-		SpriteData.CuttingPos = _CuttingPos;
-		SpriteData.CuttingSize = _CuttingSize;
-	}
+	ENGINEAPI void SetSpriteData(size_t _Index);
 
 protected:
 	ENGINEAPI void BeginPlay() override;
@@ -45,8 +38,7 @@ private:
 public:
 	FSpriteData SpriteData;
 
-	std::shared_ptr<class UEngineTexture> Texture = nullptr;
-
+	std::shared_ptr<class UEngineSprite> Sprite = nullptr;
 
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> SamplerState = nullptr;
 

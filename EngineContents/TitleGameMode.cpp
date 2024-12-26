@@ -8,20 +8,11 @@ ATitleGameMode::ATitleGameMode()
 {
 
 	{
-		std::shared_ptr<ALogo> TitleLogo = GetWorld()->SpawnActor<ALogo>();
-
-
-
-
-
-		TitleLogo->SetActorLocation({ -350.0f, 0.0f, 0.0f });
+		Logo = GetWorld()->SpawnActor<ALogo>();
+		Logo->SetActorLocation({ 300.0f, 0.0f, 0.0f });
+		Logo->GetRenderer()->SetSpriteData(4);
 	}
 
-	{
-		std::shared_ptr<ALogo> Logo = GetWorld()->SpawnActor<ALogo>();
-		Logo->SetActorLocation({ 350.0f, 0.0f, 0.0f });
-		Logo->GetRenderer()->SetSpriteData({ 0.3f, 0.3f }, { 0.4f, 0.4f });
-	}
 
 	std::shared_ptr<ACameraActor> Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation({ 0.0f, 0.0f, -1000.0f, 1.0f });
@@ -34,5 +25,24 @@ ATitleGameMode::~ATitleGameMode()
 void ATitleGameMode::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
+
+	static float Time = 1.0f;
+	static int Index = 0;
+
+	Logo->GetRenderer()->SetSpriteData(Index);
+
+	Time -= _DeltaTime * 5 ;
+
+	if (0.0f >= Time)
+	{
+		
+		++Index;
+		if (Index > 6)
+		{
+			Index = 0;
+
+		}
+		Time = 1.0f;
+	}
 
 }
