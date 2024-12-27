@@ -10,7 +10,6 @@ ALogo::ALogo()
 	std::shared_ptr<UDefaultSceneComponent> Default = CreateDefaultSubObject<UDefaultSceneComponent>();
 	RootComponent = Default;
 
-
 	LogoRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	LogoRenderer->CreateAnimation("Idle", "plant_01_loop.png", 0, 6, 0.2f);
 	USpriteRenderer::FrameAnimation* Animation = LogoRenderer->FindAnimation("Idle");
@@ -20,14 +19,6 @@ ALogo::ALogo()
 	LogoRenderer->SetRelativeScale3D({ 230.0f, 400.0f, 1.0f });
 
 	LogoRenderer->SetupAttachment(RootComponent);
-
-
-
-
-
-
-	// -를 넣을 경우 -> 레지스터에서 cull모드에서 영향 -> Back으로 설정했으면 반시계방향으로 바뀌어 화면에 뜨지 않음..! NONE으로 하면 반대로 뒤집혀서 화면에 뜸..!
-	//SetActorRelativeScale3D({ 230.0f, 400.0f, 1.0f });
 
 }
 
@@ -48,6 +39,7 @@ void ALogo::Tick(float _DeltaTime)
 	{
 		AddRelativeLocation(FVector{ -100.0f * _DeltaTime, 0.0f, 0.0f });
 	}
+
 	if (UEngineInput::IsPress('D'))
 	{
 		AddRelativeLocation(FVector{ 100.0f * _DeltaTime, 0.0f, 0.0f });
@@ -66,17 +58,6 @@ void ALogo::Tick(float _DeltaTime)
 	if (UEngineInput::IsPress('Q'))
 	{
 		AddActorRotation(FVector{ 0.0f, 0.0f , 360.0f * _DeltaTime });
-	}
-
-	if (UEngineInput::IsPress('E'))
-	{
-		// 단 1순간만 처리되는 걸로 
-		Child->AddRelativeLocation(FVector{ 100.0f * _DeltaTime, 0.0f , 0.0f });
-	}
-
-	if (UEngineInput::IsPress('R'))
-	{
-		Child->SetWorldLocation(FVector{ 100.0f, 0.0f , 0.0f });
 	}
 
 	// AddActorLocation(FVector{ 100.0f * _DeltaTime, 0.0f, 0.0f});

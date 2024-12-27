@@ -183,6 +183,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineVertex.h" />
     <ClInclude Include="Pawn.h">
       <SubType>
       </SubType>
@@ -254,6 +255,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="IndexBuffer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="VertexBuffer.h">
       <SubType>
       </SubType>
@@ -274,6 +283,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EngineGraphicDevice_Resources.cpp" />
     <ClCompile Include="Pawn.cpp">
       <SubType>
       </SubType>
@@ -349,6 +359,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="RenderUnit.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="IndexBuffer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
       <SubType>
       </SubType>
     </ClCompile>

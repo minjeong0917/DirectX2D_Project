@@ -77,6 +77,11 @@ VertexShaderOutPut VertexToWorld(EngineVertex _Vertex)
     return OutPut;
 }
 
+cbuffer MatColor : register(b1)
+{
+    float4 Albedo;
+};
+
 
 Texture2D ImageTexture : register(t0);
 

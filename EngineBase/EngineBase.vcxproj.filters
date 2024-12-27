@@ -31,8 +31,12 @@
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
-    <ClInclude Include="EngineTimer.h" />
-    <ClInclude Include="EngineDelegate.h" />
+    <ClInclude Include="EngineTimer.h">
+      <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineDelegate.h">
+      <Filter>Event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EnginePath.cpp">
@@ -62,8 +66,12 @@
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
-    <ClCompile Include="EngineTimer.cpp" />
-    <ClCompile Include="EngineDelegate.cpp" />
+    <ClCompile Include="EngineTimer.cpp">
+      <Filter>Time</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineDelegate.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="IO">
@@ -86,6 +94,12 @@
     </Filter>
     <Filter Include="PreCompile">
       <UniqueIdentifier>{a7fb5927-21e5-4b0d-bfe1-2e5dcebfd90c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time">
+      <UniqueIdentifier>{4bad6363-b3f7-4115-b1a7-0620325b64f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{9595f7af-3197-4699-b831-5c71725ccb5a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
