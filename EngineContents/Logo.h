@@ -25,5 +25,7 @@ protected:
 
 private:
 	std::shared_ptr<class USpriteRenderer> LogoRenderer;
+	std::shared_ptr<class USpriteRenderer> Child;
+
 };
 

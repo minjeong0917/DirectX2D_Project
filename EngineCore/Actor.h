@@ -81,14 +81,13 @@ public:
 
 		RootComponent->SetRelativeScale3D(_Scale);
 	}
-	void AddActorLocation(const FVector& _Value)
+	void AddRelativeLocation(const FVector& _Value)
 	{
 		if (nullptr == RootComponent)
 		{
 			return;
 		}
-
-		RootComponent->AddLocation(_Value);
+		RootComponent->AddRelativeLocation(_Value);
 	}
 	void SetActorRotation(const FVector& _Value)
 	{

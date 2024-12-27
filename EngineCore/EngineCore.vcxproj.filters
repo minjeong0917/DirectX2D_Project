@@ -83,6 +83,7 @@
     <ClInclude Include="EngineSprite.h">
       <Filter>Resources</Filter>
     </ClInclude>
+    <ClInclude Include="DefaultSceneComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -155,6 +156,7 @@
     <ClCompile Include="EngineSprite.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
+    <ClCompile Include="DefaultSceneComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Interface">
