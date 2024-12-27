@@ -31,8 +31,8 @@ public:
 	void CreateBackBuffer(const UEngineWindow& _Window);
 
 	IDXGIAdapter* GetHighPerFormanceAdapter();
+	ENGINEAPI void Release();
 
-	void Release();
 
 	void RenderStart();
 

@@ -136,9 +136,9 @@ TextureImporter:
       name: plant_01_loop_1
       rect:
         serializedVersion: 2
-        x: 24
+        x: 23
         y: 80
-        width: 22
+        width: 23
         height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -157,9 +157,9 @@ TextureImporter:
       name: plant_01_loop_2
       rect:
         serializedVersion: 2
-        x: 47
+        x: 46
         y: 80
-        width: 22
+        width: 23
         height: 38
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -178,9 +178,9 @@ TextureImporter:
       name: plant_01_loop_3
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 40
-        width: 22
+        width: 23
         height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -199,9 +199,9 @@ TextureImporter:
       name: plant_01_loop_4
       rect:
         serializedVersion: 2
-        x: 24
+        x: 23
         y: 40
-        width: 22
+        width: 23
         height: 38
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -220,9 +220,9 @@ TextureImporter:
       name: plant_01_loop_5
       rect:
         serializedVersion: 2
-        x: 47
+        x: 46
         y: 40
-        width: 22
+        width: 23
         height: 39
       alignment: 7
       pivot: {x: 0.5, y: 0}

@@ -8,6 +8,12 @@
 #include "EngineGUI.h"
 #include <EnginePlatform/EngineInput.h>
 
+UEngineGraphicDevice& UEngineCore::GetDevice()
+{
+	return Device;
+}
+
+
 UEngineGraphicDevice UEngineCore::Device;
 UEngineWindow UEngineCore::MainWindow;
 HMODULE UEngineCore::ContentsDLL = nullptr;

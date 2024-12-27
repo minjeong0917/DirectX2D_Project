@@ -12,7 +12,7 @@ ALogo::ALogo()
 
 
 	LogoRenderer = CreateDefaultSubObject<USpriteRenderer>();
-	LogoRenderer->CreateAnimation("Idle", "plant_01_loop.png", 0, 6, 0.1f);
+	LogoRenderer->CreateAnimation("Idle", "plant_01_loop.png", 0, 6, 0.2f);
 	USpriteRenderer::FrameAnimation* Animation = LogoRenderer->FindAnimation("Idle");
 	Animation->IsAutoScale = true;
 	Animation->AutoScaleRatio = 4.0f;

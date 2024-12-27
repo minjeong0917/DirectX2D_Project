@@ -96,6 +96,7 @@ protected:
 
 
 private:
+
 	int CurIndex = 0;
 	float CurAnimationSpeed = 1.0f;
 
