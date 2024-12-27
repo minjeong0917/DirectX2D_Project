@@ -12,19 +12,15 @@ ALogo::ALogo()
 
 
 	LogoRenderer = CreateDefaultSubObject<USpriteRenderer>();
-	LogoRenderer->SetSprite("plant_01_loop.png", 0);
+	LogoRenderer->CreateAnimation("Idle", "plant_01_loop.png", 0, 6, 0.1f);
+	USpriteRenderer::FrameAnimation* Animation = LogoRenderer->FindAnimation("Idle");
+	Animation->IsAutoScale = true;
+	Animation->AutoScaleRatio = 4.0f;
+	LogoRenderer->ChangeAnimation("Idle");
 	LogoRenderer->SetRelativeScale3D({ 230.0f, 400.0f, 1.0f });
 
 	LogoRenderer->SetupAttachment(RootComponent);
 
-
-
-	Child = CreateDefaultSubObject<USpriteRenderer>();
-
-	Child->SetSprite("plant_01_loop.png", 2);
-	Child->SetRelativeLocation({ 100.0f, 0.0f, 0.0f });
-	Child->SetScale3D({ 50.0f, 50.0f, 1.0f });
-	Child->SetupAttachment(RootComponent);
 
 
 
@@ -80,7 +76,7 @@ void ALogo::Tick(float _DeltaTime)
 
 	if (UEngineInput::IsPress('R'))
 	{
-		Child->SetLocation(FVector{ 100.0f, 0.0f , 0.0f });
+		Child->SetWorldLocation(FVector{ 100.0f, 0.0f , 0.0f });
 	}
 
 	// AddActorLocation(FVector{ 100.0f * _DeltaTime, 0.0f, 0.0f});

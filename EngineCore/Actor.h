@@ -69,7 +69,8 @@ public:
 			return;
 		}
 
-		RootComponent->SetLocation(_Value);
+		RootComponent->SetWorldLocation(_Value);
+
 	}
 
 	void SetActorRelativeScale3D(const FVector& _Scale)

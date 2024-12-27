@@ -84,6 +84,8 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="DefaultSceneComponent.h" />
+    <ClInclude Include="RenderUnit.h" />
+    <ClInclude Include="VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -157,6 +159,8 @@
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="DefaultSceneComponent.cpp" />
+    <ClCompile Include="RenderUnit.cpp" />
+    <ClCompile Include="VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Interface">

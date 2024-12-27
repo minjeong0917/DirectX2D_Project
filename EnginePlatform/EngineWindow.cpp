@@ -90,7 +90,10 @@ int UEngineWindow::WindowMessageLoop(std::function<void()> _StartFunction, std::
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
-
+        if (false == LoopActive)
+        {
+            break;
+        }
         _FrameFunction();
     }
 

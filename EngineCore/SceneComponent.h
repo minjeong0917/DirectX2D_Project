@@ -25,7 +25,7 @@ public:
 		TransformUpdate();
 	}
 
-	void SetLocation(const FVector& _Value)
+	void SetWorldLocation(const FVector& _Value)
 	{
 		IsAbsolute = true;
 		Transform.Location = _Value;
@@ -58,15 +58,12 @@ public:
 		TransformUpdate();
 	}
 
-	// local
 	void SetRelativeScale3D(const FVector& _Value)
 	{
-		// 절대값이라는 뜻
-		// 이게 true가 되면 부모가 있건 없건
-		// 100 100 100
-		// 10 10 10
-		// 나는 무조건 이값에 해당하는 행렬이 되어야 한다는 뜻으로 
+
 		Transform.Scale = _Value;
+		Transform.Scale.W = 0.0f;
+
 		TransformUpdate();
 	}
 
