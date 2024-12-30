@@ -25,6 +25,8 @@ public:
 	ENGINEAPI void SetSprite(std::string_view _Value);
 	ENGINEAPI void SetSprite(UEngineSprite* _Sprite);
 	ENGINEAPI void SetSpriteData(size_t _Index);
+	ENGINEAPI void SetMesh(std::string_view _Name);
+	ENGINEAPI void SetBlend(std::string_view _Name);
 
 protected:
 	ENGINEAPI void BeginPlay() override;
@@ -33,6 +35,10 @@ private:
 	
 
 public:
+	class UMesh* Mesh = nullptr;
+	class UEngineBlend* Blend = nullptr;
+
+
 	FSpriteData SpriteData;
 
 	class UEngineSprite* Sprite = nullptr;
@@ -41,9 +47,8 @@ public:
 
 
 	// InputAssembler1
-	Microsoft::WRL::ComPtr<ID3D11Buffer> VertexBuffer = nullptr;
+
 	Microsoft::WRL::ComPtr<ID3D11InputLayout> InputLayOut = nullptr;
-	void InputAssembler1Init();
 	void InputAssembler1Setting();
 	void InputAssembler1LayOut();
 
@@ -58,9 +63,7 @@ public:
 
 
 	// InputAssembler2
-	Microsoft::WRL::ComPtr<ID3D11Buffer> IndexBuffer = nullptr;
 	D3D11_PRIMITIVE_TOPOLOGY Topology = D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-	void InputAssembler2Init();
 	void InputAssembler2Setting();
 
 	// Rasterizer

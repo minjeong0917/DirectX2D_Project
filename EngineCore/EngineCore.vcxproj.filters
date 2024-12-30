@@ -101,6 +101,7 @@
     <ClInclude Include="EngineVertex.h">
       <Filter>Resources</Filter>
     </ClInclude>
+    <ClInclude Include="EngineBlend.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -191,6 +192,7 @@
     <ClCompile Include="DefaultSceneComponent.cpp">
       <Filter>Object\Component\Contents</Filter>
     </ClCompile>
+    <ClCompile Include="EngineBlend.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Interface">

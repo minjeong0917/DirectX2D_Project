@@ -1,7 +1,7 @@
 #pragma once
 
 // Ό³Έν :
-class APlayer
+class APlayer : public APawn
 {
 public:
 	// constrcuter destructer
