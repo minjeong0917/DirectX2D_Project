@@ -35,30 +35,5 @@ void ALogo::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
-	if (UEngineInput::IsPress('A'))
-	{
-		AddRelativeLocation(FVector{ -100.0f * _DeltaTime, 0.0f, 0.0f });
-	}
 
-	if (UEngineInput::IsPress('D'))
-	{
-		AddRelativeLocation(FVector{ 100.0f * _DeltaTime, 0.0f, 0.0f });
-	}
-
-	if (UEngineInput::IsPress('W'))
-	{
-		AddRelativeLocation(FVector{ 0.0f, 100.0f * _DeltaTime, 0.0f });
-	}
-
-	if (UEngineInput::IsPress('S'))
-	{
-		AddRelativeLocation(FVector{ 0.0f, -100.0f * _DeltaTime, 0.0f });
-	}
-
-	if (UEngineInput::IsPress('Q'))
-	{
-		AddActorRotation(FVector{ 0.0f, 0.0f , 360.0f * _DeltaTime });
-	}
-
-	// AddActorLocation(FVector{ 100.0f * _DeltaTime, 0.0f, 0.0f});
 }

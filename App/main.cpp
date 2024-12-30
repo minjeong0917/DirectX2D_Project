@@ -12,6 +12,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE _hInstance,
 	_In_ LPWSTR    _lpCmdLine,
 	_In_ int       _nCmdShow)
 {
-	UEngineCore::EngineStart(_hInstance, "EngineContents.dll");
+	UEngineCore::EngineStart(_hInstance, "NoUmbrellasAllowed.dll");
 	return 0;
 }

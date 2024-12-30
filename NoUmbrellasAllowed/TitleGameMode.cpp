@@ -24,8 +24,8 @@ ATitleGameMode::ATitleGameMode()
 
 	{
 		Logo = GetWorld()->SpawnActor<ALogo>();
-		//Logo->SetActorLocation({ 300.0f, 0.0f, 0.0f });
-		Logo->GetRenderer()->SetSpriteData(4);
+		Logo->SetActorLocation({ 300.0f, 0.0f, 0.0f });
+		Logo->GetRenderer()->SetSpriteData(0);
 	}
 
 

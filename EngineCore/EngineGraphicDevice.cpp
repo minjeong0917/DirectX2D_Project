@@ -204,7 +204,7 @@ void UEngineGraphicDevice::RenderStart()
 {
     FVector ClearColor;
 
-    ClearColor = FVector(0.0f, 0.0f, 1.0f, 1.0f);
+    ClearColor = FVector(0.0f, 0.0f, 0.0f, 1.0f);
 
     Context->ClearRenderTargetView(RTV.Get(), ClearColor.Arr1D);
 }
