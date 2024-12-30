@@ -19,8 +19,8 @@ UContentsCore::~UContentsCore()
 void UContentsCore::EngineStart(UEngineInitData& _Data)
 {
 
-	_Data.WindowPos = { 100, 100 };
-	_Data.WindowSize = { 1280, 720 };
+	_Data.WindowPos = { -10, 0 };
+	_Data.WindowSize = WindowSize;
 
 
 	{
@@ -30,16 +30,39 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
 			return;
 		}
-		Dir.Append("Images");
+		Dir.Append("Images//TitleImage");
+
 		std::vector<UEngineFile> ImageFiles = Dir.GetAllFile(true, { ".PNG", ".BMP", ".JPG" });
 		for (size_t i = 0; i < ImageFiles.size(); i++)
 		{
 			std::string FilePath = ImageFiles[i].GetPathToString();
 			UEngineTexture::Load(FilePath);
 		}
+		UEngineSprite::CreateSpriteToFolder(Dir.GetPathToString());
+		UEngineSprite::CreateSpriteToMeta("plant_01_loop.png", ".sdata");
 	}
 
-	UEngineSprite::CreateSpriteToMeta("plant_01_loop.png", ".sdata");
+
+	{
+		UEngineDirectory Dir;
+		if (false == Dir.MoveParentToDirectory("ContentsResources"))
+		{
+			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+			return;
+		}
+		Dir.Append("Images//Logo");
+
+		std::vector<UEngineFile> ImageFiles = Dir.GetAllFile(true, { ".PNG", ".BMP", ".JPG" });
+		for (size_t i = 0; i < ImageFiles.size(); i++)
+		{
+			std::string FilePath = ImageFiles[i].GetPathToString();
+			UEngineTexture::Load(FilePath);
+		}
+
+		UEngineSprite::CreateSpriteToFolder(Dir.GetPathToString());
+	}
+
+
 
 	UEngineCore::CreateLevel<ATitleGameMode, APawn>("Titlelevel");
 	UEngineCore::OpenLevel("Titlelevel");

@@ -11,13 +11,15 @@ ALogo::ALogo()
 	RootComponent = Default;
 
 	LogoRenderer = CreateDefaultSubObject<USpriteRenderer>();
-	LogoRenderer->CreateAnimation("Idle", "plant_01_loop.png", 0, 6, 0.2f);
-	USpriteRenderer::FrameAnimation* Animation = LogoRenderer->FindAnimation("Idle");
-	Animation->IsAutoScale = true;
-	Animation->AutoScaleRatio = 4.0f;
-	LogoRenderer->ChangeAnimation("Idle");
-	LogoRenderer->SetRelativeScale3D({ 230.0f, 400.0f, 1.0f });
+	LogoRenderer->USpriteRenderer::SetSprite("Logo",0);
+	LogoRenderer->SetScale3D({ 732.0f, 267.0f, 1.0f });
 
+
+	//LogoRenderer->CreateAnimation("Idle", "Logo", 0, 0, 0.1f);
+	//USpriteRenderer::FrameAnimation* Animation = LogoRenderer->FindAnimation("Idle");
+	//Animation->IsAutoScale = true;
+	//Animation->AutoScaleRatio = 4.0f;
+	//LogoRenderer->ChangeAnimation("Idle");
 	LogoRenderer->SetupAttachment(RootComponent);
 
 }
@@ -34,6 +36,5 @@ void ALogo::BeginPlay()
 void ALogo::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
-
 
 }

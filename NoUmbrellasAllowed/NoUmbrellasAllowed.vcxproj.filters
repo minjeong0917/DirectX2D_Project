@@ -10,6 +10,7 @@
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
+    <ClCompile Include="TitleUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logo.h" />
@@ -21,6 +22,7 @@
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
+    <ClInclude Include="TitleUI.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameMode">

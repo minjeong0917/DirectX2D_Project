@@ -22,9 +22,10 @@ public:
 
 	ENGINEAPI void SetOrder(int _Order) override;
 
-	ENGINEAPI void SetSprite(std::string_view _Value);
-	ENGINEAPI void SetSprite(UEngineSprite* _Sprite);
-	ENGINEAPI void SetSpriteData(size_t _Index);
+	ENGINEAPI void SetTexture(UEngineTexture* _Value);
+
+	ENGINEAPI void SetSpriteData(UEngineSprite* _Sprite, size_t _Index);
+
 	ENGINEAPI void SetMesh(std::string_view _Name);
 	ENGINEAPI void SetBlend(std::string_view _Name);
 
@@ -40,8 +41,8 @@ public:
 
 
 	FSpriteData SpriteData;
+	UEngineTexture* Texture = nullptr;
 
-	class UEngineSprite* Sprite = nullptr;
 
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> SamplerState = nullptr;
 
