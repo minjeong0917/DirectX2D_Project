@@ -67,18 +67,80 @@ ATitleGameMode::ATitleGameMode()
 		Building->SetActorLocation({ -200.0f, UIYPos, 0.0f});
 	}
 
-	FVector StartLocation = { -700.0f, -285.0f, 0.0f };
-	FVector InterLocation = { 300.0f, 0.0f };
-
-	for (int i = 0; i < 3; i++)
+	// Lights
 	{
-	
-		std::shared_ptr<class ATitleUI> Plants = GetWorld()->SpawnActor<ATitleUI>();
-		Plants->CreateAnimation("Idle", "plant_01_loop.png", 0, 6, 0.2f);
-		Plants->ChangeAnimation("Idle");
-		Plants->SetRelativeLocation(StartLocation + InterLocation * i);
+		std::shared_ptr<class ATitleUI> LightHalo = GetWorld()->SpawnActor<ATitleUI>();
+		LightHalo->CreateAnimation("Idle", "lamp_halo_loop.png", 3.0f, 0, 3, 0.2f);
+		LightHalo->ChangeAnimation("Idle");
+		LightHalo->SetRelativeLocation({ -496.0f, -150.0f, 0.0f });
+
+		std::shared_ptr<class ATitleUI> Light = GetWorld()->SpawnActor<ATitleUI>();
+		Light->SetUISprite("TitleImage", 6);
+		Light->SetUIScale3D({ 213.0f, 201.0f, 1.0f });
+		Light->SetActorLocation({ -496.0f, -150.0f, 0.0f });
+
 
 	}
+	{
+		std::shared_ptr<class ATitleUI> Light = GetWorld()->SpawnActor<ATitleUI>();
+		Light->SetUISprite("TitleImage", 7);
+		Light->SetUIScale3D({ 213.0f, 201.0f, 1.0f });
+		Light->SetActorLocation({ -313.0f, -150.0f, 0.0f });
+	}
+	{
+		std::shared_ptr<class ATitleUI> LightHalo = GetWorld()->SpawnActor<ATitleUI>();
+		LightHalo->CreateAnimation("Idle", "lamp_halo_loop.png", 3.0f, 0, 3, 0.2f);
+		LightHalo->ChangeAnimation("Idle");
+		LightHalo->SetRelativeLocation({ 221.0f, -150.0f, 0.0f });
+
+		std::shared_ptr<class ATitleUI> Light = GetWorld()->SpawnActor<ATitleUI>();
+		Light->SetUISprite("TitleImage", 6);
+		Light->SetUIScale3D({ 213.0f, 201.0f, 1.0f });
+		Light->SetActorLocation({ 221.0f, -150.0f, 0.0f });
+	}
+
+	// Window
+	{
+		std::shared_ptr<class ATitleUI> WindowLight = GetWorld()->SpawnActor<ATitleUI>();
+		WindowLight->CreateAnimation("Idle", "window02_light_loop.png", 3.0f, 0, 6, 0.2f);
+		WindowLight->ChangeAnimation("Idle");
+		WindowLight->SetRelativeLocation({ -30.0f, -188.0f, 1.0f, 0.0f });
+	}
+
+
+	std::shared_ptr<class ATitleUI> Wood = GetWorld()->SpawnActor<ATitleUI>();
+	Wood->SetUISprite("TitleImage", 10);
+	Wood->SetUIScale3D({ 1290.0f, 195.0f, 1.0f });
+	Wood->SetActorLocation({ -100.0f, -311.0f, 0.0f });
+
+
+	// plants
+	{
+		FVector StartLocation = { -700.0f, -285.0f, 0.0f };
+		FVector InterLocation = { 350.0f, 0.0f };
+
+		for (float i = 0; i < 3; i++)
+		{
+
+			std::shared_ptr<class ATitleUI> Plants = GetWorld()->SpawnActor<ATitleUI>();
+			Plants->CreateAnimation("Idle", "plant_01_loop.png", 3.1f, 0, 6, 0.2f);
+			Plants->ChangeAnimation("Idle");
+			Plants->SetRelativeLocation(StartLocation + InterLocation * i);
+
+		}
+	}
+
+	// Door
+	std::shared_ptr<class ATitleUI> Door = GetWorld()->SpawnActor<ATitleUI>();
+	Door->CreateAnimation("Idle", "holoDoor_loop.png", 3.0f, 0, 4, 0.2f);
+	Door->ChangeAnimation("Idle");
+	Door->SetRelativeLocation({-582.0f, -258.0f, 1.0f, 0.0f});
+	
+	// fence
+	std::shared_ptr<class ATitleUI> Fence = GetWorld()->SpawnActor<ATitleUI>();
+	Fence->SetUISprite("TitleImage", 9);
+	Fence->SetUIScale3D({ 1280.0f, 106.0f, 1.0f });
+	Fence->SetActorLocation({ -100.0f, -311.0f, 0.0f });
 
 
 	// Camera
@@ -90,6 +152,11 @@ ATitleGameMode::ATitleGameMode()
 
 ATitleGameMode::~ATitleGameMode()
 {
+}
+void ATitleGameMode::BeginPlay()
+{
+	AActor::BeginPlay();
+
 }
 
 void ATitleGameMode::Tick(float _DeltaTime)

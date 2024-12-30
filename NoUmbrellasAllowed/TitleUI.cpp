@@ -39,13 +39,13 @@ void ATitleUI::SetUIScale3D(const FVector& _Value)
 	UIRenderer->USpriteRenderer::SetScale3D(_Value);
 }
 
-void ATitleUI::CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, int _Start, int _End, float Time /*= 0.1f*/, bool _Loop /*= true*/)
+void ATitleUI::CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, float _Scale, int _Start, int _End, float Time /*= 0.1f*/, bool _Loop /*= true*/)
 {
 	UIRenderer->CreateAnimation(_AnimationName, _SpriteName, _Start, _End, Time, _Loop);
 
 	USpriteRenderer::FrameAnimation* Animation = UIRenderer->FindAnimation(_AnimationName);
 	Animation->IsAutoScale = true;
-	Animation->AutoScaleRatio = 3.1f;
+	Animation->AutoScaleRatio = _Scale;
 }
 
 void ATitleUI::ChangeAnimation(std::string_view _AnimationName, bool _Force /*= false*/)

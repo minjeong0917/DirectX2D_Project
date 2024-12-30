@@ -40,6 +40,9 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 		}
 		UEngineSprite::CreateSpriteToFolder(Dir.GetPathToString());
 		UEngineSprite::CreateSpriteToMeta("plant_01_loop.png", ".sdata");
+		UEngineSprite::CreateSpriteToMeta("holoDoor_loop.png", ".sdata");
+		UEngineSprite::CreateSpriteToMeta("window02_light_loop.png", ".sdata");
+		UEngineSprite::CreateSpriteToMeta("lamp_halo_loop.png", ".sdata");
 	}
 
 

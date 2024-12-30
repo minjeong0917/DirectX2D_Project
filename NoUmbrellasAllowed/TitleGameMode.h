@@ -15,10 +15,12 @@ public:
 	ATitleGameMode& operator=(const ATitleGameMode& _Other) = delete;
 	ATitleGameMode& operator=(ATitleGameMode&& _Other) noexcept = delete;
 
-	void Tick(float _DeltaTime);
 
 
 protected:
+	void BeginPlay();
+
+	void Tick(float _DeltaTime);
 
 private:
 	std::shared_ptr<class ALogo> Logo;
@@ -29,6 +31,5 @@ private:
 	std::shared_ptr<class ATitleUI> BackBuilding2;
 	std::shared_ptr<class ATitleUI> BackBuilding3;
 
-	std::vector<class ATitleUI> AllPlants;
 };
 

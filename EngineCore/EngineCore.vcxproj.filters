@@ -50,30 +50,6 @@
     <ClInclude Include="EngineTexture.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imstb_rectpack.h">
-      <Filter>GUI\IMGUI\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imstb_textedit.h">
-      <Filter>GUI\IMGUI\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imstb_truetype.h">
-      <Filter>GUI\IMGUI\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imconfig.h">
-      <Filter>GUI\IMGUI\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui.h">
-      <Filter>GUI\IMGUI\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_impl_dx11.h">
-      <Filter>GUI\IMGUI\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_impl_win32.h">
-      <Filter>GUI\IMGUI\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_internal.h">
-      <Filter>GUI\IMGUI\Header</Filter>
-    </ClInclude>
     <ClInclude Include="EngineGUI.h">
       <Filter>GUI</Filter>
     </ClInclude>
@@ -102,6 +78,30 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="EngineBlend.h" />
+    <ClInclude Include="imstb_rectpack.h">
+      <Filter>GUI\IMGUI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_textedit.h">
+      <Filter>GUI\IMGUI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_truetype.h">
+      <Filter>GUI\IMGUI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="imconfig.h">
+      <Filter>GUI\IMGUI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui.h">
+      <Filter>GUI\IMGUI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_dx11.h">
+      <Filter>GUI\IMGUI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_win32.h">
+      <Filter>GUI\IMGUI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_internal.h">
+      <Filter>GUI\IMGUI\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -147,24 +147,6 @@
     <ClCompile Include="EngineTexture.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui.cpp">
-      <Filter>GUI\IMGUI\CPP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_draw.cpp">
-      <Filter>GUI\IMGUI\CPP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_impl_dx11.cpp">
-      <Filter>GUI\IMGUI\CPP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_impl_win32.cpp">
-      <Filter>GUI\IMGUI\CPP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_tables.cpp">
-      <Filter>GUI\IMGUI\CPP</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_widgets.cpp">
-      <Filter>GUI\IMGUI\CPP</Filter>
-    </ClCompile>
     <ClCompile Include="EngineGUI.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
@@ -193,6 +175,24 @@
       <Filter>Object\Component\Contents</Filter>
     </ClCompile>
     <ClCompile Include="EngineBlend.cpp" />
+    <ClCompile Include="imgui_tables.cpp">
+      <Filter>GUI\IMGUI\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <Filter>GUI\IMGUI\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui.cpp">
+      <Filter>GUI\IMGUI\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <Filter>GUI\IMGUI\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_dx11.cpp">
+      <Filter>GUI\IMGUI\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_win32.cpp">
+      <Filter>GUI\IMGUI\CPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Interface">

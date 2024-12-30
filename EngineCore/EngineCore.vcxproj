@@ -167,14 +167,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imconfig.h" />
-    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui.h" />
-    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_impl_dx11.h" />
-    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_impl_win32.h" />
-    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_internal.h" />
-    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imstb_rectpack.h" />
-    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imstb_textedit.h" />
-    <ClInclude Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imstb_truetype.h" />
     <ClInclude Include="CameraActor.h">
       <SubType>
       </SubType>
@@ -184,6 +176,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="EngineVertex.h" />
+    <ClInclude Include="imconfig.h" />
+    <ClInclude Include="imgui.h" />
+    <ClInclude Include="imgui_impl_dx11.h" />
+    <ClInclude Include="imgui_impl_win32.h" />
+    <ClInclude Include="imgui_internal.h" />
+    <ClInclude Include="imstb_rectpack.h" />
+    <ClInclude Include="imstb_textedit.h" />
+    <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="Pawn.h">
       <SubType>
       </SubType>
@@ -273,12 +273,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui.cpp" />
-    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_draw.cpp" />
-    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_impl_dx11.cpp" />
-    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_impl_win32.cpp" />
-    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_tables.cpp" />
-    <ClCompile Include="..\..\GM\GM2\DX\GM2DX\EngineCore\imgui_widgets.cpp" />
     <ClCompile Include="CameraActor.cpp">
       <SubType>
       </SubType>
@@ -288,6 +282,12 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="EngineGraphicDevice_Resources.cpp" />
+    <ClCompile Include="imgui.cpp" />
+    <ClCompile Include="imgui_draw.cpp" />
+    <ClCompile Include="imgui_impl_dx11.cpp" />
+    <ClCompile Include="imgui_impl_win32.cpp" />
+    <ClCompile Include="imgui_tables.cpp" />
+    <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="Pawn.cpp">
       <SubType>
       </SubType>
