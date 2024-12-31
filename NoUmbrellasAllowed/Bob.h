@@ -15,7 +15,8 @@ public:
 	ABob& operator=(ABob&& _Other) noexcept = delete;
 
 protected:
-
+	void BeginPlay();
+	void Tick(float _DeltaTime);
 private:
 
 };

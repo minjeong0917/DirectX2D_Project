@@ -21,6 +21,7 @@ protected:
 	void EngineStart(UEngineInitData& _Data);
 	void EngineTick(float _DeltaTime);
 	void EngineEnd();
+	void LoadFile(UEngineDirectory& _Dir);
 
 private:
 	FVector WindowSize = { 1920, 1080 };

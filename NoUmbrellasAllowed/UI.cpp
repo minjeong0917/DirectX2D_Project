@@ -3,9 +3,9 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/DefaultSceneComponent.h>
 
-#include "TitleUI.h"
+#include "UI.h"
 
-ATitleUI::ATitleUI()
+AUI::AUI()
 {
 	std::shared_ptr<UDefaultSceneComponent> Default = CreateDefaultSubObject<UDefaultSceneComponent>();
 	RootComponent = Default;
@@ -14,32 +14,32 @@ ATitleUI::ATitleUI()
 
 }
 
-ATitleUI::~ATitleUI()
+AUI::~AUI()
 {
 }
 
-void ATitleUI::BeginPlay()
+void AUI::BeginPlay()
 {
 	AActor::BeginPlay();
 }
 
-void ATitleUI::Tick(float _DeltaTime)
+void AUI::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 
 }
 
-void ATitleUI::SetUISprite(std::string _Name, int _Index)
+void AUI::SetUISprite(std::string _Name, int _Index)
 {
 	UIRenderer->USpriteRenderer::SetSprite(_Name, _Index);
 }
 
-void ATitleUI::SetUIScale3D(const FVector& _Value)
+void AUI::SetUIScale3D(const FVector& _Value)
 {
 	UIRenderer->USpriteRenderer::SetScale3D(_Value);
 }
 
-void ATitleUI::CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, float _Scale, int _Start, int _End, float Time /*= 0.1f*/, bool _Loop /*= true*/)
+void AUI::CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, float _Scale, int _Start, int _End, float Time /*= 0.1f*/, bool _Loop /*= true*/)
 {
 	UIRenderer->CreateAnimation(_AnimationName, _SpriteName, _Start, _End, Time, _Loop);
 
@@ -48,13 +48,13 @@ void ATitleUI::CreateAnimation(std::string_view _AnimationName, std::string_view
 	Animation->AutoScaleRatio = _Scale;
 }
 
-void ATitleUI::ChangeAnimation(std::string_view _AnimationName, bool _Force /*= false*/)
+void AUI::ChangeAnimation(std::string_view _AnimationName, bool _Force /*= false*/)
 {
 	UIRenderer->ChangeAnimation(_AnimationName, _Force);
 
 }
 
-void ATitleUI::SetRelativeLocation(const FVector& _Value)
+void AUI::SetRelativeLocation(const FVector& _Value)
 {
 	UIRenderer->SetRelativeLocation(_Value);
 }

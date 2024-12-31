@@ -1,6 +1,6 @@
 #pragma once
 #include <EngineBase/EngineDefine.h>
-#include <EnginePlatform/EngineWindow.h>
+
 #include "EngineGraphicDevice.h"
 #include "IContentsCore.h"
 #include "Level.h"

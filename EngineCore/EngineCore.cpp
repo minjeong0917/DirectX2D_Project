@@ -42,7 +42,7 @@ UEngineCore::~UEngineCore()
 void UEngineCore::WindowInit(HINSTANCE _Instance)
 {
 	UEngineWindow::EngineWindowInit(_Instance);
-	MainWindow.Open("No Umbrellas Allowed");
+	MainWindow.Open("TestWindow");
 }
 
 void UEngineCore::LoadContents(std::string_view _DllName)

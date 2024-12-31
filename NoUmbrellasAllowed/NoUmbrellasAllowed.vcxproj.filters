@@ -10,7 +10,7 @@
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
-    <ClCompile Include="TitleUI.cpp" />
+    <ClCompile Include="UI.cpp" />
     <ClCompile Include="ShopGameMode.cpp">
       <Filter>GameMode</Filter>
     </ClCompile>
@@ -25,7 +25,7 @@
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
-    <ClInclude Include="TitleUI.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="ShopGameMode.h">
       <Filter>GameMode</Filter>
     </ClInclude>

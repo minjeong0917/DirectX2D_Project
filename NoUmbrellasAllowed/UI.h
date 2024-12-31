@@ -2,18 +2,18 @@
 #include <EngineCore/Actor.h>
 
 // Ό³Έν :
-class ATitleUI : public AActor
+class AUI : public AActor
 {
 public:
 	// constrcuter destructer
-	ATitleUI();
-	~ATitleUI();
+	AUI();
+	~AUI();
 
 	// delete Function
-	ATitleUI(const ATitleUI& _Other) = delete;
-	ATitleUI(ATitleUI&& _Other) noexcept = delete;
-	ATitleUI& operator=(const ATitleUI& _Other) = delete;
-	ATitleUI& operator=(ATitleUI&& _Other) noexcept = delete;
+	AUI(const AUI& _Other) = delete;
+	AUI(AUI&& _Other) noexcept = delete;
+	AUI& operator=(const AUI& _Other) = delete;
+	AUI& operator=(AUI&& _Other) noexcept = delete;
 
 	std::shared_ptr<class USpriteRenderer> GetRenderer()
 	{

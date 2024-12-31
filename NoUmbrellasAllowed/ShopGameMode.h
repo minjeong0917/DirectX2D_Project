@@ -19,6 +19,6 @@ protected:
 	void BeginPlay();
 	void Tick(float _DeltaTime);
 private:
-
+	//std::shared_ptr<class AUI> WalkCustomer;
 };
 

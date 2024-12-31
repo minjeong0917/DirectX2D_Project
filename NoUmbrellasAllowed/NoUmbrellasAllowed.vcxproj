@@ -175,7 +175,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="TitleUI.cpp">
+    <ClCompile Include="UI.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -198,7 +198,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="TitleUI.h">
+    <ClInclude Include="UI.h">
       <SubType>
       </SubType>
     </ClInclude>
