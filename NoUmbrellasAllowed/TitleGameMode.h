@@ -25,11 +25,7 @@ protected:
 private:
 	std::shared_ptr<class ALogo> Logo;
 	std::shared_ptr<class ATitleUI> Background;
-	std::shared_ptr<class ATitleUI> Building;
-	std::shared_ptr<class ATitleUI> BuildingFrame;
-	std::shared_ptr<class ATitleUI> BackBuilding1;
-	std::shared_ptr<class ATitleUI> BackBuilding2;
-	std::shared_ptr<class ATitleUI> BackBuilding3;
+	std::vector<std::shared_ptr<class ATitleUI>> AllPlants;
 
 };
 

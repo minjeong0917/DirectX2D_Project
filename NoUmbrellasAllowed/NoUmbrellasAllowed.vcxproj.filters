@@ -11,6 +11,9 @@
       <Filter>PreCompile</Filter>
     </ClCompile>
     <ClCompile Include="TitleUI.cpp" />
+    <ClCompile Include="ShopGameMode.cpp">
+      <Filter>GameMode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logo.h" />
@@ -23,6 +26,9 @@
       <Filter>PreCompile</Filter>
     </ClInclude>
     <ClInclude Include="TitleUI.h" />
+    <ClInclude Include="ShopGameMode.h">
+      <Filter>GameMode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameMode">

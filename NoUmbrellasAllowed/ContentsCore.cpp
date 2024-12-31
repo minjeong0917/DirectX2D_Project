@@ -2,6 +2,7 @@
 #include "ContentsCore.h"
 #include <EngineCore/Level.h>
 #include "TitleGameMode.h"
+#include "ShopGameMode.h"
 #include <EngineCore/EngineTexture.h>
 #include <EngineCore/EngineSprite.h>
 
@@ -40,9 +41,14 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 		}
 		UEngineSprite::CreateSpriteToFolder(Dir.GetPathToString());
 		UEngineSprite::CreateSpriteToMeta("plant_01_loop.png", ".sdata");
+		UEngineSprite::CreateSpriteToMeta("plant_02_loop.png", ".sdata");
+		UEngineSprite::CreateSpriteToMeta("plant_03_loop.png", ".sdata");
 		UEngineSprite::CreateSpriteToMeta("holoDoor_loop.png", ".sdata");
 		UEngineSprite::CreateSpriteToMeta("window02_light_loop.png", ".sdata");
 		UEngineSprite::CreateSpriteToMeta("lamp_halo_loop.png", ".sdata");
+		UEngineSprite::CreateSpriteToMeta("name_01_loop.png", ".sdata");
+		UEngineSprite::CreateSpriteToMeta("name_02_loop.png", ".sdata");
+		UEngineSprite::CreateSpriteToMeta("name_home_loop.png", ".sdata");
 	}
 
 
@@ -68,6 +74,7 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 
 
 	UEngineCore::CreateLevel<ATitleGameMode, APawn>("Titlelevel");
+	UEngineCore::CreateLevel<AShopGameMode, APawn>("Shoplevel");
 	UEngineCore::OpenLevel("Titlelevel");
 
 }
