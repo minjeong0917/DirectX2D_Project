@@ -50,6 +50,7 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 		UEngineSprite::CreateSpriteToMeta("name_01_loop.png", ".sdata");
 		UEngineSprite::CreateSpriteToMeta("name_02_loop.png", ".sdata");
 		UEngineSprite::CreateSpriteToMeta("name_home_loop.png", ".sdata");
+
 	}
 
 	// Logo
@@ -71,6 +72,15 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 
 
 		UEngineSprite::CreateSpriteToFolder(Dir.GetPathToString());
+		UEngineSprite::CreateSpriteToMeta("femaleCustomer_walk_01.png", ".sdata");
+		UEngineSprite::CreateSpriteToMeta("femaleCustomer_walk_02.png", ".sdata");
+		UEngineSprite::CreateSpriteToMeta("femaleCustomer_walk_03.png", ".sdata");
+		UEngineSprite::CreateSpriteToMeta("femaleCustomer_walk_04.png", ".sdata");
+		UEngineSprite::CreateSpriteToMeta("maleCustomer_walk_01.png", ".sdata");
+		UEngineSprite::CreateSpriteToMeta("maleCustomer_walk_02.png", ".sdata");
+		UEngineSprite::CreateSpriteToMeta("maleCustomer_walk_03.png", ".sdata");
+		UEngineSprite::CreateSpriteToMeta("maleCustomer_walk_04.png", ".sdata");
+
 	}
 
 	// Ocean

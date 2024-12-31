@@ -3,6 +3,7 @@
 #include "UI.h"
 #include <EngineCore/EngineCore.h>
 
+
 AShopGameMode::AShopGameMode()
 {
 
@@ -18,17 +19,27 @@ AShopGameMode::AShopGameMode()
 	Ocean->ChangeAnimation("Idle");
 	Ocean->SetRelativeLocation({ 0.0f, -250.0f, 0.0f });
 
-	// WalkCustomer
-	//WalkCustomer = GetWorld()->SpawnActor<AUI>();
-	//WalkCustomer->CreateAnimation("WalkCustomer", "000_femaleCustomer_run_01.png", 3.0f, 0, 3, 0.2f);
-	//WalkCustomer->ChangeAnimation("WalkCustomer");
-	//WalkCustomer->SetRelativeLocation({ 640.0f, -250.0f, 0.0f });
-
 	// Bridge
 	std::shared_ptr<class AUI> Bridge = GetWorld()->SpawnActor<AUI>();
 	Bridge->SetUISprite("Shop", 1);
 	Bridge->SetUIScale3D({ 1800.0f, 219.0f, 1.0f });
 	Bridge->SetActorLocation({ 0.0f, -250.0f, 0.0f });
+
+	// WalkCustomer
+	for (int i = 0; i < 8; i++)
+	{
+		AllOutCustormerAni.push_back("WalkCustomer0" + std::to_string(i + 1));
+	}
+
+	int RandInt = RandomInt(0, 8);
+	std::string RandAni = AllOutCustormerAni[RandInt];
+
+	WalkCustomer1 = GetWorld()->SpawnActor<AUI>();
+	CustomerCreateAni(WalkCustomer1);
+
+	WalkCustomer1->SetRelativeLocation({ 840.0f, -300.0f, 0.0f });
+	WalkCustomer1->ChangeAnimation(RandAni);
+
 
 	// DoorDown
 	std::shared_ptr<class AUI> DoorDown = GetWorld()->SpawnActor<AUI>();
@@ -78,7 +89,37 @@ void AShopGameMode::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 	UEngineDebug::OutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
+	RandomOutCustomer(_DeltaTime);
 
-	//WalkCustomer->AddRelativeLocation({ (-1.0f) * _DeltaTime * 10, 0.0f,0.0f });
 }
 
+void AShopGameMode::RandomOutCustomer(float _DeltaTime)
+{
+	ApearTime += _DeltaTime;
+	if (ApearTime > 3.0f)
+	{
+		Apear = true;
+	}
+
+	if (Apear == true)
+	{
+		WalkCustomer1->AddRelativeLocation({ (-1.0f) * _DeltaTime * 100, 0.0f, 0.0f });
+	}
+
+	if (WalkCustomer1->GetActorTransform().Location.X < -840.0f)
+	{
+		int a = 0;
+	}
+}
+
+void AShopGameMode::CustomerCreateAni(std::shared_ptr<class AUI> _Customer)
+{
+	_Customer->CreateAnimation("WalkCustomer01", "femaleCustomer_walk_01.png", 3.0f, 0, 3, 0.2f);
+	_Customer->CreateAnimation("WalkCustomer02", "femaleCustomer_walk_02.png", 3.0f, 0, 3, 0.2f);
+	_Customer->CreateAnimation("WalkCustomer03", "femaleCustomer_walk_03.png", 3.0f, 0, 3, 0.2f);
+	_Customer->CreateAnimation("WalkCustomer04", "femaleCustomer_walk_04.png", 3.0f, 0, 3, 0.2f);
+	_Customer->CreateAnimation("WalkCustomer05", "maleCustomer_walk_01.png", 3.0f, 0, 3, 0.2f);
+	_Customer->CreateAnimation("WalkCustomer06", "maleCustomer_walk_02.png", 3.0f, 0, 3, 0.2f);
+	_Customer->CreateAnimation("WalkCustomer07", "maleCustomer_walk_03.png", 3.0f, 0, 3, 0.2f);
+	_Customer->CreateAnimation("WalkCustomer08", "maleCustomer_walk_04.png", 3.0f, 0, 3, 0.2f);
+}

@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 59d2883fa3d17e14790b7bc6ac98ca77
+guid: 9fb7754a23bb4df46bd4c779c8faa250
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3393994045777706266
-    second: 000_femaleCustomer_run_01_0
+      213: 5261048131379274608
+    second: femaleCustomer_walk_01_0
   - first:
-      213: 4590422751629981528
-    second: 000_femaleCustomer_run_01_1
+      213: 6474934510475152599
+    second: femaleCustomer_walk_01_1
   - first:
-      213: -4555629206603241427
-    second: 000_femaleCustomer_run_01_2
+      213: 305636273901741548
+    second: femaleCustomer_walk_01_2
   - first:
-      213: 5904862547319967538
-    second: 000_femaleCustomer_run_01_3
+      213: 8443109875788489999
+    second: femaleCustomer_walk_01_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -103,12 +103,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 000_femaleCustomer_run_01_0
+      name: femaleCustomer_walk_01_0
       rect:
         serializedVersion: 2
         x: 0
         y: 121
-        width: 83
+        width: 46
         height: 121
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -117,19 +117,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e201a3c56c16e0d0800000000000000
-      internalID: -3393994045777706266
+      spriteID: 0732819b66ff20940800000000000000
+      internalID: 5261048131379274608
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 000_femaleCustomer_run_01_1
+      name: femaleCustomer_walk_01_1
       rect:
         serializedVersion: 2
-        x: 83
+        x: 46
         y: 121
-        width: 83
+        width: 46
         height: 121
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -138,19 +138,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 857b6c7eb2574bf30800000000000000
-      internalID: 4590422751629981528
+      spriteID: 7dc0ac0b1a69bd950800000000000000
+      internalID: 6474934510475152599
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 000_femaleCustomer_run_01_2
+      name: femaleCustomer_walk_01_2
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 83
+        width: 46
         height: 121
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -159,19 +159,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d28e4049f5727c0c0800000000000000
-      internalID: -4555629206603241427
+      spriteID: ce523606296dd3400800000000000000
+      internalID: 305636273901741548
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 000_femaleCustomer_run_01_3
+      name: femaleCustomer_walk_01_3
       rect:
         serializedVersion: 2
-        x: 83
+        x: 46
         y: 0
-        width: 83
+        width: 46
         height: 121
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -180,8 +180,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23fc384933942f150800000000000000
-      internalID: 5904862547319967538
+      spriteID: f0527f1d2b3fb2570800000000000000
+      internalID: 8443109875788489999
       vertices: []
       indices: 
       edges: []
@@ -189,7 +189,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c3ba8afd823cced4690524c3f01e4e13
+    spriteID: d4c586f515f638b4c823f25f3572a5c6
     internalID: 0
     vertices: []
     indices: 
