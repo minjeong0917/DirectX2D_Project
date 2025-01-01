@@ -17,9 +17,13 @@ public:
 
 	int RandomInt(int _Min, int _Max)
 	{
-
 		std::uniform_int_distribution<int> RandomCreate(_Min, _Max);
+		return RandomCreate.operator()(MtGen);
+	}
 
+	float Randomfloat(float _Min, float _Max)
+	{
+		std::uniform_real_distribution<float> RandomCreate(_Min, _Max);
 		return RandomCreate.operator()(MtGen);
 	}
 
@@ -27,13 +31,17 @@ protected:
 	void BeginPlay();
 	void Tick(float _DeltaTime);
 private:
-	void RandomOutCustomer(float _DeltaTime);
+	void CustomerMove(float _DeltaTime, std::shared_ptr<class AUI> _Customer, bool _IsRight);
 	void CustomerCreateAni(std::shared_ptr<class AUI> _Customer);
-	float ApearTime = 0.0f;
-	bool Apear = false;
+	void RandomCustomerAnimation(std::shared_ptr<class AUI> _Customer);
+
+
 	bool IsChange = false;
+
 	std::mt19937_64 MtGen = std::mt19937_64(time(nullptr));
 	std::vector<std::string> AllOutCustormerAni;
+
 	std::shared_ptr<class AUI> WalkCustomer1;
+	std::shared_ptr<class AUI> WalkCustomer2;
 };
 

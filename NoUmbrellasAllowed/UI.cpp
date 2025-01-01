@@ -58,3 +58,9 @@ void AUI::SetRelativeLocation(const FVector& _Value)
 {
 	UIRenderer->SetRelativeLocation(_Value);
 }
+
+float4 AUI::GetLocation()
+{
+	float4 Location = UIRenderer->GetTransformRef().RelativeLocation;
+	return Location;
+}

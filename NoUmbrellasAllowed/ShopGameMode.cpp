@@ -31,14 +31,13 @@ AShopGameMode::AShopGameMode()
 		AllOutCustormerAni.push_back("WalkCustomer0" + std::to_string(i + 1));
 	}
 
-	int RandInt = RandomInt(0, 8);
-	std::string RandAni = AllOutCustormerAni[RandInt];
 
+	// WalkCustomer
 	WalkCustomer1 = GetWorld()->SpawnActor<AUI>();
 	CustomerCreateAni(WalkCustomer1);
-
-	WalkCustomer1->SetRelativeLocation({ 840.0f, -300.0f, 0.0f });
-	WalkCustomer1->ChangeAnimation(RandAni);
+	
+	WalkCustomer2 = GetWorld()->SpawnActor<AUI>();
+	CustomerCreateAni(WalkCustomer2);
 
 
 	// DoorDown
@@ -83,33 +82,89 @@ void AShopGameMode::BeginPlay()
 {
 	AActor::BeginPlay();
 
+	WalkCustomer1->SetRelativeLocation({ 840.0f, -300.0f, 0.0f });
+	RandomCustomerAnimation(WalkCustomer1);
+	float RandomApear = Randomfloat(2.0f, 10.0f);
+	WalkCustomer1->ApearTime = RandomApear;
+
+	WalkCustomer2->SetRelativeLocation({ -900.0f,  -300.0f, 0.0f });
+	RandomCustomerAnimation(WalkCustomer2);
+	float RandomApear2 = Randomfloat(2.0f, 10.0f);
+	WalkCustomer2->ApearTime = RandomApear2;
+
 }
 
 void AShopGameMode::Tick(float _DeltaTime)
 {
 	AActor::Tick(_DeltaTime);
 	UEngineDebug::OutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
-	RandomOutCustomer(_DeltaTime);
+
+	CustomerMove(_DeltaTime, WalkCustomer1, true);
+	CustomerMove(_DeltaTime, WalkCustomer2, false);
 
 }
 
-void AShopGameMode::RandomOutCustomer(float _DeltaTime)
+void AShopGameMode::CustomerMove(float _DeltaTime, std::shared_ptr<class AUI> _Customer, bool _IsRight)
 {
-	ApearTime += _DeltaTime;
-	if (ApearTime > 3.0f)
+	//UEngineDebug::OutPutString(std::to_string(WalkCustomer2->GetActorTransform().WorldLocation.X));
+	if (_IsRight == true)
 	{
-		Apear = true;
+		if (_Customer->GetActorTransform().WorldLocation.X > -2000.0f)
+		{
+			_Customer->CurApearTime += _DeltaTime;
+			if (_Customer->CurApearTime > _Customer->ApearTime)
+			{
+				_Customer->IsApear = true;
+			}
+
+			if (_Customer->IsApear == true)
+			{
+				_Customer->AddRelativeLocation({ (-1.0f) * _DeltaTime * 100, 0.0f, 0.0f });
+			}
+		}
+		else if (_Customer->GetActorTransform().WorldLocation.X < -2000.0f)
+		{
+			_Customer->IsApear = false;
+			_Customer->SetActorLocation({ 0.0f, 0.0f, 0.0f });
+
+			float RandomApear = Randomfloat(2.0f, 10.0f);
+			_Customer->ApearTime = RandomApear;
+
+			RandomCustomerAnimation(_Customer);
+			_Customer->CurApearTime = 0.0f;
+		}
 	}
 
-	if (Apear == true)
+	if (_IsRight == false)
 	{
-		WalkCustomer1->AddRelativeLocation({ (-1.0f) * _DeltaTime * 100, 0.0f, 0.0f });
+		if (_Customer->GetActorTransform().WorldLocation.X <  2000.0f)
+		{
+			_Customer->CurApearTime += _DeltaTime;
+			if (_Customer->CurApearTime > _Customer->ApearTime)
+			{
+				_Customer->IsApear = true;
+			}
+
+			if (_Customer->IsApear == true)
+			{
+
+				_Customer->AddRelativeLocation({ (1.0f) * _DeltaTime * 100, 0.0f, 0.0f });
+
+			}
+		}
+		 if (_Customer->GetActorTransform().WorldLocation.X > 2000.0f)
+		{
+			_Customer->IsApear = false;
+			_Customer->SetActorLocation({ 0.0f,  0.0f, 0.0f });
+
+			float RandomApear = Randomfloat(2.0f, 10.0f);
+			_Customer->ApearTime = RandomApear;
+
+			RandomCustomerAnimation(_Customer);
+			_Customer->CurApearTime = 0.0f;
+		}
 	}
 
-	if (WalkCustomer1->GetActorTransform().Location.X < -840.0f)
-	{
-		int a = 0;
-	}
 }
 
 void AShopGameMode::CustomerCreateAni(std::shared_ptr<class AUI> _Customer)
@@ -122,4 +177,12 @@ void AShopGameMode::CustomerCreateAni(std::shared_ptr<class AUI> _Customer)
 	_Customer->CreateAnimation("WalkCustomer06", "maleCustomer_walk_02.png", 3.0f, 0, 3, 0.2f);
 	_Customer->CreateAnimation("WalkCustomer07", "maleCustomer_walk_03.png", 3.0f, 0, 3, 0.2f);
 	_Customer->CreateAnimation("WalkCustomer08", "maleCustomer_walk_04.png", 3.0f, 0, 3, 0.2f);
+}
+
+void AShopGameMode::RandomCustomerAnimation(std::shared_ptr<class AUI> _Customer)
+{
+	int RandInt = RandomInt(0, 7);
+	std::string RandAni = AllOutCustormerAni[RandInt];
+
+	_Customer->ChangeAnimation(RandAni);
 }

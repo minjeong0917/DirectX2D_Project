@@ -24,6 +24,13 @@ public:
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, float _Scale, int _Start, int _End, float Time = 0.1f, bool _Loop = true);
 	void ChangeAnimation(std::string_view _AnimationName, bool _Force = false);
 	void SetRelativeLocation(const FVector& _Value);
+	float4 GetLocation();
+	void SetLocation(const FVector& _Value);
+
+
+	float CurApearTime = 0.0f;
+	float ApearTime = 3.0f;
+	bool IsApear = false;
 
 protected:
 	void BeginPlay() override;
