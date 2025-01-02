@@ -75,33 +75,10 @@ AShopGameMode::AShopGameMode()
 
 
 	// Hue
-	FVector HueLocation = { 370.0f, -333.0f, 0.0f };
-	FVector HueAnimationLocation = { 0.0f, 13.0f, 0.0f };
-
-	std::shared_ptr<class AUI> HueBody = GetWorld()->SpawnActor<AUI>();
-	HueBody->SetUISprite("Shop", 7);
-	HueBody->SetUIScale3D({ 183.0f, 222.0f, 1.0f });
-	HueBody->SetActorLocation(HueLocation);
-
 	std::shared_ptr<class AUI> HueBodyAnimation = GetWorld()->SpawnActor<AUI>();
-	HueBodyAnimation->CreateAnimation("Idle", "hue_body_loop.png", 3.0f, 0, 6, 0.16f);
+	HueBodyAnimation->CreateAnimation("Idle", "companion_idle_loop.png", 3.1f, 0, 13, 0.2f);
 	HueBodyAnimation->ChangeAnimation("Idle");
-	HueBodyAnimation->SetRelativeLocation(HueLocation + HueAnimationLocation);
-
-	std::shared_ptr<class AUI> HueHead = GetWorld()->SpawnActor<AUI>();
-	HueHead->SetUISprite("Shop", 8);
-	HueHead->SetUIScale3D({ 183.0f, 222.0f, 1.0f });
-	HueHead->SetActorLocation(HueLocation);
-
-	std::shared_ptr<class AUI> HueHeadAnimation = GetWorld()->SpawnActor<AUI>();
-	HueHeadAnimation->CreateAnimation("Idle", "hue_head_loop.png", 3.0f, 0, 6, 0.16f);
-	HueHeadAnimation->ChangeAnimation("Idle");
-	HueHeadAnimation->SetRelativeLocation(HueLocation + HueAnimationLocation);
-
-	std::shared_ptr<class AUI> HueEyeAnimation = GetWorld()->SpawnActor<AUI>();
-	HueEyeAnimation->CreateAnimation("Idle", "hue_eye_00.png", 3.0f, { 0,1,2,3,4 }, { 0.2f,0.2f,0.2f,0.2f, 2.0f });
-	HueEyeAnimation->ChangeAnimation("Idle");
-	HueEyeAnimation->SetRelativeLocation(HueLocation + HueAnimationLocation);
+	HueBodyAnimation->SetRelativeLocation({ 370.0f, -300.0f, 0.0f });
 
 
 	// OutLine	

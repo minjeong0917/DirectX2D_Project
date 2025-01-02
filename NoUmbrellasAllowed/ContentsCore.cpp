@@ -80,9 +80,8 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 		UEngineSprite::CreateSpriteToMeta("maleCustomer_walk_02.png", ".sdata");
 		UEngineSprite::CreateSpriteToMeta("maleCustomer_walk_03.png", ".sdata");
 		UEngineSprite::CreateSpriteToMeta("maleCustomer_walk_04.png", ".sdata");
-		UEngineSprite::CreateSpriteToMeta("hue_body_loop.png", ".sdata");
-		UEngineSprite::CreateSpriteToMeta("hue_head_loop.png", ".sdata");
-		UEngineSprite::CreateSpriteToMeta("hue_eye_00.png", ".sdata");
+		UEngineSprite::CreateSpriteToMeta("companion_idle_loop.png", ".sdata");
+
 
 	}
 

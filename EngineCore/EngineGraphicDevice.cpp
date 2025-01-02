@@ -158,7 +158,9 @@ void UEngineGraphicDevice::CreateBackBuffer(const UEngineWindow& _Window)
     ScInfo.BufferDesc.Width = Size.iX();
     ScInfo.BufferDesc.Height = Size.iY();
     ScInfo.OutputWindow = _Window.GetWindowHandle();
-    ScInfo.Windowed = true;
+    // 전체화면
+    // ScInfo.Windowed = false;
+    ScInfo.Windowed = true; // 창모드
     ScInfo.BufferDesc.RefreshRate.Denominator = 1;
     ScInfo.BufferDesc.RefreshRate.Numerator = 60;
     ScInfo.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
