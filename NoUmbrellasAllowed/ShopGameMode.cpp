@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "ShopGameMode.h"
 #include "UI.h"
+#include "Customer.h"
 #include <EngineCore/EngineCore.h>
 
 
@@ -64,6 +65,8 @@ AShopGameMode::AShopGameMode()
 	//Main->SetUIScale3D({ 1920.0f, 1080.0f, 1.0f });
 	Main->SetRelativeLocation({ 0.0f, -540.0f, 0.0f });
 
+	//Customer
+	Customer = GetWorld()->SpawnActor<ACustomer>();
 
 	// Table
 	std::shared_ptr<class AUI> Table = GetWorld()->SpawnActor<AUI>();
@@ -86,6 +89,8 @@ AShopGameMode::AShopGameMode()
 	OutLine->SetUISprite("Shop", 3);
 	OutLine->SetUIScale3D({ 1920.0f, 1080.0f, 1.0f });
 	OutLine->SetRelativeLocation({ 0.0f, -540.0f, 0.0f });
+
+
 
 }
 

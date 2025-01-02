@@ -33,45 +33,29 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 		return;
 	}
 
+	// TitleImage
+	LoadFile(Dir, "Images//TitleImage");
 
-	{
-		Dir.MoveParentToDirectory("ContentsResources");
-		Dir.Append("Images//TitleImage");
+	UEngineSprite::CreateSpriteToFolder(Dir.GetPathToString());
+	UEngineSprite::CreateSpriteToMeta("plant_01_loop.png", ".sdata");
+	UEngineSprite::CreateSpriteToMeta("plant_02_loop.png", ".sdata");
+	UEngineSprite::CreateSpriteToMeta("plant_03_loop.png", ".sdata");
+	UEngineSprite::CreateSpriteToMeta("holoDoor_loop.png", ".sdata");
+	UEngineSprite::CreateSpriteToMeta("window02_light_loop.png", ".sdata");
+	UEngineSprite::CreateSpriteToMeta("lamp_halo_loop.png", ".sdata");
+	UEngineSprite::CreateSpriteToMeta("name_01_loop.png", ".sdata");
+	UEngineSprite::CreateSpriteToMeta("name_02_loop.png", ".sdata");
+	UEngineSprite::CreateSpriteToMeta("name_home_loop.png", ".sdata");
 
-		LoadFile(Dir);
-
-		UEngineSprite::CreateSpriteToFolder(Dir.GetPathToString());
-		UEngineSprite::CreateSpriteToMeta("plant_01_loop.png", ".sdata");
-		UEngineSprite::CreateSpriteToMeta("plant_02_loop.png", ".sdata");
-		UEngineSprite::CreateSpriteToMeta("plant_03_loop.png", ".sdata");
-		UEngineSprite::CreateSpriteToMeta("holoDoor_loop.png", ".sdata");
-		UEngineSprite::CreateSpriteToMeta("window02_light_loop.png", ".sdata");
-		UEngineSprite::CreateSpriteToMeta("lamp_halo_loop.png", ".sdata");
-		UEngineSprite::CreateSpriteToMeta("name_01_loop.png", ".sdata");
-		UEngineSprite::CreateSpriteToMeta("name_02_loop.png", ".sdata");
-		UEngineSprite::CreateSpriteToMeta("name_home_loop.png", ".sdata");
-
-	}
 
 	// Logo
-	{
-		Dir.MoveParentToDirectory("ContentsResources");
-		Dir.Append("Images//Logo");
+	LoadFile(Dir, "Images//Logo");
 
-		LoadFile(Dir);
-
-		UEngineSprite::CreateSpriteToFolder(Dir.GetPathToString());
-	}
 
 	// Shop
 	{
-		Dir.MoveParentToDirectory("ContentsResources");
-		Dir.Append("Images//Shop");
+		LoadFile(Dir, "Images//Shop");
 
-		LoadFile(Dir);
-
-
-		UEngineSprite::CreateSpriteToFolder(Dir.GetPathToString());
 		UEngineSprite::CreateSpriteToMeta("femaleCustomer_walk_01.png", ".sdata");
 		UEngineSprite::CreateSpriteToMeta("femaleCustomer_walk_02.png", ".sdata");
 		UEngineSprite::CreateSpriteToMeta("femaleCustomer_walk_03.png", ".sdata");
@@ -83,29 +67,33 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 		UEngineSprite::CreateSpriteToMeta("companion_idle_loop.png", ".sdata");
 
 
+		// Ocean
+		LoadFile(Dir, "Images//Shop//Ocean");
+
+		// Main
+		LoadFile(Dir, "Images//Shop//Main");
+
+		// Table
+		LoadFile(Dir, "Images//Shop//Table");
 	}
 
-	// Ocean
+	// Customer
 	{
-		Dir.MoveParentToDirectory("ContentsResources");
-		Dir.Append("Images//Shop//Ocean");
-		LoadFile(Dir);
-		UEngineSprite::CreateSpriteToFolder(Dir.GetPathToString());
-	}
+		LoadFile(Dir, "Images//Customer//Eyes");
+		UEngineSprite::CreateSpriteToMeta("000_happy_loop.png", ".sdata");
 
-	// Main
-	{
-		Dir.MoveParentToDirectory("ContentsResources");
-		Dir.Append("Images//Shop//Main");
-		LoadFile(Dir);
-		UEngineSprite::CreateSpriteToFolder(Dir.GetPathToString());
-	}
-	// Main
-	{
-		Dir.MoveParentToDirectory("ContentsResources");
-		Dir.Append("Images//Shop//Table");
-		LoadFile(Dir);
-		UEngineSprite::CreateSpriteToFolder(Dir.GetPathToString());
+		// Head
+		LoadFile(Dir, "Images//Customer//Head");
+		// Hair
+		LoadFile(Dir, "Images//Customer//Hair");
+		// Body
+		LoadFile(Dir, "Images//Customer//Body");
+		// Eyebrow
+		LoadFile(Dir, "Images//Customer//Eyebrow");
+		// Nose
+		LoadFile(Dir, "Images//Customer//Nose");
+		// Mouse
+		LoadFile(Dir, "Images//Customer//Mouse");
 	}
 
 	UEngineCore::CreateLevel<ATitleGameMode, APawn>("Titlelevel");
@@ -124,13 +112,16 @@ void UContentsCore::EngineEnd()
 
 }
 
-void UContentsCore::LoadFile(UEngineDirectory& _Dir)
+void UContentsCore::LoadFile(UEngineDirectory& _Dir, std::string_view _Path)
 {
+	_Dir.MoveParentToDirectory("ContentsResources");
+	_Dir.Append(_Path);
 	std::vector<UEngineFile> ImageFiles = _Dir.GetAllFile(true, { ".PNG", ".BMP", ".JPG" });
 	for (size_t i = 0; i < ImageFiles.size(); i++)
 	{
 		std::string FilePath = ImageFiles[i].GetPathToString();
 		UEngineTexture::Load(FilePath);
 	}
+	UEngineSprite::CreateSpriteToFolder(_Dir.GetPathToString());
 
 }

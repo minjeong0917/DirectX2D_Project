@@ -45,6 +45,7 @@ private:
 
 	std::shared_ptr<class AUI> WalkCustomer1;
 	std::shared_ptr<class AUI> WalkCustomer2;
+	std::shared_ptr<class ACustomer> Customer;
 
 };
 
