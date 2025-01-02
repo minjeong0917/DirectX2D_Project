@@ -38,10 +38,13 @@ private:
 
 	bool IsChange = false;
 
+	float CustomerSpeed = 120;
+
 	std::mt19937_64 MtGen = std::mt19937_64(time(nullptr));
 	std::vector<std::string> AllOutCustormerAni;
 
 	std::shared_ptr<class AUI> WalkCustomer1;
 	std::shared_ptr<class AUI> WalkCustomer2;
+
 };
 

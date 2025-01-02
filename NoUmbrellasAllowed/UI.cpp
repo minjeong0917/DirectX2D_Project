@@ -48,6 +48,15 @@ void AUI::CreateAnimation(std::string_view _AnimationName, std::string_view _Spr
 	Animation->AutoScaleRatio = _Scale;
 }
 
+void AUI::CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, float _Scale, std::vector<int> _Indexs, std::vector<float> _Frame, bool _Loop)
+{
+	UIRenderer->CreateAnimation(_AnimationName,  _SpriteName, _Indexs, _Frame, _Loop);
+
+	USpriteRenderer::FrameAnimation* Animation = UIRenderer->FindAnimation(_AnimationName);
+	Animation->IsAutoScale = true;
+	Animation->AutoScaleRatio = _Scale;
+}
+
 void AUI::ChangeAnimation(std::string_view _AnimationName, bool _Force /*= false*/)
 {
 	UIRenderer->ChangeAnimation(_AnimationName, _Force);

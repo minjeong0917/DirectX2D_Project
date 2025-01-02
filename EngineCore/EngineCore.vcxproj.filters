@@ -77,7 +77,6 @@
     <ClInclude Include="EngineVertex.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="EngineBlend.h" />
     <ClInclude Include="imstb_rectpack.h">
       <Filter>GUI\IMGUI\Header</Filter>
     </ClInclude>
@@ -101,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="imgui_internal.h">
       <Filter>GUI\IMGUI\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineBlend.h">
+      <Filter>Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -174,7 +176,6 @@
     <ClCompile Include="DefaultSceneComponent.cpp">
       <Filter>Object\Component\Contents</Filter>
     </ClCompile>
-    <ClCompile Include="EngineBlend.cpp" />
     <ClCompile Include="imgui_tables.cpp">
       <Filter>GUI\IMGUI\CPP</Filter>
     </ClCompile>
@@ -192,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="imgui_impl_win32.cpp">
       <Filter>GUI\IMGUI\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineBlend.cpp">
+      <Filter>Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

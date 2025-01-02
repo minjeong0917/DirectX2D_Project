@@ -22,10 +22,10 @@ public:
 	void SetUISprite(std::string _Name, int _Index);
 	void SetUIScale3D(const FVector& _Value);
 	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, float _Scale, int _Start, int _End, float Time = 0.1f, bool _Loop = true);
+	void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, float _Scale, std::vector<int> _Indexs, std::vector<float> _Frame, bool _Loop = true);
 	void ChangeAnimation(std::string_view _AnimationName, bool _Force = false);
 	void SetRelativeLocation(const FVector& _Value);
 	float4 GetLocation();
-	void SetLocation(const FVector& _Value);
 
 
 	float CurApearTime = 0.0f;

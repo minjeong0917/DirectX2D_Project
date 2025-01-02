@@ -4,6 +4,7 @@
 #include <EngineCore/EngineCore.h>
 
 
+
 AShopGameMode::AShopGameMode()
 {
 
@@ -13,11 +14,13 @@ AShopGameMode::AShopGameMode()
 	BackGround->SetUIScale3D({ 1920.0f, 1078.0f, 1.0f });
 	BackGround->SetRelativeLocation({ 0.0f, -700.0f, 0.0f });
 
+
 	// Ocean
 	std::shared_ptr<class AUI> Ocean = GetWorld()->SpawnActor<AUI>();
 	Ocean->CreateAnimation("Idle", "Ocean", 3.0f, 0, 4, 0.2f);
 	Ocean->ChangeAnimation("Idle");
 	Ocean->SetRelativeLocation({ 0.0f, -250.0f, 0.0f });
+
 
 	// Bridge
 	std::shared_ptr<class AUI> Bridge = GetWorld()->SpawnActor<AUI>();
@@ -25,14 +28,13 @@ AShopGameMode::AShopGameMode()
 	Bridge->SetUIScale3D({ 1800.0f, 219.0f, 1.0f });
 	Bridge->SetActorLocation({ 0.0f, -250.0f, 0.0f });
 
+
 	// WalkCustomer
 	for (int i = 0; i < 8; i++)
 	{
 		AllOutCustormerAni.push_back("WalkCustomer0" + std::to_string(i + 1));
 	}
 
-
-	// WalkCustomer
 	WalkCustomer1 = GetWorld()->SpawnActor<AUI>();
 	CustomerCreateAni(WalkCustomer1);
 	
@@ -46,11 +48,13 @@ AShopGameMode::AShopGameMode()
 	DoorDown->SetUIScale3D({ 246.0f, 165.0f, 1.0f });
 	DoorDown->SetActorLocation({ 0.0f, -250.0f, 0.0f });
 
+
 	// DoorUp
 	std::shared_ptr<class AUI> DoorUp = GetWorld()->SpawnActor<AUI>();
 	DoorUp->SetUISprite("Shop", 5);
 	DoorUp->SetUIScale3D({ 252.0f, 363.0f, 1.0f });
 	DoorUp->SetActorLocation({ 0.0f, -120.0f, 0.0f });
+
 
 	// main
 	std::shared_ptr<class AUI> Main = GetWorld()->SpawnActor<AUI>();
@@ -60,13 +64,47 @@ AShopGameMode::AShopGameMode()
 	//Main->SetUIScale3D({ 1920.0f, 1080.0f, 1.0f });
 	Main->SetRelativeLocation({ 0.0f, -540.0f, 0.0f });
 
+
 	// Table
 	std::shared_ptr<class AUI> Table = GetWorld()->SpawnActor<AUI>();
+	//Table->CreateAnimation("Idle", "Table", 3.0f, 0, 6, 0.2f);
+	//Table->ChangeAnimation("Idle");
 	Table->SetUISprite("Shop", 4);
 	Table->SetUIScale3D({ 1920.0f, 347.0f, 1.0f });
 	Table->SetRelativeLocation({ 0.0f, -545.0f, 0.0f});
 
-	// OutLine
+
+	// Hue
+	FVector HueLocation = { 370.0f, -333.0f, 0.0f };
+	FVector HueAnimationLocation = { 0.0f, 13.0f, 0.0f };
+
+	std::shared_ptr<class AUI> HueBody = GetWorld()->SpawnActor<AUI>();
+	HueBody->SetUISprite("Shop", 7);
+	HueBody->SetUIScale3D({ 183.0f, 222.0f, 1.0f });
+	HueBody->SetActorLocation(HueLocation);
+
+	std::shared_ptr<class AUI> HueBodyAnimation = GetWorld()->SpawnActor<AUI>();
+	HueBodyAnimation->CreateAnimation("Idle", "hue_body_loop.png", 3.0f, 0, 6, 0.16f);
+	HueBodyAnimation->ChangeAnimation("Idle");
+	HueBodyAnimation->SetRelativeLocation(HueLocation + HueAnimationLocation);
+
+	std::shared_ptr<class AUI> HueHead = GetWorld()->SpawnActor<AUI>();
+	HueHead->SetUISprite("Shop", 8);
+	HueHead->SetUIScale3D({ 183.0f, 222.0f, 1.0f });
+	HueHead->SetActorLocation(HueLocation);
+
+	std::shared_ptr<class AUI> HueHeadAnimation = GetWorld()->SpawnActor<AUI>();
+	HueHeadAnimation->CreateAnimation("Idle", "hue_head_loop.png", 3.0f, 0, 6, 0.16f);
+	HueHeadAnimation->ChangeAnimation("Idle");
+	HueHeadAnimation->SetRelativeLocation(HueLocation + HueAnimationLocation);
+
+	std::shared_ptr<class AUI> HueEyeAnimation = GetWorld()->SpawnActor<AUI>();
+	HueEyeAnimation->CreateAnimation("Idle", "hue_eye_00.png", 3.0f, { 0,1,2,3,4 }, { 0.2f,0.2f,0.2f,0.2f, 2.0f });
+	HueEyeAnimation->ChangeAnimation("Idle");
+	HueEyeAnimation->SetRelativeLocation(HueLocation + HueAnimationLocation);
+
+
+	// OutLine	
 	std::shared_ptr<class AUI> OutLine = GetWorld()->SpawnActor<AUI>();
 	OutLine->SetUISprite("Shop", 3);
 	OutLine->SetUIScale3D({ 1920.0f, 1080.0f, 1.0f });
@@ -82,16 +120,23 @@ void AShopGameMode::BeginPlay()
 {
 	AActor::BeginPlay();
 
-	WalkCustomer1->SetRelativeLocation({ 840.0f, -300.0f, 0.0f });
-	RandomCustomerAnimation(WalkCustomer1);
-	float RandomApear = Randomfloat(2.0f, 10.0f);
-	WalkCustomer1->ApearTime = RandomApear;
+	{
+		WalkCustomer1->SetRelativeLocation({ 840.0f, -300.0f, 0.0f });
+		RandomCustomerAnimation(WalkCustomer1);
+		float RandomApear = Randomfloat(2.0f, 10.0f);
+		WalkCustomer1->ApearTime = RandomApear;
+		UEngineDebug::OutPutString(std::to_string(RandomApear));
+	}
+	{
+		//WalkCustomer2->SetActorLocation({ -900.0f,  -300.0f, 0.0f });
+		WalkCustomer2->SetRelativeLocation({ 900.0f,  -300.0f, 0.0f });
+		WalkCustomer2->SetActorRotation({ 0.0f, 180.0f, 0.0f });
+		RandomCustomerAnimation(WalkCustomer2);
 
-	WalkCustomer2->SetRelativeLocation({ -900.0f,  -300.0f, 0.0f });
-	RandomCustomerAnimation(WalkCustomer2);
-	float RandomApear2 = Randomfloat(2.0f, 10.0f);
-	WalkCustomer2->ApearTime = RandomApear2;
-
+		float RandomApear = Randomfloat(6.0f, 15.0f);
+		WalkCustomer2->ApearTime = RandomApear;
+		UEngineDebug::OutPutString(std::to_string(RandomApear));
+	}
 }
 
 void AShopGameMode::Tick(float _DeltaTime)
@@ -106,7 +151,7 @@ void AShopGameMode::Tick(float _DeltaTime)
 
 void AShopGameMode::CustomerMove(float _DeltaTime, std::shared_ptr<class AUI> _Customer, bool _IsRight)
 {
-	//UEngineDebug::OutPutString(std::to_string(WalkCustomer2->GetActorTransform().WorldLocation.X));
+
 	if (_IsRight == true)
 	{
 		if (_Customer->GetActorTransform().WorldLocation.X > -2000.0f)
@@ -119,7 +164,7 @@ void AShopGameMode::CustomerMove(float _DeltaTime, std::shared_ptr<class AUI> _C
 
 			if (_Customer->IsApear == true)
 			{
-				_Customer->AddRelativeLocation({ (-1.0f) * _DeltaTime * 100, 0.0f, 0.0f });
+				_Customer->AddRelativeLocation({ (-1.0f) * _DeltaTime * CustomerSpeed, 0.0f, 0.0f });
 			}
 		}
 		else if (_Customer->GetActorTransform().WorldLocation.X < -2000.0f)
@@ -127,7 +172,8 @@ void AShopGameMode::CustomerMove(float _DeltaTime, std::shared_ptr<class AUI> _C
 			_Customer->IsApear = false;
 			_Customer->SetActorLocation({ 0.0f, 0.0f, 0.0f });
 
-			float RandomApear = Randomfloat(2.0f, 10.0f);
+			float RandomApear = Randomfloat(1.0f, 20.0f);
+			UEngineDebug::OutPutString(std::to_string(RandomApear));
 			_Customer->ApearTime = RandomApear;
 
 			RandomCustomerAnimation(_Customer);
@@ -148,7 +194,7 @@ void AShopGameMode::CustomerMove(float _DeltaTime, std::shared_ptr<class AUI> _C
 			if (_Customer->IsApear == true)
 			{
 
-				_Customer->AddRelativeLocation({ (1.0f) * _DeltaTime * 100, 0.0f, 0.0f });
+				_Customer->AddRelativeLocation({ (1.0f) * _DeltaTime * CustomerSpeed, 0.0f, 0.0f });
 
 			}
 		}
@@ -157,8 +203,9 @@ void AShopGameMode::CustomerMove(float _DeltaTime, std::shared_ptr<class AUI> _C
 			_Customer->IsApear = false;
 			_Customer->SetActorLocation({ 0.0f,  0.0f, 0.0f });
 
-			float RandomApear = Randomfloat(2.0f, 10.0f);
+			float RandomApear = Randomfloat(4.0f, 20.0f);
 			_Customer->ApearTime = RandomApear;
+
 
 			RandomCustomerAnimation(_Customer);
 			_Customer->CurApearTime = 0.0f;
@@ -169,14 +216,30 @@ void AShopGameMode::CustomerMove(float _DeltaTime, std::shared_ptr<class AUI> _C
 
 void AShopGameMode::CustomerCreateAni(std::shared_ptr<class AUI> _Customer)
 {
-	_Customer->CreateAnimation("WalkCustomer01", "femaleCustomer_walk_01.png", 3.0f, 0, 3, 0.2f);
-	_Customer->CreateAnimation("WalkCustomer02", "femaleCustomer_walk_02.png", 3.0f, 0, 3, 0.2f);
-	_Customer->CreateAnimation("WalkCustomer03", "femaleCustomer_walk_03.png", 3.0f, 0, 3, 0.2f);
-	_Customer->CreateAnimation("WalkCustomer04", "femaleCustomer_walk_04.png", 3.0f, 0, 3, 0.2f);
-	_Customer->CreateAnimation("WalkCustomer05", "maleCustomer_walk_01.png", 3.0f, 0, 3, 0.2f);
-	_Customer->CreateAnimation("WalkCustomer06", "maleCustomer_walk_02.png", 3.0f, 0, 3, 0.2f);
-	_Customer->CreateAnimation("WalkCustomer07", "maleCustomer_walk_03.png", 3.0f, 0, 3, 0.2f);
-	_Customer->CreateAnimation("WalkCustomer08", "maleCustomer_walk_04.png", 3.0f, 0, 3, 0.2f);
+	for (int i = 1; i < 9; i++)
+	{
+		if (i < 5)
+		{
+			std::string SpriteName = "femaleCustomer_walk_0" + std::to_string(i) + ".png";
+
+			_Customer->CreateAnimation("WalkCustomer0" + std::to_string(i), SpriteName, 3.0f, 0, 3, 0.2f);
+		}
+		else
+		{
+			std::string SpriteName = "maleCustomer_walk_0" + std::to_string(i - 4) + ".png";
+			_Customer->CreateAnimation("WalkCustomer0" + std::to_string(i), SpriteName, 3.0f, 0, 3, 0.2f);
+		}
+
+	}
+
+	//_Customer->CreateAnimation("WalkCustomer01", "femaleCustomer_walk_01.png", 3.0f, 0, 3, 0.2f);
+	//_Customer->CreateAnimation("WalkCustomer02", "femaleCustomer_walk_02.png", 3.0f, 0, 3, 0.2f);
+	//_Customer->CreateAnimation("WalkCustomer03", "femaleCustomer_walk_03.png", 3.0f, 0, 3, 0.2f);
+	//_Customer->CreateAnimation("WalkCustomer04", "femaleCustomer_walk_04.png", 3.0f, 0, 3, 0.2f);
+	//_Customer->CreateAnimation("WalkCustomer05", "maleCustomer_walk_01.png", 3.0f, 0, 3, 0.2f);
+	//_Customer->CreateAnimation("WalkCustomer06", "maleCustomer_walk_02.png", 3.0f, 0, 3, 0.2f);
+	//_Customer->CreateAnimation("WalkCustomer07", "maleCustomer_walk_03.png", 3.0f, 0, 3, 0.2f);
+	//_Customer->CreateAnimation("WalkCustomer08", "maleCustomer_walk_04.png", 3.0f, 0, 3, 0.2f);
 }
 
 void AShopGameMode::RandomCustomerAnimation(std::shared_ptr<class AUI> _Customer)
