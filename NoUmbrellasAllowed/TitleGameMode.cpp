@@ -199,7 +199,9 @@ void ATitleGameMode::Tick(float _DeltaTime)
 	}
 	std::shared_ptr<class ACameraActor> Camera = GetWorld()->GetCamera(0);
 
-	UEngineDebug::OutPutString(Camera->ScreenMousePosToWorldPos().ToString());
+	FVector MousePos = UEngineCore::GetMainWindow().GetMousePos();
+
+	//UEngineDebug::OutPutString(Camera->ScreenMousePosToWorldPos().ToString());
 
 }
 

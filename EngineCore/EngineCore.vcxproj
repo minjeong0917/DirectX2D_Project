@@ -175,6 +175,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineEnums.h" />
     <ClInclude Include="EngineVertex.h" />
     <ClInclude Include="imconfig.h" />
     <ClInclude Include="imgui.h" />
