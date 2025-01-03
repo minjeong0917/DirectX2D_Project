@@ -84,8 +84,9 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 
 		// Head
 		LoadFile(Dir, "Images//Customer//Head");
-		// Hair
-		LoadFile(Dir, "Images//Customer//Hair");
+		// WomanHair
+		LoadFile(Dir, "Images//Customer//Hair//WomanHair");
+		LoadFile(Dir, "Images//Customer//Hair//WomanHair//Set");
 		// Body
 		LoadFile(Dir, "Images//Customer//Body");
 		// Eyebrow
