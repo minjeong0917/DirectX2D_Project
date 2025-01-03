@@ -12,9 +12,10 @@ enum class EProjectionType : int8
 enum class EShaderType : int8
 {
 	VS, 
-	HS,  
+	HS, 
 	DS,
 	GS,
 	PS,
 	CS,
+	MAX
 };

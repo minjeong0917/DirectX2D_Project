@@ -256,7 +256,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="IndexBuffer.h">
+    <ClInclude Include="EngineIndexBuffer.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -268,7 +268,47 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="VertexBuffer.h">
+    <ClInclude Include="EngineRasterizerState.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EngineShader.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EngineShaderResources.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EngineVertexShader.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EngineConstantBuffer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EngineDeviceBuffer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EngineVertexBuffer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EngineMaterial.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EnginePixelShader.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EngineInputLayOutInfo.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EngineSampler.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -283,6 +323,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="EngineGraphicDevice_Resources.cpp" />
+    <ClCompile Include="EngineVertex.cpp" />
     <ClCompile Include="imgui.cpp" />
     <ClCompile Include="imgui_draw.cpp" />
     <ClCompile Include="imgui_impl_dx11.cpp" />
@@ -367,7 +408,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="IndexBuffer.cpp">
+    <ClCompile Include="EngineIndexBuffer.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -379,7 +420,47 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="VertexBuffer.cpp">
+    <ClCompile Include="EngineRasterizerState.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineShader.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineShaderResources.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineVertexShader.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineConstantBuffer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineDeviceBuffer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineVertexBuffer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineMaterial.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EnginePixelShader.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineInputLayOutInfo.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineSampler.cpp">
       <SubType>
       </SubType>
     </ClCompile>

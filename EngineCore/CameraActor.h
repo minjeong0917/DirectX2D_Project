@@ -20,7 +20,6 @@ public:
 		return CameraComponent;
 	}
 
-
 	void BeginPlay() override;
 	void Tick(float _DeltaTime);
 

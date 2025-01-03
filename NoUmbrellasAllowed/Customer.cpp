@@ -124,6 +124,6 @@ void ACustomer::CreateAnimation(std::shared_ptr<class USpriteRenderer>& _Render,
 	_Render->CreateAnimation(_AnimationName, _SpriteName, _Indexs, _Frame, _Loop);
 
 	USpriteRenderer::FrameAnimation* Animation = _Render->FindAnimation(_AnimationName);
-	Animation->IsAutoScale = true;
+
 	Animation->AutoScaleRatio = _Scale;
 }

@@ -44,7 +44,6 @@ void USceneComponent::BeginPlay()
 void USceneComponent::TransformUpdate()
 {
 	ParentMatrixCheck();
-	// 나의 트랜스폼 업데이트는 일단 한다.
 	Transform.TransformUpdate(IsAbsolute);
 
 	for (std::shared_ptr<USceneComponent> Child : Childs)
@@ -53,4 +52,14 @@ void USceneComponent::TransformUpdate()
 	}
 
 	IsAbsolute = false;
+}
+
+void USceneComponent::ComponentTick(float _DeltaTime)
+{
+	UActorComponent::ComponentTick(_DeltaTime);
+
+	for (std::shared_ptr<USceneComponent> Child : Childs)
+	{
+		Child->ComponentTick(_DeltaTime);
+	}
 }

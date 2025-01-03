@@ -15,7 +15,7 @@ public:
 	ENGINEAPI ~UEngineDirectory();
 
 
-	ENGINEAPI std::vector<class UEngineFile> GetAllFile(bool _IsRecursive, std::vector<std::string> _Exts);
+	ENGINEAPI std::vector<class UEngineFile> GetAllFile(bool _IsRecursive, const std::vector<std::string>& _Exts);
 
 	ENGINEAPI std::vector<class UEngineDirectory> GetAllDirectory();
 
@@ -25,7 +25,7 @@ public:
 protected:
 
 private:
-	void GetAllFileRecursive(std::filesystem::path _Path, std::vector<class UEngineFile>& _Result);
+	void GetAllFileRecursive(std::filesystem::path _Path, std::vector<class UEngineFile>& _Result, const std::vector<std::string>& _Exts);
 
 };
 

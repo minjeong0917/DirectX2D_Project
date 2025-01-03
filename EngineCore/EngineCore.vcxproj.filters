@@ -62,10 +62,10 @@
     <ClInclude Include="Mesh.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="VertexBuffer.h">
+    <ClInclude Include="EngineVertexBuffer.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="IndexBuffer.h">
+    <ClInclude Include="EngineIndexBuffer.h">
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="RenderUnit.h">
@@ -105,6 +105,16 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="EngineEnums.h" />
+    <ClInclude Include="EngineRasterizerState.h" />
+    <ClInclude Include="EngineShader.h" />
+    <ClInclude Include="EngineShaderResources.h" />
+    <ClInclude Include="EngineVertexShader.h" />
+    <ClInclude Include="EngineConstantBuffer.h" />
+    <ClInclude Include="EngineDeviceBuffer.h" />
+    <ClInclude Include="EngineMaterial.h" />
+    <ClInclude Include="EnginePixelShader.h" />
+    <ClInclude Include="EngineInputLayOutInfo.h" />
+    <ClInclude Include="EngineSampler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineCore.cpp" />
@@ -162,10 +172,10 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="VertexBuffer.cpp">
+    <ClCompile Include="EngineVertexBuffer.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="IndexBuffer.cpp">
+    <ClCompile Include="EngineIndexBuffer.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="RenderUnit.cpp">
@@ -198,6 +208,19 @@
     <ClCompile Include="EngineBlend.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
+    <ClCompile Include="EngineRasterizerState.cpp" />
+    <ClCompile Include="EngineShader.cpp" />
+    <ClCompile Include="EngineShaderResources.cpp" />
+    <ClCompile Include="EngineVertexShader.cpp" />
+    <ClCompile Include="EngineConstantBuffer.cpp" />
+    <ClCompile Include="EngineDeviceBuffer.cpp" />
+    <ClCompile Include="EngineMaterial.cpp" />
+    <ClCompile Include="EnginePixelShader.cpp" />
+    <ClCompile Include="EngineInputLayOutInfo.cpp" />
+    <ClCompile Include="EngineVertex.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSampler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Interface">

@@ -7,6 +7,7 @@
 #include "EngineResources.h"
 #include "EngineGUI.h"
 #include <EnginePlatform/EngineInput.h>
+#include "EngineConstantBuffer.h"
 
 UEngineGraphicDevice& UEngineCore::GetDevice()
 {
@@ -64,7 +65,6 @@ void UEngineCore::LoadContents(std::string_view _DllName)
 	UEngineFile File = Dir.GetFile(_DllName);
 
 	std::string FullPath = File.GetPathToString();
-	// 규칙이 생길수밖에 없다.
 	ContentsDLL = LoadLibraryA(FullPath.c_str());
 
 	if (nullptr == ContentsDLL)
@@ -182,6 +182,7 @@ void UEngineCore::EngineEnd()
 
 	Device.Release();
 	UEngineResources::Release();
+	UEngineConstantBuffer::Release();
 
 	CurLevel = nullptr;
 	NextLevel = nullptr;

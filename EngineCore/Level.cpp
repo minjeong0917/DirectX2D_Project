@@ -25,6 +25,7 @@ std::shared_ptr<class ACameraActor> ULevel::SpawnCamera(int _Order)
 ULevel::ULevel()
 {
 	SpawnCamera(0);
+
 }
 
 ULevel::~ULevel()

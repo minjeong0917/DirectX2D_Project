@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "EngineGraphicDevice.h"
+#include "EngineTexture.h"
 
 UEngineGraphicDevice::UEngineGraphicDevice()
 {
@@ -26,7 +27,6 @@ IDXGIAdapter* UEngineGraphicDevice::GetHighPerFormanceAdapter()
     unsigned __int64 MaxVideoMemory = 0;
     IDXGIAdapter* ResultAdapter = nullptr;
 
-
     HRESULT HR = CreateDXGIFactory(__uuidof(IDXGIFactory), reinterpret_cast<void**>(&Factory));
 
     if (nullptr == Factory)
@@ -47,17 +47,12 @@ IDXGIAdapter* UEngineGraphicDevice::GetHighPerFormanceAdapter()
             break;
         }
 
-
         DXGI_ADAPTER_DESC Desc;
-
-
         CurAdapter->GetDesc(&Desc);
-
 
         if (MaxVideoMemory <= Desc.DedicatedVideoMemory)
         {
             MaxVideoMemory = Desc.DedicatedVideoMemory;
-
             if (nullptr != ResultAdapter)
             {
                 ResultAdapter->Release();
@@ -82,12 +77,12 @@ IDXGIAdapter* UEngineGraphicDevice::GetHighPerFormanceAdapter()
     }
 
 
-
     return ResultAdapter;
 }
 
 void UEngineGraphicDevice::CreateDeviceAndContext()
 {
+
     MainAdapter = GetHighPerFormanceAdapter();
 
     int iFlag = 0;
@@ -97,8 +92,8 @@ void UEngineGraphicDevice::CreateDeviceAndContext()
     iFlag = D3D11_CREATE_DEVICE_DEBUG;
 #endif
 
-
     D3D_FEATURE_LEVEL ResultLevel;
+
 
     HRESULT Result = D3D11CreateDevice(
         MainAdapter.Get(),
@@ -106,7 +101,7 @@ void UEngineGraphicDevice::CreateDeviceAndContext()
         nullptr, 
         iFlag,
         nullptr, 
-        0,
+        0, 
         D3D11_SDK_VERSION, 
         &Device,
         &ResultLevel,
@@ -136,6 +131,7 @@ void UEngineGraphicDevice::CreateDeviceAndContext()
         MSGASSERT("다이렉트 11버전을 지원하지 않는 그래픽카드 입니다.");
         return;
     }
+
     Result = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
 
     if (Result != S_OK)
@@ -150,7 +146,25 @@ void UEngineGraphicDevice::CreateDeviceAndContext()
 
 void UEngineGraphicDevice::CreateBackBuffer(const UEngineWindow& _Window)
 {
+
+
     FVector Size = _Window.GetWindowSize();
+
+    D3D11_TEXTURE2D_DESC Desc = { 0 };
+    Desc.ArraySize = 1;
+    Desc.Width = Size.iX();
+    Desc.Height = Size.iY();
+    Desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+    Desc.SampleDesc.Count = 1;
+    Desc.SampleDesc.Quality = 0;
+    Desc.MipLevels = 1;
+    Desc.Usage = D3D11_USAGE_DEFAULT;
+    Desc.CPUAccessFlags = 0;
+    Desc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_DEPTH_STENCIL;
+
+    DepthTex = std::make_shared<UEngineTexture>();
+    DepthTex->ResCreate(Desc);
+
 
     DXGI_SWAP_CHAIN_DESC ScInfo = { 0 };
 
@@ -159,8 +173,10 @@ void UEngineGraphicDevice::CreateBackBuffer(const UEngineWindow& _Window)
     ScInfo.BufferDesc.Height = Size.iY();
     ScInfo.OutputWindow = _Window.GetWindowHandle();
     // 전체화면
-    // ScInfo.Windowed = false;
-    ScInfo.Windowed = true; // 창모드
+    // false면 전체화면
+    // true면 창화면
+    ScInfo.Windowed = true;
+
     ScInfo.BufferDesc.RefreshRate.Denominator = 1;
     ScInfo.BufferDesc.RefreshRate.Numerator = 60;
     ScInfo.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -171,8 +187,6 @@ void UEngineGraphicDevice::CreateBackBuffer(const UEngineWindow& _Window)
     ScInfo.SampleDesc.Count = 1;
     ScInfo.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
     ScInfo.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
-
-
     IDXGIFactory* pF = nullptr;
 
     MainAdapter->GetParent(__uuidof(IDXGIFactory), reinterpret_cast<void**>(&pF));
@@ -186,13 +200,11 @@ void UEngineGraphicDevice::CreateBackBuffer(const UEngineWindow& _Window)
         MSGASSERT("스왑체인 제작에 실패했습니다.");
     }
 
-
     if (S_OK != SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), &DXBackBufferTexture))
     {
         MSGASSERT("백버퍼 텍스처를 얻어오는데 실패했습니다.");
 
     };
-
 
     if (S_OK != Device->CreateRenderTargetView(DXBackBufferTexture.Get(), nullptr, &RTV))
     {

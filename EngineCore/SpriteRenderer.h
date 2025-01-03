@@ -2,6 +2,19 @@
 #include "Renderer.h"
 #include <EngineBase/EngineDelegate.h>
 
+struct FUVValue
+{
+	float4 PlusUVValue;
+};
+
+
+struct ResultColor
+{
+public:
+	float4 PlusColor;
+	float4 MulColor;
+};
+
 // 설명 :
 class USpriteRenderer : public URenderer
 {
@@ -41,8 +54,6 @@ public:
 	USpriteRenderer& operator=(const USpriteRenderer& _Other) = delete;
 	USpriteRenderer& operator=(USpriteRenderer&& _Other) noexcept = delete;
 
-
-
 	int GetCurIndex()
 	{
 		return CurIndex;
@@ -53,18 +64,16 @@ public:
 		return CurAnimation->CurIndex;
 	}
 
-
-
 	ENGINEAPI void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, int _Start, int _End, float Time = 0.1f, bool _Loop = true);
 
 	ENGINEAPI void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, std::vector<float> _Frame, bool _Loop = true);
 
 	ENGINEAPI void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, float _Frame, bool _Loop = true);
 
-	// 내가 Idle인데 Idle 바꾸라고 했다. 
 	ENGINEAPI void ChangeAnimation(std::string_view _AnimationName, bool _Force = false);
 
 	ENGINEAPI void SetAnimationEvent(std::string_view _AnimationName, int _Frame, std::function<void()> _Function);
+
 	ENGINEAPI FrameAnimation* FindAnimation(std::string_view _AnimationName);
 
 	ENGINEAPI std::string GetCurSpriteName()
@@ -91,6 +100,10 @@ public:
 
 	void SetSprite(UEngineSprite* _Sprite);
 
+	ResultColor ColorData;
+	FUVValue UVValue;
+	FSpriteData SpriteData;
+
 protected:
 	ENGINEAPI void Render(class UEngineCamera* _Camera, float _DeltaTime) override;
 	void BeginPlay() override;
@@ -98,6 +111,7 @@ protected:
 
 
 private:
+	URenderUnit* MainUnit;
 
 	int CurIndex = 0;
 	float CurAnimationSpeed = 1.0f;

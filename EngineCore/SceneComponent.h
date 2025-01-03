@@ -1,8 +1,6 @@
 #pragma once
 #include "ActorComponent.h"
 
-// #include "PreCompile.h"
-
 // Ό³Έν :
 class USceneComponent : public UActorComponent
 {
@@ -18,6 +16,7 @@ public:
 	USceneComponent(USceneComponent&& _Other) noexcept = delete;
 	USceneComponent& operator=(const USceneComponent& _Other) = delete;
 	USceneComponent& operator=(USceneComponent&& _Other) noexcept = delete;
+	ENGINEAPI void ComponentTick(float _DeltaTime) override;
 
 	void AddRelativeLocation(const FVector& _Value)
 	{
