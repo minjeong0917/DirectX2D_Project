@@ -3,7 +3,7 @@
 #include "UI.h"
 #include "Customer.h"
 #include <EngineCore/EngineCore.h>
-
+#include "ContentsRandom.h"
 
 
 AShopGameMode::AShopGameMode()
@@ -101,11 +101,12 @@ AShopGameMode::~AShopGameMode()
 void AShopGameMode::BeginPlay()
 {
 	AActor::BeginPlay();
+	ContentsRandom Random;
 
 	{
 		WalkCustomer1->SetRelativeLocation({ 840.0f, -300.0f, 0.0f });
 		RandomCustomerAnimation(WalkCustomer1);
-		float RandomApear = Randomfloat(2.0f, 10.0f);
+		float RandomApear = Random.Randomfloat(2.0f, 10.0f);
 		WalkCustomer1->ApearTime = RandomApear;
 		UEngineDebug::OutPutString(std::to_string(RandomApear));
 	}
@@ -115,7 +116,7 @@ void AShopGameMode::BeginPlay()
 		WalkCustomer2->SetActorRotation({ 0.0f, 180.0f, 0.0f });
 		RandomCustomerAnimation(WalkCustomer2);
 
-		float RandomApear = Randomfloat(6.0f, 15.0f);
+		float RandomApear = Random.Randomfloat(6.0f, 15.0f);
 		WalkCustomer2->ApearTime = RandomApear;
 		UEngineDebug::OutPutString(std::to_string(RandomApear));
 	}
@@ -133,6 +134,7 @@ void AShopGameMode::Tick(float _DeltaTime)
 
 void AShopGameMode::CustomerMove(float _DeltaTime, std::shared_ptr<class AUI> _Customer, bool _IsRight)
 {
+	ContentsRandom Random;
 
 	if (_IsRight == true)
 	{
@@ -154,7 +156,7 @@ void AShopGameMode::CustomerMove(float _DeltaTime, std::shared_ptr<class AUI> _C
 			_Customer->IsApear = false;
 			_Customer->SetActorLocation({ 0.0f, 0.0f, 0.0f });
 
-			float RandomApear = Randomfloat(1.0f, 20.0f);
+			float RandomApear = Random.Randomfloat(1.0f, 20.0f);
 			UEngineDebug::OutPutString(std::to_string(RandomApear));
 			_Customer->ApearTime = RandomApear;
 
@@ -185,7 +187,7 @@ void AShopGameMode::CustomerMove(float _DeltaTime, std::shared_ptr<class AUI> _C
 			_Customer->IsApear = false;
 			_Customer->SetActorLocation({ 0.0f,  0.0f, 0.0f });
 
-			float RandomApear = Randomfloat(4.0f, 20.0f);
+			float RandomApear = Random.Randomfloat(4.0f, 20.0f);
 			_Customer->ApearTime = RandomApear;
 
 
@@ -226,7 +228,9 @@ void AShopGameMode::CustomerCreateAni(std::shared_ptr<class AUI> _Customer)
 
 void AShopGameMode::RandomCustomerAnimation(std::shared_ptr<class AUI> _Customer)
 {
-	int RandInt = RandomInt(0, 7);
+	ContentsRandom Random;
+
+	int RandInt = Random.RandomInt(0, 7);
 	std::string RandAni = AllOutCustormerAni[RandInt];
 
 	_Customer->ChangeAnimation(RandAni);

@@ -32,6 +32,7 @@ void AUI::Tick(float _DeltaTime)
 void AUI::SetUISprite(std::string _Name, int _Index)
 {
 	UIRenderer->USpriteRenderer::SetSprite(_Name, _Index);
+	UIRenderer->SetAutoScale(false);
 }
 
 void AUI::SetUIScale3D(const FVector& _Value)
@@ -43,18 +44,15 @@ void AUI::CreateAnimation(std::string_view _AnimationName, std::string_view _Spr
 {
 	UIRenderer->CreateAnimation(_AnimationName, _SpriteName, _Start, _End, Time, _Loop);
 
-	USpriteRenderer::FrameAnimation* Animation = UIRenderer->FindAnimation(_AnimationName);
-	Animation->IsAutoScale = true;
-	Animation->AutoScaleRatio = _Scale;
+	UIRenderer->SetAutoScaleRatio(_Scale);
 }
 
 void AUI::CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, float _Scale, std::vector<int> _Indexs, std::vector<float> _Frame, bool _Loop)
 {
 	UIRenderer->CreateAnimation(_AnimationName,  _SpriteName, _Indexs, _Frame, _Loop);
 
-	USpriteRenderer::FrameAnimation* Animation = UIRenderer->FindAnimation(_AnimationName);
-	Animation->IsAutoScale = true;
-	Animation->AutoScaleRatio = _Scale;
+
+	UIRenderer->SetAutoScaleRatio(_Scale);
 }
 
 void AUI::ChangeAnimation(std::string_view _AnimationName, bool _Force /*= false*/)

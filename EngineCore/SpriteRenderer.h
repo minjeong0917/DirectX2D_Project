@@ -32,8 +32,6 @@ public:
 		float CurTime = 0.0f;
 		bool Loop = true;
 		bool IsEnd = false;
-		bool IsAutoScale = true;
-		float AutoScaleRatio = 1.0f;
 
 		void Reset()
 		{
@@ -70,6 +68,7 @@ public:
 
 	ENGINEAPI void CreateAnimation(std::string_view _AnimationName, std::string_view _SpriteName, std::vector<int> _Indexs, float _Frame, bool _Loop = true);
 
+	// 내가 Idle인데 Idle 바꾸라고 했다. 
 	ENGINEAPI void ChangeAnimation(std::string_view _AnimationName, bool _Force = false);
 
 	ENGINEAPI void SetAnimationEvent(std::string_view _AnimationName, int _Frame, std::function<void()> _Function);
@@ -98,6 +97,17 @@ public:
 		CurAnimationSpeed = 1.0f;
 	}
 
+	void SetAutoScale(bool _Value)
+	{
+		IsAutoScale = _Value;
+	}
+
+	void SetAutoScaleRatio(float _Scale)
+	{
+		AutoScaleRatio = _Scale;
+	}
+
+
 	void SetSprite(UEngineSprite* _Sprite);
 
 	ResultColor ColorData;
@@ -119,6 +129,7 @@ private:
 	std::map<std::string, FrameAnimation> FrameAnimations;
 	FrameAnimation* CurAnimation = nullptr;
 	UEngineSprite* Sprite = nullptr;
-
+	bool IsAutoScale = true;
+	float AutoScaleRatio = 1.0f;
 };
 

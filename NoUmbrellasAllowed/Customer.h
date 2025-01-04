@@ -21,6 +21,7 @@ public:
 	ACustomer(ACustomer&& _Other) noexcept = delete;
 	ACustomer& operator=(const ACustomer& _Other) = delete;
 	ACustomer& operator=(ACustomer&& _Other) noexcept = delete;
+	void RandomGender();
 
 protected:
 
