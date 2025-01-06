@@ -81,6 +81,9 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
     {
         LoadFile(Dir, "Images//Customer//Eyes");
         UEngineSprite::CreateSpriteToMeta("000_happy_loop.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("001_neutral_loop.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("002_neutral_loop.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("003_neutral_loop.png", ".sdata");
 
         // Head
         LoadFile(Dir, "Images//Customer//Head");

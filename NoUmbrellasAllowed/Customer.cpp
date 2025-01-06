@@ -58,14 +58,20 @@ ACustomer::ACustomer()
 
 
     RightEyeRenderer = CreateDefaultSubObject<USpriteRenderer>();
-    CreateAnimation(RightEyeRenderer, "happy", "000_happy_loop.png", 3.1f, { 0,1,2, 3 }, { 0.1f,0.1f,0.1f, 4.0f });
-    RightEyeRenderer->ChangeAnimation("happy");
+    CreateAnimation(RightEyeRenderer, "000", "000_happy_loop.png", 3.1f, { 0,1,2, 3 }, { 0.1f,0.1f,0.1f, 4.0f });
+    CreateAnimation(RightEyeRenderer, "001", "001_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
+    CreateAnimation(RightEyeRenderer, "002", "002_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
+    CreateAnimation(RightEyeRenderer, "003", "003_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
+    RightEyeRenderer->ChangeAnimation("000");
     RightEyeRenderer->SetWorldLocation({ 27.0f, 63.0f, 2.0f });
     RightEyeRenderer->SetupAttachment(RootComponent);
 
     LeftEyeRenderer = CreateDefaultSubObject<USpriteRenderer>();
-    CreateAnimation(LeftEyeRenderer, "happy", "000_happy_loop.png", 3.1f, { 0,1,2, 3 }, { 0.1f,0.1f,0.1f, 4.0f });
-    LeftEyeRenderer->ChangeAnimation("happy");
+    CreateAnimation(LeftEyeRenderer, "000", "000_happy_loop.png", 3.1f, { 0,1,2, 3 }, { 0.1f,0.1f,0.1f, 4.0f });
+    CreateAnimation(LeftEyeRenderer, "001", "001_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f,0.1f, 4.0f });
+    CreateAnimation(LeftEyeRenderer, "002", "002_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f,0.1f, 4.0f });
+    CreateAnimation(LeftEyeRenderer, "003", "003_neutral_loop.png", 3.1f, { 0,1,2, 3 ,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
+    LeftEyeRenderer->ChangeAnimation("000");
     LeftEyeRenderer->SetWorldLocation({ -27.0f, 63.0f, -2.0f });
     LeftEyeRenderer->SetRotation({ 0.0f, -180.0f, 0.0f });
     LeftEyeRenderer->SetupAttachment(RootComponent);
@@ -116,7 +122,7 @@ void ACustomer::CreateAnimation(std::shared_ptr<class USpriteRenderer>& _Render,
     _Render->SetAutoScaleRatio(_Scale);
 }
 
-void ACustomer::RandomCustomer(int _Gender, int _HairRand, int _Head, int _Body)
+void ACustomer::RandomCustomer(int _Gender, int _HairRand, int _Head, int _Body, int _Eyes, int _Nose, int _Mouse)
 {
 
     UEngineDebug::OutPutString("Gender : " + std::to_string(_Gender));
@@ -139,7 +145,8 @@ void ACustomer::RandomCustomer(int _Gender, int _HairRand, int _Head, int _Body)
         {
             HairRenderer2->SetWorldLocation({ 0.0f,0.0f, -10001.0f });
         }
-
+        RightEyeRenderer->ChangeAnimation("00" + std::to_string(_Eyes));
+        LeftEyeRenderer->ChangeAnimation("00" + std::to_string(_Eyes));
     }
 
     if (_Gender == 1)
@@ -148,6 +155,8 @@ void ACustomer::RandomCustomer(int _Gender, int _HairRand, int _Head, int _Body)
         _HairRand += 4;
         _Head += 4;
         _Body += 4;
+        _Eyes += 4;
+
         UEngineDebug::OutPutString("ManHair : " + std::to_string(_HairRand));
         HairRenderer->SetSprite("Hair", _HairRand);
         HairRenderer->SetWorldLocation(AllHairInfo[_HairRand].Location);
@@ -155,6 +164,8 @@ void ACustomer::RandomCustomer(int _Gender, int _HairRand, int _Head, int _Body)
         HeadRenderer->SetSprite("Head", _Head);
         BodyRenderer->SetSprite("Body", _Body);
 
-
     }
+
+
+
 }
