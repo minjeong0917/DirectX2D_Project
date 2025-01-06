@@ -15,28 +15,27 @@ ACustomer::ACustomer()
         AllHairSetInfo.resize(4);
 
         // Wonman 0st HairInfo
-        AllHairInfo[0].Location = { 0.0f, 50.0f, 0.0f };
-        AllHairSetInfo[0].Location = { 0.0f, -10.0f, 0.0f };
+        AllHairInfo[0].Location = { 0.0f, 50.0f, -10.0f };
+        AllHairSetInfo[0].Location = { 0.0f, -10.0f, 21.0f };
 
         // Wonman 1st HairInfo
-        AllHairInfo[1].Location = { 0.0f, 77.0f, 0.0f };
-        AllHairSetInfo[1].Location = { 0.0f, 160.0f, 0.0f };
+        AllHairInfo[1].Location = { 0.0f, 77.0f, -10.0f };
+        AllHairSetInfo[1].Location = { 0.0f, 160.0f, 21.0f };
 
         // Wonman 1st HairInfo
-        AllHairInfo[2].Location = { 0.0f, 70.0f, 0.0f };
-        AllHairSetInfo[2].Location = { 0.0f, -10.0f, 0.0f };
+        AllHairInfo[2].Location = { 0.0f, 70.0f, -10.0f };
+        AllHairSetInfo[2].Location = { 0.0f, -10.0f, 21.0f };
 
         // Wonman 3st HairInfo
-        AllHairInfo[3].Location = { 0.0f, 78.0f, 0.0f };
-        AllHairInfo[4].Location = { 0.0f, 75.0f, 0.0f };
-        AllHairInfo[5].Location = { 0.0f, 75.0f, 0.0f };
-        AllHairInfo[6].Location = { 0.0f, 75.0f, 0.0f };
-        AllHairInfo[7].Location = { 0.0f, 75.0f, 0.0f };
+        AllHairInfo[3].Location = { 0.0f, 78.0f, -10.0f };
+        AllHairInfo[4].Location = { 0.0f, 75.0f, -10.0f };
+        AllHairInfo[5].Location = { 0.0f, 75.0f, -10.0f };
+        AllHairInfo[6].Location = { 0.0f, 75.0f, -10.0f };
+        AllHairInfo[7].Location = { 0.0f, 75.0f, -10.0f };
     }
 
 
     int HairNum = 1;
-
     HairRenderer2 = CreateDefaultSubObject<USpriteRenderer>();
     HairRenderer2->SetSprite("Set", HairNum);
     HairRenderer2->SetWorldLocation(AllHairSetInfo[HairNum].Location);
@@ -48,48 +47,48 @@ ACustomer::ACustomer()
     BodyRenderer = CreateDefaultSubObject<USpriteRenderer>();
     BodyRenderer->SetSprite("Body", Form);
     BodyRenderer->SetAutoScaleRatio(3.0f);
-    BodyRenderer->SetWorldLocation({ 0.0f, -210.0f, 0.0f });
+    BodyRenderer->SetWorldLocation({ 0.0f, -210.0f, 20.0f });
     BodyRenderer->SetupAttachment(RootComponent);
 
     HeadRenderer = CreateDefaultSubObject<USpriteRenderer>();
     HeadRenderer->SetSprite("Head", Form);
-    HeadRenderer->SetWorldLocation({ 0.0f, -11.0f, 0.0f });
+    HeadRenderer->SetWorldLocation({ 0.0f, -11.0f, 10.0f });
     HeadRenderer->SetAutoScaleRatio(3.0f);
     HeadRenderer->SetupAttachment(RootComponent);
 
 
     RightEyeRenderer = CreateDefaultSubObject<USpriteRenderer>();
-    CreateAnimation(RightEyeRenderer, "happy", "000_happy_loop.png", 3.1f, { 0,1,2, 3 }, { 0.2f,0.2f,0.2f, 3.0f });
+    CreateAnimation(RightEyeRenderer, "happy", "000_happy_loop.png", 3.1f, { 0,1,2, 3 }, { 0.1f,0.1f,0.1f, 4.0f });
     RightEyeRenderer->ChangeAnimation("happy");
-    RightEyeRenderer->SetWorldLocation({ 27.0f, 63.0f, 0.0f });
+    RightEyeRenderer->SetWorldLocation({ 27.0f, 63.0f, 2.0f });
     RightEyeRenderer->SetupAttachment(RootComponent);
 
     LeftEyeRenderer = CreateDefaultSubObject<USpriteRenderer>();
-    CreateAnimation(LeftEyeRenderer, "happy", "000_happy_loop.png", 3.1f, { 0,1,2, 3 }, { 0.2f,0.2f,0.2f, 3.0f });
+    CreateAnimation(LeftEyeRenderer, "happy", "000_happy_loop.png", 3.1f, { 0,1,2, 3 }, { 0.1f,0.1f,0.1f, 4.0f });
     LeftEyeRenderer->ChangeAnimation("happy");
-    LeftEyeRenderer->SetWorldLocation({ -27.0f, 63.0f, 0.0f });
+    LeftEyeRenderer->SetWorldLocation({ -27.0f, 63.0f, -2.0f });
     LeftEyeRenderer->SetRotation({ 0.0f, -180.0f, 0.0f });
     LeftEyeRenderer->SetupAttachment(RootComponent);
 
     RightEyebrowRenderer = CreateDefaultSubObject<USpriteRenderer>();
     RightEyebrowRenderer->SetSprite("Eyebrow", 1);
-    RightEyebrowRenderer->SetWorldLocation({ 23.0f, 75.0f, 0.0f });
+    RightEyebrowRenderer->SetWorldLocation({ 23.0f, 75.0f, 1.0f });
     RightEyebrowRenderer->SetupAttachment(RootComponent);
 
     LeftEyebrowRenderer = CreateDefaultSubObject<USpriteRenderer>();
     LeftEyebrowRenderer->SetSprite("Eyebrow", 1);
-    LeftEyebrowRenderer->SetWorldLocation({ -23.0f, 75.0f, 0.0f });
+    LeftEyebrowRenderer->SetWorldLocation({ -23.0f, 75.0f, -1.0f });
     LeftEyebrowRenderer->SetRotation({ 0.0f, 180.0f, 0.0f });
     LeftEyebrowRenderer->SetupAttachment(RootComponent);
 
     NoseRenderer = CreateDefaultSubObject<USpriteRenderer>();
     NoseRenderer->SetSprite("Nose", 0);
-    NoseRenderer->SetWorldLocation({ 0.0f, 45.0f, 0.0f });
+    NoseRenderer->SetWorldLocation({ 0.0f, 45.0f, 2.0f });
     NoseRenderer->SetupAttachment(RootComponent);
 
     MouseRenderer = CreateDefaultSubObject<USpriteRenderer>();
     MouseRenderer->SetSprite("Mouse", 0);
-    MouseRenderer->SetWorldLocation({ 0.0f, 10.0f, 0.0f });
+    MouseRenderer->SetWorldLocation({ 0.0f, 10.0f, 2.0f });
     MouseRenderer->SetupAttachment(RootComponent);
     MouseRenderer->SetAutoScaleRatio(3.0f);
 

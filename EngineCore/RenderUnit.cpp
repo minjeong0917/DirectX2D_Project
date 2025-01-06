@@ -37,6 +37,10 @@ void URenderUnit::MaterialResourcesCheck()
 			{
 				continue;
 			}
+			if (false == Resources[i].IsConstantBuffer("FTransform"))
+			{
+				continue;
+			}
 
 			FTransform& Ref = ParentRenderer->GetTransformRef();
 			Resources[i].ConstantBufferLinkData("FTransform", Ref);
@@ -162,10 +166,6 @@ void URenderUnit::Render(class UEngineCamera* _Camera, float _DeltaTime)
 
 	//	OutPutMergeSetting();
 	Material->GetBlend()->Setting();
-	ID3D11RenderTargetView* RTV = UEngineCore::GetDevice().GetRTV();
-	ID3D11RenderTargetView* ArrRtv[16] = { 0 };
-	ArrRtv[0] = RTV; 
-	UEngineCore::GetDevice().GetContext()->OMSetRenderTargets(1, &ArrRtv[0], nullptr);
 
 	UEngineCore::GetDevice().GetContext()->DrawIndexed(Mesh->GetIndexBuffer()->GetIndexCount(), 0, 0);
 }

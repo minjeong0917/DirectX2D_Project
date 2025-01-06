@@ -257,7 +257,7 @@ public:
 		return { iX(), iY() };
 	}
 
-	class FIntPoint ConvertToPoint() const;
+	ENGINEAPI class FIntPoint ConvertToPoint() const;
 
 	void Normalize()
 	{
@@ -823,7 +823,7 @@ public:
 	static const FIntPoint UP;
 	static const FIntPoint DOWN;
 
-	FIntPoint()
+	ENGINEAPI FIntPoint()
 	{
 
 	}

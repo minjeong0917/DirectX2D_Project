@@ -312,6 +312,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineDepthStencilState.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TimeEventComponent.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CameraActor.cpp">
@@ -461,6 +469,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="EngineSampler.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineDepthStencilState.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TimeEventComponent.cpp">
       <SubType>
       </SubType>
     </ClCompile>

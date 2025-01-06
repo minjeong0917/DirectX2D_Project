@@ -75,5 +75,7 @@ private:
 	ENGINEAPI void MaterialInit();
 	ENGINEAPI void RasterizerStateInit();
 	ENGINEAPI void TextureInit();
+	ENGINEAPI void DepthStencilInit();
+
 };
 

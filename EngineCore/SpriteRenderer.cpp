@@ -25,7 +25,7 @@ USpriteRenderer::~USpriteRenderer()
 {
 }
 
-void USpriteRenderer::SetSprite(std::string_view _Name, size_t _Index)
+void USpriteRenderer::SetSprite(std::string_view _Name, UINT _Index)
 {
 	Sprite = UEngineSprite::Find<UEngineSprite>(_Name).get();
 
@@ -34,7 +34,22 @@ void USpriteRenderer::SetSprite(std::string_view _Name, size_t _Index)
 
 	CurIndex = _Index;
 }
+void USpriteRenderer::SetTexture(std::string_view _Name, bool AutoScale /*= false*/, float _Ratio /*= 1.0f*/)
+{
+	std::shared_ptr<UEngineTexture> Texture = UEngineTexture::Find<UEngineTexture>(_Name);
 
+	if (nullptr == Texture)
+	{
+		MSGASSERT("로드하지 않은 텍스처를 사용하려고 했습니다.");
+	}
+
+	GetRenderUnit().SetTexture("ImageTexture", _Name);
+
+	if (true == AutoScale)
+	{
+		SetRelativeScale3D(Texture->GetTextureSize() * _Ratio);
+	}
+}
 void USpriteRenderer::BeginPlay()
 {
 	URenderer::BeginPlay();
@@ -63,7 +78,7 @@ void USpriteRenderer::Render(UEngineCamera* _Camera, float _DeltaTime)
 		SpriteData = Sprite->GetSpriteData(CurIndex);
 	}
 
-	if (true == IsAutoScale)
+	if (true == IsAutoScale && nullptr != Sprite)
 	{
 		FVector Scale = Sprite->GetSpriteScaleToReal(CurIndex);
 		Scale.Z = 1.0f;
@@ -77,7 +92,6 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 {
 	URenderer::ComponentTick(_DeltaTime);
 
-	// 애니메이션 진행시키는 코드를 ComponentTick으로 옮겼다. 
 	if (nullptr != CurAnimation)
 	{
 		CurAnimation->IsEnd = false;
@@ -91,7 +105,6 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 
 		float CurFrameTime = Times[CurAnimation->CurIndex];
 
-		//                           0.1 0.1 0.1
 		if (CurAnimation->CurTime > CurFrameTime)
 		{
 
@@ -102,8 +115,6 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 			{
 				CurAnimation->Events[CurIndex]();
 			}
-
-			// 애니메이션 앤드
 			if (CurAnimation->CurIndex >= Indexs.size())
 			{
 				CurAnimation->IsEnd = true;
