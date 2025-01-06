@@ -23,18 +23,25 @@ private:
 	void CustomerMove(float _DeltaTime, std::shared_ptr<class AUI> _Customer, bool _IsRight);
 	void CustomerCreateAni(std::shared_ptr<class AUI> _Customer);
 	void RandomCustomerAnimation(std::shared_ptr<class AUI> _Customer);
+	void CustomerEnter(float _DeltaTime);
+	void CustomerOut(float _DeltaTime);
 
+	bool IsExistCustomer = false;
+	float NotExistCustomerTime = 0.0f;
+	float ExistCustomerTime = 0.0f;
+	float DoorClosedTime = 0.0f;
+	float DoorAcc = 1.0f;
 
-	bool IsChange = false;
+	bool IsOut = false;
 
 	float CustomerSpeed = 120;
-
-
 	std::vector<std::string> AllOutCustormerAni;
 
 	std::shared_ptr<class AUI> WalkCustomer1;
 	std::shared_ptr<class AUI> WalkCustomer2;
 	std::shared_ptr<class ACustomer> Customer;
-
+	std::shared_ptr<class ACalculator> Calculator;
+	std::shared_ptr<class AUI> DoorUp;
+	std::shared_ptr<class AUI> DoorDown;
 };
 

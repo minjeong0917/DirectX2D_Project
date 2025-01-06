@@ -21,10 +21,12 @@ public:
 	ACustomer(ACustomer&& _Other) noexcept = delete;
 	ACustomer& operator=(const ACustomer& _Other) = delete;
 	ACustomer& operator=(ACustomer&& _Other) noexcept = delete;
-	void RandomGender();
+	void RandomCustomer(int _Gender, int _HairRand, int _Head, int _Body);
+
+
 
 protected:
-
+	void Tick(float _DeltaTime);
 private:
 	void CreateAnimation(std::shared_ptr<class USpriteRenderer>& _Render, std::string_view _AnimationName, std::string_view _SpriteName, float _Scale, std::vector<int> _Indexs, std::vector<float> _Frame, bool _Loop = true);
 

@@ -18,6 +18,7 @@
     <ClCompile Include="ContentsRandom.cpp">
       <Filter>Random</Filter>
     </ClCompile>
+    <ClCompile Include="Calculator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logo.h" />
@@ -37,6 +38,7 @@
     <ClInclude Include="ContentsRandom.h">
       <Filter>Random</Filter>
     </ClInclude>
+    <ClInclude Include="Calculator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameMode">
