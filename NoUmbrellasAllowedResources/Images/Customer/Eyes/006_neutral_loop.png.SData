@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: be6251fbcdc6c134f9fe69053dbed207
+guid: b1a27c02e0af606478b34bc6915e0306
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -104959304502949428
-    second: 003_neutral_loop #316508_0
+      213: 1268346061722994453
+    second: 006_neutral_loop_0
   - first:
-      213: 2499657933416759567
-    second: 003_neutral_loop #316508_1
+      213: 8453089179936535389
+    second: 006_neutral_loop_1
   - first:
-      213: 4657765026144828613
-    second: 003_neutral_loop #316508_2
+      213: -1241858005721411205
+    second: 006_neutral_loop_2
   - first:
-      213: 2620624980592373668
-    second: 003_neutral_loop #316508_3
+      213: 277970674742857838
+    second: 006_neutral_loop_3
   - first:
-      213: 7479725516856557733
-    second: 003_neutral_loop #316508_4
+      213: -9001984841642045152
+    second: 006_neutral_loop_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -80,7 +80,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -92,7 +92,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 8192
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -106,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 003_neutral_loop #316508_0
+      name: 006_neutral_loop_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 14
-        width: 19
-        height: 14
+        y: 12
+        width: 21
+        height: 12
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -120,20 +120,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc9ca33911c1b8ef0800000000000000
-      internalID: -104959304502949428
+      spriteID: 517c34de5021a9110800000000000000
+      internalID: 1268346061722994453
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 003_neutral_loop #316508_1
+      name: 006_neutral_loop_1
       rect:
         serializedVersion: 2
-        x: 19
-        y: 14
-        width: 19
-        height: 14
+        x: 21
+        y: 12
+        width: 21
+        height: 12
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,20 +141,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f010b4d85a190b220800000000000000
-      internalID: 2499657933416759567
+      spriteID: d53b0d0a2d76f4570800000000000000
+      internalID: 8453089179936535389
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 003_neutral_loop #316508_2
+      name: 006_neutral_loop_2
       rect:
         serializedVersion: 2
-        x: 38
-        y: 14
-        width: 19
-        height: 14
+        x: 42
+        y: 12
+        width: 21
+        height: 12
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,20 +162,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ccb9960d94b3a040800000000000000
-      internalID: 4657765026144828613
+      spriteID: b71108339b804cee0800000000000000
+      internalID: -1241858005721411205
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 003_neutral_loop #316508_3
+      name: 006_neutral_loop_3
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 19
-        height: 14
+        width: 21
+        height: 12
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,20 +183,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4af29b109845e5420800000000000000
-      internalID: 2620624980592373668
+      spriteID: e60160e1bdc8bd300800000000000000
+      internalID: 277970674742857838
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 003_neutral_loop #316508_4
+      name: 006_neutral_loop_4
       rect:
         serializedVersion: 2
-        x: 19
+        x: 21
         y: 0
-        width: 19
-        height: 14
+        width: 21
+        height: 12
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,8 +204,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a009a17ab25dc760800000000000000
-      internalID: 7479725516856557733
+      spriteID: 02199782b76821380800000000000000
+      internalID: -9001984841642045152
       vertices: []
       indices: 
       edges: []
@@ -213,7 +213,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 84a0d3462cde4b440ac9cad99dd87af4
+    spriteID: 9a28e7f90ed3e5b4d84e84b2c86b6322
     internalID: 0
     vertices: []
     indices: 

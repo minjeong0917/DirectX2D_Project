@@ -53,7 +53,7 @@ AShopGameMode::AShopGameMode()
     DoorDown = GetWorld()->SpawnActor<AUI>();
     DoorDown->SetUISprite("Shop", 6);
     DoorDown->SetUIScale3D({ 246.0f, 165.0f, 1.0f });
-    DoorDown->SetActorLocation({ 0.0f, -250.0f, 500.0f });
+    DoorDown->SetActorLocation({ 0.0f, -260.0f, 500.0f });
 
 
     // DoorUp
@@ -264,16 +264,18 @@ void AShopGameMode::CustomerEnter(float _DeltaTime)
     UEngineRandom Random;
 
     int Gender = Random.RandomInt(0, 1);
-    int HairRand = Random.RandomInt(0, 3);
+    int HairRand = Random.RandomInt(0, 4);
     int HeadRand = Random.RandomInt(0, 3);
     int BodyRand = Random.RandomInt(0, 3);
     int EyeRand = Random.RandomInt(0, 3);
-    int NoseRand = Random.RandomInt(0, 3);
-    int MouseRand = Random.RandomInt(0, 3);
+    int EyeBrowRand = Random.RandomInt(0, 4);
+    int NoseRand = Random.RandomInt(0, 1);
+    int MouseRand = Random.RandomInt(0, 5);
+
 
     if (IsExistCustomer == false)
     {
-        TimeEventComponent->AddEvent(2.5f, [this](float DeltaTime, float CurTime) {DoorOpen(DeltaTime); }, [this]() { IsExistCustomer = true; }, false);
+        TimeEventComponent->AddEvent(2.8f, [this](float DeltaTime, float CurTime) {DoorOpen(DeltaTime); }, [this]() {IsDoorClosed = false; IsExistCustomer = true; }, false);
 
     }
 
@@ -282,14 +284,15 @@ void AShopGameMode::CustomerEnter(float _DeltaTime)
         if (CustomerActive == 0)
         {
             CustomerActive += 1;
-            Customer->RandomCustomer(Gender, HairRand, HeadRand, BodyRand, EyeRand, NoseRand, MouseRand);
+            Customer->RandomCustomer(Gender, HairRand, HeadRand, BodyRand, EyeRand, EyeBrowRand, NoseRand, MouseRand);
             Customer->SetActive(true);
             Customer->SetActorLocation({ 0.0f,0.0f,-100.0f });
         }
+        if (IsDoorClosed == false)
+        {
+            TimeEventComponent->AddEvent(2.8f, [this](float DeltaTime, float CurTime) {DoorClose(DeltaTime); }, [this]() {IsDoorClosed = true; NotExistCustomerTime = 0.0f; DoorOpenTime = 0.0f; DoorClosedTime = 0.0f; }, false);
 
-        TimeEventComponent->AddEvent(2.5f, [this](float DeltaTime, float CurTime) {DoorClose(DeltaTime); }, [this]() {NotExistCustomerTime = 0.0f; DoorOpenTime = 0.0f; DoorClosedTime = 0.0f; }, false);
-
-
+        }
     }
 }
 
@@ -300,14 +303,13 @@ void AShopGameMode::CustomerOut(float _DeltaTime)
 
     if (IsExistCustomer == true)
     {
-        TimeEventComponent->AddEvent(2.5f, [this](float DeltaTime, float CurTime) {DoorOpen(DeltaTime); }, [this]() {Customer->SetActive(false);  IsExistCustomer = false; CustomerActive = 0;
-        }, false);
+        TimeEventComponent->AddEvent(2.8f, [this](float DeltaTime, float CurTime) {DoorOpen(DeltaTime); }, [this]() {Customer->SetActive(false);  IsExistCustomer = false; CustomerActive = 0; }, false);
 
     }
 
      if (IsExistCustomer == false)
     {
-        TimeEventComponent->AddEvent(2.5f, [this](float DeltaTime, float CurTime) {DoorClose(DeltaTime); }, [this]() { IsOut = false; NotExistCustomerTime = 0.0f; DoorOpenTime = 0.0f; DoorClosedTime = 0.0f; }, false);
+        TimeEventComponent->AddEvent(2.8f, [this](float DeltaTime, float CurTime) {DoorClose(DeltaTime); }, [this]() { IsOut = false; NotExistCustomerTime = 0.0f; DoorOpenTime = 0.0f; DoorClosedTime = 0.0f; }, false);
 
     }
 
@@ -318,13 +320,13 @@ void AShopGameMode::DoorOpen(float _DeltaTime)
 {
 
     DoorOpenTime += _DeltaTime;
-    if (DoorOpenTime > 100.0f && DoorOpenTime < 105.0f)
+    if (DoorOpenTime > 90.0f && DoorOpenTime < 100.0f)
     {
-        DoorUp->AddRelativeLocation({ 0.0f, -1.0f * _DeltaTime, 0.0f });
-        DoorDown->AddRelativeLocation({ 0.0f, 1.0f * _DeltaTime, 0.0f });
+        DoorUp->AddRelativeLocation({ 0.0f, -1.5f * _DeltaTime, 0.0f });
+        DoorDown->AddRelativeLocation({ 0.0f, 1.5f * _DeltaTime, 0.0f });
     }
 
-    if (DoorOpenTime > 105.0f && DoorUp->GetActorTransform().WorldLocation.Y < 165.0f)
+    if (DoorOpenTime > 100.0f && DoorUp->GetActorTransform().WorldLocation.Y < 165.0f)
     {
 
         DoorUp->AddRelativeLocation({ 0.0f, 8.0f * _DeltaTime, 0.0f });
@@ -337,14 +339,14 @@ void AShopGameMode::DoorClose(float _DeltaTime)
 {
     DoorClosedTime += _DeltaTime;
 
-    if (DoorClosedTime > 100.0f && DoorUp->GetActorTransform().WorldLocation.Y > -135.0f)
+    if (DoorClosedTime > 100.0f && DoorClosedTime < 200.0f && DoorUp->GetActorTransform().WorldLocation.Y > -137.0f)
     {
 
         DoorUp->AddRelativeLocation({ 0.0f, -8.0f * _DeltaTime ,0.0f });
         DoorDown->AddRelativeLocation({ 0.0f, 8.0f * _DeltaTime,0.0f });
     }
 
-    if (DoorClosedTime > 200.0f && DoorUp->GetActorTransform().WorldLocation.Y < -120.0f)
+    if (DoorClosedTime > 200.0f && DoorClosedTime < 210.0f && DoorUp->GetActorTransform().WorldLocation.Y < -135.0f)
     {
 
         DoorUp->AddRelativeLocation({ 0.0f, 2.0f * _DeltaTime ,0.0f });

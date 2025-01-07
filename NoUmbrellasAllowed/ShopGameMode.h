@@ -34,7 +34,7 @@ private:
 
 	float DoorClosedTime = 0.0f;
 	float DoorOpenTime = 0.0f;
-
+	bool IsDoorClosed = true;
 	float DoorAcc = 1.0f;
 
 	bool IsOut = false;
