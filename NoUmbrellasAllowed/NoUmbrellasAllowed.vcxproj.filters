@@ -15,9 +15,6 @@
       <Filter>GameMode</Filter>
     </ClCompile>
     <ClCompile Include="Customer.cpp" />
-    <ClCompile Include="ContentsRandom.cpp">
-      <Filter>Random</Filter>
-    </ClCompile>
     <ClCompile Include="Calculator.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -35,9 +32,6 @@
       <Filter>GameMode</Filter>
     </ClInclude>
     <ClInclude Include="Customer.h" />
-    <ClInclude Include="ContentsRandom.h">
-      <Filter>Random</Filter>
-    </ClInclude>
     <ClInclude Include="Calculator.h" />
   </ItemGroup>
   <ItemGroup>
@@ -46,9 +40,6 @@
     </Filter>
     <Filter Include="PreCompile">
       <UniqueIdentifier>{b33e8f89-8865-45a0-862d-54bad21b7666}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Random">
-      <UniqueIdentifier>{58dc552c-3040-45a1-843f-c11f073d180c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

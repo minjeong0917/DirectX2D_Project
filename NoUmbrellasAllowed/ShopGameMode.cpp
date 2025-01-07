@@ -4,11 +4,12 @@
 #include "Customer.h"
 #include "Calculator.h"
 #include <EngineCore/EngineCore.h>
-#include "ContentsRandom.h"
+
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/CameraActor.h>
 #include <EngineCore/EngineCamera.h>
 #include <EngineCore/TimeEventComponent.h>
+#include <EngineBase/EngineRandom.h>
 
 AShopGameMode::AShopGameMode()
 {
@@ -111,7 +112,7 @@ AShopGameMode::~AShopGameMode()
 void AShopGameMode::BeginPlay()
 {
     AActor::BeginPlay();
-    ContentsRandom Random;
+    UEngineRandom Random;
 
     {
         WalkCustomer1->SetRelativeLocation({ 840.0f, -300.0f, 800.0f });
@@ -166,7 +167,7 @@ void AShopGameMode::Tick(float _DeltaTime)
 
 void AShopGameMode::CustomerMove(float _DeltaTime, std::shared_ptr<class AUI> _Customer, bool _IsRight)
 {
-    ContentsRandom Random;
+    UEngineRandom Random;
 
     if (_IsRight == true)
     {
@@ -250,7 +251,7 @@ void AShopGameMode::CustomerCreateAni(std::shared_ptr<class AUI> _Customer)
 
 void AShopGameMode::RandomCustomerAnimation(std::shared_ptr<class AUI> _Customer)
 {
-    ContentsRandom Random;
+    UEngineRandom Random;
 
     int RandInt = Random.RandomInt(0, 7);
     std::string RandAni = AllOutCustormerAni[RandInt];
@@ -260,7 +261,7 @@ void AShopGameMode::RandomCustomerAnimation(std::shared_ptr<class AUI> _Customer
 
 void AShopGameMode::CustomerEnter(float _DeltaTime)
 {
-    ContentsRandom Random;
+    UEngineRandom Random;
 
     int Gender = Random.RandomInt(0, 1);
     int HairRand = Random.RandomInt(0, 3);

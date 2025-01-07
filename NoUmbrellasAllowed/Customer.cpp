@@ -143,7 +143,7 @@ void ACustomer::RandomCustomer(int _Gender, int _HairRand, int _Head, int _Body,
         }
         else
         {
-            HairRenderer2->SetWorldLocation({ 0.0f,0.0f, -10001.0f });
+            HairRenderer2->SetWorldLocation({ 0.0f,0.0f, -1001.0f });
         }
         RightEyeRenderer->ChangeAnimation("00" + std::to_string(_Eyes));
         LeftEyeRenderer->ChangeAnimation("00" + std::to_string(_Eyes));
