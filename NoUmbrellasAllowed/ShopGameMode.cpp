@@ -39,14 +39,14 @@ AShopGameMode::AShopGameMode()
     // WalkCustomer
     for (int i = 0; i < 8; i++)
     {
-        AllOutCustormerAni.push_back("WalkCustomer0" + std::to_string(i + 1));
+        AllOutPeopleAni.push_back("WalkCustomer0" + std::to_string(i + 1));
     }
 
     WalkCustomer1 = GetWorld()->SpawnActor<AUI>();
-    CustomerCreateAni(WalkCustomer1);
+    PeopleCreateAni(WalkCustomer1);
 
     WalkCustomer2 = GetWorld()->SpawnActor<AUI>();
-    CustomerCreateAni(WalkCustomer2);
+    PeopleCreateAni(WalkCustomer2);
 
 
     // DoorDown
@@ -116,7 +116,7 @@ void AShopGameMode::BeginPlay()
 
     {
         WalkCustomer1->SetRelativeLocation({ 840.0f, -300.0f, 800.0f });
-        RandomCustomerAnimation(WalkCustomer1);
+        RandomPeopleAnimation(WalkCustomer1);
         float RandomApear = Random.Randomfloat(2.0f, 10.0f);
         WalkCustomer1->ApearTime = RandomApear;
 
@@ -125,7 +125,7 @@ void AShopGameMode::BeginPlay()
         //WalkCustomer2->SetActorLocation({ -900.0f,  -300.0f, 0.0f });
         WalkCustomer2->SetRelativeLocation({ 900.0f,  -300.0f, -801.0f });
         WalkCustomer2->SetActorRotation({ 0.0f, 180.0f, 0.0f });
-        WalkCustomer2->ChangeAnimation(AllOutCustormerAni[3]);
+        WalkCustomer2->ChangeAnimation(AllOutPeopleAni[3]);
 
 
         float RandomApear = Random.Randomfloat(6.0f, 15.0f);
@@ -139,8 +139,8 @@ void AShopGameMode::Tick(float _DeltaTime)
     AActor::Tick(_DeltaTime);
     //UEngineDebug::OutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 
-    CustomerMove(_DeltaTime, WalkCustomer1, true);
-    CustomerMove(_DeltaTime, WalkCustomer2, false);
+    PeopleMove(_DeltaTime, WalkCustomer1, true);
+    PeopleMove(_DeltaTime, WalkCustomer2, false);
 
     // TestCode
     if (UEngineInput::IsPress('O'))
@@ -165,72 +165,72 @@ void AShopGameMode::Tick(float _DeltaTime)
 
 }
 
-void AShopGameMode::CustomerMove(float _DeltaTime, std::shared_ptr<class AUI> _Customer, bool _IsRight)
+void AShopGameMode::PeopleMove(float _DeltaTime, std::shared_ptr<class AUI> _People, bool _IsRight)
 {
     UEngineRandom Random;
 
     if (_IsRight == true)
     {
-        if (_Customer->GetActorTransform().WorldLocation.X > -2000.0f)
+        if (_People->GetActorTransform().WorldLocation.X > -2000.0f)
         {
-            _Customer->CurApearTime += _DeltaTime;
-            if (_Customer->CurApearTime > _Customer->ApearTime)
+            _People->CurApearTime += _DeltaTime;
+            if (_People->CurApearTime > _People->ApearTime)
             {
-                _Customer->IsApear = true;
+                _People->IsApear = true;
             }
 
-            if (_Customer->IsApear == true)
+            if (_People->IsApear == true)
             {
-                _Customer->AddRelativeLocation({ (-1.0f) * _DeltaTime * CustomerSpeed, 0.0f, 0.0f });
+                _People->AddRelativeLocation({ (-1.0f) * _DeltaTime * CustomerSpeed, 0.0f, 0.0f });
             }
         }
-        else if (_Customer->GetActorTransform().WorldLocation.X < -2000.0f)
+        else if (_People->GetActorTransform().WorldLocation.X < -2000.0f)
         {
-            _Customer->IsApear = false;
-            _Customer->SetActorLocation({ 0.0f, 0.0f, 0.0f });
+            _People->IsApear = false;
+            _People->SetActorLocation({ 0.0f, 0.0f, 0.0f });
 
             float RandomApear = Random.Randomfloat(1.0f, 20.0f);
-            _Customer->ApearTime = RandomApear;
+            _People->ApearTime = RandomApear;
 
-            RandomCustomerAnimation(_Customer);
-            _Customer->CurApearTime = 0.0f;
+            RandomPeopleAnimation(_People);
+            _People->CurApearTime = 0.0f;
         }
     }
 
     if (_IsRight == false)
     {
-        if (_Customer->GetActorTransform().WorldLocation.X < 2000.0f)
+        if (_People->GetActorTransform().WorldLocation.X < 2000.0f)
         {
-            _Customer->CurApearTime += _DeltaTime;
-            if (_Customer->CurApearTime > _Customer->ApearTime)
+            _People->CurApearTime += _DeltaTime;
+            if (_People->CurApearTime > _People->ApearTime)
             {
-                _Customer->IsApear = true;
+                _People->IsApear = true;
             }
 
-            if (_Customer->IsApear == true)
+            if (_People->IsApear == true)
             {
 
-                _Customer->AddRelativeLocation({ (1.0f) * _DeltaTime * CustomerSpeed, 0.0f, 0.0f });
+                _People->AddRelativeLocation({ (1.0f) * _DeltaTime * CustomerSpeed, 0.0f, 0.0f });
 
             }
         }
-        if (_Customer->GetActorTransform().WorldLocation.X > 2000.0f)
+        if (_People->GetActorTransform().WorldLocation.X > 2000.0f)
         {
-            _Customer->IsApear = false;
-            _Customer->SetActorLocation({ 0.0f,  0.0f, 0.0f });
+            _People->IsApear = false;
+            _People->SetActorLocation({ 0.0f,  0.0f, 0.0f });
 
             float RandomApear = Random.Randomfloat(4.0f, 20.0f);
-            _Customer->ApearTime = RandomApear;
+            _People->ApearTime = RandomApear;
 
 
-            RandomCustomerAnimation(_Customer);
-            _Customer->CurApearTime = 0.0f;
+            RandomPeopleAnimation(_People);
+            _People->CurApearTime = 0.0f;
         }
     }
 
 }
 
-void AShopGameMode::CustomerCreateAni(std::shared_ptr<class AUI> _Customer)
+void AShopGameMode::PeopleCreateAni(std::shared_ptr<class AUI> _People)
 {
     for (int i = 1; i < 9; i++)
     {
@@ -238,25 +238,25 @@ void AShopGameMode::CustomerCreateAni(std::shared_ptr<class AUI> _Customer)
         {
             std::string SpriteName = "femaleCustomer_walk_0" + std::to_string(i) + ".png";
 
-            _Customer->CreateAnimation("WalkCustomer0" + std::to_string(i), SpriteName, 3.0f, 0, 3, 0.2f);
+            _People->CreateAnimation("WalkCustomer0" + std::to_string(i), SpriteName, 3.0f, 0, 3, 0.2f);
         }
         else
         {
             std::string SpriteName = "maleCustomer_walk_0" + std::to_string(i - 4) + ".png";
-            _Customer->CreateAnimation("WalkCustomer0" + std::to_string(i), SpriteName, 3.0f, 0, 3, 0.2f);
+            _People->CreateAnimation("WalkCustomer0" + std::to_string(i), SpriteName, 3.0f, 0, 3, 0.2f);
         }
 
     }
 }
 
-void AShopGameMode::RandomCustomerAnimation(std::shared_ptr<class AUI> _Customer)
+void AShopGameMode::RandomPeopleAnimation(std::shared_ptr<class AUI> _People)
 {
     UEngineRandom Random;
 
     int RandInt = Random.RandomInt(0, 7);
-    std::string RandAni = AllOutCustormerAni[RandInt];
+    std::string RandAni = AllOutPeopleAni[RandInt];
 
-    _Customer->ChangeAnimation(RandAni);
+    _People->ChangeAnimation(RandAni);
 }
 
 void AShopGameMode::CustomerEnter(float _DeltaTime)
@@ -273,13 +273,12 @@ void AShopGameMode::CustomerEnter(float _DeltaTime)
 
     if (IsExistCustomer == false)
     {
-        TimeEventComponent->AddEvent(3.0f, [this](float DeltaTime, float CurTime) {DoorOpen(DeltaTime); }, [this]() { IsExistCustomer = true; }, false);
+        TimeEventComponent->AddEvent(2.5f, [this](float DeltaTime, float CurTime) {DoorOpen(DeltaTime); }, [this]() { IsExistCustomer = true; }, false);
 
     }
 
     if (IsExistCustomer == true)
     {
-        TimeEventComponent->AddEvent(3.0f, [this](float DeltaTime, float CurTime) {DoorClose(DeltaTime); }, [this]() {NotExistCustomerTime = 0.0f; DoorClosedTime = 0.0f; }, false);
         if (CustomerActive == 0)
         {
             CustomerActive += 1;
@@ -287,6 +286,9 @@ void AShopGameMode::CustomerEnter(float _DeltaTime)
             Customer->SetActive(true);
             Customer->SetActorLocation({ 0.0f,0.0f,-100.0f });
         }
+
+        TimeEventComponent->AddEvent(2.5f, [this](float DeltaTime, float CurTime) {DoorClose(DeltaTime); }, [this]() {NotExistCustomerTime = 0.0f; DoorOpenTime = 0.0f; DoorClosedTime = 0.0f; }, false);
+
 
     }
 }
@@ -298,15 +300,14 @@ void AShopGameMode::CustomerOut(float _DeltaTime)
 
     if (IsExistCustomer == true)
     {
-        TimeEventComponent->AddEvent(3.0f, [this](float DeltaTime, float CurTime) {DoorOpen(DeltaTime); }, [this]() { IsExistCustomer = false; }, false);
-        CustomerActive = 0;
-        Customer->SetActive(false);
+        TimeEventComponent->AddEvent(2.5f, [this](float DeltaTime, float CurTime) {DoorOpen(DeltaTime); }, [this]() {Customer->SetActive(false);  IsExistCustomer = false; CustomerActive = 0;
+        }, false);
 
     }
 
      if (IsExistCustomer == false)
     {
-        TimeEventComponent->AddEvent(3.0f, [this](float DeltaTime, float CurTime) {DoorClose(DeltaTime); }, [this]() { IsOut = false; NotExistCustomerTime = 0.0f; DoorClosedTime = 0.0f; }, false);
+        TimeEventComponent->AddEvent(2.5f, [this](float DeltaTime, float CurTime) {DoorClose(DeltaTime); }, [this]() { IsOut = false; NotExistCustomerTime = 0.0f; DoorOpenTime = 0.0f; DoorClosedTime = 0.0f; }, false);
 
     }
 
@@ -317,17 +318,17 @@ void AShopGameMode::DoorOpen(float _DeltaTime)
 {
 
     DoorOpenTime += _DeltaTime;
-    if (DoorOpenTime > 100.0f && DoorOpenTime < 500.0f)
+    if (DoorOpenTime > 100.0f && DoorOpenTime < 105.0f)
     {
-        DoorUp->AddRelativeLocation({ 0.0f, -2.0f * _DeltaTime, 0.0f });
-        DoorDown->AddRelativeLocation({ 0.0f, 2.0f * _DeltaTime, 0.0f });
+        DoorUp->AddRelativeLocation({ 0.0f, -1.0f * _DeltaTime, 0.0f });
+        DoorDown->AddRelativeLocation({ 0.0f, 1.0f * _DeltaTime, 0.0f });
     }
 
     if (DoorOpenTime > 105.0f && DoorUp->GetActorTransform().WorldLocation.Y < 165.0f)
     {
 
-        DoorUp->AddRelativeLocation({ 0.0f, 7.0f * _DeltaTime, 0.0f });
-        DoorDown->AddRelativeLocation({ 0.0f, -7.0f * _DeltaTime, 0.0f });
+        DoorUp->AddRelativeLocation({ 0.0f, 8.0f * _DeltaTime, 0.0f });
+        DoorDown->AddRelativeLocation({ 0.0f, -8.0f * _DeltaTime, 0.0f });
 
     }
 }
@@ -339,11 +340,11 @@ void AShopGameMode::DoorClose(float _DeltaTime)
     if (DoorClosedTime > 100.0f && DoorUp->GetActorTransform().WorldLocation.Y > -135.0f)
     {
 
-        DoorUp->AddRelativeLocation({ 0.0f, -7.0f * _DeltaTime ,0.0f });
-        DoorDown->AddRelativeLocation({ 0.0f, 7.0f * _DeltaTime,0.0f });
+        DoorUp->AddRelativeLocation({ 0.0f, -8.0f * _DeltaTime ,0.0f });
+        DoorDown->AddRelativeLocation({ 0.0f, 8.0f * _DeltaTime,0.0f });
     }
 
-    if (DoorClosedTime > 360.0f && DoorUp->GetActorTransform().WorldLocation.Y < -120.0f)
+    if (DoorClosedTime > 200.0f && DoorUp->GetActorTransform().WorldLocation.Y < -120.0f)
     {
 
         DoorUp->AddRelativeLocation({ 0.0f, 2.0f * _DeltaTime ,0.0f });

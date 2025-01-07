@@ -6,6 +6,8 @@
 // 설명 :
 class ULevel : public UObject
 {
+	friend class UCollision;
+
 public:
 	// constrcuter destructer
 	ENGINEAPI ULevel();
@@ -23,6 +25,8 @@ public:
 
 	void Tick(float _DeltaTime);
 	void Render(float _DeltaTime);
+	void Collision(float _DeltaTime);
+	void Release(float _DeltaTime);
 
 	std::shared_ptr<class ACameraActor> GetMainCamera()
 	{
@@ -51,12 +55,14 @@ public:
 	std::shared_ptr<ActorType> SpawnActor()
 	{
 
+
 		static_assert(std::is_base_of_v<AActor, ActorType>, "액터를 상속받지 않은 클래스를 SpawnActor하려고 했습니다.");
 
 		if (false == std::is_base_of_v<AActor, ActorType>)
 		{
 			MSGASSERT("액터를 상속받지 않은 클래스를 SpawnActor하려고 했습니다.");
 			return nullptr;
+
 		}
 
 		char* ActorMemory = new char[sizeof(ActorType)];
@@ -69,12 +75,22 @@ public:
 
 		std::shared_ptr<ActorType> NewActor(NewPtr = new(ActorMemory) ActorType());
 
+
 		BeginPlayList.push_back(NewActor);
 
 		return NewActor;
 	}
 
-	void ChangeRenderGroup(int _CameraOrder, int _PrevGroupOrder, std::shared_ptr<class URenderer> _Renderer);
+	ENGINEAPI void ChangeRenderGroup(int _CameraOrder, int _PrevGroupOrder, std::shared_ptr<class URenderer> _Renderer);
+
+	ENGINEAPI void ChangeCollisionProfileName(std::string_view _ProfileName, std::string_view _PrevProfileName, std::shared_ptr<class UCollision> _Collision);
+
+	ENGINEAPI void PushCollisionProfileEvent(std::shared_ptr<class URenderer> _Renderer);
+
+	ENGINEAPI void CreateCollisionProfile(std::string_view _ProfileName);
+
+	ENGINEAPI void LinkCollisionProfile(std::string_view _LeftProfileName, std::string_view _RightProfileName);
+
 
 protected:
 
@@ -85,5 +101,10 @@ private:
 
 	std::map<int, std::shared_ptr<class ACameraActor>> Cameras;
 
+	std::map<std::string, std::list<std::shared_ptr<class UCollision>>> Collisions;
+
+	std::map<std::string, std::list<std::shared_ptr<class UCollision>>> CheckCollisions;
+
+	std::map<std::string, std::list<std::string>> CollisionLinks;
 };
 

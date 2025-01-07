@@ -3,7 +3,6 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/DefaultSceneComponent.h>
 #include "Customer.h"
-#include "ContentsRandom.h"
 
 ACustomer::ACustomer()
 {
@@ -138,12 +137,13 @@ void ACustomer::RandomCustomer(int _Gender, int _HairRand, int _Head, int _Body,
 
         if (_HairRand < 3)
         {
+            HairRenderer2->SetActive(true);
             HairRenderer2->SetSprite("Set", _HairRand);
             HairRenderer2->SetWorldLocation(AllHairSetInfo[_HairRand].Location);
         }
         else
         {
-            HairRenderer2->SetWorldLocation({ 0.0f,0.0f, -1001.0f });
+            HairRenderer2->SetActive(false);
         }
         RightEyeRenderer->ChangeAnimation("00" + std::to_string(_Eyes));
         LeftEyeRenderer->ChangeAnimation("00" + std::to_string(_Eyes));
@@ -151,16 +151,16 @@ void ACustomer::RandomCustomer(int _Gender, int _HairRand, int _Head, int _Body,
 
     if (_Gender == 1)
     {
-
-        _HairRand += 4;
-        _Head += 4;
-        _Body += 4;
-        _Eyes += 4;
+        int ManNum = 4;
+        _HairRand += ManNum;
+        _Head += ManNum;
+        _Body += ManNum;
+        _Eyes += ManNum;
 
         UEngineDebug::OutPutString("ManHair : " + std::to_string(_HairRand));
         HairRenderer->SetSprite("Hair", _HairRand);
         HairRenderer->SetWorldLocation(AllHairInfo[_HairRand].Location);
-        HairRenderer2->SetWorldLocation({ 0.0f,0.0f, -10001.0f });
+        HairRenderer2->SetActive(false);
         HeadRenderer->SetSprite("Head", _Head);
         BodyRenderer->SetSprite("Body", _Body);
 

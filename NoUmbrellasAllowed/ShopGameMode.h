@@ -20,9 +20,9 @@ protected:
 	void BeginPlay();
 	void Tick(float _DeltaTime);
 private:
-	void CustomerMove(float _DeltaTime, std::shared_ptr<class AUI> _Customer, bool _IsRight);
-	void CustomerCreateAni(std::shared_ptr<class AUI> _Customer);
-	void RandomCustomerAnimation(std::shared_ptr<class AUI> _Customer);
+	void PeopleMove(float _DeltaTime, std::shared_ptr<class AUI> _Customer, bool _IsRight);
+	void PeopleCreateAni(std::shared_ptr<class AUI> _Customer);
+	void RandomPeopleAnimation(std::shared_ptr<class AUI> _Customer);
 	void CustomerEnter(float _DeltaTime);
 	void CustomerOut(float _DeltaTime);
 	void DoorOpen(float _DeltaTime);
@@ -41,7 +41,7 @@ private:
 
 	float CustomerSpeed = 120;
 	std::shared_ptr<class UTimeEventComponent> TimeEventComponent;
-	std::vector<std::string> AllOutCustormerAni;
+	std::vector<std::string> AllOutPeopleAni;
 
 	std::shared_ptr<class AUI> WalkCustomer1;
 	std::shared_ptr<class AUI> WalkCustomer2;

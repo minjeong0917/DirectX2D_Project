@@ -3,6 +3,7 @@
 #include <string>
 #include <functional>
 
+
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
 
@@ -12,6 +13,7 @@
 class ENGINEAPI  UEngineMath
 {
 public:
+
 	static inline const double DPI = 3.14159265358979323846264338327950288419716939937510;
 	static inline const double DPI2 = DPI * 2.0;
 
@@ -83,7 +85,9 @@ public:
 
 		ValueType Arr2D[1][4];
 		ValueType Arr1D[4];
-		
+		DirectX::XMFLOAT3 DirectFloat3;
+		DirectX::XMFLOAT4 DirectFloat4;
+	
 		DirectX::XMVECTOR DirectVector;
 	};
 
@@ -93,6 +97,12 @@ public:
 	{
 
 	}
+
+	ENGINEAPI TVector(DirectX::XMVECTOR _DirectVector) : DirectVector(_DirectVector)
+	{
+
+	}
+
 
 	ENGINEAPI TVector(float _X, float _Y) : X(_X), Y(_Y), Z(0.0f), W(1.0f)
 	{
@@ -135,7 +145,6 @@ public:
 
 		float CosRad = Dot(LCopy, RCopy);
 
-
 		return acos(CosRad);
 	}
 
@@ -153,7 +162,7 @@ public:
 		float LeftLen = _Left.Length();
 		float RightLen = _Right.Length();
 
-
+	
 
 		return _Left.X * _Right.X + _Left.Y * _Right.Y + _Left.Z * _Right.Z;
 	}
@@ -163,6 +172,7 @@ public:
 		_Value.Normalize();
 		return _Value;
 	}
+
 
 	static TVector AngleToVectorDeg(float _Angle)
 	{
@@ -180,13 +190,11 @@ public:
 		return Result;
 	}
 
-
 	static TVector AngleToVectorRad(float _Angle)
 	{
 
 		return { cosf(_Angle), sinf(_Angle) };
 	}
-
 
 	static TVector Transform(const TVector& _Vector, const class FMatrix& _Matrix);
 
@@ -257,7 +265,6 @@ public:
 		return Result;
 	}
 
-	
 	void RotationXDeg(float _Angle)
 	{
 		RotationXRad(_Angle * UEngineMath::D2R);
@@ -284,7 +291,6 @@ public:
 	}
 
 
-	
 	void RotationYDeg(float _Angle)
 	{
 		RotationYRad(_Angle * UEngineMath::D2R);
@@ -310,6 +316,10 @@ public:
 		return Result;
 	}
 
+	TVector ABSVectorReturn()
+	{
+		return DirectX::XMVectorAbs(DirectVector);
+	}
 	
 	void RotationZDeg(float _Angle)
 	{
@@ -414,6 +424,7 @@ public:
 		return iX() == _Other.iX() && iY() == _Other.iY();
 	}
 
+	
 	TVector& operator+=(const TVector& _Other)
 	{
 		X += _Other.X;
@@ -499,6 +510,8 @@ public:
 
 		float Arr2D[1][4];
 		float Arr1D[4];
+
+		DirectX::XMFLOAT4 DirectFloat4;
 		DirectX::XMVECTOR DirectVector;
 
 	};
@@ -512,6 +525,7 @@ public:
 using FVector = TVector<float>;
 
 using float4 = TVector<float>;
+
 
 class FMatrix
 {
@@ -599,6 +613,7 @@ public:
 	{
 		DirectMatrix = DirectX::XMMatrixRotationRollPitchYawFromVector(_Angle.DirectVector);
 
+
 	}
 
 
@@ -638,11 +653,15 @@ public:
 		Identity();
 		DirectMatrix = DirectX::XMMatrixPerspectiveFovLH(_FovAngle, _Width / _Height, _Near, _Far);
 	}
+
+
 	void ViewPort(float _Width, float _Height, float _Left, float _Top, float _ZMin, float _ZMax)
 	{
 		Identity();
 		Arr2D[0][0] = _Width * 0.5f;
+
 		Arr2D[1][1] = -_Height * 0.5f;
+
 		Arr2D[2][2] = _ZMax != 0.0f ? 1.0f : _ZMin / _ZMax;
 
 		Arr2D[3][0] = Arr2D[0][0] + _Left;
@@ -718,9 +737,30 @@ enum class ECollisionType
 	Point,
 	Rect,
 	CirCle, 
+	OBB2D,
+	Sphere,
+	AABB,
+	OBB,
 	Max
 
 };
+
+struct FCollisionData
+{
+	union
+	{
+		// Á¤¹æ¿ø
+		DirectX::BoundingSphere Sphere;
+		DirectX::BoundingBox AABB;
+		DirectX::BoundingOrientedBox OBB;
+	};
+
+	FCollisionData()
+	{
+
+	}
+};
+
 
 struct FTransform
 {
@@ -752,7 +792,7 @@ struct FTransform
 	float4x4 WVP;
 
 	FTransform()
-		: Scale({ 1.0f, 1.0f, 1.0f, 1.0f })
+		: Scale(FVector(1.0f, 1.0f, 1.0f, 1.0f))
 	{
 
 	}
@@ -770,7 +810,9 @@ private:
 	static std::function<bool(const FTransform&, const FTransform&)> AllCollisionFunction[static_cast<int>(ECollisionType::Max)][static_cast<int>(ECollisionType::Max)];
 
 public:
-	static bool Collision(ECollisionType _LeftType, const FTransform& _Left, ECollisionType _RightType, const FTransform& _Right);
+	ENGINEAPI static bool Collision(ECollisionType _LeftType, const FTransform& _Left, ECollisionType _RightType, const FTransform& _Right);
+
+
 	static bool PointToCirCle(const FTransform& _Left, const FTransform& _Right);
 	static bool PointToRect(const FTransform& _Left, const FTransform& _Right);
 
@@ -779,6 +821,23 @@ public:
 
 	static bool CirCleToCirCle(const FTransform& _Left, const FTransform& _Right);
 	static bool CirCleToRect(const FTransform& _Left, const FTransform& _Right);
+
+	static bool OBB2DToOBB2D(const FTransform& _Left, const FTransform& _Right);
+	static bool OBB2DToRect(const FTransform& _Left, const FTransform& _Right);
+	static bool OBB2DToSphere(const FTransform& _Left, const FTransform& _Right);
+	static bool OBB2DToPoint(const FTransform& _Left, const FTransform& _Right);
+
+
+
+	FCollisionData GetCollisionData() const
+	{
+		FCollisionData Result;
+
+		Result.OBB.Center = WorldLocation.DirectFloat3;
+		Result.OBB.Extents = (WorldScale * 0.5f).ABSVectorReturn().DirectFloat3;
+		Result.OBB.Orientation = WorldQuat.DirectFloat4;
+		return Result;
+	}
 
 	FVector ZAxisCenterLeftTop() const
 	{
