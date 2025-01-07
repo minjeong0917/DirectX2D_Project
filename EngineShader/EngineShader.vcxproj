@@ -129,6 +129,9 @@
   <ItemGroup>
     <FxCompile Include="EngineSpriteShader.fx" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EngineDebugCollisionShader.fx" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

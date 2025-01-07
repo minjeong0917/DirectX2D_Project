@@ -171,6 +171,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cursor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Calculator.cpp">
       <SubType>
       </SubType>
@@ -202,6 +206,10 @@
     <ClCompile Include="TitleGameMode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cursor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Calculator.h">
       <SubType>
       </SubType>

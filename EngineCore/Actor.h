@@ -63,7 +63,10 @@ public:
 	{
 		return World;
 	}
-
+	FVector GetActorLocation()
+	{
+		return RootComponent->Transform.WorldLocation;
+	}
 	void SetActorLocation(const FVector& _Value)
 	{
 		if (nullptr == RootComponent)

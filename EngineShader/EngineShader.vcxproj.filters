@@ -3,4 +3,7 @@
   <ItemGroup>
     <FxCompile Include="EngineSpriteShader.fx" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EngineDebugCollisionShader.fx" />
+  </ItemGroup>
 </Project>

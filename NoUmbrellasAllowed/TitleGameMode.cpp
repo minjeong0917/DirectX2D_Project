@@ -11,7 +11,7 @@
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/CameraActor.h>
 #include <EngineCore/EngineCamera.h>
-
+#include "Cursor.h"
 
 
 class TestWindow : public UEngineGUIWindow
@@ -29,6 +29,7 @@ public:
 ATitleGameMode::ATitleGameMode()
 {
 	FVector Size = UEngineCore::GetScreenScale();
+	GetWorld()->CreateCollisionProfile("Cursor");
 
 	float UIYPos = -310.0f;
 	{
@@ -173,7 +174,7 @@ ATitleGameMode::ATitleGameMode()
 	}
 
 
-
+	Cursor = GetWorld()->SpawnActor<ACursor>();
 
 	// Camera
 	std::shared_ptr<ACameraActor> Camera = GetWorld()->GetMainCamera();
@@ -201,8 +202,8 @@ void ATitleGameMode::Tick(float _DeltaTime)
 	}
 	std::shared_ptr<class ACameraActor> Camera = GetWorld()->GetCamera(0);
 
-	FVector MousePos = UEngineCore::GetMainWindow().GetMousePos();
-
+	FVector MousePos = Camera->ScreenMousePosToWorldPos();
+	Cursor->SetActorLocation({ MousePos.X+8.0f,MousePos.Y- 40.0f, -999.0f });
 	//UEngineDebug::OutPutString(Camera->ScreenMousePosToWorldPos().ToString());
 
 }

@@ -38,6 +38,7 @@ private:
 	float DoorAcc = 1.0f;
 
 	bool IsOut = false;
+	std::shared_ptr<class ACursor> Cursor;
 
 	float CustomerSpeed = 120;
 	std::shared_ptr<class UTimeEventComponent> TimeEventComponent;

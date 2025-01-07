@@ -4,6 +4,7 @@
 #include "Customer.h"
 #include "Calculator.h"
 #include <EngineCore/EngineCore.h>
+#include "Cursor.h"
 
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/CameraActor.h>
@@ -14,6 +15,9 @@
 AShopGameMode::AShopGameMode()
 {
     TimeEventComponent = CreateDefaultSubObject<UTimeEventComponent>();
+    GetWorld()->CreateCollisionProfile("Calculator");
+    GetWorld()->CreateCollisionProfile("Cursor");
+    GetWorld()->LinkCollisionProfile("Calculator", "Cursor");
 
     // BackGround
     std::shared_ptr<class AUI> BackGround = GetWorld()->SpawnActor<AUI>();
@@ -98,6 +102,7 @@ AShopGameMode::AShopGameMode()
     OutLine->SetUIScale3D({ 1920.0f, 1080.0f, 1.0f });
     OutLine->SetActorLocation({ 0.0f, -540.0f, -999.0f });
 
+    Cursor = GetWorld()->SpawnActor<ACursor>();
 
     std::shared_ptr<ACameraActor> Camera = GetWorld()->GetMainCamera();
     Camera->SetActorLocation({ 0.0f, 0.0f, -1000.0f, 1.0f });
@@ -138,6 +143,9 @@ void AShopGameMode::Tick(float _DeltaTime)
 {
     AActor::Tick(_DeltaTime);
     //UEngineDebug::OutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
+    std::shared_ptr<class ACameraActor> Camera = GetWorld()->GetCamera(0);
+    FVector MousePos = Camera->ScreenMousePosToWorldPos();
+    Cursor->SetActorLocation({ MousePos.X + 8.0f,MousePos.Y - 40.0f, -800.0f });
 
     PeopleMove(_DeltaTime, WalkCustomer1, true);
     PeopleMove(_DeltaTime, WalkCustomer2, false);

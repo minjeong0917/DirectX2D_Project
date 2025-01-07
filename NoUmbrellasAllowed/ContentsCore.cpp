@@ -103,6 +103,11 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
         // Mouse
         LoadFile(Dir, "Images//Customer//Mouse");
     }
+    // UI
+    {
+        LoadFile(Dir, "Images//UI//Cursor");
+
+    }
     // UI in the Shop
     {
         LoadFile(Dir, "Images//UIIntheShop//Calculator//Entity");

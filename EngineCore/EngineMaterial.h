@@ -2,6 +2,8 @@
 #include "EngineVertexShader.h"
 #include "EnginePixelShader.h"
 #include "EngineRasterizerState.h"
+#include "EngineDepthStencilState.h"
+
 #include "EngineBlend.h"
 
 // Ό³Έν :
@@ -43,6 +45,11 @@ public:
 		return Blend;
 	}
 	ENGINEAPI void SetBlend(std::string_view _Name);
+	ENGINEAPI std::shared_ptr<UEngineDepthStencilState> GetDepthStencilState()
+	{
+		return DepthState;
+	}
+	ENGINEAPI void SetDepthStencilState(std::string_view _Name);
 
 	ENGINEAPI void PrimitiveTopologySetting();
 
@@ -53,6 +60,7 @@ private:
 	std::shared_ptr<UEnginePixelShader> PixelShader;
 	std::shared_ptr<UEngineRasterizerState> RasterizerState;
 	std::shared_ptr<UEngineBlend> Blend;
+	std::shared_ptr<UEngineDepthStencilState> DepthState;
 
 	D3D11_PRIMITIVE_TOPOLOGY TOPOLOGY = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 

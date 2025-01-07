@@ -6,16 +6,27 @@
     <ClCompile Include="TitleGameMode.cpp">
       <Filter>GameMode</Filter>
     </ClCompile>
-    <ClCompile Include="Bob.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
-    <ClCompile Include="UI.cpp" />
     <ClCompile Include="ShopGameMode.cpp">
       <Filter>GameMode</Filter>
     </ClCompile>
-    <ClCompile Include="Customer.cpp" />
-    <ClCompile Include="Calculator.cpp" />
+    <ClCompile Include="Cursor.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Bob.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Calculator.cpp">
+      <Filter>Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="Customer.cpp">
+      <Filter>Shop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Logo.h" />
@@ -23,16 +34,27 @@
     <ClInclude Include="TitleGameMode.h">
       <Filter>GameMode</Filter>
     </ClInclude>
-    <ClInclude Include="Bob.h" />
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
-    <ClInclude Include="UI.h" />
     <ClInclude Include="ShopGameMode.h">
       <Filter>GameMode</Filter>
     </ClInclude>
-    <ClInclude Include="Customer.h" />
-    <ClInclude Include="Calculator.h" />
+    <ClInclude Include="Cursor.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Bob.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Calculator.h">
+      <Filter>Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="Customer.h">
+      <Filter>Shop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameMode">
@@ -40,6 +62,12 @@
     </Filter>
     <Filter Include="PreCompile">
       <UniqueIdentifier>{b33e8f89-8865-45a0-862d-54bad21b7666}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{16754af6-102f-4850-ad63-fb00b697efaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shop">
+      <UniqueIdentifier>{5faf8ea2-b35a-4e05-8835-89e9442a1213}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

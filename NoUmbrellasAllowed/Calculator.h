@@ -18,13 +18,18 @@ public:
 	ACalculator& operator=(const ACalculator& _Other) = delete;
 	ACalculator& operator=(ACalculator&& _Other) noexcept = delete;
 
+	void OnCollisionEnter(UCollision* _This, UCollision* _Other);
+	void OnCollisionEnd(UCollision* _This, UCollision* _Other);
 
 
 protected:
 	void Tick(float _DeltaTime);
 private:
 
-	std::shared_ptr<class USpriteRenderer> CalculatorRender;
 
+	std::shared_ptr<class USpriteRenderer> CalculatorRender;
+	std::shared_ptr<class UCollision> CalculatorCollision;
+	bool IsEnter = false;
+	int Acc = 0.0f;
 };
 
