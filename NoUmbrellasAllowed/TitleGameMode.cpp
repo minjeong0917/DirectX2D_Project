@@ -22,7 +22,10 @@ public:
 		ImGui::Button("WindowButton");
 		ImGui::SameLine(); // ÇÑ°£ ¶ç±â
 		ImGui::Text("test");
-
+		if (true == ImGui::Button("FreeCameraOn"))
+		{
+			GetWorld()->GetMainCamera()->FreeCameraSwitch();
+		}
 	}
 };
 

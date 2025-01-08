@@ -1,10 +1,13 @@
 #pragma once
 #include "ActorComponent.h"
 
+
+
 // Ό³Έν :
 class USceneComponent : public UActorComponent
 {
 	friend class AActor;
+
 
 public:
 	// constrcuter destructer
@@ -16,6 +19,7 @@ public:
 	USceneComponent(USceneComponent&& _Other) noexcept = delete;
 	USceneComponent& operator=(const USceneComponent& _Other) = delete;
 	USceneComponent& operator=(USceneComponent&& _Other) noexcept = delete;
+
 	ENGINEAPI void ComponentTick(float _DeltaTime) override;
 
 	void AddRelativeLocation(const FVector& _Value)
@@ -31,6 +35,13 @@ public:
 		TransformUpdate();
 	}
 
+	void AddWorldLocation(const FVector& _Value)
+	{
+		IsAbsolute = true;
+		Transform.Location += _Value;
+		TransformUpdate();
+	}
+
 	void SetRelativeLocation(const FVector& _Value)
 	{
 		Transform.Location = _Value;
@@ -38,7 +49,14 @@ public:
 	}
 
 
-	void AddRotation(const FVector& _Value)
+	void AddWorldRotation(const FVector& _Value)
+	{
+		IsAbsolute = true;
+		Transform.Rotation += _Value;
+		TransformUpdate();
+	}
+
+	void AddLocalRotation(const FVector& _Value)
 	{
 		Transform.Rotation += _Value;
 		TransformUpdate();
@@ -57,12 +75,12 @@ public:
 		TransformUpdate();
 	}
 
+
 	void SetRelativeScale3D(const FVector& _Value)
 	{
 
 		Transform.Scale = _Value;
 		Transform.Scale.W = 0.0f;
-
 		TransformUpdate();
 	}
 
@@ -71,10 +89,12 @@ public:
 		return Transform.WorldScale;
 	}
 
+
 	FTransform& GetTransformRef()
 	{
 		return Transform;
 	}
+
 
 	ENGINEAPI void SetupAttachment(std::shared_ptr<USceneComponent> _Parent);
 

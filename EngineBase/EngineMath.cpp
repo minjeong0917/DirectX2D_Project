@@ -88,7 +88,6 @@ FVector FQuat::QuaternionToEulerRad() const
 	result.Y = atan2f(sinyCosp, cosyCosp);
 
 
-
 	return result;
 }
 
@@ -158,6 +157,9 @@ bool FTransform::CirCleToRect(const FTransform& _Left, const FTransform& _Right)
 	RightCol.OBB.Center.z = 0.0f;
 	return LeftCol.Sphere.Intersects(RightCol.AABB);
 
+
+
+
 }
 
 bool FTransform::OBB2DToOBB2D(const FTransform& _Left, const FTransform& _Right)
@@ -189,7 +191,7 @@ bool FTransform::OBB2DToSphere(const FTransform& _Left, const FTransform& _Right
 
 bool FTransform::OBB2DToPoint(const FTransform& _Left, const FTransform& _Right)
 {
-
+	
 	FCollisionData LeftCol = _Left.GetCollisionData();
 	FCollisionData RightCol = _Right.GetCollisionData();
 	LeftCol.OBB.Center.z = 0.0f;
@@ -229,6 +231,9 @@ FVector FVector::operator*(const class FMatrix& _Matrix) const
 	Result.W = Arr2D[0][0] * _Matrix.Arr2D[0][3] + Arr2D[0][1] * _Matrix.Arr2D[1][3] + Arr2D[0][2] * _Matrix.Arr2D[2][3] + Arr2D[0][3] * _Matrix.Arr2D[3][3];
 
 
+
+
+
 	return Result;
 }
 
@@ -262,21 +267,24 @@ void FTransform::TransformUpdate(bool _IsAbsolut /*= false*/)
 	RotationMat.RotationDeg(Rotation);
 	LocationMat.Position(Location);
 
+
 	FMatrix CheckWorld = ScaleMat * RotationMat * LocationMat;
+
 
 	if (true == _IsAbsolut)
 	{
+
 		World = CheckWorld;
 		LocalWorld = CheckWorld * ParentMat.InverseReturn();
-
+		
 	}
 	else
 	{
+	
+		LocalWorld = CheckWorld;
+		World = CheckWorld * RevolveMat * ParentMat;
 
-		LocalWorld = ScaleMat * RotationMat * LocationMat;
-		World = ScaleMat * RotationMat * LocationMat * RevolveMat * ParentMat;
 	}
-
 
 	Decompose();
 

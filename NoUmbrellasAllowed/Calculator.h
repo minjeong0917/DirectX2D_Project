@@ -30,6 +30,6 @@ private:
 	std::shared_ptr<class USpriteRenderer> CalculatorRender;
 	std::shared_ptr<class UCollision> CalculatorCollision;
 	bool IsEnter = false;
-	int Acc = 0.0f;
+	int Acc = 0;
 };
 

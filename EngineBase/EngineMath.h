@@ -10,10 +10,12 @@
 #include "EngineDefine.h"
 
 
+
+
 class ENGINEAPI  UEngineMath
 {
 public:
-
+	// 상수 정의
 	static inline const double DPI = 3.14159265358979323846264338327950288419716939937510;
 	static inline const double DPI2 = DPI * 2.0;
 
@@ -87,7 +89,6 @@ public:
 		ValueType Arr1D[4];
 		DirectX::XMFLOAT3 DirectFloat3;
 		DirectX::XMFLOAT4 DirectFloat4;
-	
 		DirectX::XMVECTOR DirectVector;
 	};
 
@@ -142,7 +143,6 @@ public:
 		LCopy.Normalize();
 		RCopy.Normalize();
 
-
 		float CosRad = Dot(LCopy, RCopy);
 
 		return acos(CosRad);
@@ -162,7 +162,6 @@ public:
 		float LeftLen = _Left.Length();
 		float RightLen = _Right.Length();
 
-	
 
 		return _Left.X * _Right.X + _Left.Y * _Right.Y + _Left.Z * _Right.Z;
 	}
@@ -172,7 +171,6 @@ public:
 		_Value.Normalize();
 		return _Value;
 	}
-
 
 	static TVector AngleToVectorDeg(float _Angle)
 	{
@@ -190,15 +188,19 @@ public:
 		return Result;
 	}
 
+
 	static TVector AngleToVectorRad(float _Angle)
 	{
 
 		return { cosf(_Angle), sinf(_Angle) };
 	}
 
+
 	static TVector Transform(const TVector& _Vector, const class FMatrix& _Matrix);
 
+
 	static TVector TransformCoord(const TVector& _Vector, const class FMatrix& _Matrix);
+
 
 	static TVector TransformNormal(const TVector& _Vector, const class FMatrix& _Matrix);
 
@@ -222,7 +224,6 @@ public:
 		return Y * 0.5f;
 	}
 
-
 	bool IsZeroed() const
 	{
 		return X == 0.0f || Y == 0.0f;
@@ -232,7 +233,6 @@ public:
 	{
 		return { X * 0.5f, Y * 0.5f };
 	}
-
 
 	float Length() const
 	{
@@ -265,6 +265,7 @@ public:
 		return Result;
 	}
 
+	// 
 	void RotationXDeg(float _Angle)
 	{
 		RotationXRad(_Angle * UEngineMath::D2R);
@@ -291,6 +292,7 @@ public:
 	}
 
 
+	// 
 	void RotationYDeg(float _Angle)
 	{
 		RotationYRad(_Angle * UEngineMath::D2R);
@@ -320,7 +322,7 @@ public:
 	{
 		return DirectX::XMVectorAbs(DirectVector);
 	}
-	
+	// 
 	void RotationZDeg(float _Angle)
 	{
 		RotationZRad(_Angle * UEngineMath::D2R);
@@ -412,19 +414,19 @@ public:
 		return Result;
 	}
 
+
 	bool operator==(const TVector& _Other) const
 	{
 		return X == _Other.X && Y == _Other.Y;
 	}
 
-
 	bool EqualToInt(TVector _Other) const
 	{
-
 		return iX() == _Other.iX() && iY() == _Other.iY();
 	}
 
-	
+
+
 	TVector& operator+=(const TVector& _Other)
 	{
 		X += _Other.X;
@@ -525,7 +527,6 @@ public:
 using FVector = TVector<float>;
 
 using float4 = TVector<float>;
-
 
 class FMatrix
 {
@@ -659,9 +660,7 @@ public:
 	{
 		Identity();
 		Arr2D[0][0] = _Width * 0.5f;
-
 		Arr2D[1][1] = -_Height * 0.5f;
-
 		Arr2D[2][2] = _ZMax != 0.0f ? 1.0f : _ZMin / _ZMax;
 
 		Arr2D[3][0] = Arr2D[0][0] + _Left;
@@ -709,6 +708,7 @@ public:
 
 	void Decompose(FVector& _Scale, FQuat& _RotQuaternion, FVector& _Pos)
 	{
+		
 		DirectX::XMMatrixDecompose(&_Scale.DirectVector, &_RotQuaternion.DirectVector, &_Pos.DirectVector, DirectMatrix);
 	}
 
@@ -749,7 +749,7 @@ struct FCollisionData
 {
 	union
 	{
-		// 정방원
+
 		DirectX::BoundingSphere Sphere;
 		DirectX::BoundingBox AABB;
 		DirectX::BoundingOrientedBox OBB;
@@ -765,15 +765,18 @@ struct FCollisionData
 struct FTransform
 {
 
+
 	float4 Scale;
 	float4 Rotation;
 	FQuat Quat;
 	float4 Location;
 
+
 	float4 RelativeScale;
 	float4 RelativeRotation;
 	FQuat RelativeQuat;
 	float4 RelativeLocation;
+
 
 	float4 WorldScale;
 	float4 WorldRotation;
@@ -802,7 +805,41 @@ public:
 	ENGINEAPI void TransformUpdate(bool _IsAbsolut = false);
 
 
+
 	ENGINEAPI void Decompose();
+
+
+	FVector GetWorldFoward()
+	{
+		return World.GetFoward();;
+	}
+
+	FVector GetWorldRight()
+	{
+		return World.GetRight();
+	}
+
+	FVector GetWorldUp()
+	{
+		return World.GetUp();
+	}
+
+	FVector GetLocalFoward()
+	{
+
+		return LocalWorld.GetFoward();;
+	}
+
+	FVector GetLocalRight()
+	{
+		return LocalWorld.GetRight();
+	}
+
+	FVector GetLocalUp()
+	{
+		return LocalWorld.GetUp();
+	}
+
 
 private:
 	friend class CollisionFunctionInit;
@@ -821,6 +858,7 @@ public:
 
 	static bool CirCleToCirCle(const FTransform& _Left, const FTransform& _Right);
 	static bool CirCleToRect(const FTransform& _Left, const FTransform& _Right);
+
 
 	static bool OBB2DToOBB2D(const FTransform& _Left, const FTransform& _Right);
 	static bool OBB2DToRect(const FTransform& _Left, const FTransform& _Right);

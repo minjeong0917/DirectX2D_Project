@@ -1,6 +1,7 @@
 #pragma once
 #include "SceneComponent.h"
 
+
 class AActor : public UObject
 {
 	friend class ULevel;
@@ -16,11 +17,13 @@ public:
 	AActor& operator=(const AActor& _Other) = delete;
 	AActor& operator=(AActor&& _Other) noexcept = delete;
 
+
 	ENGINEAPI virtual void BeginPlay();
 	ENGINEAPI virtual void Tick(float _DeltaTime);
 
 	virtual void LevelChangeStart() {}
 	virtual void LevelChangeEnd() {}
+
 
 
 	template<typename ComponentType>
@@ -32,7 +35,6 @@ public:
 		{
 			MSGASSERT("액터 컴포넌트를 상속받지 않은 클래스를 CreateDefaultSubObject하려고 했습니다.");
 			return nullptr;
-
 		}
 
 		char* ComMemory = new char[sizeof(ComponentType)];
@@ -43,7 +45,6 @@ public:
 		ComponentType* NewPtr = reinterpret_cast<ComponentType*>(ComMemory);
 
 		std::shared_ptr<ComponentType> NewCom(new(ComMemory) ComponentType());
-
 
 		if (std::is_base_of_v<UActorComponent, ComponentType>
 			&& !std::is_base_of_v<USceneComponent, ComponentType>)
@@ -63,10 +64,7 @@ public:
 	{
 		return World;
 	}
-	FVector GetActorLocation()
-	{
-		return RootComponent->Transform.WorldLocation;
-	}
+
 	void SetActorLocation(const FVector& _Value)
 	{
 		if (nullptr == RootComponent)
@@ -75,7 +73,16 @@ public:
 		}
 
 		RootComponent->SetWorldLocation(_Value);
+	}
 
+	void AddActorLocation(const FVector& _Value)
+	{
+		if (nullptr == RootComponent)
+		{
+			return;
+		}
+
+		RootComponent->AddWorldLocation(_Value);
 	}
 
 	void SetActorRelativeScale3D(const FVector& _Scale)
@@ -87,14 +94,17 @@ public:
 
 		RootComponent->SetRelativeScale3D(_Scale);
 	}
+
 	void AddRelativeLocation(const FVector& _Value)
 	{
 		if (nullptr == RootComponent)
 		{
 			return;
 		}
+
 		RootComponent->AddRelativeLocation(_Value);
 	}
+
 	void SetActorRotation(const FVector& _Value)
 	{
 		if (nullptr == RootComponent)
@@ -112,8 +122,17 @@ public:
 			return;
 		}
 
-		RootComponent->AddRotation(_Value);
+		RootComponent->AddWorldRotation(_Value);
 	}
+
+	ENGINEAPI void AttachToActor(AActor* _Parent);
+
+	FVector GetActorLocation()
+	{
+		return RootComponent->Transform.WorldLocation;
+	}
+
+	
 	FTransform GetActorTransform()
 	{
 		if (nullptr == RootComponent)
@@ -124,12 +143,29 @@ public:
 		return RootComponent->GetTransformRef();
 	}
 
+	void SetActorTransform(const FTransform& _Transform)
+	{
+		if (nullptr == RootComponent)
+		{
+			return;
+		}
+
+		RootComponent->Transform = _Transform;
+
+		return;
+	}
+
+
+	ENGINEAPI FVector GetActorUpVector();
+	ENGINEAPI FVector GetActorRightVector();
+	ENGINEAPI FVector GetActorForwardVector();
+
 protected:
 	std::shared_ptr<class USceneComponent> RootComponent = nullptr;
 
 private:
-	ULevel* World;
 
+	ULevel* World;
 
 	std::list<std::shared_ptr<class UActorComponent>> ActorComponentList;
 };

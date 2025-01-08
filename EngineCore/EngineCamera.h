@@ -10,6 +10,7 @@
 class UEngineCamera : public USceneComponent
 {
 	friend class ULevel;
+	friend class ACameraActor;
 
 public:
 	// constrcuter destructer
@@ -47,10 +48,13 @@ public:
 
 	ENGINEAPI void SetProjectionType(EProjectionType _Type)
 	{
-		Type = _Type;
+		ProjectionType = _Type;
 	}
+
 	ENGINEAPI void SetZSort(int _Order, bool _Value);
+
 	ENGINEAPI void Release(float _DeltaTime);
+
 protected:
 
 
@@ -60,14 +64,17 @@ private:
 
 	float FOV = 60.0f;
 
-	EProjectionType Type = EProjectionType::Orthographic;
+	EProjectionType ProjectionType = EProjectionType::Orthographic;
 
 	D3D11_VIEWPORT ViewPortInfo;
+
+
 
 	FVector ProjectionScale = { 0.0f, 0.0f };
 
 	std::map<int, std::list<std::shared_ptr<class URenderer>>> Renderers;
 	std::map<int, bool> RendererZSort;
+
 
 	void ChangeRenderGroup(int _PrevGroupOrder, std::shared_ptr<URenderer> _Renderer);
 };

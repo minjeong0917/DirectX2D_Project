@@ -34,6 +34,7 @@ void USpriteRenderer::SetSprite(std::string_view _Name, UINT _Index)
 
 	CurIndex = _Index;
 }
+
 void USpriteRenderer::SetTexture(std::string_view _Name, bool AutoScale /*= false*/, float _Ratio /*= 1.0f*/)
 {
 	std::shared_ptr<UEngineTexture> Texture = UEngineTexture::Find<UEngineTexture>(_Name);
@@ -50,6 +51,7 @@ void USpriteRenderer::SetTexture(std::string_view _Name, bool AutoScale /*= fals
 		SetRelativeScale3D(Texture->GetTextureSize() * _Ratio);
 	}
 }
+
 void USpriteRenderer::BeginPlay()
 {
 	URenderer::BeginPlay();
@@ -92,8 +94,12 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 {
 	URenderer::ComponentTick(_DeltaTime);
 
+	
 	if (nullptr != CurAnimation)
 	{
+		FrameAnimation* EventAnimation = nullptr;
+		int EventFrame = -1;
+
 		CurAnimation->IsEnd = false;
 		std::vector<int>& Indexs = CurAnimation->FrameIndex;
 		std::vector<float>& Times = CurAnimation->FrameTime;
@@ -105,6 +111,7 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 
 		float CurFrameTime = Times[CurAnimation->CurIndex];
 
+		//                           0.1 0.1 0.1
 		if (CurAnimation->CurTime > CurFrameTime)
 		{
 
@@ -113,8 +120,12 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 
 			if (CurAnimation->Events.contains(CurIndex))
 			{
-				CurAnimation->Events[CurIndex]();
+				EventAnimation = CurAnimation;
+				EventFrame = CurIndex;
+
 			}
+
+	
 			if (CurAnimation->CurIndex >= Indexs.size())
 			{
 				CurAnimation->IsEnd = true;
@@ -132,7 +143,9 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 
 					if (CurAnimation->Events.contains(CurIndex))
 					{
-						CurAnimation->Events[CurIndex]();
+						EventAnimation = CurAnimation;
+						EventFrame = CurIndex;
+						
 					}
 				}
 				else
@@ -146,6 +159,14 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 
 
 		CurIndex = Indexs[CurAnimation->CurIndex];
+
+		if (nullptr != EventAnimation)
+		{
+			if (EventAnimation->Events.contains(CurIndex))
+			{
+				EventAnimation->Events[CurIndex]();
+			}
+		}
 	}
 
 

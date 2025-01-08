@@ -32,8 +32,12 @@ private:
 	bool IsExistCustomer = false;
 	float NotExistCustomerTime = 0.0f;
 
+	float CustomerEnterTime = 0.0f;
+
 	float DoorClosedTime = 0.0f;
 	float DoorOpenTime = 0.0f;
+	bool IsDoorDown = false;
+
 	bool IsDoorClosed = true;
 	float DoorAcc = 1.0f;
 

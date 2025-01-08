@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "EngineInput.h"
 
+
 void UEngineInput::UEngineKey::KeyCheck(float _DeltaTime)
 {
 
@@ -11,7 +12,7 @@ void UEngineInput::UEngineKey::KeyCheck(float _DeltaTime)
 		{
 			PressTime += _DeltaTime;
 		}
-
+	
 		if (true == IsFree)
 		{
 			IsDown = true;
@@ -21,21 +22,24 @@ void UEngineInput::UEngineKey::KeyCheck(float _DeltaTime)
 		}
 		else if (true == IsDown)
 		{
-
+		
 			FreeTime = 0.0f;
 			IsDown = false;
 			IsPress = true;
 			IsFree = false;
 			IsUp = false;
 		}
+
 	}
 	else
 	{
+
 		if (true == IsFree)
 		{
 			FreeTime += _DeltaTime;
 		}
 
+	
 		if (true == IsPress)
 		{
 			IsDown = false;
@@ -92,7 +96,6 @@ void UEngineInput::UEngineKey::EventCheck()
 
 UEngineInput& UEngineInput::GetInst()
 {
-
 	static UEngineInput Inst = UEngineInput();
 	return Inst;
 }
@@ -144,6 +147,8 @@ UEngineInput::UEngineInput()
 	Keys.insert({ VK_RIGHT , UEngineKey(VK_RIGHT) });
 	Keys.insert({ VK_UP , UEngineKey(VK_UP) });
 	Keys.insert({ VK_DOWN , UEngineKey(VK_DOWN) });
+	Keys.insert({ VK_LSHIFT , UEngineKey(VK_LSHIFT) });
+
 
 	Keys.insert({ VK_LEFT, UEngineKey(VK_LEFT) });
 	Keys.insert({ VK_RIGHT, UEngineKey(VK_RIGHT) });
@@ -214,6 +219,7 @@ void UEngineInput::EventCheck(float _DeltaTime)
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
+		
 		UEngineKey& CurKey = StartIter->second;
 		CurKey.EventCheck();
 	}
@@ -226,6 +232,7 @@ void UEngineInput::KeyCheck(float _DeltaTime)
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
+	
 		UEngineKey& CurKey = StartIter->second;
 		CurKey.KeyCheck(_DeltaTime);
 	}

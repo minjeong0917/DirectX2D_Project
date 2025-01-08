@@ -4,7 +4,6 @@
 
 UEngineCamera::UEngineCamera()
 {
-
 }
 
 void UEngineCamera::BeginPlay()
@@ -28,7 +27,7 @@ UEngineCamera::~UEngineCamera()
 
 void UEngineCamera::Tick(float _DetlaTime)
 {
-
+	
 	Transform.View;
 	Transform.Projection;
 }
@@ -40,6 +39,7 @@ void UEngineCamera::Render(float _DetlaTime)
 	for (std::pair<const int, std::list<std::shared_ptr<URenderer>>>& RenderGroup : Renderers)
 	{
 		std::list<std::shared_ptr<URenderer>>& RenderList = RenderGroup.second;
+
 		if (true == RendererZSort[RenderGroup.first])
 		{
 
@@ -48,16 +48,20 @@ void UEngineCamera::Render(float _DetlaTime)
 					return _Left->GetTransformRef().WorldLocation.Z > _Right->GetTransformRef().WorldLocation.Z;
 				});
 		}
+
+
 		for (std::shared_ptr<URenderer> Renderer : RenderList)
 		{
 			if (false == Renderer->IsActive())
 			{
 				continue;
 			}
+
 			Renderer->Render(this, _DetlaTime);
 		}
 	}
 }
+
 void UEngineCamera::Release(float _DeltaTime)
 {
 
@@ -84,6 +88,7 @@ void UEngineCamera::Release(float _DeltaTime)
 		}
 	}
 }
+
 void UEngineCamera::SetZSort(int _Order, bool _Value)
 {
 	RendererZSort[_Order] = _Value;
@@ -101,7 +106,7 @@ void UEngineCamera::CalculateViewAndProjection()
 
 	Trans.View.View(Trans.World.ArrVector[3], Trans.World.GetFoward(), Trans.World.GetUp());
 
-	switch (Type)
+	switch (ProjectionType)
 	{
 	case EProjectionType::Perspective:
 		Trans.Projection.PerspectiveFovDeg(FOV, ProjectionScale.X, ProjectionScale.Y, Near, Far);

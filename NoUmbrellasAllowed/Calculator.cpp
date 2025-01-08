@@ -17,13 +17,13 @@ ACalculator::ACalculator()
     CalculatorRender->CreateAnimation("Calculator", "Entity", 0, 2, 0.2f);
     CalculatorRender->ChangeAnimation("Calculator");
     CalculatorRender->SetAutoScaleRatio(3.0f);
-    CalculatorRender->SetWorldLocation({ 680.0f, -840.0f, 0.0f });
+    CalculatorRender->SetWorldLocation({ 680.0f, -840.0f, -150.0f });
     CalculatorRender->SetupAttachment(RootComponent);
 
     CalculatorCollision = CreateDefaultSubObject<UCollision>();
     CalculatorCollision->SetCollisionProfileName("Calculator");
     CalculatorCollision->SetScale3D({330.0f,462.0f,0.0f});
-    CalculatorCollision->SetRelativeLocation({ CalculatorRender->GetTransformRef().WorldLocation.X, CalculatorRender->GetTransformRef().WorldLocation.Y + 231.0f  });
+    CalculatorCollision->SetRelativeLocation({ CalculatorRender->GetTransformRef().WorldLocation.X, CalculatorRender->GetTransformRef().WorldLocation.Y + 231.0f , CalculatorRender->GetTransformRef().WorldLocation.Z, });
     CalculatorCollision->SetupAttachment(RootComponent);
 
     CalculatorCollision->SetCollisionEnter([this](UCollision* _This, UCollision* _Other)
@@ -57,7 +57,7 @@ void ACalculator::Tick(float _DeltaTime)
     }
     if (IsEnter == false)
     {
-        Acc = 0.0f;
+        Acc = 0;
         if (CalculatorRender->GetTransformRef().WorldLocation.Y > -840.0f)
         {
             CalculatorRender->AddRelativeLocation({ 0.0f,-1.0f * _DeltaTime * 900,0.0f });
