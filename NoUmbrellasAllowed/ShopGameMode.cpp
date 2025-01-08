@@ -3,6 +3,7 @@
 #include "UI.h"
 #include "Customer.h"
 #include "Calculator.h"
+#include "CalculatorButton.h"
 #include <EngineCore/EngineCore.h>
 #include "Cursor.h"
 
@@ -17,7 +18,17 @@ AShopGameMode::AShopGameMode()
     TimeEventComponent = CreateDefaultSubObject<UTimeEventComponent>();
     GetWorld()->CreateCollisionProfile("Calculator");
     GetWorld()->CreateCollisionProfile("Cursor");
+    for (int i = 0; i < 14; i++)
+    {
+        GetWorld()->CreateCollisionProfile("Button_" + std::to_string(i));
+        GetWorld()->LinkCollisionProfile("Button_" + std::to_string(i), "Cursor");
+        GetWorld()->LinkCollisionProfile("Cursor","Button_" + std::to_string(i));
+
+    }
+
     GetWorld()->LinkCollisionProfile("Calculator", "Cursor");
+
+
 
     // BackGround
     std::shared_ptr<class AUI> BackGround = GetWorld()->SpawnActor<AUI>();
@@ -96,6 +107,12 @@ AShopGameMode::AShopGameMode()
 
     Calculator = GetWorld()->SpawnActor<ACalculator>();
 
+    // ToolsIcon
+    std::shared_ptr<class AUI> ToolsIcon = GetWorld()->SpawnActor<AUI>();
+    ToolsIcon->SetUISprite("Tools", 0);
+    ToolsIcon->SetUIScale3D({ 87.0f, 30.0f, 1.0f });
+    ToolsIcon->SetRelativeLocation({ 0.0f, -450.0f, -151.0f });
+
     // OutLine   
     std::shared_ptr<class AUI> OutLine = GetWorld()->SpawnActor<AUI>();
     OutLine->SetUISprite("Shop", 3);
@@ -118,6 +135,7 @@ void AShopGameMode::BeginPlay()
 {
     AActor::BeginPlay();
     UEngineRandom Random;
+
 
     {
         WalkCustomer1->SetRelativeLocation({ 840.0f, -300.0f, 800.0f });
@@ -147,6 +165,8 @@ void AShopGameMode::Tick(float _DeltaTime)
     FVector MousePos = Camera->ScreenMousePosToWorldPos();
     Cursor->SetActorLocation({ MousePos.X + 8.0f,MousePos.Y - 40.0f, -800.0f });
 
+
+
     PeopleMove(_DeltaTime, WalkCustomer1, true);
     PeopleMove(_DeltaTime, WalkCustomer2, false);
 
@@ -164,12 +184,14 @@ void AShopGameMode::Tick(float _DeltaTime)
         {
             CustomerEnter(_DeltaTime);
         }
-
     }
+
     if (IsOut == true)
     {
         CustomerOut(_DeltaTime);
     }
+
+
 
 }
 

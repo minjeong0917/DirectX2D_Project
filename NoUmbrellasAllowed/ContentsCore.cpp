@@ -110,6 +110,7 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
     }
     // UI in the Shop
     {
+        LoadFile(Dir, "Images//UIIntheShop//Tools");
         LoadFile(Dir, "Images//UIIntheShop//Calculator//Entity");
         LoadFile(Dir, "Images//UIIntheShop//Calculator//Buttons");
 

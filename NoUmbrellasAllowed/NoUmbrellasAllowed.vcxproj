@@ -171,6 +171,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ItemShelf.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="CalculatorButton.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Cursor.cpp">
       <SubType>
       </SubType>
@@ -206,6 +214,14 @@
     <ClCompile Include="TitleGameMode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ItemShelf.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="CalculatorButton.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Cursor.h">
       <SubType>
       </SubType>

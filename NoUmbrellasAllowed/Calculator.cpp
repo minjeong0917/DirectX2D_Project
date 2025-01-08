@@ -6,7 +6,7 @@
 #include <EngineCore/Collision.h>
 
 #include "Calculator.h"
-
+#include "CalculatorButton.h"
 
 ACalculator::ACalculator()
 {
@@ -36,6 +36,9 @@ ACalculator::ACalculator()
 
         });
 
+    Button = GetWorld()->SpawnActor<AButton>();
+
+
 }
 
 ACalculator::~ACalculator()
@@ -52,7 +55,8 @@ void ACalculator::Tick(float _DeltaTime)
         if (CalculatorRender->GetTransformRef().WorldLocation.Y < -440.0f)
         {
             Acc += 5;
-            CalculatorRender->AddRelativeLocation({ 0.0f,1.0f * _DeltaTime * 10 * Acc,0.0f });
+            CalculatorRender->AddRelativeLocation({ 0.0f,1.0f * _DeltaTime * 20 * Acc,0.0f });
+            Button->AddRelativeLocation({ 0.0f,1.0f * _DeltaTime * 20 * Acc,0.0f });
         }
     }
     if (IsEnter == false)
@@ -60,7 +64,8 @@ void ACalculator::Tick(float _DeltaTime)
         Acc = 0;
         if (CalculatorRender->GetTransformRef().WorldLocation.Y > -840.0f)
         {
-            CalculatorRender->AddRelativeLocation({ 0.0f,-1.0f * _DeltaTime * 900,0.0f });
+            CalculatorRender->AddRelativeLocation({ 0.0f,-1.0f * _DeltaTime * 900, 0.0f });
+            Button->AddRelativeLocation({ 0.0f,-1.0f * _DeltaTime * 900, 0.0f });
         }
     }
     CalculatorCollision->SetRelativeLocation({ CalculatorRender->GetTransformRef().WorldLocation.X, CalculatorRender->GetTransformRef().WorldLocation.Y + 231.0f });
@@ -74,3 +79,4 @@ void ACalculator::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 {
     IsEnter = false;
 }
+

@@ -1,7 +1,7 @@
 #pragma once
-
+#include "UI.h"
 // Ό³Έν :
-class ACursor : public AActor
+class ACursor : public AUI
 {
 public:
 	// constrcuter destructer
@@ -16,8 +16,11 @@ public:
 
 protected:
 	void Tick(float _DeltaTime);
-
+	void OnCollisionEnter(class UCollision* _This, class UCollision* _Other);
+	void OnCollisionEnd(class UCollision* _This, class UCollision* _Other);
 private:
+	bool IsEnter = false;
+
 	std::shared_ptr<class USpriteRenderer> CursorRender;
 	std::shared_ptr<class UCollision> CursorCollision;
 

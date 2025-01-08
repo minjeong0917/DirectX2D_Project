@@ -19,13 +19,12 @@ class TestWindow : public UEngineGUIWindow
 public:
 	void OnGUI() override
 	{
-		ImGui::Button("WindowButton");
-		ImGui::SameLine(); // ÇÑ°£ ¶ç±â
-		ImGui::Text("test");
 		if (true == ImGui::Button("FreeCameraOn"))
 		{
 			GetWorld()->GetMainCamera()->FreeCameraSwitch();
 		}
+
+		ImGui::SameLine(); // ÇÑ°£ ¶ç±â
 	}
 };
 
@@ -96,6 +95,7 @@ ATitleGameMode::ATitleGameMode()
 		{
 
 			std::shared_ptr<class AUI> Plants = GetWorld()->SpawnActor<AUI>();
+			Plants->SetUISprite("plant_01_loop.png", 0);
 			Plants->CreateAnimation("Idle", "plant_01_loop.png", 3.1f, 0, 6, 0.2f);
 			Plants->ChangeAnimation("Idle");
 			Plants->SetRelativeLocation(StartLocation + InterLocation * i + FVector(50.0, 0.0f,0.0f)*i);

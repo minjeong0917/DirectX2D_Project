@@ -21,11 +21,17 @@
     <ClCompile Include="UI.cpp">
       <Filter>Global</Filter>
     </ClCompile>
-    <ClCompile Include="Calculator.cpp">
-      <Filter>Shop</Filter>
-    </ClCompile>
     <ClCompile Include="Customer.cpp">
       <Filter>Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="CalculatorButton.cpp">
+      <Filter>Shop\Calculator</Filter>
+    </ClCompile>
+    <ClCompile Include="Calculator.cpp">
+      <Filter>Shop\Calculator</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemShelf.cpp">
+      <Filter>Shop\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -49,11 +55,17 @@
     <ClInclude Include="UI.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="Calculator.h">
-      <Filter>Shop</Filter>
-    </ClInclude>
     <ClInclude Include="Customer.h">
       <Filter>Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="CalculatorButton.h">
+      <Filter>Shop\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="Calculator.h">
+      <Filter>Shop\Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemShelf.h">
+      <Filter>Shop\Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +80,12 @@
     </Filter>
     <Filter Include="Shop">
       <UniqueIdentifier>{5faf8ea2-b35a-4e05-8835-89e9442a1213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shop\Calculator">
+      <UniqueIdentifier>{0906e724-4532-4bfe-aa05-4fb3e97c784c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shop\Tools">
+      <UniqueIdentifier>{98327bd7-be42-4975-8487-a81178eefedb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
