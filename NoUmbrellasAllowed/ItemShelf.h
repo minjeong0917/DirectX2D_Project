@@ -15,8 +15,14 @@ public:
 	AItemShelf& operator=(AItemShelf&& _Other) noexcept = delete;
 
 protected:
+	void Tick(float _DeltaTime);
 
+	void OnCollisionEnter(class UCollision* _This, class UCollision* _Other);
+	void OnCollisionEnd(class UCollision* _This, class UCollision* _Other);
 private:
-
+	bool IsEnter = false;
+	int Acc = 1.0f;
+	std::shared_ptr<class USpriteRenderer> ItemShelfRender;
+	std::shared_ptr<class UCollision> ItemShelfCollision;
 };
 

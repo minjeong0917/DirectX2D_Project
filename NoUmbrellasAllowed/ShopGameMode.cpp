@@ -6,6 +6,7 @@
 #include "CalculatorButton.h"
 #include <EngineCore/EngineCore.h>
 #include "Cursor.h"
+#include "ItemShelf.h"
 
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/CameraActor.h>
@@ -18,6 +19,7 @@ AShopGameMode::AShopGameMode()
     TimeEventComponent = CreateDefaultSubObject<UTimeEventComponent>();
     GetWorld()->CreateCollisionProfile("Calculator");
     GetWorld()->CreateCollisionProfile("Cursor");
+    GetWorld()->CreateCollisionProfile("ItemShelf");
     for (int i = 0; i < 14; i++)
     {
         GetWorld()->CreateCollisionProfile("Button_" + std::to_string(i));
@@ -27,6 +29,7 @@ AShopGameMode::AShopGameMode()
     }
 
     GetWorld()->LinkCollisionProfile("Calculator", "Cursor");
+    GetWorld()->LinkCollisionProfile("ItemShelf", "Cursor");
 
 
 
@@ -97,6 +100,8 @@ AShopGameMode::AShopGameMode()
     Table->SetUISprite("Shop", 4);
     Table->SetUIScale3D({ 1920.0f, 347.0f, 1.0f });
     Table->SetRelativeLocation({ 0.0f, -545.0f, -100.0f });
+
+    std::shared_ptr<class AItemShelf> ItemShelf = GetWorld()->SpawnActor<AItemShelf>();
 
 
     // Hue
