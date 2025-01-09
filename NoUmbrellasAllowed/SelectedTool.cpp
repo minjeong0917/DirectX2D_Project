@@ -3,10 +3,11 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/DefaultSceneComponent.h>
 #include <EnginePlatform/EngineInput.h>
-#include <EngineCore/Collision.h>
+
 #include "SelectedTool.h"
 #include <EngineCore/CameraActor.h>
 #include <EngineCore/EngineCamera.h>
+
 ASelectedTool::ASelectedTool()
 {
     std::shared_ptr<UDefaultSceneComponent> Default = CreateDefaultSubObject<UDefaultSceneComponent>();

@@ -43,6 +43,12 @@
     <ClCompile Include="SelectedTool.cpp">
       <Filter>Shop\Tools</Filter>
     </ClCompile>
+    <ClCompile Include="Merchandise.cpp">
+      <Filter>Shop\Merchandise</Filter>
+    </ClCompile>
+    <ClCompile Include="CardSlot.cpp">
+      <Filter>Shop\Merchandise</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleGameMode.h">
@@ -87,6 +93,12 @@
     <ClInclude Include="SelectedTool.h">
       <Filter>Shop\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="Merchandise.h">
+      <Filter>Shop\Merchandise</Filter>
+    </ClInclude>
+    <ClInclude Include="CardSlot.h">
+      <Filter>Shop\Merchandise</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameMode">
@@ -112,6 +124,9 @@
     </Filter>
     <Filter Include="Title">
       <UniqueIdentifier>{396d860a-486f-435f-bede-0da63d668719}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shop\Merchandise">
+      <UniqueIdentifier>{cc555855-7f25-4ba5-9ece-264522235c10}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

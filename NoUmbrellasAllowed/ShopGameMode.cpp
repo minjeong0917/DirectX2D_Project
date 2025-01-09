@@ -7,6 +7,8 @@
 #include <EngineCore/EngineCore.h>
 #include "Cursor.h"
 #include "ItemShelf.h"
+#include "Merchandise.h"
+#include "CardSlot.h"
 
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/CameraActor.h>
@@ -92,8 +94,6 @@ AShopGameMode::AShopGameMode()
     std::shared_ptr<class AUI> Main = GetWorld()->SpawnActor<AUI>();
     Main->CreateAnimation("Idle", "Main", 3.0f, 0, 6, 0.2f);
     Main->ChangeAnimation("Idle");
-    //Main->SetUISprite("Shop", 0);
-    //Main->SetUIScale3D({ 1920.0f, 1080.0f, 1.0f });
     Main->SetRelativeLocation({ 0.0f, -540.0f, 11.0f });
 
     //Customer
@@ -102,14 +102,17 @@ AShopGameMode::AShopGameMode()
 
     // Table
     std::shared_ptr<class AUI> Table = GetWorld()->SpawnActor<AUI>();
-    //Table->CreateAnimation("Idle", "Table", 3.0f, 0, 6, 0.2f);
-    //Table->ChangeAnimation("Idle");
     Table->SetUISprite("UI", 4);
     Table->SetUIScale3D({ 1920.0f, 347.0f, 1.0f });
     Table->SetRelativeLocation({ 0.0f, -545.0f, -100.0f });
 
     ItemShelf = GetWorld()->SpawnActor<AItemShelf>();
 
+    Merchandise = GetWorld()->SpawnActor<AMerchandise>();
+    Merchandise->SetActive(false);
+
+    CardSlot = GetWorld()->SpawnActor<ACardSlot>();
+    CardSlot->SetActive(false);
 
     // Hue
     std::shared_ptr<class AUI> HueBodyAnimation = GetWorld()->SpawnActor<AUI>();
@@ -157,11 +160,9 @@ void AShopGameMode::BeginPlay()
 
     }
     {
-        //WalkCustomer2->SetActorLocation({ -900.0f,  -300.0f, 0.0f });
         WalkCustomer2->SetRelativeLocation({ 900.0f,  -300.0f, -801.0f });
         WalkCustomer2->SetActorRotation({ 0.0f, 180.0f, 0.0f });
         WalkCustomer2->ChangeAnimation(AllOutPeopleAni[3]);
-
 
         float RandomApear = Random.Randomfloat(6.0f, 15.0f);
         WalkCustomer2->ApearTime = RandomApear;
@@ -172,7 +173,7 @@ void AShopGameMode::BeginPlay()
 void AShopGameMode::Tick(float _DeltaTime)
 {
     AActor::Tick(_DeltaTime);
-    //UEngineDebug::OutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
+
 
     std::shared_ptr<class ACameraActor> Camera = GetWorld()->GetCamera(0);
     FVector MousePos = Camera->ScreenMousePosToWorldPos();
@@ -200,20 +201,30 @@ void AShopGameMode::Tick(float _DeltaTime)
         IsOut = true;
     }
 
-
     if (IsOut == false)
     {
         NotExistCustomerTime += _DeltaTime;
         if(NotExistCustomerTime > 3.0f)
         {
             CustomerEnter(_DeltaTime);
+            if (IsExistCustomer == true)
+            {
+                Merchandise->SetActive(true);
+                CardSlot->SetActive(true);
+                CardSlot->IsActive = true;
+                if (Merchandise->GetActorLocation().Y > -100.0f)
+                {
+                    Merchandise->PlusAlpha(_DeltaTime, 1.0f);
+                    Merchandise->AddActorLocation({ 0.0f, -1.0f * _DeltaTime * 100 , 0.0f });
+                }
+            }
         }
     }
 
     if (IsOut == true)
     {
         CustomerOut(_DeltaTime);
-    }
+    }   
 
 
 

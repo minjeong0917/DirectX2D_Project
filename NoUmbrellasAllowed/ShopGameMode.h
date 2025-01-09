@@ -56,6 +56,9 @@ private:
 
 	std::shared_ptr<class ACalculator> Calculator;
 	std::shared_ptr<class AItemShelf> ItemShelf;
+	std::shared_ptr<class AMerchandise> Merchandise;
+	std::shared_ptr<class ACardSlot> CardSlot;
+
 	std::shared_ptr<class AButton> NumButton;
 	std::shared_ptr<class AUI> DoorUp;
 	std::shared_ptr<class AUI> DoorDown;

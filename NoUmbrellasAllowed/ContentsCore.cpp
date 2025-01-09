@@ -51,6 +51,7 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
     LoadFile(Dir, "Images//Logo");
 
 
+
     // Shop
     {
         LoadFile(Dir, "Images//Shop//UI");
@@ -74,6 +75,9 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 
         // Table
         LoadFile(Dir, "Images//Shop//Table");
+
+        // Merchandise
+        LoadFile(Dir, "Images//Shop//Merchandise");
     }
 
     // Customer
@@ -113,6 +117,7 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
         LoadFile(Dir, "Images//UIIntheShop//Tools//SelectedTool");
         LoadFile(Dir, "Images//UIIntheShop//Calculator//Entity");
         LoadFile(Dir, "Images//UIIntheShop//Calculator//Buttons");
+        LoadFile(Dir, "Images//UIIntheShop//Card");
 
 
     }
