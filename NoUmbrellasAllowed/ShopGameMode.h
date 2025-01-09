@@ -1,7 +1,7 @@
 #pragma once
-#include <EngineCore/Actor.h>
+
 // Ό³Έν :
-class AShopGameMode : public AActor
+class AShopGameMode : public AGameMode
 {
 public:
 	// constrcuter destructer
@@ -19,6 +19,7 @@ public:
 protected:
 	void BeginPlay();
 	void Tick(float _DeltaTime);
+
 private:
 	void PeopleMove(float _DeltaTime, std::shared_ptr<class AUI> _Customer, bool _IsRight);
 	void PeopleCreateAni(std::shared_ptr<class AUI> _Customer);
@@ -29,18 +30,19 @@ private:
 	void DoorClose(float _DeltaTime);
 
 	int CustomerActive = 0;
-	bool IsExistCustomer = false;
-	float NotExistCustomerTime = 0.0f;
 
+	bool IsExistCustomer = false;
+
+	float NotExistCustomerTime = 0.0f;
 	float CustomerEnterTime = 0.0f;
 
 	float DoorClosedTime = 0.0f;
 	float DoorOpenTime = 0.0f;
+
 	bool IsDoorDown = false;
-
 	bool IsDoorClosed = true;
-	float DoorAcc = 1.0f;
 
+	float DoorAcc = 1.0f;
 	bool IsOut = false;
 	std::shared_ptr<class ACursor> Cursor;
 

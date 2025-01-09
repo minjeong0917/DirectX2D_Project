@@ -73,13 +73,16 @@ public:
 	ENGINEAPI void SetAnimationEvent(std::string_view _AnimationName, int _Frame, std::function<void()> _Function);
 
 	ENGINEAPI FrameAnimation* FindAnimation(std::string_view _AnimationName);
-	ENGINEAPI void SetTexture(std::string_view _Name, bool AutoScale = false, float _Ratio = 1.0f);
+
 	ENGINEAPI std::string GetCurSpriteName()
 	{
 		return Sprite->GetName();
 	}
 
 	ENGINEAPI void SetSprite(std::string_view _Name, UINT _CurIndex = 0);
+
+	ENGINEAPI void SetTexture(std::string_view _Name, bool AutoScale = false, float _Ratio = 1.0f);
+
 	bool IsCurAnimationEnd()
 	{
 		return CurAnimation->IsEnd;
@@ -105,6 +108,16 @@ public:
 		AutoScaleRatio = _Scale;
 	}
 
+	void BillboardOn()
+	{
+		IsBillboard = true;
+	}
+
+	void BillboardOff()
+	{
+		IsBillboard = false;
+	}
+
 
 	void SetSprite(UEngineSprite* _Sprite);
 
@@ -116,9 +129,11 @@ protected:
 	ENGINEAPI void Render(class UEngineCamera* _Camera, float _DeltaTime) override;
 	void BeginPlay() override;
 	void ComponentTick(float _DeltaTime) override;
-
+	ENGINEAPI void RenderTransUpdate(UEngineCamera* _Camera) override;
 
 private:
+	bool IsBillboard = false;
+
 	URenderUnit* MainUnit;
 
 	int CurIndex = 0;

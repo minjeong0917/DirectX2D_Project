@@ -1,11 +1,11 @@
 #pragma once
 #include <EngineBase/EngineDefine.h>
-
+#include <EngineBase/EngineTimer.h>
+#include <EnginePlatform/EngineWindow.h>
 #include "EngineGraphicDevice.h"
 #include "IContentsCore.h"
 #include "Level.h"
 #include <memory>
-#include <EngineBase/EngineTimer.h>
 
 
 // Ό³Έν :
@@ -24,14 +24,17 @@ public:
 
 		std::shared_ptr<ULevel> NewLevel = NewLevelCreate(_Name);
 
-		NewLevel->SpawnActor<GameModeType>();
-		NewLevel->SpawnActor<MainPawnType>();
 
+		std::shared_ptr<GameModeType> GameMode = NewLevel->SpawnActor<GameModeType>();
+		std::shared_ptr<MainPawnType> Pawn = NewLevel->SpawnActor<MainPawnType>();
+
+		NewLevel->InitLevel(GameMode.get(), Pawn.get());
 
 		return NewLevel;
 	}
 
 	ENGINEAPI static void OpenLevel(std::string_view _Name);
+
 
 	ENGINEAPI static FVector GetScreenScale();
 
@@ -42,17 +45,18 @@ public:
 protected:
 
 private:
-	ENGINEAPI static UEngineGraphicDevice Device;
 	ENGINEAPI static UEngineWindow MainWindow;
+
+	ENGINEAPI static UEngineGraphicDevice Device;
 
 	static HMODULE ContentsDLL;
 	static std::shared_ptr<IContentsCore> Core;
 	static UEngineInitData Data;
 
+	static UEngineTimer Timer;
+
 	static void WindowInit(HINSTANCE _Instance);
 	static void LoadContents(std::string_view _DllName);
-
-	static UEngineTimer Timer;
 
 	static void EngineFrame();
 	static void EngineEnd();

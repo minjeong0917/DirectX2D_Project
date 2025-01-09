@@ -71,5 +71,4 @@ void AItemShelf::OnCollisionEnter(UCollision* _This, UCollision* _Other)
 void AItemShelf::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 {
     IsEnter = false;
-    Acc = 0;
 }

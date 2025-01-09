@@ -7,6 +7,7 @@
 class ULevel : public UObject
 {
 	friend class UCollision;
+	friend class UEngineCore;
 
 public:
 	// constrcuter destructer
@@ -19,8 +20,21 @@ public:
 	ULevel& operator=(const ULevel& _Other) = delete;
 	ULevel& operator=(ULevel&& _Other) noexcept = delete;
 
+
 	void LevelChangeStart();
+	
 	void LevelChangeEnd();
+
+	class AGameMode* GetGameMode()
+	{
+		return GameMode;
+	}
+
+	class APawn* GetMainPawn()
+	{
+		return MainPawn;
+	}
+
 
 
 	void Tick(float _DeltaTime);
@@ -55,14 +69,13 @@ public:
 	std::shared_ptr<ActorType> SpawnActor()
 	{
 
-
 		static_assert(std::is_base_of_v<AActor, ActorType>, "액터를 상속받지 않은 클래스를 SpawnActor하려고 했습니다.");
 
 		if (false == std::is_base_of_v<AActor, ActorType>)
 		{
 			MSGASSERT("액터를 상속받지 않은 클래스를 SpawnActor하려고 했습니다.");
 			return nullptr;
-
+	
 		}
 
 		char* ActorMemory = new char[sizeof(ActorType)];
@@ -74,7 +87,6 @@ public:
 		ActorType* NewPtr = reinterpret_cast<ActorType*>(ActorMemory);
 
 		std::shared_ptr<ActorType> NewActor(NewPtr = new(ActorMemory) ActorType());
-
 
 		BeginPlayList.push_back(NewActor);
 
@@ -91,10 +103,13 @@ public:
 
 	ENGINEAPI void LinkCollisionProfile(std::string_view _LeftProfileName, std::string_view _RightProfileName);
 
-
 protected:
 
 private:
+	class AGameMode* GameMode = nullptr;
+
+	class APawn* MainPawn = nullptr;
+
 	std::list<std::shared_ptr<class AActor>> BeginPlayList;
 
 	std::list<std::shared_ptr<class AActor>> AllActorList;
@@ -106,5 +121,7 @@ private:
 	std::map<std::string, std::list<std::shared_ptr<class UCollision>>> CheckCollisions;
 
 	std::map<std::string, std::list<std::string>> CollisionLinks;
+
+	ENGINEAPI void InitLevel(AGameMode* _GameMode, APawn* _Pawn);
 };
 

@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Logo.cpp" />
-    <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="TitleGameMode.cpp">
       <Filter>GameMode</Filter>
     </ClCompile>
@@ -33,10 +31,14 @@
     <ClCompile Include="ItemShelf.cpp">
       <Filter>Shop\Tools</Filter>
     </ClCompile>
+    <ClCompile Include="ContentsCore.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Logo.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Logo.h" />
-    <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="TitleGameMode.h">
       <Filter>GameMode</Filter>
     </ClInclude>
@@ -67,6 +69,12 @@
     <ClInclude Include="ItemShelf.h">
       <Filter>Shop\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="ContentsCore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Logo.h">
+      <Filter>Title</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameMode">
@@ -86,6 +94,12 @@
     </Filter>
     <Filter Include="Shop\Tools">
       <UniqueIdentifier>{98327bd7-be42-4975-8487-a81178eefedb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{2e91155d-45a4-4335-88f7-9d446048752a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Title">
+      <UniqueIdentifier>{396d860a-486f-435f-bede-0da63d668719}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

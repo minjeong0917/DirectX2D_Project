@@ -8,8 +8,6 @@
 #include "CameraActor.h"
 #include "EngineGUI.h"
 
-
-
 std::shared_ptr<class ACameraActor> ULevel::SpawnCamera(int _Order)
 {
 	std::shared_ptr<ACameraActor> Camera = std::make_shared<ACameraActor>();
@@ -73,6 +71,12 @@ void ULevel::Tick(float _DeltaTime)
 		StartIter = BeginPlayList.erase(StartIter);
 
 		CurActor->BeginPlay();
+
+		if (nullptr != CurActor->Parent)
+		{
+			continue;
+		}
+
 		AllActorList.push_back(CurActor);
 	}
 
@@ -101,6 +105,7 @@ void ULevel::Render(float _DeltaTime)
 	{
 		std::shared_ptr<class ACameraActor> Camera = GetMainCamera();
 
+
 		for (std::pair<const std::string, std::list<std::shared_ptr<UCollision>>>& Group : Collisions)
 		{
 			std::list<std::shared_ptr<UCollision>>& List = Group.second;
@@ -120,7 +125,7 @@ void ULevel::Render(float _DeltaTime)
 	if (true == UEngineWindow::IsApplicationOn())
 	{
 		UEngineGUI::GUIRender(this);
-
+		
 	}
 
 	UEngineCore::GetDevice().RenderEnd();
@@ -132,7 +137,7 @@ void ULevel::ChangeRenderGroup(int _CameraOrder, int _PrevGroupOrder, std::share
 {
 	if (false == Cameras.contains(_CameraOrder))
 	{
-
+	
 		MSGASSERT("존재하지 않는 카메라에 랜더러를 집어넣으려고 했습니다.");
 		return;
 	}
@@ -187,7 +192,6 @@ void ULevel::ChangeCollisionProfileName(std::string_view _ProfileName, std::stri
 void ULevel::Collision(float _DeltaTime)
 {
 
-
 	for (std::pair<const std::string, std::list<std::string>>& Links : CollisionLinks)
 	{
 		const std::string& LeftProfile = Links.first;
@@ -218,14 +222,13 @@ void ULevel::Release(float _DeltaTime)
 	}
 
 	{
-	
+
 		for (std::pair<const std::string, std::list<std::shared_ptr<UCollision>>>& Group : Collisions)
 		{
 			std::list<std::shared_ptr<UCollision>>& List = Group.second;
 
 			std::list<std::shared_ptr<UCollision>>::iterator StartIter = List.begin();
 			std::list<std::shared_ptr<UCollision>>::iterator EndIter = List.end();
-
 
 			for (; StartIter != EndIter; )
 			{
@@ -235,7 +238,6 @@ void ULevel::Release(float _DeltaTime)
 					continue;
 				}
 
-				
 				StartIter = List.erase(StartIter);
 			}
 		}
@@ -247,17 +249,29 @@ void ULevel::Release(float _DeltaTime)
 		std::list<std::shared_ptr<AActor>>::iterator StartIter = List.begin();
 		std::list<std::shared_ptr<AActor>>::iterator EndIter = List.end();
 
-
 		for (; StartIter != EndIter; )
 		{
+			if (nullptr != (*StartIter)->Parent)
+			{
+
+				StartIter = List.erase(StartIter);
+				continue;
+			}
+
 			if (false == (*StartIter)->IsDestroy())
 			{
 				++StartIter;
 				continue;
 			}
 
-
 			StartIter = List.erase(StartIter);
 		}
 	}
+}
+
+void ULevel::InitLevel(AGameMode* _GameMode, APawn* _Pawn)
+{
+	GameMode = _GameMode;
+
+	MainPawn = _Pawn;
 }
