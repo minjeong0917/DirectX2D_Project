@@ -39,7 +39,6 @@ std::vector<class UEngineFile> UEngineDirectory::GetAllFile(bool _IsRecursive, c
 
 	std::vector<class UEngineFile> Result;
 
-	// 경로를 넣어주면 그 경로의 첫번째 파일을 가리키게 된다.
 	std::filesystem::directory_iterator Diriter = std::filesystem::directory_iterator(Path);
 
 	while (false == Diriter._At_end())
@@ -118,8 +117,6 @@ void UEngineDirectory::GetAllFileRecursive(std::filesystem::path _Path, std::vec
 		UpperExts.push_back(UEngineString::ToUpper(_Exts[i]));
 	}
 
-
-	// 경로를 넣어주면 그 경로의 첫번째 파일을 가리키게 된다.
 	std::filesystem::directory_iterator Diriter = std::filesystem::directory_iterator(_Path);
 
 	while (false == Diriter._At_end())
@@ -163,10 +160,6 @@ UEngineFile UEngineDirectory::GetFile(std::string_view _FileName)
 	UEnginePath FilePath = Path;
 	FilePath.Append(_FileName);
 
-	if (false == FilePath.IsExists())
-	{
-		MSGASSERT("존재하지 않는 파일을 객체화하려고 했습니다.");
-	}
 
 	return UEngineFile(FilePath);
 }

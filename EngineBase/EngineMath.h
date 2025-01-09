@@ -3,19 +3,17 @@
 #include <string>
 #include <functional>
 
-
+// 충돌 함수를 제공해줍니다.
 #include <DirectXMath.h>
 #include <DirectXCollision.h>
 
 #include "EngineDefine.h"
 
 
-
-
 class ENGINEAPI  UEngineMath
 {
 public:
-	// 상수 정의
+
 	static inline const double DPI = 3.14159265358979323846264338327950288419716939937510;
 	static inline const double DPI2 = DPI * 2.0;
 
@@ -145,6 +143,7 @@ public:
 
 		float CosRad = Dot(LCopy, RCopy);
 
+
 		return acos(CosRad);
 	}
 
@@ -188,19 +187,15 @@ public:
 		return Result;
 	}
 
-
 	static TVector AngleToVectorRad(float _Angle)
 	{
 
 		return { cosf(_Angle), sinf(_Angle) };
 	}
 
-
 	static TVector Transform(const TVector& _Vector, const class FMatrix& _Matrix);
 
-
 	static TVector TransformCoord(const TVector& _Vector, const class FMatrix& _Matrix);
-
 
 	static TVector TransformNormal(const TVector& _Vector, const class FMatrix& _Matrix);
 
@@ -265,7 +260,6 @@ public:
 		return Result;
 	}
 
-	// 
 	void RotationXDeg(float _Angle)
 	{
 		RotationXRad(_Angle * UEngineMath::D2R);
@@ -292,7 +286,6 @@ public:
 	}
 
 
-	// 
 	void RotationYDeg(float _Angle)
 	{
 		RotationYRad(_Angle * UEngineMath::D2R);
@@ -322,7 +315,7 @@ public:
 	{
 		return DirectX::XMVectorAbs(DirectVector);
 	}
-	// 
+	
 	void RotationZDeg(float _Angle)
 	{
 		RotationZRad(_Angle * UEngineMath::D2R);
@@ -414,7 +407,6 @@ public:
 		return Result;
 	}
 
-
 	bool operator==(const TVector& _Other) const
 	{
 		return X == _Other.X && Y == _Other.Y;
@@ -422,10 +414,9 @@ public:
 
 	bool EqualToInt(TVector _Other) const
 	{
+
 		return iX() == _Other.iX() && iY() == _Other.iY();
 	}
-
-
 
 	TVector& operator+=(const TVector& _Other)
 	{
@@ -655,7 +646,6 @@ public:
 		DirectMatrix = DirectX::XMMatrixPerspectiveFovLH(_FovAngle, _Width / _Height, _Near, _Far);
 	}
 
-
 	void ViewPort(float _Width, float _Height, float _Left, float _Top, float _ZMin, float _ZMax)
 	{
 		Identity();
@@ -708,7 +698,6 @@ public:
 
 	void Decompose(FVector& _Scale, FQuat& _RotQuaternion, FVector& _Pos)
 	{
-		
 		DirectX::XMMatrixDecompose(&_Scale.DirectVector, &_RotQuaternion.DirectVector, &_Pos.DirectVector, DirectMatrix);
 	}
 
@@ -740,6 +729,7 @@ enum class ECollisionType
 	OBB2D,
 	Sphere,
 	AABB,
+
 	OBB,
 	Max
 
@@ -749,7 +739,6 @@ struct FCollisionData
 {
 	union
 	{
-
 		DirectX::BoundingSphere Sphere;
 		DirectX::BoundingBox AABB;
 		DirectX::BoundingOrientedBox OBB;
@@ -765,18 +754,15 @@ struct FCollisionData
 struct FTransform
 {
 
-
 	float4 Scale;
 	float4 Rotation;
 	FQuat Quat;
 	float4 Location;
 
-
 	float4 RelativeScale;
 	float4 RelativeRotation;
 	FQuat RelativeQuat;
 	float4 RelativeLocation;
-
 
 	float4 WorldScale;
 	float4 WorldRotation;
@@ -804,8 +790,6 @@ struct FTransform
 public:
 	ENGINEAPI void TransformUpdate(bool _IsAbsolut = false);
 
-
-
 	ENGINEAPI void Decompose();
 
 
@@ -826,7 +810,6 @@ public:
 
 	FVector GetLocalFoward()
 	{
-
 		return LocalWorld.GetFoward();;
 	}
 
@@ -849,7 +832,6 @@ private:
 public:
 	ENGINEAPI static bool Collision(ECollisionType _LeftType, const FTransform& _Left, ECollisionType _RightType, const FTransform& _Right);
 
-
 	static bool PointToCirCle(const FTransform& _Left, const FTransform& _Right);
 	static bool PointToRect(const FTransform& _Left, const FTransform& _Right);
 
@@ -859,11 +841,22 @@ public:
 	static bool CirCleToCirCle(const FTransform& _Left, const FTransform& _Right);
 	static bool CirCleToRect(const FTransform& _Left, const FTransform& _Right);
 
-
 	static bool OBB2DToOBB2D(const FTransform& _Left, const FTransform& _Right);
 	static bool OBB2DToRect(const FTransform& _Left, const FTransform& _Right);
-	static bool OBB2DToSphere(const FTransform& _Left, const FTransform& _Right);
 	static bool OBB2DToPoint(const FTransform& _Left, const FTransform& _Right);
+	static bool OBB2DToCirCle(const FTransform& _Left, const FTransform& _Right);
+
+	static bool OBBToSphere(const FTransform& _Left, const FTransform& _Right);
+	static bool OBBToOBB(const FTransform& _Left, const FTransform& _Right);
+	static bool OBBToAABB(const FTransform& _Left, const FTransform& _Right);
+
+	static bool SphereToSphere(const FTransform& _Left, const FTransform& _Right);
+	static bool SphereToOBB(const FTransform& _Left, const FTransform& _Right);
+	static bool SphereToAABB(const FTransform& _Left, const FTransform& _Right);
+
+	static bool AABBToSphere(const FTransform& _Left, const FTransform& _Right);
+	static bool AABBToOBB(const FTransform& _Left, const FTransform& _Right);
+	static bool AABBToAABB(const FTransform& _Left, const FTransform& _Right);
 
 
 
@@ -978,11 +971,12 @@ public:
 };
 
 
-class UColor
+template<typename ValueType>
+class TColor
 {
 public:
-	static const UColor WHITE;
-	static const UColor BLACK;
+	static const TColor WHITE;
+	static const TColor BLACK;
 
 	union
 	{
@@ -996,22 +990,30 @@ public:
 		};
 	};
 
-	UColor(unsigned long _Value)
+	TColor(unsigned long _Value)
 		:Color(_Value)
 	{
 
 	}
 
-	bool operator==(const UColor& _Other)
+	bool operator==(const TColor& _Other)
 	{
 		return R == _Other.R && G == _Other.G && B == _Other.B;
 	}
 
 
-	UColor(unsigned char _R, unsigned char _G, unsigned char _B, unsigned char _A)
+	TColor(unsigned char _R, unsigned char _G, unsigned char _B, unsigned char _A)
 		:R(_R), G(_G), B(_B), A(_A)
 	{
 
 	}
 };
+
+using UColor = TColor<unsigned char>;
+
+template<>
+const TColor<unsigned char> TColor<unsigned char>::WHITE = TColor<unsigned char>(255, 255, 255, 0);
+
+template<>
+const TColor<unsigned char> TColor<unsigned char>::BLACK = TColor<unsigned char>(0, 0, 0, 0);
 
