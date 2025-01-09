@@ -171,6 +171,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="SelectedTool.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Tools.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ItemShelf.cpp">
       <SubType>
       </SubType>
@@ -214,6 +222,14 @@
     <ClCompile Include="TitleGameMode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SelectedTool.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Tools.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ItemShelf.h">
       <SubType>
       </SubType>

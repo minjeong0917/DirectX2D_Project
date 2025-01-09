@@ -13,6 +13,8 @@ public:
 	AItemShelf(AItemShelf&& _Other) noexcept = delete;
 	AItemShelf& operator=(const AItemShelf& _Other) = delete;
 	AItemShelf& operator=(AItemShelf&& _Other) noexcept = delete;
+	bool GetIsToolsClick();
+
 
 protected:
 	void Tick(float _DeltaTime);
@@ -21,7 +23,7 @@ protected:
 	void OnCollisionEnd(class UCollision* _This, class UCollision* _Other);
 private:
 	bool IsEnter = false;
-
+	std::shared_ptr<class ATools> Tools;
 	std::shared_ptr<class USpriteRenderer> ItemShelfRender;
 	std::shared_ptr<class UCollision> ItemShelfCollision;
 };

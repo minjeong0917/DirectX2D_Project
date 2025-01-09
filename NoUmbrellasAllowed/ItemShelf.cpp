@@ -2,11 +2,9 @@
 #include <EngineCore/Renderer.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/DefaultSceneComponent.h>
-#include <EngineCore/Renderer.h>
-#include <EngineCore/SpriteRenderer.h>
-#include <EngineCore/DefaultSceneComponent.h>
 #include <EngineCore/Collision.h>
 #include "ItemShelf.h"
+#include "Tools.h"
 
 AItemShelf::AItemShelf()
 {
@@ -35,6 +33,7 @@ AItemShelf::AItemShelf()
 
         });
 
+    Tools = GetWorld()->SpawnActor<ATools>();
 
 }
 
@@ -51,6 +50,7 @@ void AItemShelf::Tick(float _DeltaTime)
         if (ItemShelfRender->GetTransformRef().WorldLocation.Y <= -490.0f)
         {
             ItemShelfRender->AddRelativeLocation({ 0.0f, 500.0f * _DeltaTime, 0.0f });
+            Tools->AddRelativeLocation({ 0.0f, 500.0f * _DeltaTime, 0.0f });
         }
     }
 
@@ -59,6 +59,7 @@ void AItemShelf::Tick(float _DeltaTime)
         if (ItemShelfRender->GetTransformRef().WorldLocation.Y > -600.0f)
         {
             ItemShelfRender->AddRelativeLocation({ 0.0f, -500.0f * _DeltaTime, 0.0f });
+            Tools->AddRelativeLocation({ 0.0f, -500.0f * _DeltaTime, 0.0f });
         }
     }
     
@@ -71,4 +72,14 @@ void AItemShelf::OnCollisionEnter(UCollision* _This, UCollision* _Other)
 void AItemShelf::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 {
     IsEnter = false;
+}
+
+bool AItemShelf::GetIsToolsClick()
+{
+    if (Tools == nullptr)
+    {
+        return false;
+    }
+
+    return Tools->GetIsToolClick();
 }

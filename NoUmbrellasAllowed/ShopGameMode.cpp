@@ -28,6 +28,13 @@ AShopGameMode::AShopGameMode()
 
     }
 
+    for (int i = 0; i < 6; i++)
+    {
+        GetWorld()->CreateCollisionProfile("Tools_" + std::to_string(i));
+        GetWorld()->LinkCollisionProfile("Tools_" + std::to_string(i), "Cursor");
+
+    }
+
     GetWorld()->LinkCollisionProfile("Calculator", "Cursor");
     GetWorld()->LinkCollisionProfile("ItemShelf", "Cursor");
 
@@ -101,7 +108,7 @@ AShopGameMode::AShopGameMode()
     Table->SetUIScale3D({ 1920.0f, 347.0f, 1.0f });
     Table->SetRelativeLocation({ 0.0f, -545.0f, -100.0f });
 
-    std::shared_ptr<class AItemShelf> ItemShelf = GetWorld()->SpawnActor<AItemShelf>();
+    ItemShelf = GetWorld()->SpawnActor<AItemShelf>();
 
 
     // Hue
@@ -166,10 +173,22 @@ void AShopGameMode::Tick(float _DeltaTime)
 {
     AActor::Tick(_DeltaTime);
     //UEngineDebug::OutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
+
     std::shared_ptr<class ACameraActor> Camera = GetWorld()->GetCamera(0);
     FVector MousePos = Camera->ScreenMousePosToWorldPos();
     Cursor->SetActorLocation({ MousePos.X + 8.0f,MousePos.Y - 40.0f, -800.0f });
 
+    if (ItemShelf != nullptr)
+    {
+        if (false == ItemShelf->GetIsToolsClick())
+        {
+            Cursor->SetActive(true);
+        }
+        else if (true == ItemShelf->GetIsToolsClick())
+        {
+            Cursor->SetActive(false);
+        }
+    }
 
 
     PeopleMove(_DeltaTime, WalkCustomer1, true);
