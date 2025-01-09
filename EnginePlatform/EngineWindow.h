@@ -10,13 +10,13 @@
 // user header
 #include <EngineBase/EngineMath.h>
 
-// Ό³Έν :
 class UEngineWindow
 {
 public:
 	ENGINEAPI static void EngineWindowInit(HINSTANCE _Instance);
 	ENGINEAPI static void CreateWindowClass(const WNDCLASSEXA& _Class);
 	ENGINEAPI static int WindowMessageLoop(std::function<void()> _StartFunction, std::function<void()> _FrameFunction, std::function<void()> _EndFunction = nullptr);
+
 
 	// constrcuter destructer
 	ENGINEAPI UEngineWindow();
@@ -49,23 +49,32 @@ public:
 	{
 		LoopActive = false;
 	}
+
 	ENGINEAPI static bool IsApplicationOn()
 	{
 		return LoopActive;
 	}
 
+
 	ENGINEAPI HWND GetWindowHandle() const
 	{
 		return WindowHandle;
 	}
+
 	ENGINEAPI static  void SetCustomProc(std::function<bool(HWND, UINT, WPARAM, LPARAM)> _CustomProc);
+
+	ENGINEAPI bool IsFocus()
+	{
+		return IsFocusValue;
+	}
+
+
 
 
 protected:
 
 private:
 	ENGINEAPI static std::function<bool(HWND, UINT, WPARAM, LPARAM)> CustomProc;
-
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 	ENGINEAPI static HINSTANCE hInstance;
@@ -73,6 +82,10 @@ private:
 	inline static bool LoopActive = true;
 
 	ENGINEAPI static std::map<std::string, WNDCLASSEXA> WindowClasss;
+
+	ENGINEAPI static std::map<HWND, UEngineWindow*> AllWindows;
+
+	bool IsFocusValue = false;
 
 	FVector WindowSize;
 	HWND WindowHandle = nullptr;

@@ -1,15 +1,13 @@
 #pragma once
 #include <string>
-
 #include <memory>
 
-// Ό³Έν : 
+
 class UObject : public std::enable_shared_from_this<UObject>
 {
 public:
 	// constrcuter destructer
 	ENGINEAPI UObject();
-
 
 	ENGINEAPI virtual ~UObject();
 
@@ -39,6 +37,7 @@ public:
 	{
 		Name = _Name.data();
 	}
+
 
 	virtual bool IsActive()
 	{
@@ -83,6 +82,7 @@ public:
 
 	}
 
+
 	void SetActive(bool _IsActive)
 	{
 		IsActiveValue = _IsActive;
@@ -112,6 +112,7 @@ public:
 	{
 		IsDebugValue = !IsDebugValue;
 	}
+
 	int GetOrder()
 	{
 		return Order;
@@ -121,6 +122,13 @@ public:
 	{
 		Order = _Order;
 	}
+
+	bool& GetIsActiveValueRef()
+	{
+		return IsActiveValue;
+	}
+
+
 
 protected:
 

@@ -43,19 +43,19 @@ ATools::ATools()
 
     }
 
-    AllToolsRenders[0]->SetSprite("Tools", 2);
+    AllToolsRenders[0]->SetSprite("ItemShelf", 2);
 
-    AllToolsRenders[1]->SetSprite("Tools", 3);
+    AllToolsRenders[1]->SetSprite("ItemShelf", 3);
     AllToolsRenders[1]->AddWorldLocation({ 2.0f, 0.0f,0.0f });
 
-    AllToolsRenders[2]->SetSprite("Tools", 4);
+    AllToolsRenders[2]->SetSprite("ItemShelf", 4);
     AllToolsRenders[2]->AddWorldLocation({ 1.0f, 0.0f,0.0f });
 
-    AllToolsRenders[3]->SetSprite("Tools", 5);
+    AllToolsRenders[3]->SetSprite("ItemShelf", 5);
     AllToolsRenders[3]->AddWorldLocation({ 0.0f, -3.0f,0.0f });
 
-    AllToolsRenders[4]->SetSprite("Tools", 6);
-    AllToolsRenders[5]->SetSprite("Tools", 7);
+    AllToolsRenders[4]->SetSprite("ItemShelf", 6);
+    AllToolsRenders[5]->SetSprite("ItemShelf", 7);
     AllToolsRenders[5]->AddWorldLocation({ -1.0f, 0.0f,0.0f });
 
     SelectedToolools = GetWorld()->SpawnActor<ASelectedTool>();

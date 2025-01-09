@@ -101,17 +101,16 @@ void USpriteRenderer::RenderTransUpdate(UEngineCamera* _Camera)
 	FTransform& CameraTrans = _Camera->GetTransformRef();
 	FTransform& RendererTrans = GetTransformRef();
 
-
 	RendererTrans.View = CameraTrans.View;
-
 	FMatrix CurWorld = RendererTrans.World;
 
 	if (true == IsBillboard)
 	{
-		RendererTrans.View.ArrVector[0] = { 1.0f, 0.0f, 0.0f, 0.0f };
-		RendererTrans.View.ArrVector[1] = { 0.0f, 1.0f, 0.0f, 0.0f };
-		RendererTrans.View.ArrVector[2] = { 0.0f, 0.0f, 1.0f, 0.0f };
 
+		FMatrix Bill = CameraTrans.View;
+		Bill.ArrVector[3] = FVector(0.0f, 0.0f, 0.0f, 1.0f);
+		Bill.Transpose();
+		CurWorld = RendererTrans.ScaleMat * Bill * RendererTrans.LocationMat * RendererTrans.RevolveMat * RendererTrans.ParentMat;
 	}
 
 	RendererTrans.Projection = CameraTrans.Projection;
@@ -121,7 +120,6 @@ void USpriteRenderer::RenderTransUpdate(UEngineCamera* _Camera)
 void USpriteRenderer::ComponentTick(float _DeltaTime)
 {
 	URenderer::ComponentTick(_DeltaTime);
-
 
 	if (nullptr != CurAnimation)
 	{
@@ -139,7 +137,6 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 
 		float CurFrameTime = Times[CurAnimation->CurIndex];
 
-
 		if (CurAnimation->CurTime > CurFrameTime)
 		{
 
@@ -150,10 +147,8 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 			{
 				EventAnimation = CurAnimation;
 				EventFrame = CurIndex;
-				
 			}
 
-		
 			if (CurAnimation->CurIndex >= Indexs.size())
 			{
 				CurAnimation->IsEnd = true;
@@ -173,7 +168,6 @@ void USpriteRenderer::ComponentTick(float _DeltaTime)
 					{
 						EventAnimation = CurAnimation;
 						EventFrame = CurIndex;
-					
 					}
 				}
 				else

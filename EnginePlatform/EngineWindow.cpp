@@ -2,25 +2,31 @@
 #include "EngineWindow.h"
 #include <EngineBase/EngineDebug.h>
 
+
+
 HINSTANCE UEngineWindow::hInstance = nullptr;
 std::map<std::string, WNDCLASSEXA> UEngineWindow::WindowClasss;
+std::map<HWND, UEngineWindow*> UEngineWindow::AllWindows;
 std::function<bool(HWND, UINT, WPARAM, LPARAM)> UEngineWindow::CustomProc = nullptr;
-
 int WindowCount = 0;
-//bool UEngineWindow::LoopActive = true;
+
+
 void UEngineWindow::SetCustomProc(std::function<bool(HWND, UINT, WPARAM, LPARAM)> _CustomProc)
 {
     CustomProc = _CustomProc;
 }
+
 LRESULT CALLBACK UEngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     if (nullptr != CustomProc)
     {
         if (true == CustomProc(hWnd, message, wParam, lParam))
         {
-            //return true;
+            return true;
         }
     }
+
+
     switch (message)
     {
     case WM_CREATE:
@@ -31,7 +37,29 @@ LRESULT CALLBACK UEngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, 
     {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
+        
         EndPaint(hWnd, &ps);
+    }
+    break;
+    case WM_SETFOCUS:
+    {
+        if (true == AllWindows.contains(hWnd))
+        {
+          
+            AllWindows[hWnd]->IsFocusValue = true;
+        }
+        UEngineDebug::OutPutString("F");
+ 
+    }
+    break;
+    case WM_KILLFOCUS:
+    {
+        if (true == AllWindows.contains(hWnd))
+        {
+            
+            AllWindows[hWnd]->IsFocusValue = false;
+        }
+        UEngineDebug::OutPutString("K");
     }
     break;
     case WM_DESTROY:
@@ -90,10 +118,12 @@ int UEngineWindow::WindowMessageLoop(std::function<void()> _StartFunction, std::
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
+
         if (false == LoopActive)
         {
             break;
         }
+
         _FrameFunction();
     }
 
@@ -108,12 +138,14 @@ int UEngineWindow::WindowMessageLoop(std::function<void()> _StartFunction, std::
 void UEngineWindow::CreateWindowClass(const WNDCLASSEXA& _Class)
 {
 
+
     std::map<std::string, WNDCLASSEXA>::iterator EndIter = WindowClasss.end();
     std::map<std::string, WNDCLASSEXA>::iterator FindIter = WindowClasss.find(std::string(_Class.lpszClassName));
 
+
     if (EndIter != FindIter)
     {
-
+   
         MSGASSERT(std::string(_Class.lpszClassName) + " 같은 이름의 윈도우 클래스를 2번 등록했습니다");
         return;
     }
@@ -130,6 +162,7 @@ UEngineWindow::UEngineWindow()
 
 UEngineWindow::~UEngineWindow()
 {
+ 
     if (nullptr != WindowHandle)
     {
         DestroyWindow(WindowHandle);
@@ -159,13 +192,18 @@ void UEngineWindow::Create(std::string_view _TitleName, std::string_view _ClassN
         return;
     }
 
+
     HDC WindowMainDC = GetDC(WindowHandle);
+
+    AllWindows.insert({ WindowHandle, this });
 }
 
 void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
 {
+
     if (0 == WindowHandle)
     {
+
         Create(_TitleName);
     }
 
@@ -173,6 +211,7 @@ void UEngineWindow::Open(std::string_view _TitleName /*= "Window"*/)
     {
         return;
     }
+
 
     ShowWindow(WindowHandle, SW_SHOW);
     UpdateWindow(WindowHandle);
@@ -193,6 +232,7 @@ FVector UEngineWindow::GetMousePos()
     POINT MousePoint;
 
     GetCursorPos(&MousePoint);
+
     ScreenToClient(WindowHandle, &MousePoint);
 
     return FVector(MousePoint.x, MousePoint.y);

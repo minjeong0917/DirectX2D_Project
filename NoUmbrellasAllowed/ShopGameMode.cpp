@@ -42,7 +42,7 @@ AShopGameMode::AShopGameMode()
 
     // BackGround
     std::shared_ptr<class AUI> BackGround = GetWorld()->SpawnActor<AUI>();
-    BackGround->SetUISprite("Shop", 2);
+    BackGround->SetUISprite("UI", 2);
     BackGround->SetUIScale3D({ 1920.0f, 1078.0f, 1.0f });
     BackGround->SetRelativeLocation({ 0.0f, -700.0f, 1000.0f });
 
@@ -56,7 +56,7 @@ AShopGameMode::AShopGameMode()
 
     // Bridge
     std::shared_ptr<class AUI> Bridge = GetWorld()->SpawnActor<AUI>();
-    Bridge->SetUISprite("Shop", 1);
+    Bridge->SetUISprite("UI", 1);
     Bridge->SetUIScale3D({ 1800.0f, 219.0f, 1.0f });
     Bridge->SetActorLocation({ 0.0f, -250.0f, 900.0f });
 
@@ -76,14 +76,14 @@ AShopGameMode::AShopGameMode()
 
     // DoorDown
     DoorDown = GetWorld()->SpawnActor<AUI>();
-    DoorDown->SetUISprite("Shop", 6);
+    DoorDown->SetUISprite("UI", 6);
     DoorDown->SetUIScale3D({ 246.0f, 165.0f, 1.0f });
     DoorDown->SetActorLocation({ 0.0f, -260.0f, 500.0f });
 
 
     // DoorUp
     DoorUp = GetWorld()->SpawnActor<AUI>();
-    DoorUp->SetUISprite("Shop", 5);
+    DoorUp->SetUISprite("UI", 5);
     DoorUp->SetUIScale3D({ 252.0f, 363.0f, 1.0f });
     DoorUp->SetActorLocation({ 0.0f, -120.0f, 600.0f });
 
@@ -104,7 +104,7 @@ AShopGameMode::AShopGameMode()
     std::shared_ptr<class AUI> Table = GetWorld()->SpawnActor<AUI>();
     //Table->CreateAnimation("Idle", "Table", 3.0f, 0, 6, 0.2f);
     //Table->ChangeAnimation("Idle");
-    Table->SetUISprite("Shop", 4);
+    Table->SetUISprite("UI", 4);
     Table->SetUIScale3D({ 1920.0f, 347.0f, 1.0f });
     Table->SetRelativeLocation({ 0.0f, -545.0f, -100.0f });
 
@@ -121,13 +121,13 @@ AShopGameMode::AShopGameMode()
 
     // ToolsIcon
     std::shared_ptr<class AUI> ToolsIcon = GetWorld()->SpawnActor<AUI>();
-    ToolsIcon->SetUISprite("Tools", 0);
+    ToolsIcon->SetUISprite("ItemShelf", 0);
     ToolsIcon->SetUIScale3D({ 87.0f, 30.0f, 1.0f });
     ToolsIcon->SetRelativeLocation({ 0.0f, -450.0f, -151.0f });
 
     // OutLine   
     std::shared_ptr<class AUI> OutLine = GetWorld()->SpawnActor<AUI>();
-    OutLine->SetUISprite("Shop", 3);
+    OutLine->SetUISprite("UI", 3);
     OutLine->SetUIScale3D({ 1920.0f, 1080.0f, 1.0f });
     OutLine->SetActorLocation({ 0.0f, -540.0f, -999.0f });
 

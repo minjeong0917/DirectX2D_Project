@@ -3,7 +3,8 @@
 #include <EngineBase/EngineDebug.h>
 
 #include <vector>
-#include <functional> 
+#include <functional>
+
 
 enum class KeyEvent
 {
@@ -26,18 +27,17 @@ public:
 	UEngineInput& operator=(UEngineInput&& _Other) noexcept = delete;
 
 
+
 private:
 	class UEngineKey
 	{
 	public:
 		int Key = -1;
 
+	
 		bool IsDown = false;
-
 		bool IsPress = false;
-
 		bool IsUp = false;
-
 		bool IsFree = true;
 
 		float PressTime = 0.0f;
@@ -47,6 +47,17 @@ private:
 		std::vector<std::function<void()>> DownEvents;
 		std::vector<std::function<void()>> UpEvents;
 		std::vector<std::function<void()>> FreeEvents;
+
+		void Reset()
+		{
+			IsDown = false;
+			IsPress = false;
+			IsUp = false;
+			IsFree = true;
+			PressTime = 0.0f;
+			FreeTime = 0.0f;
+		}
+
 
 
 		UEngineKey()
@@ -69,6 +80,9 @@ private:
 
 public:
 	ENGINEAPI static void KeyCheck(float _DeltaTime);
+
+	ENGINEAPI static void KeyReset();
+
 
 	static bool IsDoubleClick(int _KeyIndex, float _Time)
 	{

@@ -36,7 +36,6 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
     // TitleImage
     LoadFile(Dir, "Images//TitleImage");
 
-    UEngineSprite::CreateSpriteToFolder(Dir.GetPathToString());
     UEngineSprite::CreateSpriteToMeta("plant_01_loop.png", ".sdata");
     UEngineSprite::CreateSpriteToMeta("plant_02_loop.png", ".sdata");
     UEngineSprite::CreateSpriteToMeta("plant_03_loop.png", ".sdata");
@@ -54,7 +53,7 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 
     // Shop
     {
-        LoadFile(Dir, "Images//Shop");
+        LoadFile(Dir, "Images//Shop//UI");
 
         UEngineSprite::CreateSpriteToMeta("femaleCustomer_walk_01.png", ".sdata");
         UEngineSprite::CreateSpriteToMeta("femaleCustomer_walk_02.png", ".sdata");
@@ -92,7 +91,7 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
         // Head
         LoadFile(Dir, "Images//Customer//Head");
         // WomanHair
-        LoadFile(Dir, "Images//Customer//Hair");
+        LoadFile(Dir, "Images//Customer//Hair//MainHair");
         LoadFile(Dir, "Images//Customer//Hair//Set");
         // Body
         LoadFile(Dir, "Images//Customer//Body");
@@ -110,7 +109,7 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
     }
     // UI in the Shop
     {
-        LoadFile(Dir, "Images//UIIntheShop//Tools");
+        LoadFile(Dir, "Images//UIIntheShop//Tools//ItemShelf");
         LoadFile(Dir, "Images//UIIntheShop//Tools//SelectedTool");
         LoadFile(Dir, "Images//UIIntheShop//Calculator//Entity");
         LoadFile(Dir, "Images//UIIntheShop//Calculator//Buttons");

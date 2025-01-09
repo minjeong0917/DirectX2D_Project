@@ -12,7 +12,7 @@ AItemShelf::AItemShelf()
     RootComponent = Default;
 
     ItemShelfRender = CreateDefaultSubObject<USpriteRenderer>();
-    ItemShelfRender->SetSprite("Tools", 1);
+    ItemShelfRender->SetSprite("ItemShelf", 1);
     ItemShelfRender->SetAutoScaleRatio(3.0f);
     ItemShelfRender->SetWorldLocation({ 0.0f, -580.0f, -152.0f });
     ItemShelfRender->SetupAttachment(RootComponent);

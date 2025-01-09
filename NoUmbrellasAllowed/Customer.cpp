@@ -115,7 +115,7 @@ ACustomer::ACustomer()
     MouseRenderer->SetupAttachment(RootComponent);
 
     HairRenderer = CreateDefaultSubObject<USpriteRenderer>();
-    HairRenderer->SetSprite("Hair", HairNum);
+    HairRenderer->SetSprite("MainHair", HairNum);
     HairRenderer->SetWorldLocation(AllHairInfo[HairNum].Location);
     HairRenderer->SetAutoScaleRatio(3.0f);
     HairRenderer->SetupAttachment(RootComponent);
@@ -146,7 +146,7 @@ void ACustomer::RandomCustomer(int _Gender, int _HairRand, int _Head, int _Body,
     {
 
 
-        HairRenderer->SetSprite("Hair", _HairRand);
+        HairRenderer->SetSprite("MainHair", _HairRand);
         HairRenderer->SetWorldLocation(AllHairInfo[_HairRand].Location);
         HeadRenderer->SetSprite("Head", _Head);
         BodyRenderer->SetSprite("Body", _Body);
@@ -174,7 +174,7 @@ void ACustomer::RandomCustomer(int _Gender, int _HairRand, int _Head, int _Body,
         _Eyes += ManNum;
 
         UEngineDebug::OutPutString("ManHair : " + std::to_string(_HairRand));
-        HairRenderer->SetSprite("Hair", _HairRand);
+        HairRenderer->SetSprite("MainHair", _HairRand);
         HairRenderer->SetWorldLocation(AllHairInfo[_HairRand].Location);
         HairRenderer2->SetActive(false);
         HeadRenderer->SetSprite("Head", _Head);

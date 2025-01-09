@@ -8,6 +8,7 @@
 #include "CameraActor.h"
 #include "EngineGUI.h"
 
+
 std::shared_ptr<class ACameraActor> ULevel::SpawnCamera(int _Order)
 {
 	std::shared_ptr<ACameraActor> Camera = std::make_shared<ACameraActor>();
@@ -40,12 +41,29 @@ ULevel::~ULevel()
 
 void ULevel::LevelChangeStart()
 {
+	for (std::shared_ptr<class AActor> Actor : BeginPlayList)
+	{
+		Actor->LevelChangeStart();
+	}
 
+
+	for (std::shared_ptr<class AActor> Actor : AllActorList)
+	{
+		Actor->LevelChangeStart();
+	}
 }
 
 void ULevel::LevelChangeEnd()
 {
+	for (std::shared_ptr<class AActor> Actor : BeginPlayList)
+	{
+		Actor->LevelChangeEnd();
+	}
 
+	for (std::shared_ptr<class AActor> Actor : AllActorList)
+	{
+		Actor->LevelChangeEnd();
+	}
 }
 
 
@@ -105,7 +123,6 @@ void ULevel::Render(float _DeltaTime)
 	{
 		std::shared_ptr<class ACameraActor> Camera = GetMainCamera();
 
-
 		for (std::pair<const std::string, std::list<std::shared_ptr<UCollision>>>& Group : Collisions)
 		{
 			std::list<std::shared_ptr<UCollision>>& List = Group.second;
@@ -125,7 +142,7 @@ void ULevel::Render(float _DeltaTime)
 	if (true == UEngineWindow::IsApplicationOn())
 	{
 		UEngineGUI::GUIRender(this);
-		
+
 	}
 
 	UEngineCore::GetDevice().RenderEnd();
@@ -137,7 +154,7 @@ void ULevel::ChangeRenderGroup(int _CameraOrder, int _PrevGroupOrder, std::share
 {
 	if (false == Cameras.contains(_CameraOrder))
 	{
-	
+
 		MSGASSERT("존재하지 않는 카메라에 랜더러를 집어넣으려고 했습니다.");
 		return;
 	}
@@ -248,6 +265,7 @@ void ULevel::Release(float _DeltaTime)
 
 		std::list<std::shared_ptr<AActor>>::iterator StartIter = List.begin();
 		std::list<std::shared_ptr<AActor>>::iterator EndIter = List.end();
+
 
 		for (; StartIter != EndIter; )
 		{
