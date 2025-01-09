@@ -60,5 +60,8 @@ void ACursor::OnCollisionEnd(UCollision* _This, UCollision* _Other)
     IsEnter = false;
 }
 
-
+void ACursor::SetRenderActive(bool _IsActive)
+{
+    CursorRender->SetActive(_IsActive);
+}
 

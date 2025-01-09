@@ -27,7 +27,7 @@ ATools::ATools()
         ToolsCollision = CreateDefaultSubObject<UCollision>();
         ToolsCollision->SetCollisionProfileName("Tools_" + std::to_string(i));
         ToolsCollision->SetScale3D({ 60.0f,60.0f,0.0f });
-        ToolsCollision->SetWorldLocation({ StartPos.X +3+ ((IterPos.X-1) * i), StartPos.Y +22, -155.0f });
+        ToolsCollision->SetWorldLocation({ StartPos.X + 3 + ((IterPos.X - 1) * i), StartPos.Y + 22, -155.0f });
         ToolsCollision->SetupAttachment(RootComponent);
 
         ToolsCollision->SetCollisionStay([this](UCollision* _This, UCollision* _Other)
@@ -73,7 +73,7 @@ void ATools::Tick(float _DeltaTime)
     {
         IsToolClick = false;
         SelectedToolools->SetActive(false);
-        AllToolsRenders[SpriteIndex - 2]->SetActive(true);
+        AllToolsRenders[CurSpriteIndex - 2]->SetActive(true);
     }
 }
 
@@ -83,38 +83,43 @@ void ATools::OnCollisionStay(UCollision* _This, UCollision* _Other)
 
     std::string ProfileName = _This->GetCollisionProfileName();
 
-   
-    if (IsToolClick == true && UEngineInput::IsDown(VK_LBUTTON))
+    if (UEngineInput::IsDown(VK_LBUTTON))
     {
-        size_t Index = std::stoi(ProfileName.substr(6));
-
-        int CurSpriteIndex = AllToolsRenders[Index]->GetCurIndex();
-
-        if (CurSpriteIndex == SpriteIndex)
+        if ( IsToolClick == true)
         {
+            size_t Index = std::stoi(ProfileName.substr(6));
+
+            CurSpriteIndex = AllToolsRenders[Index]->GetCurIndex();
+ 
             AllToolsRenders[CurSpriteIndex - 2]->SetActive(true);
+            AllToolsRenders[PrevSpriteIndex - 2]->SetActive(true);
             SelectedToolools->SetActive(false);
-        }
-        else if (CurSpriteIndex != SpriteIndex)
-        {
             IsToolClick = false;
-            AllToolsRenders[SpriteIndex - 2]->SetActive(true);
-            SelectedToolools->SetActive(false);
+      
+            if (CurSpriteIndex != PrevSpriteIndex)
+            {
+                IsToolClick = true;
+                AllToolsRenders[CurSpriteIndex - 2]->SetActive(false);
+                PrevSpriteIndex = CurSpriteIndex;
+                SelectedToolools->SetToolSprite(CurSpriteIndex - 2);
+                SelectedToolools->SetActive(true);
+            }
         }
+        else if (IsToolClick == false)
+        {
+            size_t Index = std::stoi(ProfileName.substr(6));
+            CurSpriteIndex = AllToolsRenders[Index]->GetCurIndex();
+
+            IsToolClick = true;
+            PrevSpriteIndex = CurSpriteIndex;
+            
+            AllToolsRenders[PrevSpriteIndex - 2]->SetActive(false);
+            SelectedToolools->SetToolSprite(PrevSpriteIndex - 2);
+            SelectedToolools->SetActive(true);
+        }
+
     }
 
-    if (IsToolClick == false && UEngineInput::IsDown(VK_LBUTTON))
-    {
-        size_t Index = std::stoi(ProfileName.substr(6));
-        int CurSpriteIndex = AllToolsRenders[Index]->GetCurIndex();
-
-        IsToolClick = true;
-        SpriteIndex = CurSpriteIndex;
-
-        AllToolsRenders[SpriteIndex-2]->SetActive(false);
-        SelectedToolools->SetToolSprite(SpriteIndex-2);
-        SelectedToolools->SetActive(true);
-    }
 
 }
 void ATools::OnCollisionEnd(UCollision* _This, UCollision* _Other)

@@ -171,6 +171,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Book.cpp" />
+    <ClCompile Include="BookButton.cpp" />
+    <ClCompile Include="BookSmall.cpp" />
     <ClCompile Include="CardSlot.cpp">
       <SubType>
       </SubType>
@@ -230,6 +233,9 @@
     <ClCompile Include="TitleGameMode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Book.h" />
+    <ClInclude Include="BookButton.h" />
+    <ClInclude Include="BookSmall.h" />
     <ClInclude Include="CardSlot.h">
       <SubType>
       </SubType>

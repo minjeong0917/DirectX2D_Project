@@ -9,6 +9,8 @@
 #include "ItemShelf.h"
 #include "Merchandise.h"
 #include "CardSlot.h"
+#include "Book.h"
+#include "BookSmall.h"
 
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/CameraActor.h>
@@ -22,6 +24,12 @@ AShopGameMode::AShopGameMode()
     GetWorld()->CreateCollisionProfile("Calculator");
     GetWorld()->CreateCollisionProfile("Cursor");
     GetWorld()->CreateCollisionProfile("ItemShelf");
+    GetWorld()->CreateCollisionProfile("Merchandise");
+    GetWorld()->CreateCollisionProfile("SelectedTool");
+    GetWorld()->CreateCollisionProfile("BookMain");
+    GetWorld()->CreateCollisionProfile("BookSmall");
+
+    GetWorld()->CreateCollisionProfile("BookButton_0");
     for (int i = 0; i < 14; i++)
     {
         GetWorld()->CreateCollisionProfile("Button_" + std::to_string(i));
@@ -39,6 +47,11 @@ AShopGameMode::AShopGameMode()
 
     GetWorld()->LinkCollisionProfile("Calculator", "Cursor");
     GetWorld()->LinkCollisionProfile("ItemShelf", "Cursor");
+    GetWorld()->LinkCollisionProfile("Merchandise", "SelectedTool");
+    GetWorld()->LinkCollisionProfile("BookMain", "Cursor");
+    GetWorld()->LinkCollisionProfile("BookButton_0", "Cursor");
+    GetWorld()->LinkCollisionProfile("BookSmall", "Cursor");
+    GetWorld()->LinkCollisionProfile("BookSmall", "SelectedTool");
 
 
 
@@ -114,6 +127,11 @@ AShopGameMode::AShopGameMode()
     CardSlot = GetWorld()->SpawnActor<ACardSlot>();
     CardSlot->SetActive(false);
 
+    Book = GetWorld()->SpawnActor<ABook>();
+    Book->SetActive(false);
+
+    BookSmall = GetWorld()->SpawnActor<ABookSmall>();
+ 
     // Hue
     std::shared_ptr<class AUI> HueBodyAnimation = GetWorld()->SpawnActor<AUI>();
     HueBodyAnimation->CreateAnimation("Idle", "companion_idle_loop.png", 3.1f, 0, 13, 0.2f);
@@ -181,13 +199,13 @@ void AShopGameMode::Tick(float _DeltaTime)
 
     if (ItemShelf != nullptr)
     {
-        if (false == ItemShelf->GetIsToolsClick())
+        if (false == ItemShelf->GetIsToolsClick() || Book->GetIsEnter() == true)
         {
-            Cursor->SetActive(true);
+            Cursor->SetRenderActive(true);
         }
-        else if (true == ItemShelf->GetIsToolsClick())
+        else if (true == ItemShelf->GetIsToolsClick() || Book->GetIsEnter() == false)
         {
-            Cursor->SetActive(false);
+            Cursor->SetRenderActive(false);
         }
     }
 
@@ -212,20 +230,35 @@ void AShopGameMode::Tick(float _DeltaTime)
                 Merchandise->SetActive(true);
                 CardSlot->SetActive(true);
                 CardSlot->IsActive = true;
+                
                 if (Merchandise->GetActorLocation().Y > -100.0f)
                 {
                     Merchandise->PlusAlpha(_DeltaTime, 1.0f);
                     Merchandise->AddActorLocation({ 0.0f, -1.0f * _DeltaTime * 100 , 0.0f });
                 }
+
             }
         }
     }
+
 
     if (IsOut == true)
     {
         CustomerOut(_DeltaTime);
     }   
 
+    if ((Merchandise->GetIsEnter() == true && Merchandise->IsActive() == true) || BookSmall->GetIsClick() == true)
+    {
+        Book->SetActive(true);
+        BookSmall->SetRenderActive(false);
+        Book->SetBookPageActive();
+    }
+    if (Book->GetIsBack() == true)
+    {
+        Book->SetActive(false);
+        BookSmall->SetRenderActive(true);
+        BookSmall->SetIsClick(false);
+    }
 
 
 }

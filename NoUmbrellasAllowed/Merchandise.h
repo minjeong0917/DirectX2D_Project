@@ -14,13 +14,20 @@ public:
 	AMerchandise& operator=(const AMerchandise& _Other) = delete;
 	AMerchandise& operator=(AMerchandise&& _Other) noexcept = delete;
 	void PlusAlpha(float _DeltaTime, float _Speed);
-
+	bool GetIsEnter()
+	{
+		return IsEnter;
+	}
 protected:
 	void Tick(float _DeltaTime);
 	void BeginPlay();
 
+	void OnCollisionEnter(class UCollision* _This, class UCollision* _Other);
+	void OnCollisionEnd(class UCollision* _This, class UCollision* _Other);
 private:
+	bool IsEnter = false;
 	std::shared_ptr<class USpriteRenderer> MerchandiseRender;
+	std::shared_ptr<class UCollision> MerchandiseCollision;
 
 };
 

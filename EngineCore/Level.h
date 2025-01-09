@@ -2,6 +2,7 @@
 
 #include <EngineBase/Object.h>
 #include <EngineBase/EngineDebug.h>
+#include "Actor.h"
 
 // Ό³Έν :
 class ULevel : public UObject

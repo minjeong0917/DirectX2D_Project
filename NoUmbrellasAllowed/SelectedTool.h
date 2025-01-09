@@ -20,6 +20,7 @@ protected:
 
 private:
 	std::shared_ptr<class USpriteRenderer> SelectdToolRender;
+	std::shared_ptr<class UCollision> SelectdToolCollision;
 
 };
 

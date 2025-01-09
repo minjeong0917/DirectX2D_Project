@@ -118,6 +118,9 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
         LoadFile(Dir, "Images//UIIntheShop//Calculator//Entity");
         LoadFile(Dir, "Images//UIIntheShop//Calculator//Buttons");
         LoadFile(Dir, "Images//UIIntheShop//Card");
+        LoadFile(Dir, "Images//UIIntheShop//Book//BookMain");
+        LoadFile(Dir, "Images//UIIntheShop//Book//BookButton");
+        LoadFile(Dir, "Images//UIIntheShop//Book//BookSmall");
 
 
     }

@@ -25,7 +25,10 @@ protected:
 private:
 	bool IsEnter = false;
 	bool IsToolClick = false;
-	int SpriteIndex = 0;
+	bool IsSameToolClick = false;
+	int CurSpriteIndex = 0;
+
+	int PrevSpriteIndex = 0;
 	float Time = 0.0f;
 	std::shared_ptr<class USpriteRenderer> ToolsRender;
 	std::shared_ptr<class UCollision> ToolsCollision;

@@ -49,6 +49,15 @@
     <ClCompile Include="CardSlot.cpp">
       <Filter>Shop\Merchandise</Filter>
     </ClCompile>
+    <ClCompile Include="Book.cpp">
+      <Filter>Shop\Book</Filter>
+    </ClCompile>
+    <ClCompile Include="BookButton.cpp">
+      <Filter>Shop\Book</Filter>
+    </ClCompile>
+    <ClCompile Include="BookSmall.cpp">
+      <Filter>Shop\Book</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleGameMode.h">
@@ -99,6 +108,15 @@
     <ClInclude Include="CardSlot.h">
       <Filter>Shop\Merchandise</Filter>
     </ClInclude>
+    <ClInclude Include="Book.h">
+      <Filter>Shop\Book</Filter>
+    </ClInclude>
+    <ClInclude Include="BookButton.h">
+      <Filter>Shop\Book</Filter>
+    </ClInclude>
+    <ClInclude Include="BookSmall.h">
+      <Filter>Shop\Book</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameMode">
@@ -127,6 +145,9 @@
     </Filter>
     <Filter Include="Shop\Merchandise">
       <UniqueIdentifier>{cc555855-7f25-4ba5-9ece-264522235c10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shop\Book">
+      <UniqueIdentifier>{f463bfab-d37c-4694-8e01-7bb01456e25b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
