@@ -5,7 +5,7 @@
 #include <EngineCore/Collision.h>
 #include "ItemShelf.h"
 #include "Tools.h"
-
+#include <EnginePlatform/EngineInput.h>
 AItemShelf::AItemShelf()
 {
     std::shared_ptr<UDefaultSceneComponent> Default = CreateDefaultSubObject<UDefaultSceneComponent>();

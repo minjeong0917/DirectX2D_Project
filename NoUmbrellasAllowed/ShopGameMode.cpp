@@ -10,6 +10,7 @@
 #include "Merchandise.h"
 #include "CardSlot.h"
 #include "Book.h"
+#include "BookButton.h"
 #include "BookSmall.h"
 
 #include <EnginePlatform/EngineInput.h>
@@ -129,6 +130,8 @@ AShopGameMode::AShopGameMode()
 
     Book = GetWorld()->SpawnActor<ABook>();
     Book->SetActive(false);
+    BookButtons = GetWorld()->SpawnActor<ABookButton>();
+    BookButtons->SetActive(false);
 
     BookSmall = GetWorld()->SpawnActor<ABookSmall>();
  
@@ -247,17 +250,35 @@ void AShopGameMode::Tick(float _DeltaTime)
         CustomerOut(_DeltaTime);
     }   
 
-    if ((Merchandise->GetIsEnter() == true && Merchandise->IsActive() == true) || BookSmall->GetIsClick() == true)
+    if (UEngineInput::IsDown('U'))
     {
         Book->SetActive(true);
         BookSmall->SetRenderActive(false);
-        Book->SetBookPageActive();
+
+
     }
-    if (Book->GetIsBack() == true)
+    if (UEngineInput::IsDown('Y'))
     {
         Book->SetActive(false);
         BookSmall->SetRenderActive(true);
-        BookSmall->SetIsClick(false);
+
+
+
+    }
+    if ((Merchandise->GetIsEnter() == true && Merchandise->IsActive() == true) || (BookSmall->GetIsEnter() == true && UEngineInput::IsDown(VK_LBUTTON)))
+    {
+        Book->SetActive(true);
+        BookSmall->SetRenderActive(false);
+        BookButtons->SetActive(true);
+    }
+
+    if (BookButtons->GetIsBack() == true)
+    {
+        Book->SetActive(false);
+        BookSmall->SetRenderActive(true);
+        BookButtons->SetActive(false);
+        BookButtons->SetIsBack(false);
+
     }
 
 

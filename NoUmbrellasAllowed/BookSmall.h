@@ -16,22 +16,18 @@ public:
 
 	void SetRenderActive(bool _IsActive);
 
-	bool GetIsClick()
+	bool GetIsEnter()
 	{
-		return IsSmallBookClick;
+		return IsEnter;
 	}
 
-	void SetIsClick(bool _Value)
-	{
-		IsSmallBookClick = _Value;
-	}
 
 protected:
 	void Tick(float _DeltaTime);
 	void OnCollisionStay(class UCollision* _This, class UCollision* _Other);
 	void OnCollisionEnd(class UCollision* _This, class UCollision* _Other);
 private:
-	bool IsSmallBookClick = false;
+	bool IsEnter = false;
 
 
 

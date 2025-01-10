@@ -16,13 +16,13 @@ ABookSmall::ABookSmall()
     BookSmallGroundRender = CreateDefaultSubObject<USpriteRenderer>();
     BookSmallGroundRender->SetSprite("BookSmall", 0);
     BookSmallGroundRender->SetAutoScaleRatio(3.0f);
-    BookSmallGroundRender->SetWorldLocation({ -380.0f, -255.0f, -170.0f });
+    BookSmallGroundRender->SetWorldLocation({ -380.0f, -255.0f, -140.0f });
     BookSmallGroundRender->SetupAttachment(RootComponent);
 
     BookSmallRender = CreateDefaultSubObject<USpriteRenderer>();
     BookSmallRender->SetSprite("BookSmall", 1);
     BookSmallRender->SetAutoScaleRatio(3.0f);
-    BookSmallRender->SetWorldLocation({ -380.0f, -255.0f, -170.0f });
+    BookSmallRender->SetWorldLocation({ -380.0f, -255.0f, -145.0f });
     BookSmallRender->SetupAttachment(RootComponent);
 
     BookSmallCollision = CreateDefaultSubObject<UCollision>();
@@ -53,18 +53,17 @@ void ABookSmall::Tick(float _DeltaTime)
 
 void ABookSmall::OnCollisionStay(UCollision* _This, UCollision* _Other)
 {
-    if (UEngineInput::IsDown(VK_LBUTTON))
-    {
-        IsSmallBookClick = true;
-        BookSmallRender->SetActive(false);
-    }
+    IsEnter = true;
 }
 void ABookSmall::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 {
 
+    IsEnter = false;
 }
 
 void ABookSmall::SetRenderActive(bool _IsActive)
 {
     BookSmallRender->SetActive(_IsActive);
+    BookSmallCollision->SetActive(_IsActive);
+
 }

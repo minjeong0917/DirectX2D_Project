@@ -17,7 +17,10 @@ public:
 	{
 		return IsBack;
 	}
-
+	void SetIsBack(bool _Value)
+	{
+		IsBack = _Value;
+	}
 protected:
 	void Tick(float _DeltaTime);
 	void OnCollisionStay(class UCollision* _This, class UCollision* _Other);

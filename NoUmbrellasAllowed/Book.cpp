@@ -15,7 +15,7 @@ ABook::ABook()
 
     BookMainRender = CreateDefaultSubObject<USpriteRenderer>();
     BookMainRender->SetSprite("BookMain", 0);
-    BookMainRender->SetAutoScaleRatio(3.0f);
+    //BookMainRender->SetAutoScaleRatio(3.0f);
     BookMainRender->SetWorldLocation({ 670.0f, -410.0f, -170.0f });
     BookMainRender->SetupAttachment(RootComponent);
 
@@ -34,8 +34,7 @@ ABook::ABook()
 
         });
 
-    BookButtons = GetWorld()->SpawnActor<ABookButton>();
-    BookButtons->SetActive(false);
+
 }
 
 ABook::~ABook()
@@ -56,17 +55,3 @@ void ABook::OnCollisionEnd(UCollision* _This, UCollision* _Other)
     IsEnter = false;
 }
 
-bool ABook::GetIsBack()
-{
-    if (BookButtons->GetIsBack() == true)
-    {
-        BookButtons->SetActive(false);
-    }
-
-    return BookButtons->GetIsBack();
-}
-
-void ABook::SetBookPageActive()
-{
-    BookButtons->SetActive(true);
-}

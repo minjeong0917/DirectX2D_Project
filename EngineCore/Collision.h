@@ -32,6 +32,8 @@ public:
 
 	ENGINEAPI bool CollisionCheck(std::string_view _OtherName, std::vector<UCollision*>& _Vector);
 
+	ENGINEAPI bool CollisionCheck(std::string_view _OtherName, FVector _NextPos, std::vector<UCollision*>& _Vector);
+
 	void SetCollisionType(ECollisionType _Type)
 	{
 		CollisionType = _Type;
@@ -55,12 +57,9 @@ private:
 
 	std::string ProfileName = "NONE";
 
-
 	std::function<void(UCollision*, UCollision*)> Enter;
 
-
 	std::function<void(UCollision*, UCollision*)> Stay;
-
 
 	std::function<void(UCollision*, UCollision*)> End;
 };

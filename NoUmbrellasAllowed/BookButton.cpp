@@ -33,6 +33,7 @@ ABookButton::ABookButton()
             this->OnCollisionEnd(_This, _Other);
 
         });
+
 }
 
 ABookButton::~ABookButton()
@@ -49,11 +50,15 @@ void ABookButton::OnCollisionStay(UCollision* _This, UCollision* _Other)
     if (UEngineInput::IsDown(VK_LBUTTON))
     {
         BackButtonRender->SetSprite("BookButton", 1);
+    }
+
+    if (UEngineInput::IsUp(VK_LBUTTON))
+    {
         IsBack = true;
     }
 }
 void ABookButton::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 {
     IsBack = false;
-
+    BackButtonRender->SetSprite("BookButton", 0);
 }

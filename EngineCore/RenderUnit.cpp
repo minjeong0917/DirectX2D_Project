@@ -37,10 +37,12 @@ void URenderUnit::MaterialResourcesCheck()
 			{
 				continue;
 			}
+
 			if (false == Resources[i].IsConstantBuffer("FTransform"))
 			{
 				continue;
 			}
+
 
 			FTransform& Ref = ParentRenderer->GetTransformRef();
 			Resources[i].ConstantBufferLinkData("FTransform", Ref);
@@ -64,6 +66,24 @@ void URenderUnit::ConstantBufferLinkData(std::string_view _Name, void* _Data)
 		}
 
 		Resources[i].ConstantBufferLinkData(_Name, _Data);
+	}
+}
+
+void URenderUnit::SetTexture(std::string_view _Name, UEngineTexture* _Texture)
+{
+	for (EShaderType i = EShaderType::VS; i < EShaderType::MAX; i = static_cast<EShaderType>(static_cast<int>(i) + 1))
+	{
+		if (false == Resources.contains(i))
+		{
+			continue;
+		}
+
+		if (false == Resources[i].IsTexture(_Name))
+		{
+			continue;
+		}
+
+		Resources[i].TextureSetting(_Name, _Texture);
 	}
 }
 
@@ -129,6 +149,8 @@ void URenderUnit::SetMaterial(std::string_view _Name)
 
 	MaterialResourcesCheck();
 
+	// UEngineConstantBufferRes Res;
+
 	if (nullptr != Mesh)
 	{
 		InputLayOutCreate();
@@ -140,6 +162,18 @@ void URenderUnit::SetMaterial(std::string_view _Name)
 
 void URenderUnit::Render(class UEngineCamera* _Camera, float _DeltaTime)
 {
+	// ¿’«≤æÓº¿∫Ì∑Ø 
+
+	// Ω¶¿Ã¥ı ∏Æº“Ω∫
+
+	//	ShaderResSetting();
+
+	//for (std::pair<EShaderType, UEngineShaderResources>& ShaderRes : Resources)
+	//{
+	//	UEngineShaderResources& Res = ShaderRes.second;
+	//	Res.Setting();
+	//}
+
 
 	for (std::pair<const EShaderType, UEngineShaderResources>& Pair : Resources)
 	{
@@ -165,7 +199,9 @@ void URenderUnit::Render(class UEngineCamera* _Camera, float _DeltaTime)
 	Material->GetPixelShader()->Setting();
 
 	//	OutPutMergeSetting();
+	// ∑£¥ı≈∏∞Ÿ¿Ã∂Û¥¬ ∞Õ¿ª πŸ≤∞Ã¥œ¥Ÿ.
 	Material->GetBlend()->Setting();
+
 	Material->GetDepthStencilState()->Setting();
 
 	UEngineCore::GetDevice().GetContext()->DrawIndexed(Mesh->GetIndexBuffer()->GetIndexCount(), 0, 0);

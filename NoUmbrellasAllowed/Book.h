@@ -13,8 +13,7 @@ public:
 	ABook(ABook&& _Other) noexcept = delete;
 	ABook& operator=(const ABook& _Other) = delete;
 	ABook& operator=(ABook&& _Other) noexcept = delete;
-	bool GetIsBack();
-	void SetBookPageActive();
+
 	bool GetIsEnter()
 	{
 		return IsEnter;
@@ -33,7 +32,7 @@ private:
 
 
 
-	std::shared_ptr<class ABookButton> BookButtons;
+
 
 };
 
