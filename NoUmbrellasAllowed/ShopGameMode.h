@@ -60,7 +60,7 @@ private:
 	std::shared_ptr<class ACardSlot> CardSlot;
 	std::shared_ptr<class ABook> Book;
 	std::shared_ptr<class ABookSmall> BookSmall;
-	std::shared_ptr<class ABookButton> BookButtons;
+
 
 	std::shared_ptr<class AButton> NumButton;
 	std::shared_ptr<class AUI> DoorUp;

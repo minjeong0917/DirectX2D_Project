@@ -55,7 +55,12 @@ AShopGameMode::AShopGameMode()
     GetWorld()->LinkCollisionProfile("BookSmall", "SelectedTool");
 
 
+    for (int i = 0; i <3; i++)
+    {
+        GetWorld()->CreateCollisionProfile("BookPage_" + std::to_string(i));
+        GetWorld()->LinkCollisionProfile("BookPage_" + std::to_string(i), "Cursor");
 
+    }
     // BackGround
     std::shared_ptr<class AUI> BackGround = GetWorld()->SpawnActor<AUI>();
     BackGround->SetUISprite("UI", 2);
@@ -130,8 +135,7 @@ AShopGameMode::AShopGameMode()
 
     Book = GetWorld()->SpawnActor<ABook>();
     Book->SetActive(false);
-    BookButtons = GetWorld()->SpawnActor<ABookButton>();
-    BookButtons->SetActive(false);
+
 
     BookSmall = GetWorld()->SpawnActor<ABookSmall>();
  
@@ -250,34 +254,22 @@ void AShopGameMode::Tick(float _DeltaTime)
         CustomerOut(_DeltaTime);
     }   
 
-    if (UEngineInput::IsDown('U'))
-    {
-        Book->SetActive(true);
-        BookSmall->SetRenderActive(false);
 
-
-    }
-    if (UEngineInput::IsDown('Y'))
-    {
-        Book->SetActive(false);
-        BookSmall->SetRenderActive(true);
-
-
-
-    }
     if ((Merchandise->GetIsEnter() == true && Merchandise->IsActive() == true) || (BookSmall->GetIsEnter() == true && UEngineInput::IsDown(VK_LBUTTON)))
     {
         Book->SetActive(true);
         BookSmall->SetRenderActive(false);
-        BookButtons->SetActive(true);
+        Book->SetButtonActive(true);
+        Book->SetButtonActive(true);
     }
 
-    if (BookButtons->GetIsBack() == true)
+    if (Book->GetIsBack() == true)
     {
         Book->SetActive(false);
         BookSmall->SetRenderActive(true);
-        BookButtons->SetActive(false);
-        BookButtons->SetIsBack(false);
+        Book->SetButtonActive(false);
+        Book->SetIsBack(false);
+        Book->SetButtonActive(false);
 
     }
 

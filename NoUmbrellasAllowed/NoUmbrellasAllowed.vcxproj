@@ -173,6 +173,7 @@
   <ItemGroup>
     <ClCompile Include="Book.cpp" />
     <ClCompile Include="BookButton.cpp" />
+    <ClCompile Include="BookPageInfo.cpp" />
     <ClCompile Include="BookSmall.cpp" />
     <ClCompile Include="CardSlot.cpp">
       <SubType>
@@ -235,6 +236,7 @@
   <ItemGroup>
     <ClInclude Include="Book.h" />
     <ClInclude Include="BookButton.h" />
+    <ClInclude Include="BookPageInfo.h" />
     <ClInclude Include="BookSmall.h" />
     <ClInclude Include="CardSlot.h">
       <SubType>

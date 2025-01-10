@@ -58,6 +58,9 @@
     <ClCompile Include="BookSmall.cpp">
       <Filter>Shop\Book</Filter>
     </ClCompile>
+    <ClCompile Include="BookPageInfo.cpp">
+      <Filter>Shop\Book</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleGameMode.h">
@@ -115,6 +118,9 @@
       <Filter>Shop\Book</Filter>
     </ClInclude>
     <ClInclude Include="BookSmall.h">
+      <Filter>Shop\Book</Filter>
+    </ClInclude>
+    <ClInclude Include="BookPageInfo.h">
       <Filter>Shop\Book</Filter>
     </ClInclude>
   </ItemGroup>
