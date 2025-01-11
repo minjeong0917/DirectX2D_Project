@@ -76,24 +76,22 @@ void ABook::Tick(float _DeltaTime)
             AllBookPageCollision[i]->SetActive(false);
         }
 
-        BookPageInfo::GetInst().SetPageInfo(0);
-        BookMainRender->SetSprite("BookMain", 0);
-        CollsionSetting(0);
+
     }
 
     if (IsEnter == true)
     {
         if (UEngineInput::IsDown(MK_LBUTTON))
         {
-            if (ClickBookPage == true)
+            if (ClickBookPage == true && IsOff == false)
             {
                 for (int i = 0; i < AllBookPageCollision.size(); i++)
                 {
                     AllBookPageCollision[i]->SetActive(false);
                 }
-
+                
                 NextPage = BookPageInfo::GetInst().GetMovePageInfo(ClickNum);
-                BookPageInfo::GetInst().SetPageInfo(NextPage);
+                //BookPageInfo::GetInst().SetPageInfo(NextPage);
                 BookMainRender->SetSprite("BookMain", NextPage);
 
                 CollsionSetting(NextPage);
@@ -104,6 +102,7 @@ void ABook::Tick(float _DeltaTime)
 void ABook::CollsionSetting(int _Page)
 {
     BookPageInfo::GetInst().SetPageInfo(_Page);
+
     for (int i = 0; i < BookPageInfo::GetInst().GetCollsionCount(); i++)
     {
         AllBookPageCollision[i]->SetActive(true);
@@ -154,4 +153,18 @@ bool ABook::GetIsBack()
     }
 
     return BookButtons->GetIsBack();
+}
+
+
+void ABook::SetPage0()
+{
+    for (int i = 0; i < AllBookPageCollision.size(); i++)
+    {
+        AllBookPageCollision[i]->SetActive(false);
+    }
+    ClickBookPage = false;
+
+    BookPageInfo::GetInst().SetPageInfo(0);
+    BookMainRender->SetSprite("BookMain", 0);
+    CollsionSetting(0);
 }

@@ -30,6 +30,8 @@ public:
 	{
 		IsBookActive = _Value;
 	}
+	void SetPage0();
+
 protected:
 protected:
 	void Tick(float _DeltaTime);
@@ -41,6 +43,7 @@ private:
 	bool IsEnter = false;
 	int ClickNum = 0;
 	bool ClickBookPage = false;
+	bool IsOff = false;
 
 	int NextPage = 0;
 	bool IsBookActive = false;

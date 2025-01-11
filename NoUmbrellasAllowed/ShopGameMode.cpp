@@ -55,7 +55,7 @@ AShopGameMode::AShopGameMode()
     GetWorld()->LinkCollisionProfile("BookSmall", "SelectedTool");
 
 
-    for (int i = 0; i <3; i++)
+    for (int i = 0; i <10; i++)
     {
         GetWorld()->CreateCollisionProfile("BookPage_" + std::to_string(i));
         GetWorld()->LinkCollisionProfile("BookPage_" + std::to_string(i), "Cursor");
@@ -258,6 +258,7 @@ void AShopGameMode::Tick(float _DeltaTime)
     if ((Merchandise->GetIsEnter() == true && Merchandise->IsActive() == true) || (BookSmall->GetIsEnter() == true && UEngineInput::IsDown(VK_LBUTTON)))
     {
         Book->SetActive(true);
+
         BookSmall->SetRenderActive(false);
         Book->SetButtonActive(true);
         Book->SetButtonActive(true);
@@ -265,12 +266,12 @@ void AShopGameMode::Tick(float _DeltaTime)
 
     if (Book->GetIsBack() == true)
     {
+        Book->SetPage0();
         Book->SetActive(false);
         BookSmall->SetRenderActive(true);
         Book->SetButtonActive(false);
         Book->SetIsBack(false);
         Book->SetButtonActive(false);
-
     }
 
 
