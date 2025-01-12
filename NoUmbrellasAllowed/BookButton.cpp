@@ -127,25 +127,24 @@ void ABookButton::OnCollisionStay(UCollision* _This, UCollision* _Other)
         AllBookButtonRenders[Index]->SetSprite("BookButton", SpriteIndex);
     }
 
-    if (UEngineInput::IsUp(VK_LBUTTON))
-    {
+
         if (Index == 0)
         {
             IsBack = true;
         }
-        else if (Index == 1)
+        if (Index == 1)
         {
             IsMoveToIndex = true;
         }
-        else if (Index == 2)
+        if (Index == 2)
         {
             IsMoveToBackPage = true;
         }
-        else if (Index == 3)
+        if (Index == 3)
         {
             IsMoveToNextPage = true;
         }
-    }
+    
 }
 void ABookButton::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 {
@@ -158,15 +157,15 @@ void ABookButton::OnCollisionEnd(UCollision* _This, UCollision* _Other)
     {
         IsBack = false;
     }
-    else if (Index == 1)
+    if (Index == 1)
     {
         IsMoveToIndex = false;
     }
-    else if (Index == 2)
+    if (Index == 2)
     {
         IsMoveToBackPage = false;
     }
-    else if (Index == 3)
+    if (Index == 3)
     {
         IsMoveToNextPage = false;
     }

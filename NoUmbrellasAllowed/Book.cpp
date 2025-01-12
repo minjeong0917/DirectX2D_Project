@@ -182,33 +182,30 @@ void ABook::SetBookButtonToPage()
             SetPage0();
         }
 
-        else if (BookButtons->IsMoveToBackPage == true)
+        else if (BookButtons->IsMoveToBackPage == true && CurPage >= 1)
         {
             for (int i = 0; i < AllBookPageCollision.size(); i++)
             {
                 AllBookPageCollision[i]->SetActive(false);
             }
-            if (CurPage >= 1)
-            {
+
                 BookMainRender->SetSprite("BookMain", CurPage - 1);
 
                 CollsionSetting(CurPage - 1);
-            }
 
         }
-        else if (BookButtons->IsMoveToNextPage == true)
+        else if (BookButtons->IsMoveToNextPage == true && CurPage < 20)
         {
             for (int i = 0; i < AllBookPageCollision.size(); i++)
             {
                 AllBookPageCollision[i]->SetActive(false);
             }
 
-            if (CurPage < 20)
-            {
+
                 BookMainRender->SetSprite("BookMain", CurPage + 1);
 
                 CollsionSetting(CurPage + 1);
-            }
+
 
         }
     }
