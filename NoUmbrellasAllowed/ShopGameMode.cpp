@@ -30,7 +30,6 @@ AShopGameMode::AShopGameMode()
     GetWorld()->CreateCollisionProfile("BookMain");
     GetWorld()->CreateCollisionProfile("BookSmall");
 
-    GetWorld()->CreateCollisionProfile("BookButton_0");
     for (int i = 0; i < 14; i++)
     {
         GetWorld()->CreateCollisionProfile("Button_" + std::to_string(i));
@@ -50,12 +49,14 @@ AShopGameMode::AShopGameMode()
     GetWorld()->LinkCollisionProfile("ItemShelf", "Cursor");
     GetWorld()->LinkCollisionProfile("Merchandise", "SelectedTool");
     GetWorld()->LinkCollisionProfile("BookMain", "Cursor");
-    GetWorld()->LinkCollisionProfile("BookButton_0", "Cursor");
     GetWorld()->LinkCollisionProfile("BookSmall", "Cursor");
     GetWorld()->LinkCollisionProfile("BookSmall", "SelectedTool");
-
-
-    for (int i = 0; i <10; i++)
+    for (int i = 0; i < 4; i++)
+    {
+        GetWorld()->CreateCollisionProfile("BookButton_" + std::to_string(i));
+        GetWorld()->LinkCollisionProfile("BookButton_" + std::to_string(i), "Cursor");
+    }
+    for (int i = 0; i <20; i++)
     {
         GetWorld()->CreateCollisionProfile("BookPage_" + std::to_string(i));
         GetWorld()->LinkCollisionProfile("BookPage_" + std::to_string(i), "Cursor");

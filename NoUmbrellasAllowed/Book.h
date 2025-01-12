@@ -38,12 +38,14 @@ protected:
 	void OnCollisionEnter(class UCollision* _This, class UCollision* _Other);
 	void OnCollisionEnd(class UCollision* _This, class UCollision* _Other);
 	void CollsionSetting(int _Page);
+	void SetBookButtonToPage();
 
 private:
 	bool IsEnter = false;
 	int ClickNum = 0;
 	bool ClickBookPage = false;
 	bool IsOff = false;
+	int CurPage = 0;
 
 	int NextPage = 0;
 	bool IsBookActive = false;

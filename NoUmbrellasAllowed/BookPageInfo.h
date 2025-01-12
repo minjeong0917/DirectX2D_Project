@@ -41,9 +41,9 @@ protected:
 
 private:
 	BookPageInfo();
-	int CollisionCount = 0;
-	std::vector<FVector> AllCollsionLocation;
-	std::vector<int> MovePageInfo;
+	int CollisionCount = 0; // 페이지에 있는 충돌 갯수
+	std::vector<FVector> AllCollsionLocation; // 충돌체들의 위치
+	std::vector<int> MovePageInfo; 
 	FVector CollsionLocation = { 0.0f,0.0f,0.0f };
 	FVector CollisionScale = { 0.0f,0.0f,0.0f };
 	FVector RenderLocation = { 0.0f,0.0f,0.0f };
