@@ -118,7 +118,10 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
         LoadFile(Dir, "Images//UIIntheShop//Tools//SelectedTool");
         LoadFile(Dir, "Images//UIIntheShop//Calculator//Entity");
         LoadFile(Dir, "Images//UIIntheShop//Calculator//Buttons");
-        LoadFile(Dir, "Images//UIIntheShop//Card");
+        LoadFile(Dir, "Images//UIIntheShop//Card//CardCase");
+        LoadFile(Dir, "Images//UIIntheShop//Card//CardType//Blue");
+        LoadFile(Dir, "Images//UIIntheShop//Card//CardType//Gray");
+        LoadFile(Dir, "Images//UIIntheShop//Card//CardType//Green");
         LoadFile(Dir, "Images//UIIntheShop//Book//BookMain");
         LoadFile(Dir, "Images//UIIntheShop//Book//BookButton");
         LoadFile(Dir, "Images//UIIntheShop//Book//BookSmall");

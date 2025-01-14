@@ -12,13 +12,13 @@ ACardSlot::ACardSlot()
     RootComponent = Default;
 
     CardSlotRender = CreateDefaultSubObject<USpriteRenderer>();
-    CardSlotRender->SetSprite("Card", 0);
+    CardSlotRender->SetSprite("CardCase", 0);
     CardSlotRender->SetAutoScaleRatio(3.0f);
     CardSlotRender->SetWorldLocation({ -730.0f, -260.0f, -150.0f });
     CardSlotRender->SetupAttachment(RootComponent);
 
     CardSlotInfoRender = CreateDefaultSubObject<USpriteRenderer>();
-    CardSlotInfoRender->SetSprite("Card", 1);
+    CardSlotInfoRender->SetSprite("CardCase", 1);
     CardSlotInfoRender->SetAutoScaleRatio(3.0f);
     CardSlotInfoRender->SetWorldLocation({ -730.0f, -100.0f, -145.0f });
     CardSlotInfoRender->SetupAttachment(RootComponent);

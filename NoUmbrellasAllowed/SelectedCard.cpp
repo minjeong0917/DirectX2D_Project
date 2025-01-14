@@ -10,6 +10,8 @@
 
 #include <EngineCore/CameraActor.h>
 #include <EngineCore/EngineCamera.h>
+#include "CardInfo.h"
+
 
 ASelectedCard::ASelectedCard()
 {
@@ -17,7 +19,7 @@ ASelectedCard::ASelectedCard()
 	RootComponent = Default;
 
     SelectedCardRender = CreateDefaultSubObject<USpriteRenderer>();
-    SelectedCardRender->SetSprite("Card", 2);
+    SelectedCardRender->SetSprite("Blue", 0);
     SelectedCardRender->SetAutoScaleRatio(3.0f);
     SelectedCardRender->SetupAttachment(RootComponent);
 
@@ -36,4 +38,24 @@ void ASelectedCard::Tick(float _DeltaTime)
     FVector MousePos = Camera->ScreenMousePosToWorldPos();
 
     SelectedCardRender->SetWorldLocation({ MousePos.X + 8.0f, MousePos.Y - SelectedCardRender->GetWorldScale3D().hY(), -200.0f});
+}
+
+void ASelectedCard::SetCardType(ECardType _CardTye, int _CardStep)
+{
+    switch (_CardTye)
+    {
+    case ECardType::Blue:
+        SelectedCardRender->SetSprite("Blue", _CardStep);
+        break;
+    case ECardType::Gray:
+        SelectedCardRender->SetSprite("Gray", _CardStep);
+        break;
+    case ECardType::Green:
+        SelectedCardRender->SetSprite("Green", _CardStep);
+        break;
+    default:
+        break;
+    }
+
+
 }

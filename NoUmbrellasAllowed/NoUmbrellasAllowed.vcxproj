@@ -171,6 +171,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CardInfo.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="SelectedCard.cpp">
       <SubType>
       </SubType>
@@ -238,6 +242,11 @@
     <ClCompile Include="TitleGameMode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CardInfo.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="ContentsEnums.h" />
     <ClInclude Include="SelectedCard.h">
       <SubType>
       </SubType>

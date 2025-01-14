@@ -14,6 +14,7 @@ BookPageInfo::~BookPageInfo()
 
 void BookPageInfo::SetPageInfo(int _PageNum)
 {
+    CurPage = _PageNum;
     switch (_PageNum)
     {
     // Page 0 : ¸ñÂ÷

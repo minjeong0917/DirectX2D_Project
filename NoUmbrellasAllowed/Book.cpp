@@ -9,6 +9,7 @@
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/Collision.h>
 #include "SelectedCard.h"
+#include "CardInfo.h"
 
 
 #include <EngineCore/CameraActor.h>
@@ -107,10 +108,7 @@ void ABook::Tick(float _DeltaTime)
                     SetNextPage();
                 }
             }
-
         }
-
-
     }
 
     if (BookPageInfo::GetInst().GetHasNextPage() == false)
@@ -131,25 +129,23 @@ void ABook::Tick(float _DeltaTime)
                 PrevMousePos = MousePos;
             }
 
-
             std::shared_ptr<class ACameraActor> Camera = GetWorld()->GetCamera(0);
             FVector MousePos = Camera->ScreenMousePosToWorldPos();
 
             if (UEngineInput::IsPress(MK_LBUTTON) && PrevMousePos != MousePos)
             {
+                CardInfo::GetInst().SetCardInfo();
                 SelectedCard->SetActive(true);
+                SelectedCard->SetCardType(CardInfo::GetInst().GetCardColor(), CardInfo::GetInst().GetCardStep());
                 IsDrawCard = true;
-            }
-            else if (UEngineInput::IsUp(MK_LBUTTON))
-            {
-                IsDrawCard = false;
-                SelectedCard->SetActive(false);
-
             }
 
         }
-
-
+        if (UEngineInput::IsUp(MK_LBUTTON))
+        {
+            IsDrawCard = false;
+            SelectedCard->SetActive(false);
+        }
     }
 }
 void ABook::CollsionSetting(int _Page)
@@ -191,6 +187,7 @@ void ABook::OnCollisionEnter(UCollision* _This, UCollision* _Other)
         {
             AllBookIconRender[ClickNum]->SetSprite("BookIcon", 0);
         }
+
         ClickNum = Index;
         IsIconEnter = true;
         ClickBookPage = true;
