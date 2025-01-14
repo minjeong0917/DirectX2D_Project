@@ -171,6 +171,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BookPage.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Book.cpp" />
     <ClCompile Include="BookButton.cpp" />
     <ClCompile Include="BookPageInfo.cpp" />
@@ -234,6 +238,10 @@
     <ClCompile Include="TitleGameMode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BookPage.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Book.h" />
     <ClInclude Include="BookButton.h" />
     <ClInclude Include="BookPageInfo.h" />

@@ -84,18 +84,20 @@ void ABook::Tick(float _DeltaTime)
     {
         if (UEngineInput::IsDown(MK_LBUTTON))
         {
-            if (ClickBookPage == true && IsOff == false)
+            if (ClickBookPage == true && IsOff == false && BookPageInfo::GetInst().GetHasNextPage() == true)
             {
+
                 for (int i = 0; i < AllBookPageCollision.size(); i++)
                 {
                     AllBookPageCollision[i]->SetActive(false);
                 }
-                
+
                 NextPage = BookPageInfo::GetInst().GetMovePageInfo(ClickNum);
                 //BookPageInfo::GetInst().SetPageInfo(NextPage);
                 BookMainRender->SetSprite("BookMain", NextPage);
 
                 CollsionSetting(NextPage);
+
             }
         }
     }

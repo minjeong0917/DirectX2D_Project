@@ -20,7 +20,7 @@ void BookPageInfo::SetPageInfo(int _PageNum)
     case 0:
     {
         CollisionCount = 13;
-
+        HasNextPage = true;
         AllCollsionLocation.resize(CollisionCount);
 
         FVector startPosition = { 540.0f, 70.0f, -170.0f };
@@ -46,12 +46,16 @@ void BookPageInfo::SetPageInfo(int _PageNum)
         CollisionScale = { 170.f, 40.f, 0.f };
 
         MovePageInfo[0] = 1;
+        MovePageInfo[1] = 7;
+     
         break;
     }
     // Page 1 : 감정도구 - 손상 계기판 설명
     case 1:
     {
         CollisionCount = 1;
+        HasNextPage = true;
+
 
         AllCollsionLocation.resize(CollisionCount);
 
@@ -65,42 +69,95 @@ void BookPageInfo::SetPageInfo(int _PageNum)
     case 2:
     {
         CollisionCount = 1;
+        HasNextPage = true;
 
         AllCollsionLocation.resize(CollisionCount);
 
         AllCollsionLocation[0] = { 740.0f, 150.0f, -170.0f };
-        CollisionScale = { 138.f, 40.f, 0.f };
+        CollisionScale = { 100.f, 40.f, 0.f };
 
-        MovePageInfo[0] = 7;
+        MovePageInfo[0] = 0;
         break;
     }
     // Page 3 : 감정도구 - 서명 검출기 설명
     case 3:
     {
         CollisionCount = 2;
+        HasNextPage = true;
 
         AllCollsionLocation.resize(CollisionCount);
 
-        AllCollsionLocation[0] = { 540.0f, 30.0f, -170.0f };
-        CollisionScale = { 138.f, 40.f, 0.f };
+        AllCollsionLocation[0] = { 750.0f, 150.0f, -170.0f };
+        AllCollsionLocation[1] = { 750.0f, 100.0f, -170.0f };
+        CollisionScale = {120.f, 40.f, 0.f };
 
-        MovePageInfo[0] = 7;
+        MovePageInfo[0] = 0;
+        MovePageInfo[1] = 0;
         break;
     }
     // Page 4 : 감정도구 - 연도 추정기 설명
     case 4:
     {
         CollisionCount = 2;
+        HasNextPage = true;
 
         AllCollsionLocation.resize(CollisionCount);
 
-        AllCollsionLocation[0] = { 540.0f, 30.0f, -170.0f };
-        CollisionScale = { 138.f, 40.f, 0.f };
+        AllCollsionLocation[0] = { 750.0f, 150.0f, -170.0f };
+        AllCollsionLocation[1] = { 750.0f, 100.0f, -170.0f };
+        CollisionScale = { 160.f, 40.f, 0.f };
 
-        MovePageInfo[0] = 7;
+        MovePageInfo[0] = 0;
+        break;
+    }
+    // Page 5 : 감정도구 - 보석 감정기 설명
+    case 5:
+    {
+        CollisionCount = 1;
+        HasNextPage = true;
+
+        AllCollsionLocation.resize(CollisionCount);
+        AllCollsionLocation[0] = { 740.0f, 150.0f, -170.0f };
+        CollisionScale = { 100.f, 40.f, 0.f };
+
+        MovePageInfo[0] = 0;
+        break;
+    }
+    // Page 6 : 감정도구 - 시계 드라이버 설명
+    case 6:
+    {
+        CollisionCount = 1;
+        HasNextPage = true;
+
+        AllCollsionLocation.resize(CollisionCount);
+
+        AllCollsionLocation[0] = { 750.0f, 150.0f, -170.0f };
+        CollisionScale = { 190.f, 40.f, 0.f };
+
+        MovePageInfo[0] = 0;
+        break;
+    }
+    // Page 7 : 상태 
+    case 7:
+    {
+        CollisionCount = 5;
+        HasNextPage = false;
+
+        AllCollsionLocation.resize(CollisionCount);
+
+        AllCollsionLocation[0] = { 619.0f, 209.0f, -170.0f };
+        AllCollsionLocation[1] = { 619.0f, 90.0f, -170.0f };
+        AllCollsionLocation[2] = { 619.0f, -29.0f, -170.0f };
+        AllCollsionLocation[3] = { 619.0f, -148.0f, -170.0f };
+        AllCollsionLocation[4] = { 666.0f, -286.0f, -170.0f };
+        CollisionScale = { 280.f, 100.f, 0.f };
+
         break;
     }
     default:
+        CollisionCount = 0;
+
+        HasNextPage = false;
         break;
     }
 }

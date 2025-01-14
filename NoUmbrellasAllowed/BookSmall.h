@@ -32,9 +32,9 @@ private:
 
 
 	std::shared_ptr<class USpriteRenderer> BookSmallRender;
+	std::shared_ptr<class UCollision> BookSmallCollision;
 	std::shared_ptr<class USpriteRenderer> BookSmallGroundRender;
 
-	std::shared_ptr<class UCollision> BookSmallCollision;
 
 
 
