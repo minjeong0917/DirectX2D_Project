@@ -1,9 +1,8 @@
 #pragma once
-// 기본적으로 지원해주기 때문
-// windowsdk에 포함되어 있고 windowsdk 폴더는 여러분들 설정중 디렉토리에 자동포함되어 있습니다.
+
 #include <wrl.h>
-#include <d3d11_4.h> // directx 11 버전4용 헤더
-#include <d3dcompiler.h> // 쉐이더 컴파일러용 인터페이스 쉐이더는 추후 설명
+#include <d3d11_4.h> 
+#include <d3dcompiler.h> 
 #include <EnginePlatform/EngineWindow.h>
 #include <memory>
 
@@ -49,9 +48,9 @@ public:
 		return Context.Get();
 	}
 
-	ENGINEAPI ID3D11RenderTargetView* GetRTV()
+	ENGINEAPI std::shared_ptr<class UEngineRenderTarget> GetBackBufferTarget()
 	{
-		return RTV.Get();
+		return BackBufferTarget;
 	}
 
 protected:
@@ -62,10 +61,9 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> Context = nullptr;
 	Microsoft::WRL::ComPtr<IDXGISwapChain> SwapChain = nullptr;
 	Microsoft::WRL::ComPtr<IDXGIAdapter> MainAdapter = nullptr;
-	Microsoft::WRL::ComPtr<ID3D11Texture2D> DXBackBufferTexture = nullptr;
-	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> RTV = nullptr;
 
-	std::shared_ptr<class UEngineTexture> DepthTex;
+
+	std::shared_ptr<class UEngineRenderTarget> BackBufferTarget;
 
 	ENGINEAPI void DefaultResourcesInit();
 

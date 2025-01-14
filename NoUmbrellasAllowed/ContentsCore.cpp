@@ -5,6 +5,7 @@
 #include "ShopGameMode.h"
 #include <EngineCore/EngineTexture.h>
 #include <EngineCore/EngineSprite.h>
+#include <EngineCore/HUD.h>
 
 
 CreateContentsCoreDefine(UContentsCore);
@@ -21,7 +22,7 @@ UContentsCore::~UContentsCore()
 void UContentsCore::EngineStart(UEngineInitData& _Data)
 {
 
-    //UEngineCore::MainWindow.SetWindowTitle("No Umbrellas Allowed");
+
 
     _Data.WindowPos = { -10, 0 };
     _Data.WindowSize = WindowSize;
@@ -124,8 +125,8 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 
 
     }
-    UEngineCore::CreateLevel<ATitleGameMode, APawn>("Titlelevel");
-    UEngineCore::CreateLevel<AShopGameMode, APawn>("Shoplevel");
+    UEngineCore::CreateLevel<ATitleGameMode, APawn, AHUD>("Titlelevel");
+    UEngineCore::CreateLevel<AShopGameMode, APawn, AHUD>("Shoplevel");
     UEngineCore::OpenLevel("Titlelevel");
 
 

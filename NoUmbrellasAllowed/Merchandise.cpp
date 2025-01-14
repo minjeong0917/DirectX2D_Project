@@ -52,12 +52,21 @@ void AMerchandise::Tick(float _DeltaTime)
 {
     AActor::Tick(_DeltaTime);
 
+    if (IsApear == true && MerchandiseRender->ColorData.PlusColor.W <= 0.0f)
+    {
+        PlusAlpha(_DeltaTime);
+    }
+    else
+    {
+        Acc = 1.0f;
+    }
 
 }
 
-void AMerchandise::PlusAlpha(float _DeltaTime, float _Speed)
+void AMerchandise::PlusAlpha(float _DeltaTime)
 {
-    MerchandiseRender->ColorData.PlusColor.W += _DeltaTime * _Speed;
+    Acc += 0.01;
+    MerchandiseRender->ColorData.PlusColor.W += _DeltaTime * Speed * Acc;
 }
 
 void AMerchandise::OnCollisionEnter(UCollision* _This, UCollision* _Other)

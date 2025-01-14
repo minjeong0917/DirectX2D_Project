@@ -167,6 +167,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="HUD.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="CameraActor.h">
       <SubType>
       </SubType>
@@ -324,8 +328,24 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EngineRenderTarget.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TransformObject.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Widget.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="HUD.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="CameraActor.cpp">
       <SubType>
       </SubType>
@@ -485,6 +505,18 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Collision.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EngineRenderTarget.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TransformObject.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Widget.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -125,8 +125,6 @@ void ABookButton::OnCollisionStay(UCollision* _This, UCollision* _Other)
     {
         int SpriteIndex = Index * 2 + 1;
         AllBookButtonRenders[Index]->SetSprite("BookButton", SpriteIndex);
-    }
-
 
         if (Index == 0)
         {
@@ -144,6 +142,10 @@ void ABookButton::OnCollisionStay(UCollision* _This, UCollision* _Other)
         {
             IsMoveToNextPage = true;
         }
+    }
+
+
+
     
 }
 void ABookButton::OnCollisionEnd(UCollision* _This, UCollision* _Other)

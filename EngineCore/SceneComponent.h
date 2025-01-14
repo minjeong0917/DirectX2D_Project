@@ -1,13 +1,16 @@
 #pragma once
+#include <EngineBase/EngineMath.h>
 #include "ActorComponent.h"
-
-
+#include "TransformObject.h"
 
 // 설명 :
-class USceneComponent : public UActorComponent
+class USceneComponent : public UActorComponent, public UTransformObject
 {
 	friend class AActor;
 
+	// Local 부모영향 받음
+	// World 안받음
+	// 아무것도 없음 안받음
 
 public:
 	// constrcuter destructer
@@ -22,97 +25,11 @@ public:
 
 	ENGINEAPI void ComponentTick(float _DeltaTime) override;
 
-	void AddRelativeLocation(const FVector& _Value)
-	{
-		Transform.Location += _Value;
-		TransformUpdate();
-	}
-
-	void SetWorldLocation(const FVector& _Value)
-	{
-		IsAbsolute = true;
-		Transform.Location = _Value;
-		TransformUpdate();
-	}
-
-	void AddWorldLocation(const FVector& _Value)
-	{
-		IsAbsolute = true;
-		Transform.Location += _Value;
-		TransformUpdate();
-	}
-
-	void SetRelativeLocation(const FVector& _Value)
-	{
-		Transform.Location = _Value;
-		TransformUpdate();
-	}
-
-
-	void AddWorldRotation(const FVector& _Value)
-	{
-		IsAbsolute = true;
-		Transform.Rotation += _Value;
-		TransformUpdate();
-	}
-
-	void AddLocalRotation(const FVector& _Value)
-	{
-		Transform.Rotation += _Value;
-		TransformUpdate();
-	}
-
-	void SetRotation(const FVector& _Value)
-	{
-		Transform.Rotation = _Value;
-		TransformUpdate();
-	}
-
-	void SetScale3D(const FVector& _Value)
-	{
-		IsAbsolute = true;
-		Transform.Scale = _Value;
-		TransformUpdate();
-	}
-
-
-	void SetRelativeScale3D(const FVector& _Value)
-	{
-
-		Transform.Scale = _Value;
-		Transform.Scale.W = 0.0f;
-		TransformUpdate();
-	}
-
-	FVector GetWorldScale3D()
-	{
-		return Transform.WorldScale;
-	}
-
-
-	FTransform& GetTransformRef()
-	{
-		return Transform;
-	}
-
-
-	ENGINEAPI void SetupAttachment(std::shared_ptr<USceneComponent> _Parent);
-
-	void SetupAttachment(USceneComponent* _Parent);
-
-	ENGINEAPI void TransformUpdate();
-
 protected:
-	bool IsAbsolute = false;
-
-	FTransform Transform;
 
 	ENGINEAPI void BeginPlay() override;
 
-	void ParentMatrixCheck();
 
 private:
-	USceneComponent* Parent = nullptr;
-	std::list<std::shared_ptr<USceneComponent>> Childs;
 };
 

@@ -236,12 +236,13 @@ void AShopGameMode::Tick(float _DeltaTime)
             if (IsExistCustomer == true)
             {
                 Merchandise->SetActive(true);
+                Merchandise->SetIsApear(true);
                 CardSlot->SetActive(true);
                 CardSlot->IsActive = true;
                 
                 if (Merchandise->GetActorLocation().Y > -100.0f)
                 {
-                    Merchandise->PlusAlpha(_DeltaTime, 1.0f);
+                    //Merchandise->PlusAlpha(_DeltaTime);
                     Merchandise->AddActorLocation({ 0.0f, -1.0f * _DeltaTime * 100 , 0.0f });
                 }
 
