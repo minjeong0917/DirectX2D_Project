@@ -14,7 +14,7 @@ AMerchandise::AMerchandise()
     RootComponent = Default;
 
     MerchandiseRender = CreateDefaultSubObject<USpriteRenderer>();
-    MerchandiseRender->SetSprite("Merchandise", 0);
+    MerchandiseRender->SetSprite("Bag", 0);
     MerchandiseRender->SetAutoScaleRatio(3.0f);
     MerchandiseRender->SetWorldLocation({ 0.0f, -260.0f, -150.0f });
     MerchandiseRender->SetupAttachment(RootComponent);

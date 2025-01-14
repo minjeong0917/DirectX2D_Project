@@ -13,7 +13,7 @@ public:
 	ASelectedCard(ASelectedCard&& _Other) noexcept = delete;
 	ASelectedCard& operator=(const ASelectedCard& _Other) = delete;
 	ASelectedCard& operator=(ASelectedCard&& _Other) noexcept = delete;
-	void SetCardType(ECardType _CardTye, int _CardStep);
+	void SetCardType(ECardColor _CardTye, int _CardStep);
 
 
 protected:

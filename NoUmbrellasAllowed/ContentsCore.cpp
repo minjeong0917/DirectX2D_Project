@@ -22,7 +22,7 @@ UContentsCore::~UContentsCore()
 void UContentsCore::EngineStart(UEngineInitData& _Data)
 {
 
-
+    UEngineCore::GetMainWindow().SetWindowTitle("No Umbrellas Allowed");
 
     _Data.WindowPos = { -10, 0 };
     _Data.WindowSize = WindowSize;
@@ -78,7 +78,7 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
         LoadFile(Dir, "Images//Shop//Table");
 
         // Merchandise
-        LoadFile(Dir, "Images//Shop//Merchandise");
+        LoadFile(Dir, "Images//Shop//Merchandise//Bag");
     }
 
     // Customer

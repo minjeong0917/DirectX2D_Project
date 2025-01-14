@@ -67,6 +67,9 @@
     <ClCompile Include="CardSlot.cpp">
       <Filter>Shop\Card</Filter>
     </ClCompile>
+    <ClCompile Include="MerchandiseInfo.cpp">
+      <Filter>Shop\Merchandise</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleGameMode.h">
@@ -137,6 +140,9 @@
     </ClInclude>
     <ClInclude Include="CardSlot.h">
       <Filter>Shop\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="MerchandiseInfo.h">
+      <Filter>Shop\Merchandise</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -40,17 +40,17 @@ void ASelectedCard::Tick(float _DeltaTime)
     SelectedCardRender->SetWorldLocation({ MousePos.X + 8.0f, MousePos.Y - SelectedCardRender->GetWorldScale3D().hY(), -200.0f});
 }
 
-void ASelectedCard::SetCardType(ECardType _CardTye, int _CardStep)
+void ASelectedCard::SetCardType(ECardColor _CardTye, int _CardStep)
 {
     switch (_CardTye)
     {
-    case ECardType::Blue:
+    case ECardColor::Blue:
         SelectedCardRender->SetSprite("Blue", _CardStep);
         break;
-    case ECardType::Gray:
+    case ECardColor::Gray:
         SelectedCardRender->SetSprite("Gray", _CardStep);
         break;
-    case ECardType::Green:
+    case ECardColor::Green:
         SelectedCardRender->SetSprite("Green", _CardStep);
         break;
     default:

@@ -15,7 +15,10 @@ void CardInfo::SetCardInfo()
 {
 	if (BookPageInfo::GetInst().GetCurPage() == 7)
 	{
-		CardColor = ECardType::Blue;
+		CardType = ECardType::CONDITION;
+
+		CardColor = ECardColor::Blue;
 		CardStep = 0;
+
 	}
 }
