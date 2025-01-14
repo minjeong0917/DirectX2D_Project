@@ -171,7 +171,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BookPage.cpp">
+    <ClCompile Include="SelectedCard.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -238,7 +238,7 @@
     <ClCompile Include="TitleGameMode.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BookPage.h">
+    <ClInclude Include="SelectedCard.h">
       <SubType>
       </SubType>
     </ClInclude>

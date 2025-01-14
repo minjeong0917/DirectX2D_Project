@@ -61,8 +61,8 @@
     <ClCompile Include="BookPageInfo.cpp">
       <Filter>Shop\Book</Filter>
     </ClCompile>
-    <ClCompile Include="BookPage.cpp">
-      <Filter>Shop\Book</Filter>
+    <ClCompile Include="SelectedCard.cpp">
+      <Filter>Shop\Card</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -126,8 +126,8 @@
     <ClInclude Include="BookPageInfo.h">
       <Filter>Shop\Book</Filter>
     </ClInclude>
-    <ClInclude Include="BookPage.h">
-      <Filter>Shop\Book</Filter>
+    <ClInclude Include="SelectedCard.h">
+      <Filter>Shop\Card</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +160,9 @@
     </Filter>
     <Filter Include="Shop\Book">
       <UniqueIdentifier>{f463bfab-d37c-4694-8e01-7bb01456e25b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shop\Card">
+      <UniqueIdentifier>{17f53501-7043-42b5-9104-2f1c751b3f04}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

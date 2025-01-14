@@ -14,27 +14,27 @@ ACustomer::ACustomer()
         AllHairSetInfo.resize(4);
 
         // Wonman 0st HairInfo
-        AllHairInfo[0].Location = {0.0f, 50.0f, -100.0f };
+        AllHairInfo[0].Location = {0.0f, 50.0f, -80.0f };
         AllHairSetInfo[0].Location = { 0.0f, -10.0f, 30.0f };
 
         // Wonman 1st HairInfo
-        AllHairInfo[1].Location = { 0.0f, 77.0f, -100.0f };
+        AllHairInfo[1].Location = { 0.0f, 77.0f, -80.0f };
         AllHairSetInfo[1].Location = { 0.0f, 160.0f, 30.0f };
 
         // Wonman 1st HairInfo
-        AllHairInfo[2].Location = { 0.0f, 70.0f, -100.0f };
+        AllHairInfo[2].Location = { 0.0f, 70.0f, -80.0f };
         AllHairSetInfo[2].Location = { 0.0f, -10.0f, 30.0f };
 
         // Wonman 3st HairInfo
-        AllHairInfo[3].Location = { 0.0f, 78.0f, -100.0f };
+        AllHairInfo[3].Location = { 0.0f, 78.0f, -80.0f };
         AllHairSetInfo[3].Location = { 0.0f, -70.0f, 30.0f };
 
-        AllHairInfo[4].Location = { 0.0f, 75.0f, -100.0f };
-        AllHairInfo[5].Location = { 0.0f, 80.0f, -100.0f };
-        AllHairInfo[6].Location = { 0.0f, 80.0f, -100.0f };
-        AllHairInfo[7].Location = { 0.0f, 80.0f, -100.0f };
-        AllHairInfo[8].Location = { 0.0f, 80.0f, -100.0f };
-        AllHairInfo[9].Location = { 0.0f, 80.0f, -100.0f };
+        AllHairInfo[4].Location = { 0.0f, 75.0f, -80.0f };
+        AllHairInfo[5].Location = { 0.0f, 80.0f, -80.0f };
+        AllHairInfo[6].Location = { 0.0f, 80.0f, -80.0f };
+        AllHairInfo[7].Location = { 0.0f, 80.0f, -80.0f };
+        AllHairInfo[8].Location = { 0.0f, 80.0f, -80.0f };
+        AllHairInfo[9].Location = { 0.0f, 80.0f, -80.0f };
 
     }
 

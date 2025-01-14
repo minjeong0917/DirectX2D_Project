@@ -18,6 +18,10 @@ public:
 	{
 		return IsEnter;
 	}
+	bool GetIsDrawCard()
+	{
+		return IsDrawCard;
+	}
 	void SetButtonActive(bool IsActive);
 	void SetIsBack(bool IsActive);
 	bool GetIsBack();
@@ -31,6 +35,7 @@ public:
 		IsBookActive = _Value;
 	}
 	void SetPage0();
+	void SetNextPage();
 
 protected:
 protected:
@@ -41,21 +46,27 @@ protected:
 	void SetBookButtonToPage();
 
 private:
-	bool IsEnter = false;
-	int ClickNum = 0;
 	bool ClickBookPage = false;
 	bool IsOff = false;
-	int CurPage = 0;
-
-	int NextPage = 0;
+	bool IsEnter = false;
+	bool IsIconEnter = true;
 	bool IsBookActive = false;
-	std::shared_ptr<class USpriteRenderer> BookMainRender;
+	bool IsDrawCard = false;
 
+	FVector PrevMousePos = { 0.0f,0.0f,0.0f };
+	int CurPage = 0;
+	int ClickNum = 0;
+	int NextPage = 0;
+	std::shared_ptr<class USpriteRenderer> BookMainRender;
 	std::shared_ptr<class UCollision> BookMainCollision;
+
 	std::vector<std::shared_ptr<class UCollision>> AllBookPageCollision;
 
-	std::shared_ptr<class ABookButton> BookButtons;
+	std::shared_ptr<class USpriteRenderer> BookIconRender;
+	std::vector<std::shared_ptr<class USpriteRenderer>> AllBookIconRender;
 
+	std::shared_ptr<class ABookButton> BookButtons;
+	std::shared_ptr<class ASelectedCard> SelectedCard;
 
 
 };

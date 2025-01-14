@@ -8,6 +8,11 @@
 #include <EngineCore/DefaultSceneComponent.h>
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/Collision.h>
+#include "SelectedCard.h"
+
+
+#include <EngineCore/CameraActor.h>
+#include <EngineCore/EngineCamera.h>
 
 ABook::ABook()
 {
@@ -38,6 +43,12 @@ ABook::ABook()
 
     for (int i = 0; i < 20; i++)
     {
+        BookIconRender = CreateDefaultSubObject<USpriteRenderer>();
+
+        BookIconRender->SetActive(false);
+        BookIconRender->SetupAttachment(RootComponent);
+        AllBookIconRender.push_back(BookIconRender);
+
         std::shared_ptr<class UCollision> BookPageCollision = CreateDefaultSubObject<UCollision>();
         BookPageCollision->SetCollisionProfileName("BookPage_" + std::to_string(i));
 
@@ -57,8 +68,11 @@ ABook::ABook()
 
     BookButtons = GetWorld()->SpawnActor<ABookButton>();
     BookButtons->SetActive(false);
-    CollsionSetting(0);
 
+    SelectedCard = GetWorld()->SpawnActor<ASelectedCard>();
+    SelectedCard->SetActive(false);
+
+    CollsionSetting(0);
 }
 
 ABook::~ABook()
@@ -70,36 +84,72 @@ void ABook::Tick(float _DeltaTime)
     AActor::Tick(_DeltaTime);
 
     SetBookButtonToPage();
+
     if (BookButtons->GetIsBack() == true)
     {
         for (int i = 0; i < AllBookPageCollision.size(); i++)
         {
             AllBookPageCollision[i]->SetActive(false);
+            AllBookIconRender[i]->SetActive(false);
         }
-
 
     }
 
     if (IsEnter == true)
     {
-        if (UEngineInput::IsDown(MK_LBUTTON))
+        if (ClickBookPage == true && IsOff == false)
         {
-            if (ClickBookPage == true && IsOff == false && BookPageInfo::GetInst().GetHasNextPage() == true)
+
+            if (UEngineInput::IsDown(MK_LBUTTON))
             {
-
-                for (int i = 0; i < AllBookPageCollision.size(); i++)
+                if (BookPageInfo::GetInst().GetHasNextPage() == true)
                 {
-                    AllBookPageCollision[i]->SetActive(false);
+                    SetNextPage();
                 }
+            }
 
-                NextPage = BookPageInfo::GetInst().GetMovePageInfo(ClickNum);
-                //BookPageInfo::GetInst().SetPageInfo(NextPage);
-                BookMainRender->SetSprite("BookMain", NextPage);
+        }
 
-                CollsionSetting(NextPage);
+
+    }
+
+    if (BookPageInfo::GetInst().GetHasNextPage() == false)
+    {
+
+        if (IsIconEnter == false)
+        {
+            AllBookIconRender[ClickNum]->SetSprite("BookIcon", 0);
+        }
+        else if (IsIconEnter == true)
+        {
+            AllBookIconRender[ClickNum]->SetSprite("BookIcon", 1);
+
+            if (UEngineInput::IsDown(MK_LBUTTON))
+            {
+                std::shared_ptr<class ACameraActor> Camera = GetWorld()->GetCamera(0);
+                FVector MousePos = Camera->ScreenMousePosToWorldPos();
+                PrevMousePos = MousePos;
+            }
+
+
+            std::shared_ptr<class ACameraActor> Camera = GetWorld()->GetCamera(0);
+            FVector MousePos = Camera->ScreenMousePosToWorldPos();
+
+            if (UEngineInput::IsPress(MK_LBUTTON) && PrevMousePos != MousePos)
+            {
+                SelectedCard->SetActive(true);
+                IsDrawCard = true;
+            }
+            else if (UEngineInput::IsUp(MK_LBUTTON))
+            {
+                IsDrawCard = false;
+                SelectedCard->SetActive(false);
 
             }
+
         }
+
+
     }
 }
 void ABook::CollsionSetting(int _Page)
@@ -107,13 +157,24 @@ void ABook::CollsionSetting(int _Page)
     BookPageInfo::GetInst().SetPageInfo(_Page);
     CurPage = _Page;
 
-    int a = BookPageInfo::GetInst().GetCollsionCount();
     for (int i = 0; i < BookPageInfo::GetInst().GetCollsionCount(); i++)
     {
         AllBookPageCollision[i]->SetActive(true);
         AllBookPageCollision[i]->SetScale3D(BookPageInfo::GetInst().GetAllCollisionScale());
         AllBookPageCollision[i]->SetWorldLocation(BookPageInfo::GetInst().GetAllCollsionLocation(i));
         
+        if (BookPageInfo::GetInst().GetHasNextPage() == false)
+        {
+
+            FVector Loc = BookPageInfo::GetInst().GetAllCollsionLocation(i);
+            FVector Scale = BookPageInfo::GetInst().GetAllCollisionScale();
+
+            AllBookIconRender[i]->SetActive(true);
+            AllBookIconRender[i]->SetSprite("BookIcon", 0);
+            AllBookIconRender[i]->SetWorldLocation({ Loc.X, Loc.Y - Scale.hY(), Loc.Z - 10.0f });
+            AllBookIconRender[i]->SetScale3D(Scale);
+
+        }
     }
   
 }
@@ -126,11 +187,17 @@ void ABook::OnCollisionEnter(UCollision* _This, UCollision* _Other)
     if (ProfileName != "BOOKMAIN")
     {
         int Index = std::stoi(ProfileName.substr(9));
+        if (ClickNum != Index)
+        {
+            AllBookIconRender[ClickNum]->SetSprite("BookIcon", 0);
+        }
         ClickNum = Index;
+        IsIconEnter = true;
         ClickBookPage = true;
     }
     else
     {
+        IsIconEnter = false;
         ClickBookPage = false;
     }
 
@@ -138,6 +205,7 @@ void ABook::OnCollisionEnter(UCollision* _This, UCollision* _Other)
 void ABook::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 {
     IsEnter = false;
+    IsIconEnter = false;
 }
 
 void ABook::SetButtonActive(bool IsActive)
@@ -159,13 +227,28 @@ bool ABook::GetIsBack()
 
     return BookButtons->GetIsBack();
 }
+void ABook::SetNextPage()
+{
+    for (int i = 0; i < AllBookPageCollision.size(); i++)
+    {
+        AllBookPageCollision[i]->SetActive(false);
+        AllBookIconRender[i]->SetActive(false);
 
+    }
+
+    NextPage = BookPageInfo::GetInst().GetMovePageInfo(ClickNum);
+    BookMainRender->SetSprite("BookMain", NextPage);
+
+    CollsionSetting(NextPage);
+}
 
 void ABook::SetPage0()
 {
     for (int i = 0; i < AllBookPageCollision.size(); i++)
     {
         AllBookPageCollision[i]->SetActive(false);
+        AllBookIconRender[i]->SetActive(false);
+
     }
     ClickBookPage = false;
 
@@ -189,6 +272,8 @@ void ABook::SetBookButtonToPage()
             for (int i = 0; i < AllBookPageCollision.size(); i++)
             {
                 AllBookPageCollision[i]->SetActive(false);
+                AllBookIconRender[i]->SetActive(false);
+
             }
 
                 BookMainRender->SetSprite("BookMain", CurPage - 1);
@@ -201,11 +286,11 @@ void ABook::SetBookButtonToPage()
             for (int i = 0; i < AllBookPageCollision.size(); i++)
             {
                 AllBookPageCollision[i]->SetActive(false);
+                AllBookIconRender[i]->SetActive(false);
+
             }
 
-
                 BookMainRender->SetSprite("BookMain", CurPage + 1);
-
                 CollsionSetting(CurPage + 1);
 
 

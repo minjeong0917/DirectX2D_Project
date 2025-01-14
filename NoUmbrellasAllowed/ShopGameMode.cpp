@@ -207,7 +207,7 @@ void AShopGameMode::Tick(float _DeltaTime)
 
     if (ItemShelf != nullptr)
     {
-        if (false == ItemShelf->GetIsToolsClick() || Book->GetIsEnter() == true)
+        if (false == ItemShelf->GetIsToolsClick() || Book->GetIsEnter() == true )
         {
             Cursor->SetRenderActive(true);
         }
@@ -215,6 +215,15 @@ void AShopGameMode::Tick(float _DeltaTime)
         {
             Cursor->SetRenderActive(false);
         }
+    }
+
+    if (Book->GetIsDrawCard() == false)
+    {
+        Cursor->SetActive(true);
+    }
+    else if (Book->GetIsDrawCard() == true)
+    {
+        Cursor->SetActive(false);
     }
 
 
