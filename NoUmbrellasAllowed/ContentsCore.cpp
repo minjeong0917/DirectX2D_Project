@@ -6,6 +6,7 @@
 #include <EngineCore/EngineTexture.h>
 #include <EngineCore/EngineSprite.h>
 #include <EngineCore/HUD.h>
+#include "ShopHUD.h"
 
 
 CreateContentsCoreDefine(UContentsCore);
@@ -130,7 +131,7 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 
     }
     UEngineCore::CreateLevel<ATitleGameMode, APawn, AHUD>("Titlelevel");
-    UEngineCore::CreateLevel<AShopGameMode, APawn, AHUD>("Shoplevel");
+    UEngineCore::CreateLevel<AShopGameMode, APawn, AShopHUD>("Shoplevel");
     UEngineCore::OpenLevel("Titlelevel");
 
 

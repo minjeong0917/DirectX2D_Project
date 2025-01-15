@@ -29,7 +29,7 @@ float4 TargetMerge_PS(VertexShaderOutPut _Vertex) : SV_Target0
     if (0.0f >= Color.a)
     {
         clip(-1);
-    }
+    }   
 	
     Color.a = max(Color.a, 1.0f);
 	

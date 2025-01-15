@@ -29,6 +29,11 @@ public:
 
 		Res->Setting(ShaderType, BindIndex);
 	}
+
+	void Reset()
+	{
+
+	}
 };
 
 class UEngineTextureRes : public UEngineShaderRes
@@ -39,6 +44,10 @@ public:
 	void Setting()
 	{
 		Res->Setting(ShaderType, BindIndex);
+	}
+	void Reset()
+	{
+		Res->Reset(ShaderType, BindIndex);
 	}
 };
 
@@ -52,14 +61,19 @@ public:
 		Res->Setting(ShaderType, BindIndex);
 	}
 
+	void Reset()
+	{
+		Res->Setting(ShaderType, BindIndex);
+	}
 };
 
 
 class UEngineShaderResources
 {
+	// 
 
 public:
-
+	// constrcuter destructer
 	UEngineShaderResources();
 	~UEngineShaderResources();
 
@@ -82,6 +96,7 @@ public:
 	void SamplerSetting(std::string_view _Name, std::string_view _ResName);
 	void TextureSetting(std::string_view _Name, std::string_view _ResName);
 	void TextureSetting(std::string_view _Name, std::shared_ptr<UEngineTexture> _Texture);
+
 	void TextureSetting(std::string_view _Name, UEngineTexture* _Texture);
 
 	bool IsSampler(std::string_view _Name);
@@ -89,13 +104,14 @@ public:
 	bool IsConstantBuffer(std::string_view _Name);
 	void Setting();
 
+	void Reset();
+
 protected:
 
 private:
 	std::map<std::string, UEngineConstantBufferRes> ConstantBufferRes;
 	std::map<std::string, UEngineTextureRes> TextureRes;
 	std::map<std::string, UEngineSamplerRes> SamplerRes;
-
 
 };
 

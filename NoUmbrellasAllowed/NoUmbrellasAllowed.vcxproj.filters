@@ -70,6 +70,9 @@
     <ClCompile Include="MerchandiseInfo.cpp">
       <Filter>Shop\Merchandise</Filter>
     </ClCompile>
+    <ClCompile Include="ShopHUD.cpp">
+      <Filter>HUD</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleGameMode.h">
@@ -144,6 +147,9 @@
     <ClInclude Include="MerchandiseInfo.h">
       <Filter>Shop\Merchandise</Filter>
     </ClInclude>
+    <ClInclude Include="ShopHUD.h">
+      <Filter>HUD</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameMode">
@@ -181,6 +187,9 @@
     </Filter>
     <Filter Include="Enum">
       <UniqueIdentifier>{2a01b87c-3550-4e31-94d2-b3e696104afc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HUD">
+      <UniqueIdentifier>{42c448bd-abbf-4b35-bd39-50effe25e956}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

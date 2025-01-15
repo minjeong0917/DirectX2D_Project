@@ -342,6 +342,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="FontWidget.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="ImageWidget.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Widget.h">
       <SubType>
       </SubType>
@@ -523,6 +531,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="EngineFont.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FontWidget.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="ImageWidget.cpp">
       <SubType>
       </SubType>
     </ClCompile>

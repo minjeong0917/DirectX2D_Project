@@ -10,13 +10,6 @@ public:
 	// constrcuter destructer
 	ENGINEAPI UEngineSerializer();
 	ENGINEAPI ~UEngineSerializer();
-
-	// delete Function
-	UEngineSerializer(const UEngineSerializer& _Other) = delete;
-	UEngineSerializer(UEngineSerializer&& _Other) noexcept = delete;
-	UEngineSerializer& operator=(const UEngineSerializer& _Other) = delete;
-	UEngineSerializer& operator=(UEngineSerializer&& _Other) noexcept = delete;
-
 	ENGINEAPI void Write(const void* _Data, unsigned int _Size);
 
 	void operator<<(const int& _Data)
@@ -41,7 +34,6 @@ public:
 
 	void operator<<(const std::string& _Data)
 	{
-
 		int Size = static_cast<int>(_Data.size());
 		operator<<(Size);
 		if (0 != Size)
@@ -88,9 +80,9 @@ public:
 
 	void operator>>(std::string& _Data)
 	{
+
 		int Size;
 		operator>>(Size);
-	
 		_Data.resize(Size);
 
 		Read(&_Data[0], static_cast<int>(_Data.size()));
@@ -107,7 +99,6 @@ public:
 
 		for (size_t i = 0; i < _vector.size(); i++)
 		{
-	
 			operator>>(_vector[i]);
 		}
 	}
@@ -137,6 +128,7 @@ protected:
 private:
 
 	int WriteOffset = 0;
+
 	int ReadOffset = 0;
 
 	std::vector<char> Data;
@@ -154,8 +146,7 @@ public:
 	}
 
 public:
-	
 	ENGINEAPI virtual void Serialize(UEngineSerializer& _Ser);
-	
 	ENGINEAPI virtual void DeSerialize(UEngineSerializer& _Ser);
 };
+

@@ -35,6 +35,7 @@ public:
 	{
 		return SRV.Get();
 	}
+
 	ID3D11DepthStencilView* GetDSV()
 	{
 		return DSV.Get();
@@ -44,12 +45,16 @@ public:
 	{
 		return RTV.Get();
 	}
+
 	FVector GetTextureSize()
 	{
 		return Size;
 	}
 
+
 	void Setting(EShaderType _Type, UINT _BindIndex);
+
+	void Reset(EShaderType _Type, UINT _BindIndex);
 
 	ENGINEAPI void ResCreate(const D3D11_TEXTURE2D_DESC& _Value);
 	ENGINEAPI void ResCreate(Microsoft::WRL::ComPtr<ID3D11Texture2D> _Texture2D);
@@ -57,6 +62,7 @@ public:
 	ENGINEAPI void CreateRenderTargetView();
 	ENGINEAPI void CreateShaderResourceView();
 	ENGINEAPI void CreateDepthStencilView();
+
 protected:
 
 private:
@@ -65,9 +71,9 @@ private:
 	FVector Size;
 	DirectX::TexMetadata Metadata;
 	DirectX::ScratchImage ImageData;
-	Microsoft::WRL::ComPtr<ID3D11Texture2D> Texture2D = nullptr;
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> SRV = nullptr; 
-	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> RTV = nullptr; 
-	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> DSV = nullptr; 
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> Texture2D = nullptr; // 로드한 텍스처
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> SRV = nullptr; // 텍스처를 쉐이더 세팅할수 있는권한
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> RTV = nullptr; // 텍스처를 쉐이더 세팅할수 있는권한
+	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> DSV = nullptr; // 텍스처를 쉐이더 세팅할수 있는권한
 	D3D11_TEXTURE2D_DESC Desc;
 };

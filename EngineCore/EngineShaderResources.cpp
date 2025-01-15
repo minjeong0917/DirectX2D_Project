@@ -49,6 +49,19 @@ void UEngineShaderResources::CreateConstantBufferRes(std::string_view _Name, UEn
 	ConstantBufferRes[UpperString] = _Res;
 }
 
+void UEngineShaderResources::Reset()
+{
+	for (std::pair<const std::string, UEngineTextureRes>& Res : TextureRes)
+	{
+		Res.second.Reset();
+	}
+
+	for (std::pair<const std::string, UEngineSamplerRes>& Res : SamplerRes)
+	{
+		Res.second.Reset();
+	}
+}
+
 void UEngineShaderResources::Setting()
 {
 	for (std::pair<const std::string, UEngineConstantBufferRes>& Res : ConstantBufferRes)
@@ -123,6 +136,7 @@ void UEngineShaderResources::TextureSetting(std::string_view _Name, std::string_
 
 	TextureRes[UpperName].Res = UEngineTexture::Find<UEngineTexture>(_ResName).get();
 }
+
 void UEngineShaderResources::TextureSetting(std::string_view _Name, std::shared_ptr<UEngineTexture> _Texture)
 {
 	std::string UpperName = UEngineString::ToUpper(_Name);

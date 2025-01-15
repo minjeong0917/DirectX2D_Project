@@ -12,7 +12,7 @@ ACursor::ACursor()
     RootComponent = Default;
 
     CursorRender = CreateDefaultSubObject<USpriteRenderer>();
-    CursorRender->SetSprite("Cursor", 0);
+    //CursorRender->SetSprite("Cursor", 0);
     CursorRender->SetAutoScaleRatio(2.0f);
     CursorRender->SetupAttachment(RootComponent);
 
@@ -44,11 +44,11 @@ void ACursor::Tick(float _DeltaTime)
 
     if (IsEnter == true)
     {
-        CursorRender->SetSprite("Cursor", 1);
+        //CursorRender->SetSprite("Cursor", 1);
     }
     if (IsEnter == false)
     {
-        CursorRender->SetSprite("Cursor", 0);
+        //CursorRender->SetSprite("Cursor", 0);
     }
 }
 void ACursor::OnCollisionEnter(UCollision* _This, UCollision* _Other)

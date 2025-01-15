@@ -17,23 +17,19 @@ void UEngineRenderTarget::CreateTarget(float4 _Scale, float4 _ClearColor /*= flo
     ClearColor = _ClearColor;
 
     std::shared_ptr<class UEngineTexture> NewTarget = std::make_shared<UEngineTexture>();
-
-
+ 
     D3D11_TEXTURE2D_DESC Desc = { 0 };
     Desc.ArraySize = 1;
     Desc.Width = _Scale.iX();
     Desc.Height = _Scale.iY();
-
     Desc.Format = _Format;
 
     Desc.SampleDesc.Count = 1;
     Desc.SampleDesc.Quality = 0;
 
-
     Desc.MipLevels = 1;
     Desc.Usage = D3D11_USAGE_DEFAULT;
     Desc.CPUAccessFlags = 0;
-
     Desc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_RENDER_TARGET | D3D11_BIND_FLAG::D3D11_BIND_SHADER_RESOURCE;
 
     NewTarget->ResCreate(Desc);
@@ -61,7 +57,6 @@ void UEngineRenderTarget::CreateTarget(Microsoft::WRL::ComPtr<ID3D11Texture2D> _
     ArrTexture.push_back(NewTarget);
 }
 
-
 void UEngineRenderTarget::CreateDepth(int _Index)
 {
     if (ArrTexture.size() <= _Index)
@@ -75,7 +70,6 @@ void UEngineRenderTarget::CreateDepth(int _Index)
     Desc.ArraySize = 1;
     Desc.Width = Size.iX();
     Desc.Height = Size.iY();
-
     Desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
     Desc.SampleDesc.Count = 1;
@@ -102,6 +96,7 @@ void UEngineRenderTarget::Clear()
 
 void UEngineRenderTarget::Setting()
 {
+
     UEngineCore::GetDevice().GetContext()->OMSetRenderTargets(1, &ArrRTVs[0], DepthTexture->GetDSV());
 }
 
@@ -117,4 +112,5 @@ void UEngineRenderTarget::MergeTo(std::shared_ptr<UEngineRenderTarget> _Target)
     _Target->Setting();
     TargetUnit.SetTexture("MergeTex", ArrTexture[0]);
     TargetUnit.Render(nullptr, 0.0f);
+    TargetUnit.Reset();
 }

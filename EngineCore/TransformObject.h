@@ -85,7 +85,15 @@ public:
 	{
 		return Transform;
 	}
+	FVector GetRelativeLocation()
+	{
+		return Transform.RelativeLocation;
+	}
 
+	FVector GetWorldLocation()
+	{
+		return Transform.WorldLocation;
+	}
 	ENGINEAPI virtual void CameraTransUpdate(class UEngineCamera* _Camera);
 	ENGINEAPI void SetupAttachment(std::shared_ptr<UTransformObject> _Parent);
 
