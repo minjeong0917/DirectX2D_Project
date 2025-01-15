@@ -12,6 +12,7 @@
 #include <EngineCore/CameraActor.h>
 #include <EngineCore/EngineCamera.h>
 #include "Cursor.h"
+#include<EnginePlatform/EngineWindow.h>
 
 
 class TestWindow : public UEngineGUIWindow
@@ -23,8 +24,13 @@ public:
 		{
 			GetWorld()->GetMainCamera()->FreeCameraSwitch();
 		}
+		//ImGui::SameLine(); // ÇÑ°£ ¶ç±â
+		if (true == ImGui::Button("Exit"))
+		{
 
-		ImGui::SameLine(); // ÇÑ°£ ¶ç±â
+			UEngineWindow::ApplicationOff();
+
+		}
 	}
 };
 
@@ -203,10 +209,12 @@ void ATitleGameMode::Tick(float _DeltaTime)
 	{
 		UEngineCore::OpenLevel("Shoplevel");
 	}
+
+
 	std::shared_ptr<class ACameraActor> Camera = GetWorld()->GetCamera(0);
 
 	FVector MousePos = Camera->ScreenMousePosToWorldPos();
-	Cursor->SetActorLocation({ MousePos.X+8.0f,MousePos.Y- 40.0f, -999.0f });
+	Cursor->SetActorLocation({ MousePos.X+8.0f,MousePos.Y- 30.0f, -999.0f });
 	//UEngineDebug::OutPutString(Camera->ScreenMousePosToWorldPos().ToString());
 
 }

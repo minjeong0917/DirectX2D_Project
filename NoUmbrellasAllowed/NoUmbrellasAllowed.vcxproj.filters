@@ -73,6 +73,9 @@
     <ClCompile Include="ShopHUD.cpp">
       <Filter>HUD</Filter>
     </ClCompile>
+    <ClCompile Include="TitleHUD.cpp">
+      <Filter>HUD</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleGameMode.h">
@@ -148,6 +151,9 @@
       <Filter>Shop\Merchandise</Filter>
     </ClInclude>
     <ClInclude Include="ShopHUD.h">
+      <Filter>HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleHUD.h">
       <Filter>HUD</Filter>
     </ClInclude>
   </ItemGroup>

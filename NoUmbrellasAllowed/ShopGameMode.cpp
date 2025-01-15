@@ -203,7 +203,7 @@ void AShopGameMode::Tick(float _DeltaTime)
 
     std::shared_ptr<class ACameraActor> Camera = GetWorld()->GetCamera(0);
     FVector MousePos = Camera->ScreenMousePosToWorldPos();
-    Cursor->SetActorLocation({ MousePos.X + 8.0f,MousePos.Y - 40.0f, -1000.0f });
+    Cursor->SetActorLocation({ MousePos.X + 8.0f,MousePos.Y - 30.0f, -1000.0f });
 
     if (ItemShelf != nullptr)
     {

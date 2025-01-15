@@ -31,6 +31,7 @@ LRESULT CALLBACK UEngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, 
     {
     case WM_CREATE:
         ++WindowCount;
+        ShowCursor(false);
         break;
 
     case WM_PAINT:
