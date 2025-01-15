@@ -49,6 +49,7 @@ public:
 	{
 		return Enter != nullptr || Stay != nullptr || End != nullptr;
 	}
+	void Release();
 
 private:
 	ECollisionType CollisionType = ECollisionType::OBB2D;

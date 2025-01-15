@@ -11,6 +11,7 @@ public:
 	// constrcuter destructer
 	URenderUnit();
 	~URenderUnit();
+	UTransformObject* TransformObject = nullptr;
 
 	URenderer* ParentRenderer = nullptr;
 

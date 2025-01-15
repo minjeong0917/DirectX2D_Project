@@ -13,7 +13,6 @@
 void UEngineGraphicDevice::DefaultResourcesInit()
 {
 	DepthStencilInit();
-
 	TextureInit();
 	MeshInit();
 	BlendInit();
@@ -21,13 +20,13 @@ void UEngineGraphicDevice::DefaultResourcesInit()
 	ShaderInit();
 	MaterialInit();
 }
+
 void UEngineGraphicDevice::DepthStencilInit()
 {
 	{
 		D3D11_DEPTH_STENCIL_DESC Desc = { 0 };
 		Desc.DepthEnable = true;
 		Desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-
 		Desc.DepthFunc = D3D11_COMPARISON_LESS;
 		Desc.StencilEnable = false;
 
@@ -36,15 +35,26 @@ void UEngineGraphicDevice::DepthStencilInit()
 
 	{
 		D3D11_DEPTH_STENCIL_DESC Desc = { 0 };
-		Desc.DepthEnable = true;
+		Desc.DepthEnable = false;
 		Desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-
-		Desc.DepthFunc = D3D11_COMPARISON_ALWAYS;
+		Desc.DepthFunc = D3D11_COMPARISON_LESS;
 		Desc.StencilEnable = false;
 
 
+		UEngineDepthStencilState::Create("UIDepth", Desc);
+	}
+
+
+	{
+		D3D11_DEPTH_STENCIL_DESC Desc = { 0 };
+		Desc.DepthEnable = true;
+		Desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+		Desc.DepthFunc = D3D11_COMPARISON_ALWAYS;
+		Desc.StencilEnable = false;
+
 		UEngineDepthStencilState::Create("CollisionDebugDepth", Desc);
 	}
+
 	{
 		D3D11_DEPTH_STENCIL_DESC Desc = { 0 };
 		Desc.DepthEnable = true;
@@ -54,6 +64,7 @@ void UEngineGraphicDevice::DepthStencilInit()
 
 		UEngineDepthStencilState::Create("TargetMerge", Desc);
 	}
+
 }
 
 void UEngineGraphicDevice::TextureInit()
@@ -61,14 +72,13 @@ void UEngineGraphicDevice::TextureInit()
 
 	D3D11_SAMPLER_DESC SampInfo = { D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_POINT };
 	SampInfo.AddressU = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP; 
-	SampInfo.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP; 
+	SampInfo.AddressV = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_WRAP;
 	SampInfo.AddressW = D3D11_TEXTURE_ADDRESS_MODE::D3D11_TEXTURE_ADDRESS_CLAMP;
 
 	SampInfo.BorderColor[0] = 0.0f;
 	SampInfo.BorderColor[1] = 0.0f;
 	SampInfo.BorderColor[2] = 0.0f;
 	SampInfo.BorderColor[3] = 0.0f;
-
 
 	UEngineSampler::Create("WRAPSampler", SampInfo);
 
@@ -155,11 +165,13 @@ void UEngineGraphicDevice::BlendInit()
 
 	D3D11_BLEND_DESC Desc = { 0 };
 
+
 	Desc.AlphaToCoverageEnable = false;
+
 	Desc.IndependentBlendEnable = true;
 	Desc.RenderTarget[0].BlendEnable = true;
-	Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-	Desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL; 
+	Desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD; 
 	Desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
 	Desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
 	Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_MAX;
@@ -168,6 +180,7 @@ void UEngineGraphicDevice::BlendInit()
 
 	UEngineBlend::Create("AlphaBlend", Desc);
 }
+
 void UEngineGraphicDevice::RasterizerStateInit()
 {
 	{
@@ -196,6 +209,14 @@ void UEngineGraphicDevice::MaterialInit()
 	}
 
 	{
+		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("WidgetMaterial");
+		Mat->SetVertexShader("EngineSpriteShader.fx");
+		Mat->SetPixelShader("EngineSpriteShader.fx");
+		Mat->SetDepthStencilState("UIDepth");
+	}
+
+
+	{
 		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("CollisionDebugMaterial");
 		Mat->SetVertexShader("EngineDebugCollisionShader.fx");
 		Mat->SetPixelShader("EngineDebugCollisionShader.fx");
@@ -203,10 +224,14 @@ void UEngineGraphicDevice::MaterialInit()
 		Mat->SetRasterizerState("CollisionDebugRas");
 	}
 
+
 	{
 		std::shared_ptr<UEngineMaterial> Mat = UEngineMaterial::Create("TargetMerge");
 		Mat->SetVertexShader("EngineTargetMergeShader.fx");
 		Mat->SetPixelShader("EngineTargetMergeShader.fx");
 		Mat->SetDepthStencilState("TargetMerge");
 	}
+
+
+
 }

@@ -7,8 +7,13 @@
 #include "EngineCamera.h"
 #include "CameraActor.h"
 #include "EngineGUI.h"
+#include "HUD.h"
 #include "EngineRenderTarget.h"
 
+// 플레이어 Renderer
+
+// 카메라 1 Renderer
+// 카메라 2 Renderer
 
 
 
@@ -106,6 +111,7 @@ void ULevel::Tick(float _DeltaTime)
 		AllActorList.push_back(CurActor);
 	}
 
+	// 절대 Ranged for안에서는 erase 리스트의 구조가 변경될 일을 하지 말라고 했ㅅ어요.
 	for (std::shared_ptr<AActor> CurActor : AllActorList)
 	{
 		if (false == CurActor->IsActive())
@@ -120,6 +126,7 @@ void ULevel::Tick(float _DeltaTime)
 void ULevel::Render(float _DeltaTime)
 {
 	UEngineCore::GetDevice().RenderStart();
+
 	LastRenderTarget->Clear();
 
 	for (std::pair<const int, std::shared_ptr<ACameraActor>>& Camera : Cameras)
@@ -129,12 +136,46 @@ void ULevel::Render(float _DeltaTime)
 			continue;
 		}
 
+		if (false == Camera.second->IsActive())
+		{
+			continue;
+		}
+
 		Camera.second->Tick(_DeltaTime);
 		Camera.second->GetCameraComponent()->Render(_DeltaTime);
+		// 이 효과는 이 카메라 그려진 대상만 영향을 줄것이다.
+		// Camera.second->PostEffect();
+		// 난 다 그려졌으니 
 		Camera.second->GetCameraComponent()->CameraTarget->MergeTo(LastRenderTarget);
 	}
+
+	if (true == Cameras.contains(static_cast<int>(EEngineCameraType::UICamera)))
+	{
+		std::shared_ptr<ACameraActor> CameraActor = Cameras[static_cast<int>(EEngineCameraType::UICamera)];
+		if (true == CameraActor->IsActive())
+		{
+			std::shared_ptr<UEngineCamera> CameraComponent = Cameras[static_cast<int>(EEngineCameraType::UICamera)]->GetCameraComponent();
+
+			CameraActor->Tick(_DeltaTime);
+			CameraComponent->CameraTarget->Clear();
+			CameraComponent->CameraTarget->Setting();
+
+			HUD->UIRender(CameraComponent.get(), _DeltaTime);
+
+			CameraComponent->CameraTarget->MergeTo(LastRenderTarget);
+		}
+
+	}
+	else
+	{
+		MSGASSERT("UI카메라가 존재하지 않습니다. 엔진 오류입니다. UI카메라를 제작해주세요.");
+	}
+
+	// LastRenderTarget->PostEffect();
+
 	std::shared_ptr<UEngineRenderTarget> BackBuffer = UEngineCore::GetDevice().GetBackBufferTarget();
 	LastRenderTarget->MergeTo(BackBuffer);
+
 
 	{
 		std::shared_ptr<class ACameraActor> Camera = GetMainCamera();
@@ -159,7 +200,7 @@ void ULevel::Render(float _DeltaTime)
 	if (true == UEngineWindow::IsApplicationOn())
 	{
 		UEngineGUI::GUIRender(this);
-
+		// IMGUI가 랜더링을하면서 
 	}
 
 	UEngineCore::GetDevice().RenderEnd();
@@ -171,7 +212,9 @@ void ULevel::ChangeRenderGroup(int _CameraOrder, int _PrevGroupOrder, std::share
 {
 	if (false == Cameras.contains(_CameraOrder))
 	{
-
+		// 이거 왜만들었을까?
+		// 카메라라서 이렇게 했네요
+		// 카메라 먼저 만들어야 니가 랜더러를 관리할수 있다.
 		MSGASSERT("존재하지 않는 카메라에 랜더러를 집어넣으려고 했습니다.");
 		return;
 	}
@@ -225,6 +268,7 @@ void ULevel::ChangeCollisionProfileName(std::string_view _ProfileName, std::stri
 
 void ULevel::Collision(float _DeltaTime)
 {
+	// Monster Player 충돌체크 해야 한다.
 
 	for (std::pair<const std::string, std::list<std::string>>& Links : CollisionLinks)
 	{
@@ -241,6 +285,11 @@ void ULevel::Collision(float _DeltaTime)
 			{
 				for (std::shared_ptr<class UCollision>& RightCollision : RightList)
 				{
+					if (LeftCollision == RightCollision)
+					{
+						continue;
+					}
+
 					if (false == LeftCollision->IsActive())
 					{
 						continue;
@@ -261,6 +310,7 @@ void ULevel::Release(float _DeltaTime)
 	}
 
 	{
+		// 충돌체 릴리즈
 		for (std::pair<const std::string, std::list<std::shared_ptr<UCollision>>>& Group : Collisions)
 		{
 			std::list<std::shared_ptr<UCollision>>& List = Group.second;
@@ -268,6 +318,7 @@ void ULevel::Release(float _DeltaTime)
 			std::list<std::shared_ptr<UCollision>>::iterator StartIter = List.begin();
 			std::list<std::shared_ptr<UCollision>>::iterator EndIter = List.end();
 
+			// 언리얼은 중간에 삭제할수 없어.
 			for (; StartIter != EndIter; )
 			{
 				if (false == (*StartIter)->IsDestroy())
@@ -276,6 +327,35 @@ void ULevel::Release(float _DeltaTime)
 					continue;
 				}
 
+				// 랜더러는 지울 필요가 없습니다.
+				// (*RenderStartIter) 누가 지울 권한을 가졌느냐.
+				// 컴포넌트의 메모리를 삭제할수 권한은 오로지 액터만 가지고 있다.
+				StartIter = List.erase(StartIter);
+			}
+		}
+	}
+
+	{
+		// 충돌체 릴리즈
+		for (std::pair<const std::string, std::list<std::shared_ptr<UCollision>>>& Group : CheckCollisions)
+		{
+			std::list<std::shared_ptr<UCollision>>& List = Group.second;
+
+			std::list<std::shared_ptr<UCollision>>::iterator StartIter = List.begin();
+			std::list<std::shared_ptr<UCollision>>::iterator EndIter = List.end();
+
+			// 언리얼은 중간에 삭제할수 없어.
+			for (; StartIter != EndIter; )
+			{
+				if (false == (*StartIter)->IsDestroy())
+				{
+					++StartIter;
+					continue;
+				}
+
+				// 랜더러는 지울 필요가 없습니다.
+				// (*RenderStartIter) 누가 지울 권한을 가졌느냐.
+				// 컴포넌트의 메모리를 삭제할수 권한은 오로지 액터만 가지고 있다.
 				StartIter = List.erase(StartIter);
 			}
 		}
@@ -287,11 +367,13 @@ void ULevel::Release(float _DeltaTime)
 		std::list<std::shared_ptr<AActor>>::iterator StartIter = List.begin();
 		std::list<std::shared_ptr<AActor>>::iterator EndIter = List.end();
 
+		// 언리얼은 중간에 삭제할수 없어.
 		for (; StartIter != EndIter; )
 		{
 			if (nullptr != (*StartIter)->Parent)
 			{
-
+				// 부모가 있는 애는 어차피 부모가 다 tick
+				// 레벨이 돌려줄필요가 없어졌다.
 				StartIter = List.erase(StartIter);
 				continue;
 			}
@@ -302,6 +384,7 @@ void ULevel::Release(float _DeltaTime)
 				continue;
 			}
 
+			// 이제 delete도 필요 없다.
 			StartIter = List.erase(StartIter);
 		}
 	}
