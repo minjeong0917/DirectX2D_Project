@@ -2,7 +2,6 @@
 
 #include <EngineBase/Object.h>
 #include <EngineBase/EngineDebug.h>
-#include "Actor.h"
 
 // 설명 :
 class ULevel : public UObject
@@ -22,18 +21,24 @@ public:
 	ULevel& operator=(ULevel&& _Other) noexcept = delete;
 
 	void LevelChangeStart();
-
 	void LevelChangeEnd();
+
+	template<typename Type>
+	Type* GetGameMode()
+	{
+		return dynamic_cast<Type*>(GameMode);
+	}
+
 
 	class AGameMode* GetGameMode()
 	{
 		return GameMode;
 	}
 
-	template<typename ConvertType>
-	ConvertType* GetGameMode()
+	template<typename Type>
+	Type* GetMainPawn()
 	{
-		return dynamic_cast<ConvertType*>(GameMode);
+		return dynamic_cast<Type*>(MainPawn);
 	}
 
 	class APawn* GetMainPawn()
@@ -41,10 +46,18 @@ public:
 		return MainPawn;
 	}
 
+	template<typename Type>
+	Type* GetHUD()
+	{
+		return dynamic_cast<Type*>(HUD);
+	}
+
+
 	class AHUD* GetHUD()
 	{
 		return HUD;
 	}
+
 
 
 	void Tick(float _DeltaTime);
@@ -55,6 +68,12 @@ public:
 	std::shared_ptr<class ACameraActor> GetMainCamera()
 	{
 		return GetCamera(0);
+	}
+
+	template<typename EnumType>
+	std::shared_ptr<class ACameraActor> GetCamera(EnumType _Order)
+	{
+		return GetCamera(static_cast<int>(_Order));
 	}
 
 	std::shared_ptr<class ACameraActor> GetCamera(int _Order)
@@ -73,13 +92,6 @@ public:
 		return SpawnCamera(static_cast<int>(_Order));
 	}
 
-	template<typename EnumType>
-	std::shared_ptr<class ACameraActor> GetCamera(EnumType _Order)
-	{
-		return GetCamera(static_cast<int>(_Order));
-	}
-
-
 	std::shared_ptr<class ACameraActor> SpawnCamera(int _Order);
 
 	template<typename ActorType>
@@ -92,7 +104,7 @@ public:
 		{
 			MSGASSERT("액터를 상속받지 않은 클래스를 SpawnActor하려고 했습니다.");
 			return nullptr;
-			
+
 		}
 
 		char* ActorMemory = new char[sizeof(ActorType)];
@@ -107,12 +119,10 @@ public:
 
 		ActorPtr->SetName(_Name);
 
-
 		BeginPlayList.push_back(NewActor);
 
 		return NewActor;
 	}
-
 
 	ENGINEAPI void ChangeRenderGroup(int _CameraOrder, int _PrevGroupOrder, std::shared_ptr<class URenderer> _Renderer);
 
@@ -123,7 +133,6 @@ public:
 	ENGINEAPI void CreateCollisionProfile(std::string_view _ProfileName);
 
 	ENGINEAPI void LinkCollisionProfile(std::string_view _LeftProfileName, std::string_view _RightProfileName);
-
 
 	template<typename ConvertType>
 	ENGINEAPI std::list<std::shared_ptr<ConvertType>> GetAllActorListByClass()
@@ -160,7 +169,7 @@ public:
 
 		return List;
 	}
-
+	// #endif
 
 protected:
 
@@ -175,11 +184,11 @@ private:
 
 	std::list<std::shared_ptr<class AActor>> AllActorList;
 
+	std::map<int, std::shared_ptr<class ACameraActor>> Cameras;
 	std::shared_ptr<class UEngineRenderTarget> LastRenderTarget;
 
-	std::map<int, std::shared_ptr<class ACameraActor>> Cameras;
-
 	std::map<std::string, std::list<std::shared_ptr<class UCollision>>> Collisions;
+
 
 	std::map<std::string, std::list<std::shared_ptr<class UCollision>>> CheckCollisions;
 
@@ -188,3 +197,4 @@ private:
 
 	ENGINEAPI void InitLevel(AGameMode* _GameMode, APawn* _Pawn, AHUD* _HUD);
 };
+

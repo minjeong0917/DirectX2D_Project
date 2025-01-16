@@ -175,6 +175,7 @@
     <ClInclude Include="ImageWidget.h">
       <Filter>Object\UI</Filter>
     </ClInclude>
+    <ClInclude Include="GameInstance.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActorComponent.cpp">
@@ -333,6 +334,7 @@
     <ClCompile Include="ImageWidget.cpp">
       <Filter>Object\UI</Filter>
     </ClCompile>
+    <ClCompile Include="GameInstance.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Interface">
