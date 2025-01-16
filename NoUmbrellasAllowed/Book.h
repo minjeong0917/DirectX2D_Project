@@ -37,6 +37,7 @@ public:
 	void SetPage0();
 	void SetNextPage();
 
+
 protected:
 protected:
 	void Tick(float _DeltaTime);

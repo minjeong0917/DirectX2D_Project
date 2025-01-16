@@ -1,6 +1,14 @@
 #pragma once
 #include "ContentsEnums.h"
 // Ό³Έν :
+
+struct CardType
+{
+	std::string CardName;
+	std::string CardExplanation;
+	int CardPercent;
+};
+
 class CardInfo
 {
 public:
@@ -19,7 +27,8 @@ public:
 		return Inst;
 	}
 
-	void SetCardInfo();
+	void SetSelectedCardInfo();
+	void CardTypeInfo();
 
 	ECardColor GetCardColor()
 	{
@@ -42,5 +51,7 @@ private:
 	ECardColor CardColor = ECardColor::Blue;
 	ECardType CardType = ECardType::NONE;
 	int CardStep = 0;
+
+	std::vector<struct CardType> AllCardType;
 };
 

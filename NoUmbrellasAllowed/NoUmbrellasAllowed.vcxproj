@@ -171,6 +171,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Card.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="TitleHUD.cpp">
       <SubType>
       </SubType>
@@ -254,6 +258,10 @@
     <ClCompile Include="TitleGameMode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Card.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TitleHUD.h">
       <SubType>
       </SubType>

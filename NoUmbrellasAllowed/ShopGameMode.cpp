@@ -12,7 +12,9 @@
 #include "Book.h"
 #include "BookButton.h"
 #include "BookSmall.h"
-
+#include "Card.h"
+#include "MerchandiseInfo.h"
+#include "CardInfo.h"
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/CameraActor.h>
 #include <EngineCore/EngineCamera.h>
@@ -162,6 +164,18 @@ AShopGameMode::AShopGameMode()
 
     Cursor = GetWorld()->SpawnActor<ACursor>();
 
+    FVector StartLoc = { -720.0f, -38.0f, -152.0f };
+    FVector IterLoc = {0.0f , -48.0f, -2.0f };
+
+    for (int i = 0; i < 5; i++)
+    {
+        Card = GetWorld()->SpawnActor<ACard>();
+        Card->SetActorLocation({ StartLoc.X, StartLoc.Y + IterLoc.Y * i, StartLoc.Z + IterLoc.Z * i });
+        AllCardLocations.push_back({ StartLoc.X, StartLoc.Y + IterLoc.Y * i, StartLoc.Z + IterLoc.Z * i });
+        Card->SetActive(false);
+        AllCard.push_back(Card);
+    }
+
     std::shared_ptr<ACameraActor> Camera = GetWorld()->GetMainCamera();
     Camera->SetActorLocation({ 0.0f, 0.0f, -1000.0f, 1.0f });
     Camera->GetCameraComponent()->SetZSort(0, true);
@@ -205,9 +219,40 @@ void AShopGameMode::Tick(float _DeltaTime)
     FVector MousePos = Camera->ScreenMousePosToWorldPos();
     Cursor->SetActorLocation({ MousePos.X + 8.0f,MousePos.Y - 30.0f, -1000.0f });
 
+
+    PeopleMove(_DeltaTime, WalkCustomer1, true);
+    PeopleMove(_DeltaTime, WalkCustomer2, false);
+
+
+
+    // TestCode
+    if (UEngineInput::IsPress('I'))
+    {
+        IsOut = true;
+    }
+
+    // Customer - InOut
+    if (IsOut == true)
+    {
+        CustomerOut(_DeltaTime);
+    }
+    if (IsOut == false)
+    {
+        NotExistCustomerTime += _DeltaTime;
+        if(NotExistCustomerTime > 3.0f)
+        {
+            CustomerEnter(_DeltaTime);
+            if (IsExistCustomer == true)
+            {
+                MerchandiseActive(_DeltaTime);
+            }
+        }
+    }
+
+    // Tools - Active
     if (ItemShelf != nullptr)
     {
-        if (false == ItemShelf->GetIsToolsClick() || Book->GetIsEnter() == true )
+        if (false == ItemShelf->GetIsToolsClick() || Book->GetIsEnter() == true)
         {
             Cursor->SetRenderActive(true);
         }
@@ -217,6 +262,7 @@ void AShopGameMode::Tick(float _DeltaTime)
         }
     }
 
+    // Cursor - Active
     if (Book->GetIsDrawCard() == false)
     {
         Cursor->SetActive(true);
@@ -227,54 +273,26 @@ void AShopGameMode::Tick(float _DeltaTime)
     }
 
 
-    PeopleMove(_DeltaTime, WalkCustomer1, true);
-    PeopleMove(_DeltaTime, WalkCustomer2, false);
 
-    // TestCode
-    if (UEngineInput::IsPress('I'))
-    {
-        IsOut = true;
-    }
 
-    if (IsOut == false)
+    for (int i = 0; i < MerchandiseInfo::GetInst().GetAllBasicCard().size(); i++)
     {
-        NotExistCustomerTime += _DeltaTime;
-        if(NotExistCustomerTime > 3.0f)
+        if (CardInfo::GetInst().GetCardType() == MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardType)
         {
-            CustomerEnter(_DeltaTime);
-            if (IsExistCustomer == true)
+            if (Book->GetIsDrawCard() == true && AllCard[i]->GetActorLocation().Y < AllCardLocations[i].Y + 80.0f)
             {
-                Merchandise->SetActive(true);
-                Merchandise->SetIsApear(true);
-                CardSlot->SetActive(true);
-                CardSlot->IsActive = true;
-                
-                if (Merchandise->GetActorLocation().Y > -100.0f)
-                {
-                    //Merchandise->PlusAlpha(_DeltaTime);
-                    Merchandise->AddActorLocation({ 0.0f, -1.0f * _DeltaTime * 100 , 0.0f });
-                }
-
+                AllCard[i]->AddActorLocation({ 0.0f, 500.0f * _DeltaTime, 0.0f });
+            }
+            if (Book->GetIsDrawCard() == false && AllCard[i]->GetActorLocation().Y >= AllCardLocations[i].Y)
+            {
+                AllCard[i]->AddActorLocation({ 0.0f, -500.0f * _DeltaTime, 0.0f });
             }
         }
     }
 
 
-    if (IsOut == true)
-    {
-        CustomerOut(_DeltaTime);
-    }   
 
-
-    if ((Merchandise->GetIsEnter() == true && Merchandise->IsActive() == true) || (BookSmall->GetIsEnter() == true && UEngineInput::IsDown(VK_LBUTTON)))
-    {
-        Book->SetActive(true);
-
-        BookSmall->SetRenderActive(false);
-        Book->SetButtonActive(true);
-        Book->SetButtonActive(true);
-    }
-
+    // Book - Active
     if (Book->GetIsBack() == true)
     {
         Book->SetPage0();
@@ -283,10 +301,40 @@ void AShopGameMode::Tick(float _DeltaTime)
         Book->SetButtonActive(false);
         Book->SetIsBack(false);
         Book->SetButtonActive(false);
+    } 
+    else if ((Merchandise->GetIsEnter() == true && Merchandise->IsActive() == true && ItemShelf->IsSelectedToolActive() == true) || (BookSmall->GetIsEnter() == true && UEngineInput::IsDown(VK_LBUTTON)))
+    {
+        Book->SetActive(true);
+        BookSmall->SetRenderActive(false);
+        Book->SetButtonActive(true);
+        Book->SetButtonActive(true);
     }
 
 
 }
+
+void AShopGameMode::MerchandiseActive(float _DeltaTime)
+{
+    MerchandiseInfo::GetInst().SetMerchandiseInfo(false, EMerchandiseType::BAG, 0);
+    Merchandise->SetActive(true);
+    Merchandise->SetIsApear(true);
+    CardSlot->SetActive(true);
+    CardSlot->IsActive = true;
+
+    for (int i = 0; i < MerchandiseInfo::GetInst().GetAllBasicCard().size(); i++)
+    {
+        AllCard[i]->SetActive(true);
+        AllCard[i]->SetCardType(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardColor, MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardStep);
+
+    }
+
+    if (Merchandise->GetActorLocation().Y > -100.0f)
+    {
+        //Merchandise->PlusAlpha(_DeltaTime);
+        Merchandise->AddActorLocation({ 0.0f, -1.0f * _DeltaTime * 100 , 0.0f });
+    }
+}
+
 
 void AShopGameMode::PeopleMove(float _DeltaTime, std::shared_ptr<class AUI> _People, bool _IsRight)
 {

@@ -22,6 +22,7 @@ protected:
 
 private:
 	std::shared_ptr<class USpriteRenderer> CardSlotRender;
+	std::vector<std::shared_ptr<class USpriteRenderer>> AllCardSlotRender;
 	std::shared_ptr<class USpriteRenderer> CardSlotInfoRender;
 
 };

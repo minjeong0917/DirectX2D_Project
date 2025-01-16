@@ -76,6 +76,9 @@
     <ClCompile Include="TitleHUD.cpp">
       <Filter>HUD</Filter>
     </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>Shop\Card</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleGameMode.h">
@@ -155,6 +158,9 @@
     </ClInclude>
     <ClInclude Include="TitleHUD.h">
       <Filter>HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="Card.h">
+      <Filter>Shop\Card</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

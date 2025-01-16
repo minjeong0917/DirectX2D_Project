@@ -28,10 +28,14 @@ private:
 	void CustomerOut(float _DeltaTime);
 	void DoorOpen(float _DeltaTime);
 	void DoorClose(float _DeltaTime);
+	void MerchandiseActive(float _DeltaTime);
 
 	int CustomerActive = 0;
 
 	bool IsExistCustomer = false;
+
+	float CardUpTime = 0.0f;
+
 
 	float NotExistCustomerTime = 0.0f;
 	float CustomerEnterTime = 0.0f;
@@ -53,6 +57,10 @@ private:
 	std::shared_ptr<class AUI> WalkCustomer1;
 	std::shared_ptr<class AUI> WalkCustomer2;
 	std::shared_ptr<class ACustomer> Customer;
+
+	std::shared_ptr<class ACard> Card;
+	std::vector<std::shared_ptr<class ACard>> AllCard;
+	std::vector<FVector> AllCardLocations;
 
 	std::shared_ptr<class ACalculator> Calculator;
 	std::shared_ptr<class AItemShelf> ItemShelf;

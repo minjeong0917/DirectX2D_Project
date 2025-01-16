@@ -22,6 +22,8 @@ ASelectedCard::ASelectedCard()
     SelectedCardRender->SetSprite("Blue", 0);
     SelectedCardRender->SetAutoScaleRatio(3.0f);
     SelectedCardRender->SetupAttachment(RootComponent);
+    
+
 
 }
 
@@ -39,6 +41,8 @@ void ASelectedCard::Tick(float _DeltaTime)
 
     SelectedCardRender->SetWorldLocation({ MousePos.X + 8.0f, MousePos.Y - SelectedCardRender->GetWorldScale3D().hY(), -200.0f});
 }
+
+
 
 void ASelectedCard::SetCardType(ECardColor _CardTye, int _CardStep)
 {

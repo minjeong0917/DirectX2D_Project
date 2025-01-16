@@ -1,7 +1,9 @@
 #pragma once
 #include "ContentsEnums.h"
+#include "Card.h"
+
 // Ό³Έν :
-class ASelectedCard : public AActor
+class ASelectedCard : public ACard
 {
 public:
 	// constrcuter destructer
@@ -13,8 +15,8 @@ public:
 	ASelectedCard(ASelectedCard&& _Other) noexcept = delete;
 	ASelectedCard& operator=(const ASelectedCard& _Other) = delete;
 	ASelectedCard& operator=(ASelectedCard&& _Other) noexcept = delete;
-	void SetCardType(ECardColor _CardTye, int _CardStep);
 
+	void SetCardType(ECardColor _CardTye, int _CardStep) override;
 
 protected:
 	void Tick(float _DeltaTime);

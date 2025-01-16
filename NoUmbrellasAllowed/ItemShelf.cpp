@@ -83,3 +83,8 @@ bool AItemShelf::GetIsToolsClick()
 
     return Tools->GetIsToolClick();
 }
+
+bool AItemShelf::IsSelectedToolActive()
+{
+    return Tools->IsSelectedToolActive();
+}

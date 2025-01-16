@@ -134,7 +134,7 @@ void ABook::Tick(float _DeltaTime)
 
             if (UEngineInput::IsPress(MK_LBUTTON) && PrevMousePos != MousePos)
             {
-                CardInfo::GetInst().SetCardInfo();
+                CardInfo::GetInst().SetSelectedCardInfo();
                 SelectedCard->SetActive(true);
                 SelectedCard->SetCardType(CardInfo::GetInst().GetCardColor(), CardInfo::GetInst().GetCardStep());
                 IsDrawCard = true;

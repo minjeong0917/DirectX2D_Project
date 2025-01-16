@@ -14,6 +14,7 @@ public:
 	AItemShelf& operator=(const AItemShelf& _Other) = delete;
 	AItemShelf& operator=(AItemShelf&& _Other) noexcept = delete;
 	bool GetIsToolsClick();
+	bool IsSelectedToolActive();
 
 
 protected:

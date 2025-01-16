@@ -27,7 +27,6 @@ public:
 		//ImGui::SameLine(); // ÇÑ°£ ¶ç±â
 		if (true == ImGui::Button("Exit"))
 		{
-
 			UEngineWindow::ApplicationOff();
 
 		}

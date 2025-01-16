@@ -28,7 +28,7 @@ void AShopHUD::BeginPlay()
 		std::shared_ptr<UFontWidget> Widget = CreateWidget<UFontWidget>(1);
 
 		Widget->SetWorldLocation({ 200, 300 });
-		Widget->SetFont("±√º≠");
+		Widget->SetFont("PF");
 		Widget->SetText("æ»≥Á«œººø‰");
 	}
 }

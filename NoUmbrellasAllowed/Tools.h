@@ -17,6 +17,8 @@ public:
 	{
 		return IsToolClick;
 	}
+	bool IsSelectedToolActive();
+
 protected:
 	void Tick(float _DeltaTime);
 

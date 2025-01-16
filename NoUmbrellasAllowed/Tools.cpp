@@ -126,3 +126,8 @@ void ATools::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 {
     IsEnter = false;
 }
+
+bool ATools::IsSelectedToolActive()
+{
+    return SelectedToolools->IsActive();
+}

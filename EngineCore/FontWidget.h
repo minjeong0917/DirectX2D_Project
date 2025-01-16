@@ -35,7 +35,6 @@ private:
 	float Scale = 20.0f;
 	UColor Color = UColor::BLACK;
 	FW1_TEXT_FLAG Flag = FW1_TEXT_FLAG::FW1_LEFT;
-	// float 
 
 };
 

@@ -5,6 +5,7 @@
 #include "ShopGameMode.h"
 #include <EngineCore/EngineTexture.h>
 #include <EngineCore/EngineSprite.h>
+#include <EngineCore/EngineFont.h>
 #include <EngineCore/HUD.h>
 #include "ShopHUD.h"
 #include "TitleHUD.h"
@@ -29,12 +30,19 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
     _Data.WindowPos = { -10, 0 };
     _Data.WindowSize = WindowSize;
 
+
+
     UEngineDirectory Dir;
     if (false == Dir.MoveParentToDirectory("NoUmbrellasAllowedResources"))
     {
         MSGASSERT("리소스 폴더를 찾지 못했습니다.");
         return;
     }
+
+    // Font
+    Dir.Append("Fonts");
+    UEngineFont::Load("PF", "PFStardust.ttf");
+
 
     // TitleImage
     LoadFile(Dir, "Images//TitleImage");

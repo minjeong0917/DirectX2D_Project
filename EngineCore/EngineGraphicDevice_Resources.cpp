@@ -22,7 +22,9 @@ void UEngineGraphicDevice::DefaultResourcesInit()
 	MaterialInit();
 
 
+
 	UEngineFont::Load("±Ã¼­", "±Ã¼­");
+
 }
 
 void UEngineGraphicDevice::DepthStencilInit()
