@@ -136,6 +136,8 @@ void ABook::Tick(float _DeltaTime)
             {
                 CardInfo::GetInst().SetSelectedCardInfo();
                 SelectedCard->SetActive(true);
+                SelectedCard->SetTextActive(true);
+                SelectedCard->SetCardNameText(CardInfo::GetInst().GetAllCardType()[ClickNum].CardName);
                 SelectedCard->SetCardType(CardInfo::GetInst().GetCardColor(), CardInfo::GetInst().GetCardStep());
                 IsDrawCard = true;
             }
@@ -145,6 +147,7 @@ void ABook::Tick(float _DeltaTime)
         {
             IsDrawCard = false;
             SelectedCard->SetActive(false);
+            SelectedCard->SetTextActive(false);
         }
     }
 }

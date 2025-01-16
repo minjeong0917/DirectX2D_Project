@@ -17,6 +17,8 @@ public:
 	ASelectedCard& operator=(ASelectedCard&& _Other) noexcept = delete;
 
 	void SetCardType(ECardColor _CardTye, int _CardStep) override;
+	void SetCardNameText(std::string _Text);
+	void SetTextActive(bool _IsActive);
 
 protected:
 	void Tick(float _DeltaTime);

@@ -16,11 +16,15 @@ public:
 	ACard& operator=(ACard&& _Other) noexcept = delete;
 	ENGINEAPI virtual void SetCardType(ECardColor _CardTye, int _CardStep);
 
-
+	void SetCardNameText(std::string _Text);
+	void SetTextActive(bool _IsActive);
 protected:
+	void BeginPlay();
 
 private:
 	std::shared_ptr<class USpriteRenderer> CardRender;
 	std::shared_ptr<class UCollision> CardCollision;
+	std::shared_ptr<class UFontWidget> CardNameText;
+
 };
 

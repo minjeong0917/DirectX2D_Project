@@ -14,7 +14,6 @@ public:
 	ACardSlot& operator=(const ACardSlot& _Other) = delete;
 	ACardSlot& operator=(ACardSlot&& _Other) noexcept = delete;
 
-
 	bool IsActive = false;
 
 protected:

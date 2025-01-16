@@ -10,6 +10,8 @@
 #include <EngineCore/CameraActor.h>
 #include <EngineCore/EngineCamera.h>
 #include "CardInfo.h"
+#include <EngineCore/FontWidget.h>
+#include "ShopHUD.h"
 
 ACard::ACard()
 {
@@ -27,6 +29,20 @@ ACard::ACard()
 ACard::~ACard()
 {
 }
+
+void ACard::BeginPlay()
+{
+    AActor::BeginPlay();
+
+    {
+        CardNameText = GetWorld()->GetHUD()->CreateWidget<UFontWidget>(1);
+
+        CardNameText->SetWorldLocation({ 200, 300 });
+        CardNameText->SetFont("PF", 25.0f, TColor<unsigned char>(97, 76, 45, 255));
+        CardNameText->SetText("완벽한 상태");
+    }
+}
+
 
 void ACard::SetCardType(ECardColor _CardTye, int _CardStep)
 {
@@ -46,4 +62,20 @@ void ACard::SetCardType(ECardColor _CardTye, int _CardStep)
     }
 
 
+}
+
+void ACard::SetCardNameText(std::string _Text)
+{
+    if (CardNameText != nullptr)
+    {
+        CardNameText->SetText(_Text);
+    }
+}
+
+void ACard::SetTextActive(bool _IsActive)
+{
+    if (CardNameText != nullptr)
+    {
+        CardNameText->SetActive(_IsActive);
+    }
 }

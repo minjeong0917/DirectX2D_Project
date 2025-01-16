@@ -59,6 +59,22 @@ void ASelectedCard::Tick(float _DeltaTime)
 }
 
 
+void ASelectedCard::SetCardNameText(std::string _Text)
+{
+    if (CardNameText != nullptr)
+    {
+        CardNameText->SetText(_Text);
+    }
+}
+
+void ASelectedCard::SetTextActive(bool _IsActive)
+{
+    if (CardNameText != nullptr)
+    {
+        CardNameText->SetActive(_IsActive);
+    }
+}
+
 
 void ASelectedCard::SetCardType(ECardColor _CardTye, int _CardStep)
 {

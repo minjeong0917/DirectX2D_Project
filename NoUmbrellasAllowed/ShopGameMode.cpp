@@ -321,7 +321,8 @@ void AShopGameMode::MerchandiseActive(float _DeltaTime)
     {
         AllCard[i]->SetActive(true);
         AllCard[i]->SetCardType(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardColor, MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardStep);
-
+        AllCard[i]->SetTextActive(true);
+        //AllCard[i]->SetCardNameText(CardInfo::GetInst().GetAllCardType()[]);
     }
 
     if (Merchandise->GetActorLocation().Y > -100.0f)
