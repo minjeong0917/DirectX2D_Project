@@ -44,6 +44,12 @@ public:
 	{
 		return CardStep;
 	}
+
+	std::vector<struct CardType> GetAllCardType()
+	{
+		return AllCardType;
+	}
+
 protected:
 
 private:

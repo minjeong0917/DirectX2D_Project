@@ -5,6 +5,7 @@
 #include <EngineCore/FontWidget.h>
 #include <EngineCore/CameraActor.h>
 #include <EngineCore/EngineCamera.h>
+#include "ShopGameMode.h"
 AShopHUD::AShopHUD()
 {
 }
@@ -20,7 +21,7 @@ void AShopHUD::BeginPlay()
 		Cursor = CreateWidget<UImageWidget>(2);
 		Cursor->SetSprite("Cursor",0);
 		Cursor->SetAutoScaleRatio(2.0f);
-
+		
 	}
 
 
@@ -42,4 +43,13 @@ void AShopHUD::Tick(float _DeltaTime)
 
 	Cursor->SetWorldLocation({ MousePos.X + 8.0f, MousePos.Y - 30.0f });
 
+	AShopGameMode* Shop = GetWorld()->GetGameMode<AShopGameMode>();
+	if (Shop->CursorActive == true)
+	{
+		Cursor->SetActive(true);
+	}
+	else if (Shop->CursorActive == false)
+	{
+		Cursor->SetActive(false);
+	}
 }

@@ -15,7 +15,7 @@ public:
 	AShopGameMode& operator=(AShopGameMode&& _Other) noexcept = delete;
 
 
-
+	bool CursorActive = true;
 protected:
 	void BeginPlay();
 	void Tick(float _DeltaTime);

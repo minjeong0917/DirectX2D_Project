@@ -249,29 +249,19 @@ void AShopGameMode::Tick(float _DeltaTime)
         }
     }
 
-    // Tools - Active
+    // Cursor - Active
     if (ItemShelf != nullptr)
     {
-        if (false == ItemShelf->GetIsToolsClick() || Book->GetIsEnter() == true)
+        if ((false == ItemShelf->GetIsToolsClick() || Book->GetIsEnter() == true) && Book->GetIsDrawCard() == false)
         {
-            Cursor->SetRenderActive(true);
+            CursorActive = true;
+
         }
-        else if (true == ItemShelf->GetIsToolsClick() || Book->GetIsEnter() == false)
+        else if (true == ItemShelf->GetIsToolsClick() || Book->GetIsEnter() == false || Book->GetIsDrawCard() == true)
         {
-            Cursor->SetRenderActive(false);
+            CursorActive = false;
         }
     }
-
-    // Cursor - Active
-    if (Book->GetIsDrawCard() == false)
-    {
-        Cursor->SetActive(true);
-    }
-    else if (Book->GetIsDrawCard() == true)
-    {
-        Cursor->SetActive(false);
-    }
-
 
 
 
@@ -279,17 +269,23 @@ void AShopGameMode::Tick(float _DeltaTime)
     {
         if (CardInfo::GetInst().GetCardType() == MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardType)
         {
-            if (Book->GetIsDrawCard() == true && AllCard[i]->GetActorLocation().Y < AllCardLocations[i].Y + 80.0f)
+            if (Book->GetIsDrawCard() == false && AllCard[i]->GetActorLocation().Y <= AllCardLocations[i].Y)
+            {
+                AllCard[i]->SetActorLocation(AllCardLocations[i]);
+                continue;
+            }
+
+            if (Book->GetIsDrawCard() == true && AllCard[i]->GetActorLocation().Y < AllCardLocations[i].Y + 50.0f)
             {
                 AllCard[i]->AddActorLocation({ 0.0f, 500.0f * _DeltaTime, 0.0f });
             }
-            if (Book->GetIsDrawCard() == false && AllCard[i]->GetActorLocation().Y >= AllCardLocations[i].Y)
+            else if (Book->GetIsDrawCard() == false && AllCard[i]->GetActorLocation().Y > AllCardLocations[i].Y)
             {
                 AllCard[i]->AddActorLocation({ 0.0f, -500.0f * _DeltaTime, 0.0f });
             }
+
         }
     }
-
 
 
     // Book - Active
