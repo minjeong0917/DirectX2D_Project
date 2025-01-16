@@ -21,17 +21,8 @@ void AShopHUD::BeginPlay()
 		Cursor = CreateWidget<UImageWidget>(2);
 		Cursor->SetSprite("Cursor",0);
 		Cursor->SetAutoScaleRatio(2.0f);
-		
 	}
 
-
-	{
-		std::shared_ptr<UFontWidget> Widget = CreateWidget<UFontWidget>(1);
-
-		Widget->SetWorldLocation({ 200, 300 });
-		Widget->SetFont("PF");
-		Widget->SetText("æ»≥Á«œººø‰");
-	}
 }
 
 void AShopHUD::Tick(float _DeltaTime)

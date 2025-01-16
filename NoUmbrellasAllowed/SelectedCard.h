@@ -20,9 +20,11 @@ public:
 
 protected:
 	void Tick(float _DeltaTime);
+	void BeginPlay();
 
 private:
 	std::shared_ptr<class USpriteRenderer> SelectedCardRender;
 	std::shared_ptr<class UCollision> SelectedCardCollision;
+	std::shared_ptr<class UFontWidget> CardNameText;
 };
 

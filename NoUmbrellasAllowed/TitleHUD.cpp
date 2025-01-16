@@ -21,8 +21,6 @@ void ATitleHUD::BeginPlay()
 	Cursor->SetSprite("Cursor", 0);
 	Cursor->SetAutoScaleRatio(2.0f);
 
-	
-
 
 }
 

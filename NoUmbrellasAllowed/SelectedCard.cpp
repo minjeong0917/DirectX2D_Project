@@ -11,7 +11,8 @@
 #include <EngineCore/CameraActor.h>
 #include <EngineCore/EngineCamera.h>
 #include "CardInfo.h"
-
+#include <EngineCore/FontWidget.h>
+#include "ShopHUD.h"
 
 ASelectedCard::ASelectedCard()
 {
@@ -25,10 +26,23 @@ ASelectedCard::ASelectedCard()
     
 
 
+
 }
 
 ASelectedCard::~ASelectedCard()
 {
+}
+void ASelectedCard::BeginPlay()
+{
+    AActor::BeginPlay();
+
+    {
+        CardNameText = GetWorld()->GetHUD()->CreateWidget<UFontWidget>(1);
+
+        CardNameText->SetWorldLocation({ 200, 300 });
+        CardNameText->SetFont("PF", 25.0f, TColor<unsigned char>(97, 76, 45, 255));
+        CardNameText->SetText("완벽한 상태");
+    }
 }
 
 
@@ -40,6 +54,8 @@ void ASelectedCard::Tick(float _DeltaTime)
     FVector MousePos = Camera->ScreenMousePosToWorldPos();
 
     SelectedCardRender->SetWorldLocation({ MousePos.X + 8.0f, MousePos.Y - SelectedCardRender->GetWorldScale3D().hY(), -200.0f});
+
+    CardNameText->SetWorldLocation({ MousePos.X -80.0f, MousePos.Y+70.0f, -200.0f });
 }
 
 
