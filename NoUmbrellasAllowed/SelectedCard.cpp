@@ -23,8 +23,6 @@ ASelectedCard::ASelectedCard()
     SelectedCardRender->SetSprite("Blue", 0);
     SelectedCardRender->SetAutoScaleRatio(3.0f);
     SelectedCardRender->SetupAttachment(RootComponent);
-    
-
 
 
 }

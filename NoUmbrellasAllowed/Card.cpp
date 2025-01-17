@@ -37,12 +37,17 @@ void ACard::BeginPlay()
     {
         CardNameText = GetWorld()->GetHUD()->CreateWidget<UFontWidget>(1);
 
-        CardNameText->SetWorldLocation({ 200, 300 });
+
         CardNameText->SetFont("PF", 25.0f, TColor<unsigned char>(97, 76, 45, 255));
-        CardNameText->SetText("완벽한 상태");
+        CardNameText->SetActive(false);
     }
 }
 
+void ACard::Tick(float _DeltaTime)
+{
+    AActor::Tick(_DeltaTime);
+    CardNameText->SetWorldLocation({ CardRender->GetWorldLocation().X - 85.0f ,CardRender->GetWorldLocation().Y + 160.0f,CardRender->GetWorldLocation().Z });
+}
 
 void ACard::SetCardType(ECardColor _CardTye, int _CardStep)
 {

@@ -26,15 +26,15 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
 
 			AllBasicCard[0].CardType = ECardType::TEXTURE;
 			AllBasicCard[0].CardColor = ECardColor::Gray;
-			AllBasicCard[0].CardName = 0;
+			AllBasicCard[0].CardNameNum = 0;
 
 			AllBasicCard[1].CardType = ECardType::TEXTURE;
 			AllBasicCard[1].CardColor = ECardColor::Green;
-			AllBasicCard[1].CardName = 0;
+			AllBasicCard[1].CardNameNum = 2;
 
 			AllBasicCard[2].CardType = ECardType::CONDITION;
 			AllBasicCard[2].CardColor = ECardColor::Blue;
-			AllBasicCard[2].CardName = 0; // 완벽한 상태
+			AllBasicCard[2].CardNameNum = 3; // 완벽한 상태
 
 
 			if (_IsFake == false)

@@ -214,6 +214,7 @@ void AShopGameMode::Tick(float _DeltaTime)
 {
     AActor::Tick(_DeltaTime);
 
+    UEngineDebug::OutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 
     std::shared_ptr<class ACameraActor> Camera = GetWorld()->GetCamera(0);
     FVector MousePos = Camera->ScreenMousePosToWorldPos();
@@ -255,7 +256,6 @@ void AShopGameMode::Tick(float _DeltaTime)
         if ((false == ItemShelf->GetIsToolsClick() || Book->GetIsEnter() == true) && Book->GetIsDrawCard() == false)
         {
             CursorActive = true;
-
         }
         else if (true == ItemShelf->GetIsToolsClick() || Book->GetIsEnter() == false || Book->GetIsDrawCard() == true)
         {
@@ -264,7 +264,7 @@ void AShopGameMode::Tick(float _DeltaTime)
     }
 
 
-
+    // Card Compare
     for (int i = 0; i < MerchandiseInfo::GetInst().GetAllBasicCard().size(); i++)
     {
         if (CardInfo::GetInst().GetCardType() == MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardType)
@@ -321,9 +321,19 @@ void AShopGameMode::MerchandiseActive(float _DeltaTime)
     {
         AllCard[i]->SetActive(true);
         AllCard[i]->SetCardType(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardColor, MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardStep);
+
         AllCard[i]->SetTextActive(true);
-        //AllCard[i]->SetCardNameText(CardInfo::GetInst().GetAllCardType()[]);
+        CardInfo::GetInst().SetCardType(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardType);
+        CardInfo::GetInst().CardTypeInfo();
+
+        int CardNum = MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardNameNum;
+        std::string Name = CardInfo::GetInst().GetAllCardType()[CardNum].CardName;
+
+        AllCard[i]->SetCardNameText(Name);
     }
+
+
+
 
     if (Merchandise->GetActorLocation().Y > -100.0f)
     {

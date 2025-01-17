@@ -6,7 +6,7 @@ struct MBasicCardInfo
 	ECardType CardType;
 	ECardColor CardColor;
 	int CardStep;
-	int CardName;
+	int CardNameNum;
 };
 
 

@@ -40,6 +40,11 @@ public:
 		return CardType;
 	}
 
+	void SetCardType(ECardType _CardType)
+	{
+		CardType = _CardType;
+	}
+
 	int GetCardStep()
 	{
 		return CardStep;
