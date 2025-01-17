@@ -42,6 +42,7 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
     // Font
     Dir.Append("Fonts");
     UEngineFont::Load("PF", "PF Stardust");
+    UEngineFont::Load("PFEXBold", "PF Stardust ExtraBold");
     //UEngineFont::Load("PF", "PFStardust.ttf");
 
 

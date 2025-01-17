@@ -6,6 +6,7 @@ struct CardType
 {
 	std::string CardName;
 	std::string CardExplanation;
+	std::string CardPercentText;
 	int CardPercent;
 };
 

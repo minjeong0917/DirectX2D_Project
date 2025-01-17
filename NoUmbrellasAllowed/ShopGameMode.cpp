@@ -31,6 +31,8 @@ AShopGameMode::AShopGameMode()
     GetWorld()->CreateCollisionProfile("SelectedTool");
     GetWorld()->CreateCollisionProfile("BookMain");
     GetWorld()->CreateCollisionProfile("BookSmall");
+    GetWorld()->CreateCollisionProfile("CardSlot");
+    GetWorld()->CreateCollisionProfile("SelectedCard");
 
     for (int i = 0; i < 14; i++)
     {
@@ -53,6 +55,8 @@ AShopGameMode::AShopGameMode()
     GetWorld()->LinkCollisionProfile("BookMain", "Cursor");
     GetWorld()->LinkCollisionProfile("BookSmall", "Cursor");
     GetWorld()->LinkCollisionProfile("BookSmall", "SelectedTool");
+    GetWorld()->LinkCollisionProfile("CardSlot", "SelectedCard");
+
     for (int i = 0; i < 4; i++)
     {
         GetWorld()->CreateCollisionProfile("BookButton_" + std::to_string(i));
@@ -245,7 +249,15 @@ void AShopGameMode::Tick(float _DeltaTime)
             CustomerEnter(_DeltaTime);
             if (IsExistCustomer == true)
             {
-                MerchandiseActive(_DeltaTime);
+                if (IsMerchandisActive == false)
+                {
+                    MerchandiseActive(_DeltaTime);
+                }
+                if (Merchandise->GetActorLocation().Y > -100.0f)
+                {
+                    //Merchandise->PlusAlpha(_DeltaTime);
+                    Merchandise->AddActorLocation({ 0.0f, -1.0f * _DeltaTime * 100 , 0.0f });
+                }
             }
         }
     }
@@ -253,41 +265,30 @@ void AShopGameMode::Tick(float _DeltaTime)
     // Cursor - Active
     if (ItemShelf != nullptr)
     {
-        if ((false == ItemShelf->GetIsToolsClick() || Book->GetIsEnter() == true) && Book->GetIsDrawCard() == false)
+        if (false == ItemShelf->GetIsToolsClick() || Book->GetIsEnter() == true)
         {
-            CursorActive = true;
+            Cursor->SetRenderActive(true);
         }
-        else if (true == ItemShelf->GetIsToolsClick() || Book->GetIsEnter() == false || Book->GetIsDrawCard() == true)
+        else if (true == ItemShelf->GetIsToolsClick() || Book->GetIsEnter() == false)
         {
-            CursorActive = false;
+            Cursor->SetRenderActive(false);
         }
     }
 
-
-    // Card Compare
-    for (int i = 0; i < MerchandiseInfo::GetInst().GetAllBasicCard().size(); i++)
+    // Cursor - Active
+    if (Book->GetIsDrawCard() == false)
     {
-        if (CardInfo::GetInst().GetCardType() == MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardType)
-        {
-            if (Book->GetIsDrawCard() == false && AllCard[i]->GetActorLocation().Y <= AllCardLocations[i].Y)
-            {
-                AllCard[i]->SetActorLocation(AllCardLocations[i]);
-                continue;
-            }
-
-            if (Book->GetIsDrawCard() == true && AllCard[i]->GetActorLocation().Y < AllCardLocations[i].Y + 50.0f)
-            {
-                AllCard[i]->AddActorLocation({ 0.0f, 500.0f * _DeltaTime, 0.0f });
-            }
-            else if (Book->GetIsDrawCard() == false && AllCard[i]->GetActorLocation().Y > AllCardLocations[i].Y)
-            {
-                AllCard[i]->AddActorLocation({ 0.0f, -500.0f * _DeltaTime, 0.0f });
-            }
-
-        }
+        Cursor->SetActive(true);
+    }
+    else if (Book->GetIsDrawCard() == true)
+    {
+        Cursor->SetActive(false);
     }
 
 
+    CardCompareAndChange(_DeltaTime);
+
+  
     // Book - Active
     if (Book->GetIsBack() == true)
     {
@@ -309,6 +310,83 @@ void AShopGameMode::Tick(float _DeltaTime)
 
 }
 
+void AShopGameMode::CardCompareAndChange(float _DeltaTime)
+{
+    // Card Compare
+    for (int i = 0; i < MerchandiseInfo::GetInst().GetAllBasicCard().size(); i++)
+    {
+        if (CardInfo::GetInst().GetCardType() == MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardType)
+        {
+            if (Book->GetIsDrawCard() == false && AllCard[i]->GetActorLocation().Y <= AllCardLocations[i].Y)
+            {
+                AllCard[i]->SetActorLocation(AllCardLocations[i]);
+                continue;
+            }
+
+            if (Book->GetIsDrawCard() == true && AllCard[i]->GetActorLocation().Y < AllCardLocations[i].Y + 50.0f)
+            {
+                AllCard[i]->AddActorLocation({ 0.0f, 500.0f * _DeltaTime, 0.0f });
+
+                ChangeCardNum = i;
+
+            }
+            if (IsCardChange == false && Book->GetIsDrawCard() == false && AllCard[i]->GetActorLocation().Y > AllCardLocations[i].Y)
+            {
+                AllCard[i]->AddActorLocation({ 0.0f, -500.0f * _DeltaTime, 0.0f });
+            }
+
+        }
+    }
+
+
+    // Card Change
+    if (CardSlot->GetIsEnter() == true && Book->GetIsDrawCard() == true)
+    {
+        int CardNum = MerchandiseInfo::GetInst().GetAllBasicCard()[ChangeCardNum].CardNameNum;
+        std::string MerchandiseCardName = CardInfo::GetInst().GetAllCardType()[CardNum].CardName;
+
+        if (Book->GetCurCardName() != MerchandiseCardName && UEngineInput::IsUp(VK_LBUTTON))
+        {
+            IsCardChange = true;
+
+        }
+    }
+
+    if (IsCardChange == true)
+    {
+
+        CardChangeTime += _DeltaTime;
+
+        if (CardChangeTime < 1.0f && Book->GetIsDrawCard() == false && AllCard[ChangeCardNum]->GetActorLocation().Y > AllCardLocations[ChangeCardNum].Y)
+        {
+            AllCard[ChangeCardNum]->AddActorLocation({ 0.0f, -1000.0f * _DeltaTime, 0.0f });
+        }
+        else if (CardChangeTime > 1.0f && CardChangeTime < 2.0f && AllCard[ChangeCardNum]->GetActorLocation().Y < AllCardLocations[ChangeCardNum].Y + 100.0f)
+        {
+            int CardNum = Book->GetCurClickNum();
+            MerchandiseInfo::GetInst().SetCardNameNum(ChangeCardNum, CardNum);
+            std::string Name = CardInfo::GetInst().GetAllCardType()[CardNum].CardName;
+            std::string Explain = CardInfo::GetInst().GetAllCardType()[CardNum].CardExplanation;
+            std::string Percent = CardInfo::GetInst().GetAllCardType()[CardNum].CardPercentText;
+
+            AllCard[ChangeCardNum]->SetCardNameText(Name);
+            AllCard[ChangeCardNum]->SetCardExplainText(Explain);
+            AllCard[ChangeCardNum]->SetCardPercentText(Percent);
+
+            AllCard[ChangeCardNum]->AddActorLocation({ 0.0f, 1000.0f * _DeltaTime, 0.0f });
+
+        }
+        else if (CardChangeTime > 2.0f && AllCard[ChangeCardNum]->GetActorLocation().Y >= AllCardLocations[ChangeCardNum].Y + 50.0f)
+        {
+            IsCardChange = false;
+            CardChangeTime = 0.0f;
+        }
+
+    }
+
+}
+
+
 void AShopGameMode::MerchandiseActive(float _DeltaTime)
 {
     MerchandiseInfo::GetInst().SetMerchandiseInfo(false, EMerchandiseType::BAG, 0);
@@ -316,6 +394,7 @@ void AShopGameMode::MerchandiseActive(float _DeltaTime)
     Merchandise->SetIsApear(true);
     CardSlot->SetActive(true);
     CardSlot->IsActive = true;
+    IsMerchandisActive = true;
 
     for (int i = 0; i < MerchandiseInfo::GetInst().GetAllBasicCard().size(); i++)
     {
@@ -323,23 +402,25 @@ void AShopGameMode::MerchandiseActive(float _DeltaTime)
         AllCard[i]->SetCardType(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardColor, MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardStep);
 
         AllCard[i]->SetTextActive(true);
+
         CardInfo::GetInst().SetCardType(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardType);
         CardInfo::GetInst().CardTypeInfo();
 
         int CardNum = MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardNameNum;
+
         std::string Name = CardInfo::GetInst().GetAllCardType()[CardNum].CardName;
+        std::string Explain = CardInfo::GetInst().GetAllCardType()[CardNum].CardExplanation;
+        std::string Percent = CardInfo::GetInst().GetAllCardType()[CardNum].CardPercentText;
 
         AllCard[i]->SetCardNameText(Name);
+        AllCard[i]->SetCardExplainText(Explain);
+        AllCard[i]->SetCardPercentText(Percent);
     }
 
 
 
 
-    if (Merchandise->GetActorLocation().Y > -100.0f)
-    {
-        //Merchandise->PlusAlpha(_DeltaTime);
-        Merchandise->AddActorLocation({ 0.0f, -1.0f * _DeltaTime * 100 , 0.0f });
-    }
+
 }
 
 

@@ -30,6 +30,14 @@ ACard::ACard()
     CardNameText->SetActive(false);
     CardNameText->SetupAttachment(RootComponent);
 
+    CardExplainText = CreateDefaultSubObject<UFontRenderer>();
+    CardExplainText->SetFont("PF", 22.0f, TColor<unsigned char>(73, 72, 71, 255), FW1_CENTER);
+    CardExplainText->SetupAttachment(RootComponent);
+
+
+    CardPercentText = CreateDefaultSubObject<UFontRenderer>();
+    CardPercentText->SetFont("PF", 20.0f, TColor<unsigned char>(148, 65, 33, 255), FW1_RIGHT);
+    CardPercentText->SetupAttachment(RootComponent);
 }
 
 ACard::~ACard()
@@ -45,6 +53,8 @@ void ACard::Tick(float _DeltaTime)
 {
     AActor::Tick(_DeltaTime);
     CardNameText->SetWorldLocation({ CardRender->GetWorldLocation().X - 85.0f ,CardRender->GetWorldLocation().Y + 160.0f,CardRender->GetWorldLocation().Z });
+    CardExplainText->SetWorldLocation({ CardRender->GetWorldLocation().X + 5.0f,CardRender->GetWorldLocation().Y + 90, CardRender->GetWorldLocation().Z });
+    CardPercentText->SetWorldLocation({ CardRender->GetWorldLocation().X + 130.0f,CardRender->GetWorldLocation().Y + 158.0f, CardRender->GetWorldLocation().Z });
 }
 
 void ACard::SetCardType(ECardColor _CardTye, int _CardStep)
@@ -74,11 +84,26 @@ void ACard::SetCardNameText(std::string _Text)
         CardNameText->SetText(_Text);
     }
 }
-
+void ACard::SetCardExplainText(std::string _Text)
+{
+    if (CardExplainText != nullptr)
+    {
+        CardExplainText->SetText(_Text);
+    }
+}
+void ACard::SetCardPercentText(std::string _Text)
+{
+    if (CardPercentText != nullptr)
+    {
+        CardPercentText->SetText(_Text);
+    }
+}
 void ACard::SetTextActive(bool _IsActive)
 {
     if (CardNameText != nullptr)
     {
         CardNameText->SetActive(_IsActive);
+        CardExplainText->SetActive(_IsActive);
+        CardPercentText->SetActive(_IsActive);
     }
 }

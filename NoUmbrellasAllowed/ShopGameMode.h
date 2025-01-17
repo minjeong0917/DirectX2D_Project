@@ -29,13 +29,16 @@ private:
 	void DoorOpen(float _DeltaTime);
 	void DoorClose(float _DeltaTime);
 	void MerchandiseActive(float _DeltaTime);
+	void CardCompareAndChange(float _DeltaTime);
 
+	float CardChangeTime = 0.0f;
+	bool IsCardChange = false;
+	int ChangeCardNum = 0;
+	bool IsMerchandisActive = false;
+	
 	int CustomerActive = 0;
 
 	bool IsExistCustomer = false;
-
-	float CardUpTime = 0.0f;
-
 
 	float NotExistCustomerTime = 0.0f;
 	float CustomerEnterTime = 0.0f;

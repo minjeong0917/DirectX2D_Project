@@ -25,10 +25,25 @@ ASelectedCard::ASelectedCard()
     SelectedCardRender->SetAutoScaleRatio(3.0f);
     SelectedCardRender->SetupAttachment(RootComponent);
 
+
+    SelectedCardCollision = CreateDefaultSubObject<UCollision>();
+    SelectedCardCollision->SetCollisionProfileName("SelectedCard");
+    SelectedCardCollision->SetRelativeLocation({ 0.0f, 0.5f,0.0f });
+    SelectedCardCollision->SetupAttachment(SelectedCardRender);
+
     CardNameText = CreateDefaultSubObject<UFontRenderer>();
     CardNameText->SetFont("PF", 25.0f, TColor<unsigned char>(97, 76, 45, 255));
     CardNameText->SetupAttachment(RootComponent);
 
+    
+    CardExplainText = CreateDefaultSubObject<UFontRenderer>();
+    CardExplainText->SetFont("PF", 22.0f, TColor<unsigned char>(73, 72, 71, 255), FW1_CENTER);
+    CardExplainText->SetupAttachment(RootComponent);
+
+
+    CardPercentText = CreateDefaultSubObject<UFontRenderer>();
+    CardPercentText->SetFont("PF", 20.0f, TColor<unsigned char>(148, 65, 33, 255),FW1_RIGHT);
+    CardPercentText->SetupAttachment(RootComponent);
 }
 
 ASelectedCard::~ASelectedCard()
@@ -42,6 +57,9 @@ void ASelectedCard::BeginPlay()
 }
 
 
+
+
+
 void ASelectedCard::Tick(float _DeltaTime)
 {
     AActor::Tick(_DeltaTime);
@@ -51,7 +69,9 @@ void ASelectedCard::Tick(float _DeltaTime)
 
     SelectedCardRender->SetWorldLocation({ MousePos.X + 8.0f, MousePos.Y - SelectedCardRender->GetWorldScale3D().hY(), -200.0f});
 
-    CardNameText->SetWorldLocation({ MousePos.X -80.0f, MousePos.Y+70.0f, -200.0f });
+    CardNameText->SetWorldLocation({ MousePos.X - 80.0f, MousePos.Y + 70.0f, -200.0f });
+    CardExplainText->SetWorldLocation({ MousePos.X + 10.0f, MousePos.Y, -200.0f });
+    CardPercentText->SetWorldLocation({ MousePos.X + 135.0f, MousePos.Y + 68.0f, -200.0f });
 }
 
 
@@ -63,11 +83,27 @@ void ASelectedCard::SetCardNameText(std::string _Text)
     }
 }
 
+void ASelectedCard::SetCardExplainText(std::string _Text)
+{
+    if (CardExplainText != nullptr)
+    {
+        CardExplainText->SetText(_Text);
+    }
+}
+void ASelectedCard::SetCardPercentText(std::string _Text)
+{
+    if (CardPercentText != nullptr)
+    {
+        CardPercentText->SetText(_Text);
+    }
+}
 void ASelectedCard::SetTextActive(bool _IsActive)
 {
     if (CardNameText != nullptr)
     {
         CardNameText->SetActive(_IsActive);
+        CardExplainText->SetActive(_IsActive);
+        CardPercentText->SetActive(_IsActive);
     }
 }
 

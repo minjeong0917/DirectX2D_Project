@@ -37,8 +37,16 @@ public:
 	void SetPage0();
 	void SetNextPage();
 
+	std::string GetCurCardName()
+	{
+		return CurCardName;
+	}
 
-protected:
+	int GetCurClickNum()
+	{
+		return CurClickNum;
+	}
+
 protected:
 	void Tick(float _DeltaTime);
 	void OnCollisionEnter(class UCollision* _This, class UCollision* _Other);
@@ -47,6 +55,9 @@ protected:
 	void SetBookButtonToPage();
 
 private:
+	std::string CurCardName = "NONE";
+	int CurClickNum = 0;
+
 	bool ClickBookPage = false;
 	bool IsOff = false;
 	bool IsEnter = false;

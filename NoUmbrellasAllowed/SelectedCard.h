@@ -18,16 +18,23 @@ public:
 
 	void SetCardType(ECardColor _CardTye, int _CardStep) override;
 	void SetCardNameText(std::string _Text);
+	void SetCardExplainText(std::string _Text);
+	void SetCardPercentText(std::string _Text);
+
 	void SetTextActive(bool _IsActive);
 
 protected:
 	void Tick(float _DeltaTime);
 	void BeginPlay();
 
+
 private:
+
 	std::shared_ptr<class USpriteRenderer> SelectedCardRender;
 	std::shared_ptr<class UCollision> SelectedCardCollision;
 	std::shared_ptr<class UFontRenderer> CardNameText;
+	std::shared_ptr<class UFontRenderer> CardExplainText;
+	std::shared_ptr<class UFontRenderer> CardPercentText;
 
 };
 

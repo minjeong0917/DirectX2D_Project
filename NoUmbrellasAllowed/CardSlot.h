@@ -14,15 +14,26 @@ public:
 	ACardSlot& operator=(const ACardSlot& _Other) = delete;
 	ACardSlot& operator=(ACardSlot&& _Other) noexcept = delete;
 
+
+
 	bool IsActive = false;
+
+	bool GetIsEnter()
+	{
+		return IsEnter;
+	}
 
 protected:
 	void Tick(float _DeltaTime);
-
+	void OnCollisionEnter(class UCollision* _This, class UCollision* _Other);
+	void OnCollisionEnd(class UCollision* _This, class UCollision* _Other);
 private:
+
+	bool IsEnter = false;
 	std::shared_ptr<class USpriteRenderer> CardSlotRender;
 	std::vector<std::shared_ptr<class USpriteRenderer>> AllCardSlotRender;
 	std::shared_ptr<class USpriteRenderer> CardSlotInfoRender;
+	std::shared_ptr<class UCollision> CardSlotCollision;
 
 };
 

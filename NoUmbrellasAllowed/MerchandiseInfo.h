@@ -35,6 +35,11 @@ public:
 	{
 		return AllBasicCard;
 	}
+	
+	void SetCardNameNum(int _th, int _CardNum)
+	{
+		AllBasicCard[_th].CardNameNum = _CardNum;
+	}
 
 protected:
 
