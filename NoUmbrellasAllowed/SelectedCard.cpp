@@ -13,6 +13,7 @@
 #include "CardInfo.h"
 #include <EngineCore/FontWidget.h>
 #include "ShopHUD.h"
+#include <EngineCore/FontRenderer.h>
 
 ASelectedCard::ASelectedCard()
 {
@@ -24,23 +25,20 @@ ASelectedCard::ASelectedCard()
     SelectedCardRender->SetAutoScaleRatio(3.0f);
     SelectedCardRender->SetupAttachment(RootComponent);
 
+    CardNameText = CreateDefaultSubObject<UFontRenderer>();
+    CardNameText->SetFont("PF", 25.0f, TColor<unsigned char>(97, 76, 45, 255));
+    CardNameText->SetupAttachment(RootComponent);
 
 }
 
 ASelectedCard::~ASelectedCard()
 {
 }
+
 void ASelectedCard::BeginPlay()
 {
     AActor::BeginPlay();
 
-    {
-        CardNameText = GetWorld()->GetHUD()->CreateWidget<UFontWidget>(1);
-
-        CardNameText->SetWorldLocation({ 200, 300 });
-        CardNameText->SetFont("PF", 25.0f, TColor<unsigned char>(97, 76, 45, 255));
-        CardNameText->SetText("완벽한 상태");
-    }
 }
 
 

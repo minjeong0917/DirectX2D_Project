@@ -12,17 +12,23 @@
 #include "CardInfo.h"
 #include <EngineCore/FontWidget.h>
 #include "ShopHUD.h"
+#include <EngineCore/FontRenderer.h>
 
 ACard::ACard()
 {
     std::shared_ptr<UDefaultSceneComponent> Default = CreateDefaultSubObject<UDefaultSceneComponent>();
     RootComponent = Default;
 
+
     CardRender = CreateDefaultSubObject<USpriteRenderer>();
     CardRender->SetSprite("Blue", 0);
     CardRender->SetAutoScaleRatio(3.0f);
     CardRender->SetupAttachment(RootComponent);
 
+    CardNameText = CreateDefaultSubObject<UFontRenderer>();
+    CardNameText->SetFont("PF", 25.0f, TColor<unsigned char>(97, 76, 45, 255));
+    CardNameText->SetActive(false);
+    CardNameText->SetupAttachment(RootComponent);
 
 }
 
@@ -33,14 +39,6 @@ ACard::~ACard()
 void ACard::BeginPlay()
 {
     AActor::BeginPlay();
-
-    {
-        CardNameText = GetWorld()->GetHUD()->CreateWidget<UFontWidget>(1);
-
-
-        CardNameText->SetFont("PF", 25.0f, TColor<unsigned char>(97, 76, 45, 255));
-        CardNameText->SetActive(false);
-    }
 }
 
 void ACard::Tick(float _DeltaTime)

@@ -25,7 +25,7 @@ protected:
 private:
 	std::shared_ptr<class USpriteRenderer> CardRender;
 	std::shared_ptr<class UCollision> CardCollision;
-	std::shared_ptr<class UFontWidget> CardNameText;
+	std::shared_ptr<class UFontRenderer> CardNameText;
 
 };
 

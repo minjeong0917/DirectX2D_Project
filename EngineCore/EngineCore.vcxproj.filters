@@ -176,6 +176,9 @@
       <Filter>Object\UI</Filter>
     </ClInclude>
     <ClInclude Include="GameInstance.h" />
+    <ClInclude Include="FontRenderer.h">
+      <Filter>Object\Component\Contents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActorComponent.cpp">
@@ -335,6 +338,9 @@
       <Filter>Object\UI</Filter>
     </ClCompile>
     <ClCompile Include="GameInstance.cpp" />
+    <ClCompile Include="FontRenderer.cpp">
+      <Filter>Object\Component\Contents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Interface">

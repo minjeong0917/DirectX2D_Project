@@ -18,8 +18,8 @@ void ATitleHUD::BeginPlay()
 	AHUD::BeginPlay();
 	
 	Cursor = CreateWidget<UImageWidget>(2);
-	Cursor->SetSprite("Cursor", 0);
-	Cursor->SetAutoScaleRatio(2.0f);
+	//Cursor->SetSprite("Cursor", 0);
+	//Cursor->SetAutoScaleRatio(2.0f);
 
 
 }
