@@ -116,11 +116,11 @@ void ABook::Tick(float _DeltaTime)
 
         if (IsIconEnter == false)
         {
-            AllBookIconRender[ClickNum]->SetSprite("BookIcon", 0);
+            BookIconEnter(ClickNum);
         }
         else if (IsIconEnter == true)
         {
-            AllBookIconRender[ClickNum]->SetSprite("BookIcon", 1);
+            BookIconOut(ClickNum);
 
             if (UEngineInput::IsDown(MK_LBUTTON))
             {
@@ -174,11 +174,11 @@ void ABook::CollsionSetting(int _Page)
 
             FVector Loc = BookPageInfo::GetInst().GetAllCollsionLocation(i);
             FVector Scale = BookPageInfo::GetInst().GetAllCollisionScale();
-
             AllBookIconRender[i]->SetActive(true);
-            AllBookIconRender[i]->SetSprite("BookIcon", 0);
             AllBookIconRender[i]->SetWorldLocation({ Loc.X, Loc.Y - Scale.hY(), Loc.Z - 10.0f });
             AllBookIconRender[i]->SetScale3D(Scale);
+
+            BookIconEnter(i);
 
         }
     }
@@ -195,7 +195,7 @@ void ABook::OnCollisionEnter(UCollision* _This, UCollision* _Other)
         int Index = std::stoi(ProfileName.substr(9));
         if (ClickNum != Index)
         {
-            AllBookIconRender[ClickNum]->SetSprite("BookIcon", 0);
+            BookIconEnter(ClickNum);
         }
 
         ClickNum = Index;
@@ -213,6 +213,30 @@ void ABook::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 {
     IsEnter = false;
     IsIconEnter = false;
+}
+
+void ABook::BookIconEnter(int _ChangeEnterRender)
+{
+    if (CurPage == 7)
+    {
+        AllBookIconRender[_ChangeEnterRender]->SetSprite("BookIcon", 0);
+    }
+    else if (CurPage == 8)
+    {
+        AllBookIconRender[_ChangeEnterRender]->SetSprite("BookIcon", 2);
+    }
+}
+
+void ABook::BookIconOut(int _ChangeEnterRender)
+{
+    if (CurPage == 7)
+    {
+        AllBookIconRender[_ChangeEnterRender]->SetSprite("BookIcon", 1);
+    }
+    else if (CurPage == 8)
+    {
+        AllBookIconRender[_ChangeEnterRender]->SetSprite("BookIcon", 3);
+    }
 }
 
 void ABook::SetButtonActive(bool IsActive)

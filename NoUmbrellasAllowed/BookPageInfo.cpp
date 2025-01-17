@@ -48,6 +48,7 @@ void BookPageInfo::SetPageInfo(int _PageNum)
 
         MovePageInfo[0] = 1;
         MovePageInfo[1] = 7;
+        MovePageInfo[2] = 8;
      
         break;
     }
@@ -77,7 +78,7 @@ void BookPageInfo::SetPageInfo(int _PageNum)
         AllCollsionLocation[0] = { 740.0f, 150.0f, -170.0f };
         CollisionScale = { 100.f, 40.f, 0.f };
 
-        MovePageInfo[0] = 0;
+        MovePageInfo[0] = 8;
         break;
     }
     // Page 3 : 감정도구 - 서명 검출기 설명
@@ -152,6 +153,33 @@ void BookPageInfo::SetPageInfo(int _PageNum)
         AllCollsionLocation[3] = { 619.0f, -148.0f, -170.0f };
         AllCollsionLocation[4] = { 666.0f, -286.0f, -170.0f };
         CollisionScale = { 280.f, 100.f, 0.f };
+
+        break;
+    }
+    // Page 8 : 재질 
+    case 8:
+    {
+        CollisionCount = 12;
+        HasNextPage = false;
+
+        AllCollsionLocation.resize(CollisionCount);
+
+        FVector StartPos = { 478.0f, 217.0f, -170.0f };
+        FVector IterPos = { 96.51f, 0.0f, 0.0f };
+
+        for (int i = 0; i < 5; i++)
+        {
+            AllCollsionLocation[i] = { StartPos.X + IterPos.X * i, StartPos.Y , -170.0f };
+        }
+        for (int i = 5; i < 9; i++)
+        {
+            AllCollsionLocation[i] = { StartPos.X + IterPos.X * (i-5), StartPos.Y - 96.53f , -170.0f };
+        }
+        for (int i = 9; i < 12; i++)
+        {
+            AllCollsionLocation[i] = { StartPos.X + IterPos.X * (i - 9), StartPos.Y - 230.0f , -170.0f };
+        }
+        CollisionScale = { 83.f, 83.f, 0.f };
 
         break;
     }

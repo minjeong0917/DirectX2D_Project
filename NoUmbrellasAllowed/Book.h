@@ -53,6 +53,8 @@ protected:
 	void OnCollisionEnd(class UCollision* _This, class UCollision* _Other);
 	void CollsionSetting(int _Page);
 	void SetBookButtonToPage();
+	void BookIconEnter(int _ChangeEnterRender);
+	void BookIconOut(int _ChangeEnterRender);
 
 private:
 	std::string CurCardName = "NONE";

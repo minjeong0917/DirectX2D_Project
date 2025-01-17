@@ -18,7 +18,7 @@ ACursor::ACursor()
 
     CursorCollision = CreateDefaultSubObject<UCollision>();
     CursorCollision->SetCollisionProfileName("Cursor");
-    CursorCollision->SetScale3D({ 4.0f,4.0f,10000.0f });
+    CursorCollision->SetScale3D({2.0f,2.0f,10000.0f });
     CursorCollision->SetRelativeLocation({ CursorCollision->GetTransformRef().WorldLocation.X - 10, CursorCollision->GetTransformRef().WorldLocation.Y + 35.0f, CursorCollision->GetTransformRef().WorldLocation.Z });
     CursorCollision->SetupAttachment(RootComponent);
 
