@@ -165,7 +165,7 @@ void BookPageInfo::SetPageInfo(int _PageNum)
         AllCollsionLocation.resize(CollisionCount);
 
         FVector StartPos = { 478.0f, 215.0f, -170.0f };
-        FVector IterPos = { 96.51f, 0.0f, 0.0f };
+        FVector IterPos = { 96.5f, 0.0f, 0.0f };
 
         for (int i = 0; i < 5; i++)
         {
@@ -177,7 +177,7 @@ void BookPageInfo::SetPageInfo(int _PageNum)
         }
         for (int i = 9; i < 12; i++)
         {
-            AllCollsionLocation[i] = { StartPos.X + IterPos.X * (i - 9), StartPos.Y - 230.0f , -170.0f };
+            AllCollsionLocation[i] = { StartPos.X + IterPos.X * (i - 9), StartPos.Y - 229.0f , -170.0f };
         }
         for (int i = 12; i < 17; i++)
         {
@@ -185,7 +185,7 @@ void BookPageInfo::SetPageInfo(int _PageNum)
         }
         for (int i = 17; i < 21; i++)
         {
-            AllCollsionLocation[i] = { StartPos.X + IterPos.X * (i - 17), StartPos.Y - 460.f , -170.0f };
+            AllCollsionLocation[i] = { StartPos.X + IterPos.X * (i - 17), StartPos.Y - 457.f , -170.0f };
         }
 
         CollisionScale = { 83.f, 83.f, 0.f };

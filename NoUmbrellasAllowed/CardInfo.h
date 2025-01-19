@@ -8,6 +8,7 @@ struct CardType
 	std::string CardExplanation;
 	std::string CardPercentText;
 	int CardPercent;
+	float CardNameTextSize = 25.0f;
 };
 
 class CardInfo
@@ -63,7 +64,7 @@ private:
 	ECardColor CardColor = ECardColor::Blue;
 	ECardType CardType = ECardType::NONE;
 	int CardStep = 0;
-
+	float NameTextSize = 25.0f;
 	std::vector<struct CardType> AllCardType;
 };
 

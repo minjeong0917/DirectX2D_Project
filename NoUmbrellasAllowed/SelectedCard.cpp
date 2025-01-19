@@ -69,7 +69,7 @@ void ASelectedCard::Tick(float _DeltaTime)
 
     SelectedCardRender->SetWorldLocation({ MousePos.X + 8.0f, MousePos.Y - SelectedCardRender->GetWorldScale3D().hY(), -200.0f});
 
-    CardNameText->SetWorldLocation({ MousePos.X - 80.0f, MousePos.Y + 70.0f, -200.0f });
+    CardNameText->SetWorldLocation({ MousePos.X - 90.0f, MousePos.Y + 70.0f, -200.0f });
     CardExplainText->SetWorldLocation({ MousePos.X + 10.0f, MousePos.Y, -200.0f });
     CardPercentText->SetWorldLocation({ MousePos.X + 135.0f, MousePos.Y + 68.0f, -200.0f });
 }
@@ -81,6 +81,15 @@ void ASelectedCard::SetCardNameText(std::string _Text)
     {
         CardNameText->SetText(_Text);
     }
+
+}
+void ASelectedCard::ChangeTextSize(float _Size)
+{
+    if (CardNameText != nullptr)
+    {
+        CardNameText->SetFont("PF", _Size, TColor<unsigned char>(97, 76, 45, 255));
+    }
+
 }
 
 void ASelectedCard::SetCardExplainText(std::string _Text)

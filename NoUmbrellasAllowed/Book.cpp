@@ -138,6 +138,8 @@ void ABook::Tick(float _DeltaTime)
                 SelectedCard->SetActive(true);
                 SelectedCard->SetTextActive(true);
                 SelectedCard->SetCardNameText(CardInfo::GetInst().GetAllCardType()[ClickNum].CardName);
+                SelectedCard->ChangeTextSize(CardInfo::GetInst().GetAllCardType()[ClickNum].CardNameTextSize);
+                SelectedCard->SetCardNameText(CardInfo::GetInst().GetAllCardType()[ClickNum].CardName);
                 SelectedCard->SetCardExplainText(CardInfo::GetInst().GetAllCardType()[ClickNum].CardExplanation);
                 SelectedCard->SetCardPercentText(CardInfo::GetInst().GetAllCardType()[ClickNum].CardPercentText);
                 SelectedCard->SetCardType(CardInfo::GetInst().GetCardColor(), CardInfo::GetInst().GetCardStep());

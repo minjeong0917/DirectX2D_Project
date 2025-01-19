@@ -52,7 +52,7 @@ void ACard::BeginPlay()
 void ACard::Tick(float _DeltaTime)
 {
     AActor::Tick(_DeltaTime);
-    CardNameText->SetWorldLocation({ CardRender->GetWorldLocation().X - 85.0f ,CardRender->GetWorldLocation().Y + 160.0f,CardRender->GetWorldLocation().Z });
+    CardNameText->SetWorldLocation({ CardRender->GetWorldLocation().X - 95.0f ,CardRender->GetWorldLocation().Y + 160.0f,CardRender->GetWorldLocation().Z });
     CardExplainText->SetWorldLocation({ CardRender->GetWorldLocation().X + 5.0f,CardRender->GetWorldLocation().Y + 90, CardRender->GetWorldLocation().Z });
     CardPercentText->SetWorldLocation({ CardRender->GetWorldLocation().X + 130.0f,CardRender->GetWorldLocation().Y + 158.0f, CardRender->GetWorldLocation().Z });
 }
@@ -74,6 +74,14 @@ void ACard::SetCardType(ECardColor _CardTye, int _CardStep)
         break;
     }
 
+
+}
+void ACard::ChangeTextSize(float _Size)
+{
+    if (CardNameText != nullptr)
+    {
+        CardNameText->SetFont("PF", _Size, TColor<unsigned char>(97, 76, 45, 255));
+    }
 
 }
 

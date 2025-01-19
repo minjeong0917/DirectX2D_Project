@@ -368,10 +368,12 @@ void AShopGameMode::CardCompareAndChange(float _DeltaTime)
             std::string Name = CardInfo::GetInst().GetAllCardType()[CardNum].CardName;
             std::string Explain = CardInfo::GetInst().GetAllCardType()[CardNum].CardExplanation;
             std::string Percent = CardInfo::GetInst().GetAllCardType()[CardNum].CardPercentText;
+            float ChangeTextSize = CardInfo::GetInst().GetAllCardType()[CardNum].CardNameTextSize;
 
             AllCard[ChangeCardNum]->SetCardNameText(Name);
             AllCard[ChangeCardNum]->SetCardExplainText(Explain);
             AllCard[ChangeCardNum]->SetCardPercentText(Percent);
+            AllCard[ChangeCardNum]->ChangeTextSize(ChangeTextSize);
 
             AllCard[ChangeCardNum]->AddActorLocation({ 0.0f, 1000.0f * _DeltaTime, 0.0f });
 

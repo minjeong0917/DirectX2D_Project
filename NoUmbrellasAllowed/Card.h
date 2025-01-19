@@ -21,6 +21,7 @@ public:
 	void SetCardPercentText(std::string _Text);
 
 	void SetTextActive(bool _IsActive);
+	void ChangeTextSize(float _Size);
 
 protected:
 	void BeginPlay();
