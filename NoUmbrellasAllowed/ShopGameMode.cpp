@@ -62,7 +62,7 @@ AShopGameMode::AShopGameMode()
         GetWorld()->CreateCollisionProfile("BookButton_" + std::to_string(i));
         GetWorld()->LinkCollisionProfile("BookButton_" + std::to_string(i), "Cursor");
     }
-    for (int i = 0; i <20; i++)
+    for (int i = 0; i <22; i++)
     {
         GetWorld()->CreateCollisionProfile("BookPage_" + std::to_string(i));
         GetWorld()->LinkCollisionProfile("BookPage_" + std::to_string(i), "Cursor");
