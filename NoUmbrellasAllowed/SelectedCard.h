@@ -29,7 +29,7 @@ protected:
 
 
 private:
-
+	bool HaveN = false;
 	std::shared_ptr<class USpriteRenderer> SelectedCardRender;
 	std::shared_ptr<class UCollision> SelectedCardCollision;
 	std::shared_ptr<class UFontRenderer> CardNameText;
