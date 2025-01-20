@@ -119,7 +119,7 @@ void ABookButton::OnCollisionStay(UCollision* _This, UCollision* _Other)
 {
     IsEnter = true;
     std::string ProfileName = _This->GetCollisionProfileName();
-    size_t Index = std::stoi(ProfileName.substr(11));
+    int Index = std::stoi(ProfileName.substr(11));
 
     if (UEngineInput::IsDown(VK_LBUTTON))
     {
@@ -153,7 +153,7 @@ void ABookButton::OnCollisionEnd(UCollision* _This, UCollision* _Other)
     IsEnter = false;
 
     std::string ProfileName = _This->GetCollisionProfileName();
-    size_t Index = std::stoi(ProfileName.substr(11));
+    int Index = std::stoi(ProfileName.substr(11));
 
     if (Index == 0)
     {

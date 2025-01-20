@@ -175,9 +175,11 @@
     <ClInclude Include="ImageWidget.h">
       <Filter>Object\UI</Filter>
     </ClInclude>
-    <ClInclude Include="GameInstance.h" />
     <ClInclude Include="FontRenderer.h">
       <Filter>Object\Component\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="GameInstance.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -337,9 +339,11 @@
     <ClCompile Include="ImageWidget.cpp">
       <Filter>Object\UI</Filter>
     </ClCompile>
-    <ClCompile Include="GameInstance.cpp" />
     <ClCompile Include="FontRenderer.cpp">
       <Filter>Object\Component\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="GameInstance.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

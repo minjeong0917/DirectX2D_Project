@@ -21,6 +21,13 @@ UEngineWindow& UEngineCore::GetMainWindow()
 	return GEngine->MainWindow;
 }
 
+
+UEngineWorkThreadPool& UEngineCore::GetThreadPool()
+{
+	return GEngine->ThreadPool;
+}
+
+
 std::map<std::string, std::shared_ptr<class ULevel>> UEngineCore::GetAllLevelMap()
 {
 	return GEngine->LevelMap;
@@ -100,6 +107,8 @@ void UEngineCore::EngineStart(HINSTANCE _Instance, std::string_view _DllName)
 	UEngineCore EngineCore;
 
 	GEngine = &EngineCore;
+
+	GEngine->ThreadPool.Initialize();
 
 	WindowInit(_Instance);
 
@@ -237,3 +246,9 @@ void UEngineCore::EngineEnd()
 	UEngineDebug::EndConsole();
 
 }
+
+void UEngineCore::SetGameInstance(std::shared_ptr<UGameInstance> _Inst)
+{
+	GEngine->GameInstance = _Inst;
+}
+

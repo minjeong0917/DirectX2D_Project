@@ -65,7 +65,7 @@ void AMerchandise::Tick(float _DeltaTime)
 
 void AMerchandise::PlusAlpha(float _DeltaTime)
 {
-    Acc += 0.01;
+    Acc += 0.01f;
     MerchandiseRender->ColorData.PlusColor.W += _DeltaTime * Speed * Acc;
 }
 
