@@ -40,6 +40,15 @@ public:
 	{
 		AllBasicCard[_th].CardNameNum = _CardNum;
 	}
+	float GetStatusLevel()
+	{
+		return StatusLevel;
+	}
+
+	EMerchandiseType GetMerchandiseType()
+	{
+		return MerchandiseType;
+	}
 
 protected:
 
@@ -47,5 +56,6 @@ private:
 	MerchandiseInfo();
 	EMerchandiseType MerchandiseType = EMerchandiseType::NONE;
 	std::vector<struct MBasicCardInfo> AllBasicCard;
+	float StatusLevel = 0.0f;
 };
 

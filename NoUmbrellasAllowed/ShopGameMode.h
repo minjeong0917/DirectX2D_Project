@@ -16,6 +16,7 @@ public:
 
 
 	bool CursorActive = true;
+	bool MerchandiseCheck = false;
 protected:
 	void BeginPlay();
 	void Tick(float _DeltaTime);

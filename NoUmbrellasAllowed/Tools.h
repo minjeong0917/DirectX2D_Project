@@ -30,11 +30,13 @@ private:
 	bool IsSameToolClick = false;
 	int CurSpriteIndex = 0;
 
+	float AccRotation = 1.0f;
+
 	int PrevSpriteIndex = 0;
 	float Time = 0.0f;
 	std::shared_ptr<class USpriteRenderer> ToolsRender;
 	std::shared_ptr<class UCollision> ToolsCollision;
-	std::shared_ptr<class ASelectedTool> SelectedToolools;
+	std::shared_ptr<class ASelectedTool> SelectedTools;
 
 	std::vector< std::shared_ptr<class USpriteRenderer>> AllToolsRenders;
 };

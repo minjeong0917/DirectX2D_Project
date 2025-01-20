@@ -311,7 +311,15 @@ void AShopGameMode::Tick(float _DeltaTime)
     }
 
     
+    if (Merchandise->GetIsEnter() == true && ItemShelf->IsSelectedToolActive() == true)
+    {
+        MerchandiseCheck = true;
+    }
+    else
+    {
+        MerchandiseCheck = false;
 
+    }
 }
 
 void AShopGameMode::MerchandiseCardCheck(float _DeltaTime)

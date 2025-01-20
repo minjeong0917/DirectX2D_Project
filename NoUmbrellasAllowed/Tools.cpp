@@ -7,6 +7,9 @@
 #include <EngineCore/Collision.h>
 #include "Tools.h"
 #include "SelectedTool.h"
+#include "ShopGameMode.h"
+#include "ContentsEnums.h"
+#include "MerchandiseInfo.h"
 
 ATools::ATools()
 {
@@ -58,22 +61,71 @@ ATools::ATools()
     AllToolsRenders[5]->SetSprite("ItemShelf", 7);
     AllToolsRenders[5]->AddWorldLocation({ -1.0f, 0.0f,0.0f });
 
-    SelectedToolools = GetWorld()->SpawnActor<ASelectedTool>();
-    SelectedToolools->SetActive(false);
+    SelectedTools = GetWorld()->SpawnActor<ASelectedTool>();
+    SelectedTools->SetActive(false);
+
+
 
 }
 
 ATools::~ATools()
 {
 }
+
 void ATools::Tick(float _DeltaTime)
 {
     AActor::Tick(_DeltaTime);
     if (IsEnter == false && IsToolClick == true && UEngineInput::IsDown(VK_LBUTTON))
     {
         IsToolClick = false;
-        SelectedToolools->SetActive(false);
+        SelectedTools->SetActive(false);
+   
         AllToolsRenders[CurSpriteIndex - 2]->SetActive(true);
+    }
+
+    AShopGameMode* ShopGameMode = GetWorld()->GetGameMode<AShopGameMode>();
+
+
+
+    if (ShopGameMode->MerchandiseCheck == false)
+    {
+        if (CurSpriteIndex == 3)
+        {
+
+            if (SelectedTools->GetAccRotZ() == 50)
+            {
+                AccRotation *= -1;
+            }
+            else if (SelectedTools->GetAccRotZ() == -50)
+            {
+                AccRotation *= -1;
+            }
+            SelectedTools->SetToolAccRotation(AccRotation);
+        }
+    }
+    else if (ShopGameMode->MerchandiseCheck == true)
+    {
+        if (CurSpriteIndex == 3)
+        {
+            if (MerchandiseInfo::GetInst().GetMerchandiseType() != EMerchandiseType::NONE)
+            {
+                if (SelectedTools->GetAccRotZ() == MerchandiseInfo::GetInst().GetStatusLevel())
+                {
+                    AccRotation = 0.0f;
+                }
+                else if (SelectedTools->GetAccRotZ() == 50)
+                {
+                    AccRotation *= -2;
+                }
+                else if (SelectedTools->GetAccRotZ() == -50)
+                {
+                    AccRotation *= -2;
+                }
+                SelectedTools->SetToolAccRotation(AccRotation);
+
+            }
+
+        }
     }
 }
 
@@ -93,7 +145,8 @@ void ATools::OnCollisionStay(UCollision* _This, UCollision* _Other)
  
             AllToolsRenders[CurSpriteIndex - 2]->SetActive(true);
             AllToolsRenders[PrevSpriteIndex - 2]->SetActive(true);
-            SelectedToolools->SetActive(false);
+            SelectedTools->SetActive(false);
+
             IsToolClick = false;
       
             if (CurSpriteIndex != PrevSpriteIndex)
@@ -101,8 +154,15 @@ void ATools::OnCollisionStay(UCollision* _This, UCollision* _Other)
                 IsToolClick = true;
                 AllToolsRenders[CurSpriteIndex - 2]->SetActive(false);
                 PrevSpriteIndex = CurSpriteIndex;
-                SelectedToolools->SetToolSprite(CurSpriteIndex - 2);
-                SelectedToolools->SetActive(true);
+                SelectedTools->SetToolSprite(CurSpriteIndex - 2);
+                if (CurSpriteIndex == 3)
+                {
+                    SelectedTools->SetToolAccessoriesSprite(6);
+
+                }
+                SelectedTools->SetActive(true);
+     
+
             }
         }
         else if (IsToolClick == false)
@@ -114,8 +174,17 @@ void ATools::OnCollisionStay(UCollision* _This, UCollision* _Other)
             PrevSpriteIndex = CurSpriteIndex;
             
             AllToolsRenders[PrevSpriteIndex - 2]->SetActive(false);
-            SelectedToolools->SetToolSprite(PrevSpriteIndex - 2);
-            SelectedToolools->SetActive(true);
+            SelectedTools->SetToolSprite(PrevSpriteIndex - 2);
+            if (CurSpriteIndex == 3)
+            {
+                SelectedTools->SetToolAccessoriesSprite(6);
+ 
+                SelectedTools->SetToolFrontActive(true);
+
+            }
+            SelectedTools->SetActive(true);
+
+
         }
 
     }
@@ -129,5 +198,5 @@ void ATools::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 
 bool ATools::IsSelectedToolActive()
 {
-    return SelectedToolools->IsActive();
+    return SelectedTools->IsActive();
 }
