@@ -30,12 +30,16 @@ private:
 	void DoorClose(float _DeltaTime);
 	void MerchandiseActive(float _DeltaTime);
 	void CardCompareAndChange(float _DeltaTime);
+	void MerchandiseCardCheck(float _DeltaTime);
 
 	float CardChangeTime = 0.0f;
 	bool IsCardChange = false;
 	int ChangeCardNum = 0;
 	bool IsMerchandisActive = false;
-	
+
+	bool IsCardHover = false;
+	int HoverCardNum = 0;
+
 	int CustomerActive = 0;
 
 	bool IsExistCustomer = false;

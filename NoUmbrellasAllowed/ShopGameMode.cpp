@@ -33,6 +33,7 @@ AShopGameMode::AShopGameMode()
     GetWorld()->CreateCollisionProfile("BookSmall");
     GetWorld()->CreateCollisionProfile("CardSlot");
     GetWorld()->CreateCollisionProfile("SelectedCard");
+    GetWorld()->CreateCollisionProfile("Card");
 
     for (int i = 0; i < 14; i++)
     {
@@ -56,6 +57,7 @@ AShopGameMode::AShopGameMode()
     GetWorld()->LinkCollisionProfile("BookSmall", "Cursor");
     GetWorld()->LinkCollisionProfile("BookSmall", "SelectedTool");
     GetWorld()->LinkCollisionProfile("CardSlot", "SelectedCard");
+    GetWorld()->LinkCollisionProfile("Card", "Cursor");
 
     for (int i = 0; i < 4; i++)
     {
@@ -287,6 +289,7 @@ void AShopGameMode::Tick(float _DeltaTime)
 
 
     CardCompareAndChange(_DeltaTime);
+    MerchandiseCardCheck(_DeltaTime);
 
   
     // Book - Active
@@ -307,7 +310,68 @@ void AShopGameMode::Tick(float _DeltaTime)
         Book->SetButtonActive(true);
     }
 
+    
 
+}
+
+void AShopGameMode::MerchandiseCardCheck(float _DeltaTime)
+{
+    for (int i = 0; i < MerchandiseInfo::GetInst().GetAllBasicCard().size(); i++)
+    {
+        if (AllCard[i]->GetIsEnter() == false)
+        {
+            if (IsCardHover == false && AllCard[i]->GetActorLocation().Y <= AllCardLocations[i].Y)
+            {
+                AllCard[i]->SetActorLocation(AllCardLocations[i]);
+                AllCard[i]->SetCollisionActive(true);
+
+
+                continue;
+            }
+        }
+        if (AllCard[i]->GetIsEnter() == true && IsCardHover == false)
+        {
+            IsCardHover = true;
+
+            HoverCardNum = i;
+            for (int i = 0; i < MerchandiseInfo::GetInst().GetAllBasicCard().size(); i++)
+            {
+                if (i == HoverCardNum)
+                {
+                    continue;
+                }
+                AllCard[i]->SetCollisionActive(false);
+
+            }
+        }
+
+    }
+
+    if (IsCardHover == true)
+    {
+
+
+        if (AllCard[HoverCardNum]->GetActorLocation().Y < AllCardLocations[HoverCardNum].Y + 80.0f && AllCard[HoverCardNum]->GetIsEnter() == true)
+        {
+            AllCard[HoverCardNum]->AddActorLocation({ 0.0f, 800.0f * _DeltaTime, 0.0f });
+            AllCard[HoverCardNum]->SetCollisionYScale(0.5f );
+            AllCard[HoverCardNum]->SetCollisionYLocation(0.4f);
+        } 
+        else if (AllCard[HoverCardNum]->GetActorLocation().Y >= AllCardLocations[HoverCardNum].Y && AllCard[HoverCardNum]->GetIsEnter() == false)
+        {
+   
+            AllCard[HoverCardNum]->AddActorLocation({ 0.0f, -1000.0f * _DeltaTime, 0.0f });
+            AllCard[HoverCardNum]->SetCollisionYScale(0.0f);
+            AllCard[HoverCardNum]->SetCollisionYLocation(0.15f);
+
+    
+        }
+        else if (AllCard[HoverCardNum]->GetActorLocation().Y <= AllCardLocations[HoverCardNum].Y)
+        {
+            IsCardHover = false;
+        }
+
+    }
 }
 
 void AShopGameMode::CardCompareAndChange(float _DeltaTime)
@@ -317,23 +381,27 @@ void AShopGameMode::CardCompareAndChange(float _DeltaTime)
     {
         if (CardInfo::GetInst().GetCardType() == MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardType)
         {
-            if (Book->GetIsDrawCard() == false && AllCard[i]->GetActorLocation().Y <= AllCardLocations[i].Y)
+            if (IsCardHover == false)
             {
-                AllCard[i]->SetActorLocation(AllCardLocations[i]);
-                continue;
+                if (Book->GetIsDrawCard() == false && AllCard[i]->GetActorLocation().Y <= AllCardLocations[i].Y)
+                {
+                    AllCard[i]->SetActorLocation(AllCardLocations[i]);
+                    continue;
+                }
+
+                if (Book->GetIsDrawCard() == true && AllCard[i]->GetActorLocation().Y < AllCardLocations[i].Y + 50.0f)
+                {
+                    AllCard[i]->AddActorLocation({ 0.0f, 500.0f * _DeltaTime, 0.0f });
+
+                    ChangeCardNum = i;
+
+                }
+                if (IsCardChange == false && Book->GetIsDrawCard() == false && AllCard[i]->GetActorLocation().Y > AllCardLocations[i].Y)
+                {
+                    AllCard[i]->AddActorLocation({ 0.0f, -500.0f * _DeltaTime, 0.0f });
+                }
             }
 
-            if (Book->GetIsDrawCard() == true && AllCard[i]->GetActorLocation().Y < AllCardLocations[i].Y + 50.0f)
-            {
-                AllCard[i]->AddActorLocation({ 0.0f, 500.0f * _DeltaTime, 0.0f });
-
-                ChangeCardNum = i;
-
-            }
-            if (IsCardChange == false && Book->GetIsDrawCard() == false && AllCard[i]->GetActorLocation().Y > AllCardLocations[i].Y)
-            {
-                AllCard[i]->AddActorLocation({ 0.0f, -500.0f * _DeltaTime, 0.0f });
-            }
 
         }
     }

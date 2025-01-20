@@ -13,6 +13,7 @@ enum class ECardColor : int8
 enum class ECardType : int8
 {
 	NONE,
+	BASIC,
 	CONDITION,
 	TEXTURE
 };

@@ -37,12 +37,12 @@ ASelectedCard::ASelectedCard()
 
     
     CardExplainText = CreateDefaultSubObject<UFontRenderer>();
-    CardExplainText->SetFont("PF", 22.0f, TColor<unsigned char>(73, 72, 71, 255), FW1_CENTER);
+    CardExplainText->SetFont("PF", 19.0f, TColor<unsigned char>(125, 75, 71, 255), FW1_CENTER);
     CardExplainText->SetupAttachment(RootComponent);
 
 
     CardPercentText = CreateDefaultSubObject<UFontRenderer>();
-    CardPercentText->SetFont("PF", 20.0f, TColor<unsigned char>(148, 65, 33, 255),FW1_RIGHT);
+    CardPercentText->SetFont("PF", 18.0f, TColor<unsigned char>(148, 65, 33, 255),FW1_RIGHT);
     CardPercentText->SetupAttachment(RootComponent);
 }
 
@@ -70,8 +70,8 @@ void ASelectedCard::Tick(float _DeltaTime)
     SelectedCardRender->SetWorldLocation({ MousePos.X + 8.0f, MousePos.Y - SelectedCardRender->GetWorldScale3D().hY(), -200.0f});
 
     CardNameText->SetWorldLocation({ MousePos.X - 90.0f, MousePos.Y + 70.0f, -200.0f });
-    CardExplainText->SetWorldLocation({ MousePos.X + 10.0f, MousePos.Y, -200.0f });
-    CardPercentText->SetWorldLocation({ MousePos.X + 135.0f, MousePos.Y + 68.0f, -200.0f });
+    CardExplainText->SetWorldLocation({ MousePos.X + 10.0f, MousePos.Y + 10.0f, -200.0f });
+    CardPercentText->SetWorldLocation({ MousePos.X + 135.0f, MousePos.Y + 65.0f, -200.0f });
 }
 
 

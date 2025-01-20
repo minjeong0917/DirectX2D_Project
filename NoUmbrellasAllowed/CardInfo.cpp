@@ -40,6 +40,17 @@ void CardInfo::CardTypeInfo()
     {
     case ECardType::NONE:
         break;
+    case ECardType::BASIC:
+        AllCardType.resize(5);
+
+        AllCardType[0].CardName = "가방";
+        AllCardType[0].CardExplanation = "있으면 불편하고 없으면 허전하다.";
+        AllCardType[0].CardPercentText = "10V";
+        AllCardType[0].CardPercent = 10;
+        AllCardType[0].CardNameTextSize = NameTextSize;
+
+        break;
+
     case ECardType::CONDITION:
 
         AllCardType.resize(5);
@@ -113,13 +124,13 @@ void CardInfo::CardTypeInfo()
         AllCardType[5].CardExplanation = "순도 58% 금 ";
         AllCardType[5].CardPercentText = "+200V";
         AllCardType[5].CardPercent = 200;
-        AllCardType[5].CardNameTextSize = 22.0f;
+        AllCardType[5].CardNameTextSize = 20.0f;
 
         AllCardType[6].CardName = "18k 화이트골드 소재";
         AllCardType[6].CardExplanation = "순도 75% 금";
         AllCardType[6].CardPercentText = "+350V";
         AllCardType[6].CardPercent = 350;
-        AllCardType[6].CardNameTextSize = 22.0f;
+        AllCardType[6].CardNameTextSize = 20.0f;
 
         AllCardType[7].CardName = "은 소재";
         AllCardType[7].CardExplanation = "재활용 가능: 수거 대상이 \n 되면 가격이 오릅니다";

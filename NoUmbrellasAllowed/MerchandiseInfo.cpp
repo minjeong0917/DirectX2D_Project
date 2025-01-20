@@ -24,7 +24,7 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
 		{
 			AllBasicCard.resize(3);
 
-			AllBasicCard[0].CardType = ECardType::TEXTURE;
+			AllBasicCard[0].CardType = ECardType::BASIC;
 			AllBasicCard[0].CardColor = ECardColor::Gray;
 			AllBasicCard[0].CardNameNum = 0;
 

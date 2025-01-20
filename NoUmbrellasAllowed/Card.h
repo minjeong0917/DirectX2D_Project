@@ -22,12 +22,24 @@ public:
 
 	void SetTextActive(bool _IsActive);
 	void ChangeTextSize(float _Size);
+	void SetCollisionActive(bool _IsActive);
+	void SetCollisionYScale(float _YScale);
+	void SetCollisionYLocation(float _YLoc);
+
+	bool GetIsEnter()
+	{
+		return IsEnter;
+	}
 
 protected:
 	void BeginPlay();
 	void Tick(float _DeltaTime);
-
+	void OnCollisionEnter(class UCollision* _This, class UCollision* _Other);
+	void OnCollisionEnd(class UCollision* _This, class UCollision* _Other);
 private:
+	bool IsEnter = false;
+
+
 	std::shared_ptr<class USpriteRenderer> CardRender;
 	std::shared_ptr<class UCollision> CardCollision;
 
