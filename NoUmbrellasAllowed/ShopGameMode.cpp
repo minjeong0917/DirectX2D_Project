@@ -15,6 +15,7 @@
 #include "Card.h"
 #include "CardInfo.h"
 #include "Merchandise.h"
+#include "MerchandiseMaterial.h"
 #include "MerchandiseInfo.h"
 #include "PlayerBalloon.h"
 #include "ConversationList.h"
@@ -147,6 +148,9 @@ AShopGameMode::AShopGameMode()
     Merchandise = GetWorld()->SpawnActor<AMerchandise>();
     Merchandise->SetActive(false);
 
+    MerchandiseMaterial = GetWorld()->SpawnActor<AMerchandiseMaterial>();
+    MerchandiseMaterial->SetActive(false);
+
     CardSlot = GetWorld()->SpawnActor<ACardSlot>();
     CardSlot->SetActive(false);
 
@@ -228,7 +232,7 @@ void AShopGameMode::Tick(float _DeltaTime)
 {
     AActor::Tick(_DeltaTime);
 
-    UEngineDebug::OutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
+    //UEngineDebug::OutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 
     std::shared_ptr<class ACameraActor> Camera = GetWorld()->GetCamera(0);
     FVector MousePos = Camera->ScreenMousePosToWorldPos();
@@ -267,6 +271,7 @@ void AShopGameMode::Tick(float _DeltaTime)
                 {
                     //Merchandise->PlusAlpha(_DeltaTime);
                     Merchandise->AddActorLocation({ 0.0f, -1.0f * _DeltaTime * 100 , 0.0f });
+                    MerchandiseMaterial->AddActorLocation({ 0.0f, -1.0f * _DeltaTime * 100 , 0.0f });
                 }
             }
         }
@@ -483,6 +488,7 @@ void AShopGameMode::MerchandiseActive(float _DeltaTime)
 {
     MerchandiseInfo::GetInst().SetMerchandiseInfo(false, EMerchandiseType::BAG, 0);
     Merchandise->SetActive(true);
+    MerchandiseMaterial->SetActive(true);
     Merchandise->SetIsApear(true);
     CardSlot->SetActive(true);
     CardSlot->IsActive = true;

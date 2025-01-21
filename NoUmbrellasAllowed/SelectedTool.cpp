@@ -85,5 +85,6 @@ float ASelectedTool::GetAccRotZ()
 void ASelectedTool::SetToolFrontActive(bool _IsActive)
 {
     SelectdToolFrontRender->SetActive(_IsActive);
+    SelectdToolAccessoriesRender->SetActive(_IsActive);
 }
 

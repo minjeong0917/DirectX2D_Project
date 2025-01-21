@@ -160,8 +160,12 @@ void ATools::OnCollisionStay(UCollision* _This, UCollision* _Other)
                 SelectedTools->SetToolSprite(CurSpriteIndex - 2);
                 if (CurSpriteIndex == 3)
                 {
+                    SelectedTools->SetToolFrontActive(true);
                     SelectedTools->SetToolAccessoriesSprite(6);
-
+                }
+                else
+                {
+                    SelectedTools->SetToolFrontActive(false);
                 }
                 SelectedTools->SetActive(true);
      
@@ -184,6 +188,10 @@ void ATools::OnCollisionStay(UCollision* _This, UCollision* _Other)
  
                 SelectedTools->SetToolFrontActive(true);
 
+            }
+            else
+            {
+                SelectedTools->SetToolFrontActive(false);
             }
             SelectedTools->SetActive(true);
 

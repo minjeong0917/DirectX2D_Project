@@ -85,6 +85,9 @@
     <ClCompile Include="ConversationList.cpp">
       <Filter>Shop\Balloons</Filter>
     </ClCompile>
+    <ClCompile Include="MerchandiseMaterial.cpp">
+      <Filter>Shop\Merchandise</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleGameMode.h">
@@ -173,6 +176,9 @@
     </ClInclude>
     <ClInclude Include="ConversationList.h">
       <Filter>Shop\Balloons</Filter>
+    </ClInclude>
+    <ClInclude Include="MerchandiseMaterial.h">
+      <Filter>Shop\Merchandise</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

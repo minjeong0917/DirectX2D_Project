@@ -171,6 +171,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="MerchandiseMaterial.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ConversationList.cpp">
       <SubType>
       </SubType>
@@ -266,6 +270,10 @@
     <ClCompile Include="TitleGameMode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MerchandiseMaterial.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ConversationList.h">
       <SubType>
       </SubType>

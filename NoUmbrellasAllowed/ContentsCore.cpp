@@ -31,7 +31,6 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
     _Data.WindowSize = WindowSize;
 
 
-
     UEngineDirectory Dir;
     if (false == Dir.MoveParentToDirectory("NoUmbrellasAllowedResources"))
     {
@@ -95,6 +94,8 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 
         // Merchandise
         LoadFile(Dir, "Images//Shop//Merchandise//Bag");
+            LoadFile(Dir, "Images//Shop//Merchandise//Material"); 
+
     }
 
     // Customer

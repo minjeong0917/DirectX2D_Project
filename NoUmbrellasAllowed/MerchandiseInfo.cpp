@@ -37,16 +37,6 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
 			AllBasicCard[2].CardNameNum = 3; // 완벽한 상태
 			StatusLevel = 36.0f;
 
-
-			if (_IsFake == false)
-			{
-
-
-			}
-			else if (_IsFake == true)
-			{
-
-			}
 		}
 
 
