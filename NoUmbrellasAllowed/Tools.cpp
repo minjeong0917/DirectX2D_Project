@@ -87,46 +87,49 @@ void ATools::Tick(float _DeltaTime)
 
 
 
-    if (ShopGameMode->MerchandiseCheck == false)
-    {
-        if (CurSpriteIndex == 3)
-        {
 
-            if (SelectedTools->GetAccRotZ() == 50)
-            {
-                AccRotation *= -1;
-            }
-            else if (SelectedTools->GetAccRotZ() == -50)
-            {
-                AccRotation *= -1;
-            }
-            SelectedTools->SetToolAccRotation(AccRotation);
-        }
-    }
-    else if (ShopGameMode->MerchandiseCheck == true)
+    if (ShopGameMode->MerchandiseCheck == true)
     {
         if (CurSpriteIndex == 3)
         {
             if (MerchandiseInfo::GetInst().GetMerchandiseType() != EMerchandiseType::NONE)
             {
-                if (SelectedTools->GetAccRotZ() == MerchandiseInfo::GetInst().GetStatusLevel())
+                float Status = MerchandiseInfo::GetInst().GetStatusLevel();
+                float CurrentRotation = SelectedTools->GetAccRotZ();
+
+                if (CurrentRotation <= Status + 2.0f && CurrentRotation >= Status - 2.f)
                 {
-                    AccRotation = 0.0f;
+                    AccRotation = 0.0f; 
                 }
-                else if (SelectedTools->GetAccRotZ() == 50)
+                else
                 {
-                    AccRotation *= -2;
+                    AccRotation = (CurrentRotation <= Status) ? 1.0f : -1.0f;
                 }
-                else if (SelectedTools->GetAccRotZ() == -50)
-                {
-                    AccRotation *= -2;
-                }
-                SelectedTools->SetToolAccRotation(AccRotation);
+
+                    SelectedTools->SetToolAccRotation(AccRotation, 4.0f);
 
             }
-
         }
     }
+    else if (ShopGameMode->MerchandiseCheck == false)
+    {
+        if (CurSpriteIndex == 3)
+        {
+            if (AccRotation == 0.0f)
+            {
+                AccRotation = 1.0f;
+            }
+
+            if (SelectedTools->GetAccRotZ() >= 52 || SelectedTools->GetAccRotZ() <= -52)
+            {
+                AccRotation *= -1;
+            }
+
+            SelectedTools->SetToolAccRotation(AccRotation, 2.0f);
+        }
+    }
+
+
 }
 
 void ATools::OnCollisionStay(UCollision* _This, UCollision* _Other)

@@ -42,8 +42,6 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
     // Font
     Dir.Append("Fonts");
 
-    UEngineFile File = Dir.GetFile("PFStardust.ttf");
-
     UEngineFont::Load("PF", "PF Stardust");
     UEngineFont::Load("PFEXBold", "PF Stardust ExtraBold");
     UEngineFont::Load("PFttf", "PFStardust.ttf");
@@ -85,6 +83,9 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 
         // Ocean
         LoadFile(Dir, "Images//Shop//Ocean");
+
+        // Balloons
+        LoadFile(Dir, "Images//Shop//Balloons");
 
         // Main
         LoadFile(Dir, "Images//Shop//Main");

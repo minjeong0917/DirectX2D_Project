@@ -1,4 +1,5 @@
 #include "PreCompile.h"
+
 #include "ShopGameMode.h"
 #include "UI.h"
 #include "Customer.h"
@@ -7,14 +8,17 @@
 #include <EngineCore/EngineCore.h>
 #include "Cursor.h"
 #include "ItemShelf.h"
-#include "Merchandise.h"
 #include "CardSlot.h"
 #include "Book.h"
 #include "BookButton.h"
 #include "BookSmall.h"
 #include "Card.h"
-#include "MerchandiseInfo.h"
 #include "CardInfo.h"
+#include "Merchandise.h"
+#include "MerchandiseInfo.h"
+#include "PlayerBalloon.h"
+#include "ConversationList.h"
+
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/CameraActor.h>
 #include <EngineCore/EngineCamera.h>
@@ -24,6 +28,7 @@
 AShopGameMode::AShopGameMode()
 {
     TimeEventComponent = CreateDefaultSubObject<UTimeEventComponent>();
+
     GetWorld()->CreateCollisionProfile("Calculator");
     GetWorld()->CreateCollisionProfile("Cursor");
     GetWorld()->CreateCollisionProfile("ItemShelf");
@@ -90,6 +95,9 @@ AShopGameMode::AShopGameMode()
     Bridge->SetUIScale3D({ 1800.0f, 219.0f, 1.0f });
     Bridge->SetActorLocation({ 0.0f, -250.0f, 900.0f });
 
+    // PlayerBalloons
+    PlayerBalloon = GetWorld()->SpawnActor<APlayerBalloon>();
+    PlayerBalloon->SetActive(false);
 
     // WalkCustomer
     for (int i = 0; i < 8; i++)
@@ -166,7 +174,7 @@ AShopGameMode::AShopGameMode()
     std::shared_ptr<class AUI> OutLine = GetWorld()->SpawnActor<AUI>();
     OutLine->SetUISprite("UI", 3);
     OutLine->SetUIScale3D({ 1920.0f, 1080.0f, 1.0f });
-    OutLine->SetActorLocation({ 0.0f, -540.0f, -999.0f });
+    OutLine->SetActorLocation({ 0.0f, -540.0f, -800.0f });
 
     Cursor = GetWorld()->SpawnActor<ACursor>();
 
@@ -420,11 +428,17 @@ void AShopGameMode::CardCompareAndChange(float _DeltaTime)
     {
         int CardNum = MerchandiseInfo::GetInst().GetAllBasicCard()[ChangeCardNum].CardNameNum;
         std::string MerchandiseCardName = CardInfo::GetInst().GetAllCardType()[CardNum].CardName;
+        ECardType CardType = CardInfo::GetInst().GetCardType();
+        int CardIndex = Book->GetCurClickNum();
+
 
         if (Book->GetCurCardName() != MerchandiseCardName && UEngineInput::IsUp(VK_LBUTTON))
         {
             IsCardChange = true;
 
+            PlayerBalloon->SetActive(true);
+            ConversationList::GetInst().SetPlayerConverastion(CardType, CardIndex);
+            PlayerBalloon->SetPlayerBalloonAndText();
         }
     }
 

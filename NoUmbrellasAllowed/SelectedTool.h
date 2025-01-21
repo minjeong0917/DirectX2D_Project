@@ -16,7 +16,7 @@ public:
 	void SetToolSprite(int _SpriteIndex);
 	void SetToolAccessoriesSprite(int _SpriteIndex);
 	void SetToolFrontActive(bool _IsActive);
-	void SetToolAccRotation(float _Rotation);
+	void SetToolAccRotation(float _Rotation, float _Speed);
 	float GetAccRotZ();
 
 protected:

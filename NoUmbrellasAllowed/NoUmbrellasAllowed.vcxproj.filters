@@ -79,6 +79,12 @@
     <ClCompile Include="Card.cpp">
       <Filter>Shop\Card</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerBalloon.cpp">
+      <Filter>Shop\Balloons</Filter>
+    </ClCompile>
+    <ClCompile Include="ConversationList.cpp">
+      <Filter>Shop\Balloons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleGameMode.h">
@@ -162,6 +168,12 @@
     <ClInclude Include="Card.h">
       <Filter>Shop\Card</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerBalloon.h">
+      <Filter>Shop\Balloons</Filter>
+    </ClInclude>
+    <ClInclude Include="ConversationList.h">
+      <Filter>Shop\Balloons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameMode">
@@ -202,6 +214,9 @@
     </Filter>
     <Filter Include="HUD">
       <UniqueIdentifier>{42c448bd-abbf-4b35-bd39-50effe25e956}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shop\Balloons">
+      <UniqueIdentifier>{328ee535-8d30-4f9e-a744-f343f3799832}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

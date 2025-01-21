@@ -35,7 +35,7 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
 			AllBasicCard[2].CardType = ECardType::CONDITION;
 			AllBasicCard[2].CardColor = ECardColor::Blue;
 			AllBasicCard[2].CardNameNum = 3; // 완벽한 상태
-			StatusLevel = 38.0f;
+			StatusLevel = 36.0f;
 
 
 			if (_IsFake == false)

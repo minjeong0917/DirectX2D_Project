@@ -171,6 +171,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ConversationList.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="PlayerBalloon.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Card.cpp">
       <SubType>
       </SubType>
@@ -258,6 +266,14 @@
     <ClCompile Include="TitleGameMode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConversationList.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="PlayerBalloon.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Card.h">
       <SubType>
       </SubType>

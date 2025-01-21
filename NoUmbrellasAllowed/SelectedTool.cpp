@@ -49,7 +49,7 @@ void ASelectedTool::Tick(float _DeltaTime)
 
     SelectdToolRender->SetWorldLocation({ MousePos.X + 8.0f, MousePos.Y - 40.0f, -160.0f });
     SelectdToolFrontRender->SetWorldLocation({ MousePos.X + 8.0f, MousePos.Y - 40.0f, -164.0f });
-    SelectdToolAccessoriesRender->SetWorldLocation({ MousePos.X + 8.0f, MousePos.Y - 30.0f, -162.0f });
+    SelectdToolAccessoriesRender->SetWorldLocation({ MousePos.X + 8.0f, MousePos.Y - 28.0f, -162.0f });
 
 }
 
@@ -65,15 +65,17 @@ void ASelectedTool::SetToolAccessoriesSprite(int _SpriteIndex)
 
 }
 
-void ASelectedTool::SetToolAccRotation(float _Rotation)
+void ASelectedTool::SetToolAccRotation(float _Rotation, float _Speed)
 {
+    float CurrentRotation = SelectdToolAccessoriesRender->GetTransformRef().Rotation.Z;
 
-    if (SelectdToolAccessoriesRender->GetTransformRef().Rotation.Z <= 50.0f && SelectdToolAccessoriesRender->GetTransformRef().Rotation.Z  >= -50.0f)
+    if (CurrentRotation + (_Rotation * _Speed) <= 52.0f && CurrentRotation + (_Rotation * _Speed) >= -52.0f)
     {
-        SelectdToolAccessoriesRender->AddLocalRotation({ 0.0f,0.0f,_Rotation * 2 });
+        SelectdToolAccessoriesRender->AddLocalRotation({ 0.0f, 0.0f, _Rotation * _Speed });
     }
-
+    
 }
+
 
 float ASelectedTool::GetAccRotZ()
 {
