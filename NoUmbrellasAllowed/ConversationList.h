@@ -27,9 +27,9 @@ public:
 		return PlayerConversation;
 	}
 
-	float GetBallonXSize()
+	float GetPlayerBalloonXSize()
 	{
-		return BalloonXSize;
+		return PlayerBalloonXSize;
 	}
 
 protected:
@@ -37,6 +37,6 @@ protected:
 private:
 	ConversationList();
 	std::string PlayerConversation = "NONE";
-	float BalloonXSize = 0.0f;
+	float PlayerBalloonXSize = 0.0f;
 };
 

@@ -37,7 +37,7 @@ void APlayerBalloon::BeginPlay()
 
 void APlayerBalloon::SetPlayerBalloonAndText()
 {
-    BoxXScale = ConversationList::GetInst().GetBallonXSize();
+    BoxXScale = ConversationList::GetInst().GetPlayerBalloonXSize();
     Text = ConversationList::GetInst().GetPlayerConversation();
 
     PlayerBaloonRender->SetScale3D({ BoxXScale, 117.0f, 1.0f });
