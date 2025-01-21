@@ -35,7 +35,18 @@ void UEngineShaderResources::CreateTextureRes(std::string_view _Name, UEngineTex
 
 	TextureRes[UpperString] = _Res;
 }
+void UEngineShaderResources::CreateStructuredBufferRes(std::string_view _Name, UEngineStructuredBufferRes _Res)
+{
+	std::string UpperString = UEngineString::ToUpper(_Name);
 
+	if (true == StructuredBufferRes.contains(UpperString))
+	{
+		MSGASSERT("같은 이름 상수버퍼가 한 쉐이더에 2개가 존재합니다");
+		return;
+	}
+
+	StructuredBufferRes[UpperString] = _Res;
+}
 void UEngineShaderResources::CreateConstantBufferRes(std::string_view _Name, UEngineConstantBufferRes _Res)
 {
 	std::string UpperString = UEngineString::ToUpper(_Name);
@@ -78,6 +89,10 @@ void UEngineShaderResources::Setting()
 	{
 		Res.second.Setting();
 	}
+	for (std::pair<const std::string, UEngineStructuredBufferRes>& Res : StructuredBufferRes)
+	{
+		Res.second.Setting();
+	}
 }
 
 bool UEngineShaderResources::IsSampler(std::string_view _Name)
@@ -96,7 +111,11 @@ bool UEngineShaderResources::IsConstantBuffer(std::string_view _Name)
 	std::string UpperName = UEngineString::ToUpper(_Name);
 	return ConstantBufferRes.contains(UpperName);
 }
-
+bool UEngineShaderResources::IsStructuredBuffer(std::string_view _Name)
+{
+	std::string UpperName = UEngineString::ToUpper(_Name);
+	return StructuredBufferRes.contains(UpperName);
+}
 void UEngineShaderResources::ConstantBufferLinkData(std::string_view _Name, void* _Data)
 {
 	std::string UpperName = UEngineString::ToUpper(_Name);
@@ -123,7 +142,25 @@ void UEngineShaderResources::SamplerSetting(std::string_view _Name, std::string_
 	SamplerRes[UpperName].Res = UEngineSampler::Find<UEngineSampler>(_ResName);
 
 }
+void UEngineShaderResources::StructuredBufferLinkData(std::string_view _Name, UINT _Count, void* _Data)
+{
+	std::string UpperName = UEngineString::ToUpper(_Name);
 
+	if (false == StructuredBufferRes.contains(UpperName))
+	{
+		UEngineDebug::OutPutString("StructuredBufferRes.contains " + UpperName);
+		return;
+	}
+
+	if (StructuredBufferRes[UpperName].Res->DataCount < _Count)
+	{
+		int DataSize = StructuredBufferRes[UpperName].Res->DataSize;
+		StructuredBufferRes[UpperName].Res->ResCreate(DataSize, _Count);
+	}
+
+	StructuredBufferRes[UpperName].DataCount = _Count;
+	StructuredBufferRes[UpperName].Data = _Data;
+}
 void UEngineShaderResources::TextureSetting(std::string_view _Name, std::string_view _ResName)
 {
 	std::string UpperName = UEngineString::ToUpper(_Name);

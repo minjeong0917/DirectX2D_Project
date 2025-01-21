@@ -181,6 +181,9 @@
     <ClInclude Include="GameInstance.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="EngineStructuredBuffer.h">
+      <Filter>Resources\Buffer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActorComponent.cpp">
@@ -203,9 +206,6 @@
     </ClCompile>
     <ClCompile Include="EngineGraphicDevice.cpp">
       <Filter>Graphic</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraActor.cpp">
-      <Filter>Object\Render</Filter>
     </ClCompile>
     <ClCompile Include="EngineCamera.cpp">
       <Filter>Object\Render</Filter>
@@ -344,6 +344,12 @@
     </ClCompile>
     <ClCompile Include="GameInstance.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineStructuredBuffer.cpp">
+      <Filter>Resources\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraActor.cpp">
+      <Filter>Object\Render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

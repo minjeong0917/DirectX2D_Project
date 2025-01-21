@@ -31,6 +31,9 @@ public:
 	ENGINEAPI FVector ScreenPosToWorldPos(FVector _Pos);
 
 	ENGINEAPI FVector WorldPosToScreenPos(FVector _Pos);
+	ENGINEAPI FVector ScreenMousePosToWorldPosWithOutPos(float _PosZ);
+
+	ENGINEAPI FVector ScreenPosToWorldPosWithOutPos(FVector _Pos, float _PosZ);
 
 	ENGINEAPI inline bool IsFreeCamera()
 	{
