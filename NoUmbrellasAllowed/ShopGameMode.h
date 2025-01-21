@@ -76,6 +76,8 @@ private:
 	std::shared_ptr<class AMerchandise> Merchandise;
 	std::shared_ptr<class AMerchandiseMaterial> MerchandiseMaterial;
 	std::shared_ptr<class ACardSlot> CardSlot;
+	std::shared_ptr<class ACardTotalPrice> CardTotalPrice;
+
 	std::shared_ptr<class ABook> Book;
 	std::shared_ptr<class ABookSmall> BookSmall;
 

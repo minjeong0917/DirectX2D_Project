@@ -43,6 +43,7 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 
     UEngineFont::Load("PF", "PF Stardust");
     UEngineFont::Load("PFEXBold", "PF Stardust ExtraBold");
+    UEngineFont::Load("OrangeKid", "OrangeKid-Regular");
     UEngineFont::Load("PFttf", "PFStardust.ttf");
 
 

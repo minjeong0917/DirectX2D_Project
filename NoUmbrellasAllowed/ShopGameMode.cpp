@@ -19,6 +19,7 @@
 #include "MerchandiseInfo.h"
 #include "PlayerBalloon.h"
 #include "ConversationList.h"
+#include "CardTotalPrice.h"
 
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/CameraActor.h>
@@ -154,6 +155,10 @@ AShopGameMode::AShopGameMode()
     CardSlot = GetWorld()->SpawnActor<ACardSlot>();
     CardSlot->SetActive(false);
 
+    CardTotalPrice = GetWorld()->SpawnActor<ACardTotalPrice>();
+    CardTotalPrice->SetActive(false);
+
+    
     Book = GetWorld()->SpawnActor<ABook>();
     Book->SetActive(false);
 
@@ -323,10 +328,16 @@ void AShopGameMode::Tick(float _DeltaTime)
         Book->SetButtonActive(true);
     }
 
+
+    if (Merchandise->GetIsEnter() == false || ItemShelf->IsSelectedToolActive() == false)
+    {
+        MerchandiseMaterial->SetActive(false);
+    }
     
     if (Merchandise->GetIsEnter() == true && ItemShelf->IsSelectedToolActive() == true)
     {
         MerchandiseCheck = true;
+        MerchandiseMaterial->SetActive(true);
     }
     else
     {
@@ -477,6 +488,7 @@ void AShopGameMode::CardCompareAndChange(float _DeltaTime)
         {
             IsCardChange = false;
             CardChangeTime = 0.0f;
+            PlayerBalloon->SetActive(false);
         }
 
     }
@@ -490,7 +502,11 @@ void AShopGameMode::MerchandiseActive(float _DeltaTime)
     Merchandise->SetActive(true);
     MerchandiseMaterial->SetActive(true);
     Merchandise->SetIsApear(true);
+
     CardSlot->SetActive(true);
+    CardTotalPrice->SetActive(true);
+    //CardInfo::GetInst().CardTypeInfo();
+    //CardTotalPrice->TotalPriceCheck();
     CardSlot->IsActive = true;
     IsMerchandisActive = true;
 

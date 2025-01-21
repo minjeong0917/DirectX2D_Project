@@ -5,6 +5,7 @@
 #include <EngineCore/Renderer.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/DefaultSceneComponent.h>
+#include <EngineCore/FontRenderer.h>
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/Collision.h>
 
@@ -13,7 +14,6 @@
 #include "CardInfo.h"
 #include <EngineCore/FontWidget.h>
 #include "ShopHUD.h"
-#include <EngineCore/FontRenderer.h>
 
 ASelectedCard::ASelectedCard()
 {

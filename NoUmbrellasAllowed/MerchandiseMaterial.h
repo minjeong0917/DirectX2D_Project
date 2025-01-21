@@ -15,6 +15,7 @@ public:
 	AMerchandiseMaterial& operator=(AMerchandiseMaterial&& _Other) noexcept = delete;
 
 protected:
+	void Tick(float _DeltaTime);
 
 private:
 	std::shared_ptr<class USpriteRenderer> MerchandiseMaterialRender;

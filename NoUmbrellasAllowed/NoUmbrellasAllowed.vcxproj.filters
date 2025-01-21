@@ -88,6 +88,9 @@
     <ClCompile Include="MerchandiseMaterial.cpp">
       <Filter>Shop\Merchandise</Filter>
     </ClCompile>
+    <ClCompile Include="CardTotalPrice.cpp">
+      <Filter>Shop\Card</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleGameMode.h">
@@ -179,6 +182,9 @@
     </ClInclude>
     <ClInclude Include="MerchandiseMaterial.h">
       <Filter>Shop\Merchandise</Filter>
+    </ClInclude>
+    <ClInclude Include="CardTotalPrice.h">
+      <Filter>Shop\Card</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
