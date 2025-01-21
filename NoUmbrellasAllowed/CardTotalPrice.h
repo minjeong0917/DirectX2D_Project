@@ -13,7 +13,9 @@ public:
 	ACardTotalPrice(ACardTotalPrice&& _Other) noexcept = delete;
 	ACardTotalPrice& operator=(const ACardTotalPrice& _Other) = delete;
 	ACardTotalPrice& operator=(ACardTotalPrice&& _Other) noexcept = delete;
-	void TotalPriceCheck();
+	int TotalPriceCheck();
+	void SetPrice(int _Price);
+
 
 protected:
 	void BeginPlay();

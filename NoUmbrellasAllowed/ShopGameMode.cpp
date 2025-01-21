@@ -272,6 +272,15 @@ void AShopGameMode::Tick(float _DeltaTime)
                 {
                     MerchandiseActive(_DeltaTime);
                 }
+                else if (IsMerchandisActive == true)
+                {
+                    if (CurPrice < TotalPrice)
+                    {
+                        CurPrice += 1;
+                    }
+                    CardTotalPrice->SetPrice(CurPrice);
+                }
+
                 if (Merchandise->GetActorLocation().Y > -100.0f)
                 {
                     //Merchandise->PlusAlpha(_DeltaTime);
@@ -505,8 +514,10 @@ void AShopGameMode::MerchandiseActive(float _DeltaTime)
 
     CardSlot->SetActive(true);
     CardTotalPrice->SetActive(true);
-    //CardInfo::GetInst().CardTypeInfo();
-    //CardTotalPrice->TotalPriceCheck();
+    
+    TotalPrice = CardTotalPrice->TotalPriceCheck();
+
+    CardTotalPrice->SetPrice(CurPrice);
     CardSlot->IsActive = true;
     IsMerchandisActive = true;
 

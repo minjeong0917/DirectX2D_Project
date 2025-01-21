@@ -38,6 +38,8 @@ private:
 	int ChangeCardNum = 0;
 	bool IsMerchandisActive = false;
 
+	int CurPrice = 0.0f;
+	int TotalPrice = 0.0f;
 	bool IsCardHover = false;
 	int HoverCardNum = 0;
 
