@@ -31,6 +31,9 @@ private:
 
 	bool IsEnter = false;
 	std::shared_ptr<class USpriteRenderer> CardSlotRender;
+	std::shared_ptr<class USpriteRenderer> UpDownRender;
+	std::shared_ptr<class UFontRenderer> UpDownText;
+
 	std::vector<std::shared_ptr<class USpriteRenderer>> AllCardSlotRender;
 	std::shared_ptr<class USpriteRenderer> CardSlotInfoRender;
 	std::shared_ptr<class UCollision> CardSlotCollision;

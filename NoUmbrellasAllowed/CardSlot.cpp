@@ -6,6 +6,7 @@
 #include <EngineCore/DefaultSceneComponent.h>
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/Collision.h>
+#include <EngineCore/FontRenderer.h>
 
 ACardSlot::ACardSlot()
 {
@@ -35,6 +36,20 @@ ACardSlot::ACardSlot()
             this->OnCollisionEnd(_This, _Other);
 
         });
+
+
+    UpDownRender = CreateDefaultSubObject<USpriteRenderer>();
+    UpDownRender->SetSprite("CardCase", 7);
+    UpDownRender->SetAutoScaleRatio(3.0f);
+    UpDownRender->SetWorldLocation({ -768.0f, -223.0f, -180.0f });
+    UpDownRender->SetupAttachment(RootComponent);
+
+    UpDownText = CreateDefaultSubObject<UFontRenderer>();
+    UpDownText->SetFont("DungGeunMo", 32.0f, TColor<unsigned char>(96, 234, 53, 255), FW1_LEFT);
+    UpDownText->SetWorldLocation({ -783.0f,-175.0f,-180.0f });
+    UpDownText->SetText("180V");
+    UpDownText->SetupAttachment(RootComponent);
+
 
     CardSlotInfoRender = CreateDefaultSubObject<USpriteRenderer>();
     CardSlotInfoRender->SetSprite("CardCase", 6);
