@@ -84,37 +84,52 @@ void ACalculator::Tick(float _DeltaTime)
 
 void ACalculator::ButtonClickCheck()
 {
-    if (UEngineInput::IsUp(VK_LBUTTON))
+    if (UEngineInput::IsUp(VK_LBUTTON) && Button->GetButtonIsEnter() == true)
     {
         int CurNum = Button->GetCurButtonIndex();
         if (CurNum < 10) // num 
         {
-            if (CurNum < 9)
+            if (CurNum < 9) // 1 ~ 9
             {
                 CurPriceText = std::to_string(CurNum + 1);
-                //CurPrice = CurNum + 1;
+                CurPrice = CurNum + 1;
             }
-            else if (CurNum == 9)
+            else if (CurNum == 9) // 0
             {
                 CurPriceText = std::to_string(0);
+                CurPrice = 0;
             }
 
             if (EntirePriceText == "0")
             {
                 EntirePriceText = CurPriceText;
+                EntirePrice = CurPrice;
             }
             else
             {
                 EntirePriceText = EntirePriceText + CurPriceText;
-            }
 
+                if (CurPrice >= 0 && CurPrice <= 9) 
+                {
+                    if (EntirePrice == 0) 
+                    {
+                        EntirePrice = CurPrice;
+                    }
+                    else
+                    {
+                        EntirePrice = EntirePrice * 10 + CurPrice; 
+                    }
+                }
+            }
         }
+
         if (CurNum == 10) // CE
         {
             EntirePriceText = "0";
+            EntirePrice = 0;
         }
         PriceText->SetText(EntirePriceText);
-
+        UEngineDebug::OutPutString(std::to_string(EntirePrice));
     }
 
 }

@@ -15,7 +15,7 @@ AMerchandiseMaterial::AMerchandiseMaterial()
     //MerchandiseMaterialRender->SetAutoScaleRatio(3.0f);
     MerchandiseMaterialRender->SetAutoScale(false);
     MerchandiseMaterialRender->SetScale3D({ 90.0f, 108.0f, 1.0f });
-    MerchandiseMaterialRender->SetWorldLocation({ 0.0f, -320.0f, -155.0f });
+    MerchandiseMaterialRender->SetWorldLocation({ 0.0f, -315.0f, -155.0f });
     MerchandiseMaterialRender->SetupAttachment(RootComponent);
 }
 
@@ -32,6 +32,6 @@ void AMerchandiseMaterial::Tick(float _DeltaTime)
     std::shared_ptr<class ACameraActor> Camera = GetWorld()->GetCamera(0);
     FVector MousePos = Camera->ScreenMousePosToWorldPos();
 
-    MerchandiseMaterialRender->SetWorldLocation({ MousePos.X + 8.0f, MousePos.Y - 20.0f, -155.0f });
+    MerchandiseMaterialRender->SetWorldLocation({ MousePos.X + 8.0f, MousePos.Y - 18.0f, -155.0f });
 
 }

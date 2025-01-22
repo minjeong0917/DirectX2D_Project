@@ -200,7 +200,8 @@ void ACalculatorButton::Tick(float _DeltaTime)
 void ACalculatorButton::OnCollisionEnter(UCollision* _This, UCollision* _Other)
 {
 
-   
+    IsEnter = true;
+
 }
 
 void ACalculatorButton::OnCollisionStay(class UCollision* _This, class UCollision* _Other)
