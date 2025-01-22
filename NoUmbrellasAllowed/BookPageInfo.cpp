@@ -159,36 +159,36 @@ void BookPageInfo::SetPageInfo(int _PageNum)
     // Page 8 : ÀçÁú 
     case 8:
     {
-        CollisionCount = 21;
+        CollisionCount = 24;
         HasNextPage = false;
 
         AllCollsionLocation.resize(CollisionCount);
 
-        FVector StartPos = { 478.0f, 215.0f, -170.0f };
-        FVector IterPos = { 96.5f, 0.0f, 0.0f };
+        FVector StartPos = { 475.0f, 215.0f, -170.0f };
+        FVector IterPos = { 78.0f, 0.0f, 0.0f };
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++)
         {
             AllCollsionLocation[i] = { StartPos.X + IterPos.X * i, StartPos.Y , -170.0f };
         }
-        for (int i = 5; i < 9; i++)
+        for (int i = 6; i < 11; i++)
         {
-            AllCollsionLocation[i] = { StartPos.X + IterPos.X * (i-5), StartPos.Y - 97.f , -170.0f };
+            AllCollsionLocation[i] = { StartPos.X + IterPos.X * (i-6), StartPos.Y - 95.f , -170.0f };
         }
-        for (int i = 9; i < 12; i++)
+        for (int i = 11; i < 15; i++)
         {
-            AllCollsionLocation[i] = { StartPos.X + IterPos.X * (i - 9), StartPos.Y - 229.0f , -170.0f };
+            AllCollsionLocation[i] = { StartPos.X + IterPos.X * (i - 11), StartPos.Y - 218.0f , -170.0f };
         }
-        for (int i = 12; i < 17; i++)
+        for (int i = 15; i < 21; i++)
         {
-            AllCollsionLocation[i] = { StartPos.X + IterPos.X * (i - 12), StartPos.Y - 358.0f, -170.0f };
+            AllCollsionLocation[i] = { StartPos.X + IterPos.X * (i - 15), StartPos.Y - 348.0f, -170.0f };
         }
-        for (int i = 17; i < 21; i++)
+        for (int i = 21; i < 24; i++)
         {
-            AllCollsionLocation[i] = { StartPos.X + IterPos.X * (i - 17), StartPos.Y - 457.f , -170.0f };
+            AllCollsionLocation[i] = { StartPos.X + IterPos.X * (i - 21), StartPos.Y - 443.f , -170.0f };
         }
 
-        CollisionScale = { 83.f, 83.f, 0.f };
+        CollisionScale = { 62.f, 83.f, 0.f };
 
         break;
     }

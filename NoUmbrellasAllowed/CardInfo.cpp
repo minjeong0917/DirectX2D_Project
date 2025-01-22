@@ -89,7 +89,7 @@ void CardInfo::CardTypeInfo(ECardType _CardType)
 
         break;
     case ECardType::TEXTURE:
-        AllCardType.resize(21);
+        AllCardType.resize(24);
 
         AllCardType[0].CardName = "알루미늄 합금";
         AllCardType[0].CardExplanation = "재활용 가능: 수거 대상이 \n 되면 가격이 오릅니다";
@@ -217,7 +217,23 @@ void CardInfo::CardTypeInfo(ECardType _CardType)
         AllCardType[20].CardPercent = 0;
         AllCardType[20].CardNameTextSize = NameTextSize;
 
+        AllCardType[21].CardName = "나무 소재";
+        AllCardType[21].CardExplanation = "가격에 영향 없음";
+        AllCardType[21].CardPercentText = "+0V";
+        AllCardType[21].CardPercent = 0;
+        AllCardType[21].CardNameTextSize = NameTextSize;
 
+        AllCardType[22].CardName = "점토 소재";
+        AllCardType[22].CardExplanation = "가격에 영향 없음";
+        AllCardType[22].CardPercentText = "+0V";
+        AllCardType[22].CardPercent = 0;
+        AllCardType[22].CardNameTextSize = NameTextSize;
+
+        AllCardType[23].CardName = "밀랍";
+        AllCardType[23].CardExplanation = "가격에 영향 없음";
+        AllCardType[23].CardPercentText = "+0V";
+        AllCardType[23].CardPercent = 0;
+        AllCardType[23].CardNameTextSize = NameTextSize;
         break;
     default:
         break;

@@ -71,7 +71,7 @@ AShopGameMode::AShopGameMode()
         GetWorld()->CreateCollisionProfile("BookButton_" + std::to_string(i));
         GetWorld()->LinkCollisionProfile("BookButton_" + std::to_string(i), "Cursor");
     }
-    for (int i = 0; i <22; i++)
+    for (int i = 0; i <24; i++)
     {
         GetWorld()->CreateCollisionProfile("BookPage_" + std::to_string(i));
         GetWorld()->LinkCollisionProfile("BookPage_" + std::to_string(i), "Cursor");
@@ -523,6 +523,7 @@ void AShopGameMode::MerchandiseActive(float _DeltaTime)
     MerchandiseInfo::GetInst().SetMerchandiseInfo(false, EMerchandiseType::BAG, 0);
     Merchandise->SetActive(true);
     MerchandiseMaterial->SetActive(true);
+    MerchandiseMaterial->SetMerchandiseMat(MerchandiseInfo::GetInst().GetTexture());
     Merchandise->SetIsApear(true);
 
     CardSlot->SetActive(true);

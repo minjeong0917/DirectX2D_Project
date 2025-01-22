@@ -151,6 +151,21 @@ void ConversationList::SetPlayerConverastion(ECardType _CardType, int _Index)
 			PlayerConversation = "돌이네요.";
 			PlayerBalloonXSize = 140.0f;
 		}
+		else if (_Index == 21)
+		{
+			PlayerConversation = "목재네요.";
+			PlayerBalloonXSize = 140.0f;
+		}
+		else if (_Index == 22)
+		{
+			PlayerConversation = "점토 소재네요.";
+			PlayerBalloonXSize = 200.0f;
+		}
+		else if (_Index == 23)
+		{
+			PlayerConversation = "밀랍이네요.";
+			PlayerBalloonXSize = 160.0f;
+		}
 		break;
 	default:
 		break;

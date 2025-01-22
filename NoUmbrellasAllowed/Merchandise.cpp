@@ -21,7 +21,7 @@ AMerchandise::AMerchandise()
 
     MerchandiseCollision = CreateDefaultSubObject<UCollision>();
     MerchandiseCollision->SetCollisionProfileName("Merchandise");
-    MerchandiseCollision->SetScale3D({ 1.2f,1.2f,0.0f });
+    MerchandiseCollision->SetScale3D({ 1.0f,0.8f,0.0f });
     MerchandiseCollision->SetRelativeLocation({ 0.0f, 0.5f,0.0f });
     MerchandiseCollision->SetupAttachment(MerchandiseRender);
 

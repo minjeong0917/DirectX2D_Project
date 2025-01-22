@@ -50,6 +50,11 @@ public:
 		return MerchandiseType;
 	}
 
+	int GetTexture()
+	{
+		return Texture;
+	}
+
 protected:
 
 private:
@@ -57,5 +62,6 @@ private:
 	EMerchandiseType MerchandiseType = EMerchandiseType::NONE;
 	std::vector<struct MBasicCardInfo> AllBasicCard;
 	float StatusLevel = 0.0f;
+	int Texture = 0;
 };
 

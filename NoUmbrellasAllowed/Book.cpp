@@ -42,7 +42,7 @@ ABook::ABook()
         });
 
 
-    for (int i = 0; i < 22; i++)
+    for (int i = 0; i < 24; i++)
     {
         BookIconRender = CreateDefaultSubObject<USpriteRenderer>();
 
