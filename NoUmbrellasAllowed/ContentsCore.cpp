@@ -44,6 +44,7 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
     UEngineFont::Load("PF", "PF Stardust");
     UEngineFont::Load("PFEXBold", "PF Stardust ExtraBold");
     UEngineFont::Load("OrangeKid", "Orange Kid");
+    UEngineFont::Load("DungGeunMo", "DungGeunMo");
     UEngineFont::Load("PFttf", "PFStardust.ttf");
 
 

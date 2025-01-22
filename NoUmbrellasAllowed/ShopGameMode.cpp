@@ -278,6 +278,10 @@ void AShopGameMode::Tick(float _DeltaTime)
                     {
                         CurPrice += 1;
                     }
+                    else if (CurPrice > TotalPrice)
+                    {
+                        CurPrice -= 1;
+                    }
                     CardTotalPrice->SetPrice(CurPrice);
                 }
 
@@ -405,7 +409,6 @@ void AShopGameMode::MerchandiseCardCheck(float _DeltaTime)
             AllCard[HoverCardNum]->SetCollisionYScale(0.0f);
             AllCard[HoverCardNum]->SetCollisionYLocation(0.15f);
 
-    
         }
         else if (AllCard[HoverCardNum]->GetActorLocation().Y <= AllCardLocations[HoverCardNum].Y)
         {
@@ -442,8 +445,6 @@ void AShopGameMode::CardCompareAndChange(float _DeltaTime)
                     AllCard[i]->AddActorLocation({ 0.0f, -500.0f * _DeltaTime, 0.0f });
                 }
             }
-
-
         }
     }
 
@@ -479,10 +480,19 @@ void AShopGameMode::CardCompareAndChange(float _DeltaTime)
         else if (CardChangeTime > 1.0f && CardChangeTime < 2.0f && AllCard[ChangeCardNum]->GetActorLocation().Y < AllCardLocations[ChangeCardNum].Y + 100.0f)
         {
             int CardNum = Book->GetCurClickNum();
+            TotalPrice = CardTotalPrice->TotalPriceCheck();
+
+            ECardType CardType = CardInfo::GetInst().GetCardType();
+
+            CardInfo::GetInst().SetCardType(CardType);
+            CardInfo::GetInst().CardTypeInfo(CardType);
+
             MerchandiseInfo::GetInst().SetCardNameNum(ChangeCardNum, CardNum);
             std::string Name = CardInfo::GetInst().GetAllCardType()[CardNum].CardName;
             std::string Explain = CardInfo::GetInst().GetAllCardType()[CardNum].CardExplanation;
             std::string Percent = CardInfo::GetInst().GetAllCardType()[CardNum].CardPercentText;
+
+
             float ChangeTextSize = CardInfo::GetInst().GetAllCardType()[CardNum].CardNameTextSize;
 
             AllCard[ChangeCardNum]->SetCardNameText(Name);
@@ -529,7 +539,7 @@ void AShopGameMode::MerchandiseActive(float _DeltaTime)
         AllCard[i]->SetTextActive(true);
 
         CardInfo::GetInst().SetCardType(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardType);
-        CardInfo::GetInst().CardTypeInfo();
+        CardInfo::GetInst().CardTypeInfo(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardType);
 
         int CardNum = MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardNameNum;
 

@@ -30,7 +30,7 @@ public:
 	}
 
 	void SetSelectedCardInfo();
-	void CardTypeInfo();
+	void CardTypeInfo(ECardType _CardType);
 
 	ECardColor GetCardColor()
 	{

@@ -31,6 +31,7 @@ public:
 		return IsEnter;
 	}
 
+
 protected:
 	void BeginPlay();
 	void Tick(float _DeltaTime);
@@ -38,7 +39,7 @@ protected:
 	void OnCollisionEnd(class UCollision* _This, class UCollision* _Other);
 private:
 	bool IsEnter = false;
-
+	int percent = 0;
 
 	std::shared_ptr<class USpriteRenderer> CardRender;
 	std::shared_ptr<class UCollision> CardCollision;

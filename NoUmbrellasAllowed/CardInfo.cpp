@@ -30,13 +30,14 @@ void CardInfo::SetSelectedCardInfo()
 
     }
 
-    CardTypeInfo();
+    CardTypeInfo(CardType);
 }
 
 
-void CardInfo::CardTypeInfo()
+void CardInfo::CardTypeInfo(ECardType _CardType)
 {
-    switch (CardType)
+
+    switch (_CardType)
     {
     case ECardType::NONE:
         break;
@@ -45,8 +46,8 @@ void CardInfo::CardTypeInfo()
 
         AllCardType[0].CardName = "가방";
         AllCardType[0].CardExplanation = "있으면 불편하고 없으면 허전하다.";
-        AllCardType[0].CardPercentText = "10V";
-        AllCardType[0].CardPercent = 10;
+        AllCardType[0].CardPercentText = "20V";
+        AllCardType[0].CardPercent = 20;
         AllCardType[0].CardNameTextSize = NameTextSize;
 
         break;

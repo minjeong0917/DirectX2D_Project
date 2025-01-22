@@ -15,8 +15,8 @@ ACardTotalPrice::ACardTotalPrice()
     RootComponent = Default;
 
     CardTotalPrice = CreateDefaultSubObject<UFontRenderer>();
-    CardTotalPrice->SetFont("OrangeKid", 52.0f, TColor<unsigned char>(196, 247, 1, 255), FW1_RIGHT);
-    CardTotalPrice->SetWorldLocation({ -585.0f,-178.0f,-170.0f });
+    CardTotalPrice->SetFont("DungGeunMo", 52.0f, TColor<unsigned char>(196, 247, 1, 255), FW1_RIGHT);
+    CardTotalPrice->SetWorldLocation({ -585.0f,-187.0f,-170.0f });
     CardTotalPrice->SetupAttachment(RootComponent);
 }
 
@@ -44,12 +44,16 @@ void ACardTotalPrice::SetPrice(int _Price)
 
 int ACardTotalPrice::TotalPriceCheck()
 {
+    float ConditionPercent = 1.0f;
+    int TexturePlusPrice = 0;
     for (size_t i = 0; i < MerchandiseInfo::GetInst().GetAllBasicCard().size(); i++)
     {
         ECardType CardType = MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardType;
  
-        CardInfo::GetInst().SetCardType(CardType);
-        CardInfo::GetInst().CardTypeInfo();
+        
+        CardInfo::GetInst().CardTypeInfo(CardType);
+
+
         int CardNum = MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardNameNum;
 
         if (CardType == ECardType::BASIC)
@@ -61,15 +65,15 @@ int ACardTotalPrice::TotalPriceCheck()
         else if (CardType == ECardType::CONDITION)
         {
             int Percentage = CardInfo::GetInst().GetAllCardType()[CardNum].CardPercent;
-            TotalPrice *= (100 + Percentage) / 100;
+            ConditionPercent = (100 + Percentage) / 100.0f;
         }
         else if (CardType == ECardType::TEXTURE)
         {
             int PlusPrice = CardInfo::GetInst().GetAllCardType()[CardNum].CardPercent;
-            TotalPrice += PlusPrice;
+            TexturePlusPrice = PlusPrice;
         }
 
     }
-
+    TotalPrice = (TotalPrice + TexturePlusPrice) * ConditionPercent;
     return TotalPrice;
 }
