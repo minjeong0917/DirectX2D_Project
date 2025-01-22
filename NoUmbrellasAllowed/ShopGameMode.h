@@ -42,6 +42,9 @@ private:
 	int TotalPrice = 0.0f;
 	bool IsCardHover = false;
 	int HoverCardNum = 0;
+	bool IsPriceChange = false;
+	float ChangePriceActiveTime = 0.0f;
+
 
 	int CustomerActive = 0;
 

@@ -76,6 +76,33 @@ void ACardSlot::Tick(float _DeltaTime)
     }
 }
 
+void ACardSlot::SetUpDownText(int _Price)
+{
+    std::string PriceText = std::to_string(_Price);
+    UpDownText->SetText(PriceText + "V");
+    if (_Price >= 0)
+    {
+        UpDownRender->SetSprite("CardCase", 7);
+        UpDownText->SetFont("DungGeunMo", 32.0f, TColor<unsigned char>(96, 234, 53, 255), FW1_LEFT);
+
+
+    }
+    else if (_Price < 0)
+    {
+        UpDownRender->SetSprite("CardCase", 8);
+        UpDownText->SetFont("DungGeunMo", 32.0f, TColor<unsigned char>(251, 100, 57, 255), FW1_LEFT);
+
+    }
+}
+
+void ACardSlot::SetUpDownActive(bool _IsActive)
+{
+    IsUpdownActive = _IsActive;
+    UpDownRender->SetActive(_IsActive);
+    UpDownText->SetActive(_IsActive);
+}
+
+
 void ACardSlot::OnCollisionEnter(UCollision* _This, UCollision* _Other)
 {
     IsEnter = true;

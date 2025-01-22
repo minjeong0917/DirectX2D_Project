@@ -15,8 +15,12 @@ public:
 	ACardSlot& operator=(ACardSlot&& _Other) noexcept = delete;
 
 
+	void SetUpDownText(int _Price);
+	void SetUpDownActive(bool _IsActive);
+
 
 	bool IsActive = false;
+	bool IsUpdownActive = false;
 
 	bool GetIsEnter()
 	{
@@ -30,6 +34,7 @@ protected:
 private:
 
 	bool IsEnter = false;
+
 	std::shared_ptr<class USpriteRenderer> CardSlotRender;
 	std::shared_ptr<class USpriteRenderer> UpDownRender;
 	std::shared_ptr<class UFontRenderer> UpDownText;

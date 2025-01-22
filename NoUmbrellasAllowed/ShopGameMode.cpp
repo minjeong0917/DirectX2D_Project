@@ -276,11 +276,24 @@ void AShopGameMode::Tick(float _DeltaTime)
                 {
                     if (CurPrice < TotalPrice)
                     {
+                      
                         CurPrice += 1;
+                        
                     }
                     else if (CurPrice > TotalPrice)
                     {
                         CurPrice -= 1;
+                    }
+                    else if (CurPrice == TotalPrice && CardSlot->IsUpdownActive == true)
+                    {
+                        ChangePriceActiveTime += 1.0f * _DeltaTime;
+                        if (ChangePriceActiveTime > 2.5f)
+                        {
+                            IsPriceChange = 0;
+                            ChangePriceActiveTime = 0.0f;
+                            CardSlot->SetUpDownActive(false);
+                        }
+
                     }
                     CardTotalPrice->SetPrice(CurPrice);
                 }
@@ -483,7 +496,17 @@ void AShopGameMode::CardCompareAndChange(float _DeltaTime)
         else if (CardChangeTime > 1.0f && CardChangeTime < 2.0f && AllCard[ChangeCardNum]->GetActorLocation().Y < AllCardLocations[ChangeCardNum].Y + 100.0f)
         {
             int CardNum = Book->GetCurClickNum();
+
             TotalPrice = CardTotalPrice->TotalPriceCheck();
+            if (CurPrice != TotalPrice && IsPriceChange == 0)
+            {
+                CardSlot->SetUpDownActive(true);
+                int ChangePrice = TotalPrice - CurPrice;
+                CardSlot->SetUpDownText(ChangePrice);
+                IsPriceChange += 1;
+            }
+
+
 
             ECardType CardType = CardInfo::GetInst().GetCardType();
 
@@ -525,11 +548,17 @@ void AShopGameMode::MerchandiseActive(float _DeltaTime)
     MerchandiseMaterial->SetActive(true);
     MerchandiseMaterial->SetMerchandiseMat(MerchandiseInfo::GetInst().GetTexture());
     Merchandise->SetIsApear(true);
+    CardSlot->SetUpDownActive(true);
 
     CardSlot->SetActive(true);
     CardTotalPrice->SetActive(true);
-    
     TotalPrice = CardTotalPrice->TotalPriceCheck();
+    TotalPrice = CardTotalPrice->TotalPriceCheck();
+
+
+    CardSlot->SetUpDownText(TotalPrice);
+
+
 
     CardTotalPrice->SetPrice(CurPrice);
     CardSlot->IsActive = true;
