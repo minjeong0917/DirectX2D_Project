@@ -5,9 +5,9 @@
 #include "CalculatorButton.h"
 #include <EngineCore/Collision.h>
 #include <EnginePlatform/EngineInput.h>
+#include <EngineCore/FontRenderer.h>
 
-
-AButton::AButton()
+ACalculatorButton::ACalculatorButton()
 {
     std::shared_ptr<UDefaultSceneComponent> Default = CreateDefaultSubObject<UDefaultSceneComponent>();
     RootComponent = Default;
@@ -20,25 +20,47 @@ AButton::AButton()
         ButtonRender->SetSprite("Buttons", 0);
         ButtonRender->SetAutoScaleRatio(3.0f);
 
+        NumButtonText = CreateDefaultSubObject<UFontRenderer>();
+        NumButtonText->SetFont("OrangeKid", 45.0f, TColor<unsigned char>(182, 180, 172, 255), FW1_CENTER);
+        NumButtonText->SetupAttachment(RootComponent);
+
+
+        if (i < 9)
+        {
+            NumButtonText->SetText(std::to_string(i + 1));
+        }
+        else
+        {
+            NumButtonText->SetText(std::to_string(0));
+
+        }
+
         ButtonCollision = CreateDefaultSubObject<UCollision>();
         ButtonCollision->SetCollisionProfileName("Button_" + std::to_string(i));
 
         if (i / 3 < 1)
         {
             ButtonRender->SetWorldLocation({ StartPos.X + (IterPos.X * i),StartPos.Y + IterPos.Y * (i / 3), -151.0f });
+            NumButtonText->SetWorldLocation({ StartPos.X + (IterPos.X * i),StartPos.Y + IterPos.Y * (i / 3) + 55.0f, -155.0f });
         }
         else if (i / 3 >= 1.0f && i / 3 < 2.0f)
         {
             ButtonRender->SetWorldLocation({ StartPos.X + (IterPos.X * (i - 3)),StartPos.Y + IterPos.Y * (i / 3), -151.0f });
+            NumButtonText->SetWorldLocation({ StartPos.X + (IterPos.X * (i - 3)),StartPos.Y + IterPos.Y * (i / 3) + 55.0f, -155.0f });
+
 
         }
         else if (i / 3 >= 2.0f && i / 3 < 3.0f)
         {
             ButtonRender->SetWorldLocation({ StartPos.X + (IterPos.X * (i - 6)),StartPos.Y + IterPos.Y * (i / 3), -151.0f });
+            NumButtonText->SetWorldLocation({ StartPos.X + (IterPos.X * (i - 6)) ,StartPos.Y + IterPos.Y * (i / 3) + 55.0f, -155.0f });
+
         }
         else
         {
             ButtonRender->SetWorldLocation({ StartPos.X + (IterPos.X * (i - 8)),StartPos.Y + IterPos.Y * (i / 3), -151.0f });
+            NumButtonText->SetWorldLocation({ StartPos.X + (IterPos.X * (i - 8)) ,StartPos.Y + IterPos.Y * (i / 3) + 55.0f, -155.0f });
+
         }
         ButtonCollision->SetRelativeLocation({ 0.0f,ButtonRender->GetTransformRef().Scale.hY(),0.0f });
 
@@ -60,6 +82,18 @@ AButton::AButton()
         CEButtonRender->SetupAttachment(RootComponent);
         AllCalculatorButtonRenders.push_back(CEButtonRender);
 
+        CEButtonText1 = CreateDefaultSubObject<UFontRenderer>();
+        CEButtonText1->SetFont("DungGeunMo", 45.0f, TColor<unsigned char>(182, 180, 172, 255), FW1_CENTER);
+        CEButtonText1->SetText("C");
+        CEButtonText1->SetWorldLocation({ 748.0f, -540.0f, -155.0f });
+        CEButtonText1->SetupAttachment(RootComponent);
+
+        CEButtonText2 = CreateDefaultSubObject<UFontRenderer>();
+        CEButtonText2->SetFont("DungGeunMo", 45.0f, TColor<unsigned char>(182, 180, 172, 255), FW1_CENTER);
+        CEButtonText2->SetText("E");
+        CEButtonText2->SetWorldLocation({ 748.0f, -575.0f, -155.0f });
+        CEButtonText2->SetupAttachment(RootComponent);
+
         CEButtonCollision = CreateDefaultSubObject<UCollision>();
         CEButtonCollision->SetCollisionProfileName("Button_10");
         CEButtonCollision->SetRelativeLocation({ 0.0f,CEButtonRender->GetTransformRef().Scale.hY(),0.0f });
@@ -78,6 +112,12 @@ AButton::AButton()
         EnterButtonRender->SetWorldLocation({ 720.0f, -730.0f, -151.0f });
         EnterButtonRender->SetupAttachment(RootComponent);
         AllCalculatorButtonRenders.push_back(EnterButtonRender);
+
+        EnterButtonText = CreateDefaultSubObject<UFontRenderer>();
+        EnterButtonText->SetFont("DungGeunMo", 30.0f, TColor<unsigned char>(182, 180, 172, 255), FW1_CENTER);
+        EnterButtonText->SetText("제시");
+        EnterButtonText->SetWorldLocation({ 740.0f, -687.0f, -155.0f });
+        EnterButtonText->SetupAttachment(RootComponent);
 
         EnterButtonCollision = CreateDefaultSubObject<UCollision>();
         EnterButtonCollision->SetCollisionProfileName("Button_11");
@@ -104,6 +144,12 @@ AButton::AButton()
         NotDealButtonRender->SetupAttachment(RootComponent);
         AllCalculatorButtonRenders.push_back(NotDealButtonRender);
 
+        NotDealButtonText = CreateDefaultSubObject<UFontRenderer>();
+        NotDealButtonText->SetFont("DungGeunMo", 26.0f, TColor<unsigned char>(182, 178, 142, 255), FW1_CENTER);
+        NotDealButtonText->SetText("거래 포기");
+        NotDealButtonText->SetWorldLocation({ 605.0f, -773.0f, -155.0f });
+        NotDealButtonText->SetupAttachment(RootComponent);
+
         NotDealButtonCollision = CreateDefaultSubObject<UCollision>();
         NotDealButtonCollision->SetCollisionProfileName("Button_12");
         NotDealButtonCollision->SetRelativeLocation({ 0.0f,NotDealButtonRender->GetTransformRef().Scale.hY(),0.0f });
@@ -123,6 +169,13 @@ AButton::AButton()
         DealButtonRender->SetupAttachment(RootComponent);
         AllCalculatorButtonRenders.push_back(DealButtonRender);
 
+        NotDealButtonText = CreateDefaultSubObject<UFontRenderer>();
+        NotDealButtonText->SetFont("DungGeunMo", 26.0f, TColor<unsigned char>(182, 178, 142, 255), FW1_CENTER);
+        NotDealButtonText->SetText("거래 수락");
+        NotDealButtonText->SetWorldLocation({ 760.0f, -773.0f, -155.0f });
+        NotDealButtonText->SetupAttachment(RootComponent);
+
+
         DealButtonCollision = CreateDefaultSubObject<UCollision>();
         DealButtonCollision->SetCollisionProfileName("Button_13");
         DealButtonCollision->SetRelativeLocation({ 0.0f,DealButtonRender->GetTransformRef().Scale.hY(),0.0f });
@@ -134,30 +187,31 @@ AButton::AButton()
     }
 }
 
-AButton::~AButton()
+ACalculatorButton::~ACalculatorButton()
 {
 
 }
 
-void AButton::Tick(float _DeltaTime)
+void ACalculatorButton::Tick(float _DeltaTime)
 {
     AActor::Tick(_DeltaTime);
 
 }
-void AButton::OnCollisionEnter(UCollision* _This, UCollision* _Other)
+void ACalculatorButton::OnCollisionEnter(UCollision* _This, UCollision* _Other)
 {
 
    
 }
 
-void AButton::OnCollisionStay(class UCollision* _This, class UCollision* _Other)
+void ACalculatorButton::OnCollisionStay(class UCollision* _This, class UCollision* _Other)
 {
     std::string ProfileName = _This->GetCollisionProfileName();
+    int Index = std::stoi(ProfileName.substr(7));
+    CurButtonIndex = Index;
 
     if (UEngineInput::IsPress(VK_LBUTTON) && ProfileName != "NONE")
     {
 
-        size_t Index = std::stoi(ProfileName.substr(7)); // "Button_" 이후의 숫자를 추출
         if (Index < 10)
         {
             AllCalculatorButtonRenders[Index]->SetSprite("Buttons", 1);
@@ -184,8 +238,7 @@ void AButton::OnCollisionStay(class UCollision* _This, class UCollision* _Other)
     {
         IsEnter = false;
 
-        std::string ProfileName = _This->GetCollisionProfileName();
-        size_t Index = std::stoi(ProfileName.substr(7)); // "Button_" 이후의 숫자를 추출
+
         if (Index < 10)
         {
             AllCalculatorButtonRenders[Index]->SetSprite("Buttons", 0);
@@ -205,7 +258,7 @@ void AButton::OnCollisionStay(class UCollision* _This, class UCollision* _Other)
     }
 }
 
-void AButton::OnCollisionEnd(UCollision* _This, UCollision* _Other)
+void ACalculatorButton::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 {
 
     IsEnter = false;
@@ -213,7 +266,7 @@ void AButton::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 
     std::string EndProfileName = _This->GetCollisionProfileName();
 
-    size_t Index = std::stoi(EndProfileName.substr(7)); // "Button_" 이후의 숫자를 추출
+    int Index = std::stoi(EndProfileName.substr(7));
     if (Index < 10)
     {
         AllCalculatorButtonRenders[Index]->SetSprite("Buttons", 0);
@@ -232,7 +285,7 @@ void AButton::OnCollisionEnd(UCollision* _This, UCollision* _Other)
     }
 }
 
-void AButton::CollisionSet(std::shared_ptr<class UCollision> _Collision)
+void ACalculatorButton::CollisionSet(std::shared_ptr<class UCollision> _Collision)
 {
     _Collision->SetCollisionEnter([this](UCollision* _This, UCollision* _Other)
         {

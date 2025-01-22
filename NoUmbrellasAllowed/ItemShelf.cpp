@@ -64,6 +64,10 @@ void AItemShelf::Tick(float _DeltaTime)
     }
     
 }
+int AItemShelf::GetCurToolIndex()
+{
+    return Tools->GetCurToolIndex();
+}
 
 void AItemShelf::OnCollisionEnter(UCollision* _This, UCollision* _Other)
 {

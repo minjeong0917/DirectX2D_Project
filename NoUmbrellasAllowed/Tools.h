@@ -19,6 +19,11 @@ public:
 	}
 	bool IsSelectedToolActive();
 
+	int GetCurToolIndex()
+	{
+		return CurSpriteIndex;
+	}
+
 protected:
 	void Tick(float _DeltaTime);
 

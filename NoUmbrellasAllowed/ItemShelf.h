@@ -15,6 +15,7 @@ public:
 	AItemShelf& operator=(AItemShelf&& _Other) noexcept = delete;
 	bool GetIsToolsClick();
 	bool IsSelectedToolActive();
+	int GetCurToolIndex();
 
 
 protected:

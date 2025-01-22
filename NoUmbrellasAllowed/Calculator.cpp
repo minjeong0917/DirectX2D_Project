@@ -3,10 +3,12 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/DefaultSceneComponent.h>
 #include <EngineCore/Collision.h>
-
+#include <EnginePlatform/EngineInput.h>
 #include "UI.h"
 #include "Calculator.h"
 #include "CalculatorButton.h"
+#include <EngineCore/FontRenderer.h>
+
 
 ACalculator::ACalculator()
 {
@@ -36,8 +38,13 @@ ACalculator::ACalculator()
 
         });
 
-    Button = GetWorld()->SpawnActor<AButton>();
+    Button = GetWorld()->SpawnActor<ACalculatorButton>();
 
+    PriceText = CreateDefaultSubObject<UFontRenderer>();
+    PriceText->SetFont("OrangeKid", 64.0f, TColor<unsigned char>(220, 225, 131, 255), FW1_RIGHT);
+    PriceText->SetText("0");
+    PriceText->SetWorldLocation({ 793.0f, -403.0f, -155.0f });
+    PriceText->SetupAttachment(RootComponent);
 
 }
 
@@ -48,7 +55,7 @@ ACalculator::~ACalculator()
 void ACalculator::Tick(float _DeltaTime)
 {
     AUI::Tick(_DeltaTime);
-
+    ButtonClickCheck();
 
     if (IsEnter == true)
     {
@@ -56,6 +63,7 @@ void ACalculator::Tick(float _DeltaTime)
         {
             Acc += 5;
             CalculatorRender->AddRelativeLocation({ 0.0f,1.0f * _DeltaTime * 20 * Acc,0.0f });
+            PriceText->AddRelativeLocation({ 0.0f,1.0f * _DeltaTime * 20 * Acc,0.0f });
             Button->AddRelativeLocation({ 0.0f,1.0f * _DeltaTime * 20 * Acc,0.0f });
         }
     }
@@ -65,11 +73,52 @@ void ACalculator::Tick(float _DeltaTime)
         if (CalculatorRender->GetTransformRef().WorldLocation.Y > -840.0f)
         {
             CalculatorRender->AddRelativeLocation({ 0.0f,-1.0f * _DeltaTime * 900, 0.0f });
+            PriceText->AddRelativeLocation({ 0.0f,-1.0f * _DeltaTime * 900, 0.0f });
+
             Button->AddRelativeLocation({ 0.0f,-1.0f * _DeltaTime * 900, 0.0f });
         }
     }
     CalculatorCollision->SetRelativeLocation({ CalculatorRender->GetTransformRef().WorldLocation.X, CalculatorRender->GetTransformRef().WorldLocation.Y + 231.0f });
 }
+
+
+void ACalculator::ButtonClickCheck()
+{
+    if (UEngineInput::IsUp(VK_LBUTTON))
+    {
+        int CurNum = Button->GetCurButtonIndex();
+        if (CurNum < 10) // num 
+        {
+            if (CurNum < 9)
+            {
+                CurPriceText = std::to_string(CurNum + 1);
+                //CurPrice = CurNum + 1;
+            }
+            else if (CurNum == 9)
+            {
+                CurPriceText = std::to_string(0);
+            }
+
+            if (EntirePriceText == "0")
+            {
+                EntirePriceText = CurPriceText;
+            }
+            else
+            {
+                EntirePriceText = EntirePriceText + CurPriceText;
+            }
+
+        }
+        if (CurNum == 10) // CE
+        {
+            EntirePriceText = "0";
+        }
+        PriceText->SetText(EntirePriceText);
+
+    }
+
+}
+
 
 void ACalculator::OnCollisionEnter(UCollision* _This, UCollision* _Other)
 {

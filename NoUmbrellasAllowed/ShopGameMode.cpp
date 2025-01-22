@@ -350,7 +350,10 @@ void AShopGameMode::Tick(float _DeltaTime)
     if (Merchandise->GetIsEnter() == true && ItemShelf->IsSelectedToolActive() == true)
     {
         MerchandiseCheck = true;
-        MerchandiseMaterial->SetActive(true);
+        if (ItemShelf->GetCurToolIndex() == 5)
+        {
+            MerchandiseMaterial->SetActive(true);
+        }
     }
     else
     {
