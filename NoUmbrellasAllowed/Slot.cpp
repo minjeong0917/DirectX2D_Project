@@ -39,12 +39,11 @@ ASlot::ASlot()
             this->OnCollisionEnd(_This, _Other);
 
         });
-
-
 }
 
 ASlot::~ASlot()
 {
+
 }
 
 
@@ -55,12 +54,9 @@ void ASlot::SetSlotItemSetting(std::string _SpriteName , int _Index, FVector _Sc
 }
 
 
-
 void ASlot::SetItemActive(bool _IsActive)
 {
-
-            SlotItemRender->SetActive(_IsActive);
-
+     SlotItemRender->SetActive(_IsActive);
 }
 
 void ASlot::SetSlotSprite(int _Index)
@@ -68,17 +64,13 @@ void ASlot::SetSlotSprite(int _Index)
     SlotRender->SetSprite("Inventory", _Index);
 }
 
-
 void ASlot::OnCollisionStay(UCollision* _This, UCollision* _Other)
 {
     IsStay = true;
 }
 
 
-
 void ASlot::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 {
     IsStay = false;
-
-
 }

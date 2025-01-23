@@ -7,6 +7,7 @@
 #include <EnginePlatform/EngineInput.h>
 #include "Slot.h"
 #include "InvenInfo.h"
+#include <EngineCore/FontRenderer.h>
 
 AInventory::AInventory()
 {
@@ -17,7 +18,6 @@ AInventory::AInventory()
     InvenRender->SetSprite("Inventory", 0);
     InvenRender->SetAutoScaleRatio(3.0f);
     InvenRender->SetWorldLocation({ 1230.0f,-345.0f, -130.0f});
-    //InvenRender->SetWorldLocation({ 650.0f,-345.0f, -130.0f});
     InvenRender->SetupAttachment(RootComponent);
 
     InvenButtonCollision = CreateDefaultSubObject<UCollision>();
@@ -49,7 +49,11 @@ AInventory::AInventory()
         }
     }
 
-
+    MerchandiseNameText = CreateDefaultSubObject<UFontRenderer>();
+    MerchandiseNameText->SetFont("DungGeunMo", 26.0f, TColor<unsigned char>(245, 222, 96, 255), FW1_CENTER);
+    MerchandiseNameText->SetWorldLocation({ 0.2f,0.0f,1.0f }); 
+    MerchandiseNameText->SetActive(false);
+    MerchandiseNameText->SetupAttachment(InvenRender);
 
  
 }
@@ -57,6 +61,8 @@ AInventory::AInventory()
 AInventory::~AInventory()
 {
 }
+
+
 void AInventory::Tick(float _DeltaTime)
 {
     AActor::Tick(_DeltaTime);
@@ -75,6 +81,12 @@ void AInventory::Tick(float _DeltaTime)
             if (AllSlots[i]->GetIsStay() == true)
             {
                 AllSlots[i]->SetSlotSprite(2);
+
+                if (UEngineInput::IsUp(VK_LBUTTON))
+                {
+                    IsClick = 2;
+                    CurClickIndex = i;
+                }
             }
             if (AllSlots[i]->GetIsStay() == false)
             {
@@ -83,6 +95,17 @@ void AInventory::Tick(float _DeltaTime)
         }
     }
 
+    if (IsClick == 2)
+    {
+        MerchandiseNameText->SetActive(true);
+
+        std::string MerchandiseName = InvenInfo::GetInst().GetAllSlotInfos()[CurClickIndex].MerchandiseName;
+        MerchandiseNameText->SetText(MerchandiseName);
+    }
+    else
+    {
+        MerchandiseNameText->SetActive(false);
+    }
 }
 
 void AInventory::ChangeLocation(float _DeltaTime)
@@ -106,23 +129,33 @@ void AInventory::ChangeLocation(float _DeltaTime)
 
     if (IsClick == 1 && InvenRender->GetWorldLocation().X > 950.0f)
     {
-        InvenRender->AddWorldLocation({ -800.f * _DeltaTime , 0.0f,0.0f });
+        InvenRender->AddWorldLocation({ -1000.f * _DeltaTime , 0.0f,0.0f });
 
 
         for (int i = 0; i < 10; i++)
         {
-            AllSlots[i]->AddActorLocation({ -800.f * _DeltaTime , 0.0f,0.0f });
+            AllSlots[i]->AddActorLocation({ -1000.f * _DeltaTime , 0.0f,0.0f });
         }
-
+            
     }
     else if (IsClick == 0 && InvenRender->GetWorldLocation().X < 1230.0f)
     {
-        InvenRender->AddWorldLocation({ 800.f * _DeltaTime , 0.0f,0.0f });
+        InvenRender->AddWorldLocation({ 1000.f * _DeltaTime , 0.0f,0.0f });
+
+        for (int i = 0; i < 10; i++)
+        {
+            AllSlots[i]->AddActorLocation({ 1000.f * _DeltaTime , 0.0f,0.0f });
+        }
+
+    }
+    else if (IsClick == 2 && InvenRender->GetWorldLocation().X > 650.0f)
+    {
+        InvenRender->AddWorldLocation({ -1000.f * _DeltaTime , 0.0f,0.0f });
 
 
         for (int i = 0; i < 10; i++)
         {
-            AllSlots[i]->AddActorLocation({ 800.f * _DeltaTime , 0.0f,0.0f });
+            AllSlots[i]->AddActorLocation({ -1000.f * _DeltaTime , 0.0f,0.0f });
         }
 
     }
@@ -137,7 +170,7 @@ void AInventory::OnCollisionStay(UCollision* _This, UCollision* _Other)
         {
             IsClick = 1;
         }
-        else if (IsClick == 1)
+        else if (IsClick == 1 || IsClick == 2)
         {
             IsClick = 0;
         }

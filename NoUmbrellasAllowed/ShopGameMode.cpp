@@ -272,7 +272,7 @@ void AShopGameMode::Tick(float _DeltaTime)
         std::string GetCurSprite = Merchandise->GetSpriteName();
         std::string CurMerchandiseName = MerchandiseInfo::GetInst().GetMerchandiseName();
         int GetSpriteIndex = Merchandise->GetSpriteIndex();
-        InvenInfo::GetInst().SetSlotInfo(0, CurMerchandiseName, GetCurSprite, GetSpriteIndex, Calculator->GetEntirePrice(), TotalPrice);
+        InvenInfo::GetInst().SetSlotInfo(0, CurMerchandiseName, AllCard, GetCurSprite, GetSpriteIndex, Calculator->GetEntirePrice(), TotalPrice);
 
 
 

@@ -32,7 +32,7 @@ public:
 		return Inst;
 	}
 
-	void SetSlotInfo(int _SlotNum, std::string _MerchandiseName, std::string _SpriteName, int _SpriteIndex, int _BuyPrice, int _CardPrice);
+	void SetSlotInfo(int _SlotNum, std::string _MerchandiseName, std::vector<std::shared_ptr<class ACard>> Cards, std::string _SpriteName, int _SpriteIndex, int _BuyPrice, int _CardPrice);
 
 	std::vector<struct SlotInfo> GetAllSlotInfos()
 	{

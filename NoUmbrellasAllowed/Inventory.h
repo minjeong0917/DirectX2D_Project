@@ -25,11 +25,12 @@ private:
 	void ChangeLocation(float _DeltaTime);
 
 	int IsClick = 0;
-
+	int CurClickIndex = 0;
 	std::vector<std::shared_ptr<class ASlot>> AllSlots;
 
 	std::shared_ptr<class USpriteRenderer>InvenRender;
 
+	std::shared_ptr<class UFontRenderer> MerchandiseNameText;
 	std::shared_ptr<class UCollision> InvenButtonCollision;
 };
 
