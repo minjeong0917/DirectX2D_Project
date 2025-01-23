@@ -5,7 +5,7 @@
 #include <EngineCore/Collision.h>
 #include "Slot.h"
 #include <EnginePlatform/EngineInput.h>
-
+#include "InvenInfo.h"
 ASlot::ASlot()
 {
     std::shared_ptr<UDefaultSceneComponent> Default = CreateDefaultSubObject<UDefaultSceneComponent>();
@@ -15,6 +15,14 @@ ASlot::ASlot()
     SlotRender->SetSprite("Inventory", 1);
     SlotRender->SetAutoScaleRatio(3.0f);
     SlotRender->SetupAttachment(RootComponent);
+
+    SlotItemRender = CreateDefaultSubObject<USpriteRenderer>();
+    SlotItemRender->SetSprite("Inventory", 1);
+    SlotItemRender->SetAutoScale(false);
+    SlotItemRender->SetScale3D({ 0.8f,0.8f,1.0f });
+    SlotItemRender->SetRelativeLocation({ 0.0f,0.2f,0.0f });
+    SlotItemRender->SetActive(false);
+    SlotItemRender->SetupAttachment(SlotRender);
 
     SlotCollision = CreateDefaultSubObject<UCollision>();
     SlotCollision->SetCollisionProfileName("Slot");
@@ -39,13 +47,38 @@ ASlot::~ASlot()
 {
 }
 
+
+void ASlot::SetSlotItemSetting(std::string _SpriteName , int _Index, FVector _Scale)
+{
+    SlotItemRender->SetSprite(_SpriteName, _Index);
+    SlotItemRender->SetRelativeScale3D(_Scale);
+}
+
+
+
+void ASlot::SetItemActive(bool _IsActive)
+{
+
+            SlotItemRender->SetActive(_IsActive);
+
+}
+
+void ASlot::SetSlotSprite(int _Index)
+{
+    SlotRender->SetSprite("Inventory", _Index);
+}
+
+
 void ASlot::OnCollisionStay(UCollision* _This, UCollision* _Other)
 {
-    SlotRender->SetSprite("Inventory", 2);
+    IsStay = true;
 }
+
+
 
 void ASlot::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 {
-    SlotRender->SetSprite("Inventory", 1);
+    IsStay = false;
+
 
 }

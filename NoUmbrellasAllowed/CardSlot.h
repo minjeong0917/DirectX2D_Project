@@ -26,6 +26,8 @@ public:
 	{
 		return IsEnter;
 	}
+	void SetMerchandiseNameText(std::string _Name);
+	void SetNameTextActive(bool _IsActive);
 
 protected:
 	void Tick(float _DeltaTime);
@@ -38,6 +40,7 @@ private:
 	std::shared_ptr<class USpriteRenderer> CardSlotRender;
 	std::shared_ptr<class USpriteRenderer> UpDownRender;
 	std::shared_ptr<class UFontRenderer> UpDownText;
+	std::shared_ptr<class UFontRenderer> MerchandiseNameText;
 
 	std::vector<std::shared_ptr<class USpriteRenderer>> AllCardSlotRender;
 	std::shared_ptr<class USpriteRenderer> CardSlotInfoRender;

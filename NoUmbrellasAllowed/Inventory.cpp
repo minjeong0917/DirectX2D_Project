@@ -6,6 +6,8 @@
 #include "Inventory.h"
 #include <EnginePlatform/EngineInput.h>
 #include "Slot.h"
+#include "InvenInfo.h"
+
 AInventory::AInventory()
 {
     std::shared_ptr<UDefaultSceneComponent> Default = CreateDefaultSubObject<UDefaultSceneComponent>();
@@ -47,6 +49,8 @@ AInventory::AInventory()
         }
     }
 
+
+
  
 }
 
@@ -56,19 +60,46 @@ AInventory::~AInventory()
 void AInventory::Tick(float _DeltaTime)
 {
     AActor::Tick(_DeltaTime);
+    ChangeLocation(_DeltaTime);
+
+    for (int i = 0; i < InvenInfo::GetInst().GetAllSlotInfos().size(); i++)
+    {
+        if (InvenInfo::GetInst().GetAllSlotInfos()[i].MerchandiseName != "NONE")
+        {
+            std::string SpriteName = InvenInfo::GetInst().GetAllSlotInfos()[i].SpriteName;
+            int Index =InvenInfo::GetInst().GetAllSlotInfos()[i].SpriteIndex;
+
+            AllSlots[i]->SetSlotItemSetting(SpriteName, Index, {0.6f ,0.6f,1.0f});
+            AllSlots[i]->SetItemActive(true);
+
+            if (AllSlots[i]->GetIsStay() == true)
+            {
+                AllSlots[i]->SetSlotSprite(2);
+            }
+            if (AllSlots[i]->GetIsStay() == false)
+            {
+                AllSlots[i]->SetSlotSprite(1);
+            }
+        }
+    }
+
+}
+
+void AInventory::ChangeLocation(float _DeltaTime)
+{
     if (InvenRender->GetWorldLocation().X > 1230.0f)
     {
-        InvenRender->SetWorldLocation({ 1230.0f,-345.0f, -130.0f});
+        InvenRender->SetWorldLocation({ 1230.0f,-345.0f, -130.0f });
 
         FVector StartPos = { 1037.0f,  224.3f };
         FVector IterPos = { 127.3f,  -119.6f };
 
         for (int y = 0; y < 5; y++)
         {
-            for (int i = 0; i <2; i++)
+            for (int i = 0; i < 2; i++)
             {
                 int index = y * 2 + i;
-                AllSlots[index]->SetActorLocation({StartPos.X + IterPos.X * i , StartPos.Y + IterPos.Y * y ,-135.0f});
+                AllSlots[index]->SetActorLocation({ StartPos.X + IterPos.X * i , StartPos.Y + IterPos.Y * y ,-135.0f });
             }
         }
     }
@@ -93,10 +124,9 @@ void AInventory::Tick(float _DeltaTime)
         {
             AllSlots[i]->AddActorLocation({ 800.f * _DeltaTime , 0.0f,0.0f });
         }
-        
+
     }
 }
-
 
 
 void AInventory::OnCollisionStay(UCollision* _This, UCollision* _Other)

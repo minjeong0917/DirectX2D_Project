@@ -29,6 +29,11 @@ public:
 	}
 	void SetClear();
 
+	int GetEntirePrice()
+	{
+		return EntirePrice;
+	}
+
 protected:
 
 	void Tick(float _DeltaTime);

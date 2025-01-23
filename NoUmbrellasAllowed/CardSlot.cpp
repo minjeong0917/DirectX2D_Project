@@ -38,6 +38,7 @@ ACardSlot::ACardSlot()
         });
 
 
+
     UpDownRender = CreateDefaultSubObject<USpriteRenderer>();
     UpDownRender->SetSprite("CardCase", 7);
     UpDownRender->SetAutoScaleRatio(3.0f);
@@ -50,13 +51,17 @@ ACardSlot::ACardSlot()
     UpDownText->SetText("180V");
     UpDownText->SetupAttachment(RootComponent);
 
-
     CardSlotInfoRender = CreateDefaultSubObject<USpriteRenderer>();
     CardSlotInfoRender->SetSprite("CardCase", 6);
     CardSlotInfoRender->SetAutoScaleRatio(3.0f);
     CardSlotInfoRender->SetWorldLocation({ -730.0f, -100.0f, -145.0f });
     CardSlotInfoRender->SetupAttachment(RootComponent);
 
+    MerchandiseNameText = CreateDefaultSubObject<UFontRenderer>();
+    MerchandiseNameText->SetFont("DungGeunMo", 26.0f, TColor<unsigned char>(245, 222, 96, 255), FW1_CENTER);
+    MerchandiseNameText->SetWorldLocation({ 0.0f, 0.9f,-0.01f });
+    MerchandiseNameText->SetText("180V");
+    MerchandiseNameText->SetupAttachment(CardSlotInfoRender);
 }
 
 ACardSlot::~ACardSlot()
@@ -75,7 +80,10 @@ void ACardSlot::Tick(float _DeltaTime)
         }
     }
 }
-
+void ACardSlot::SetMerchandiseNameText(std::string _Name)
+{
+    MerchandiseNameText->SetText(_Name);
+}
 void ACardSlot::SetUpDownText(int _Price)
 {
     std::string PriceText = std::to_string(_Price);
@@ -101,7 +109,11 @@ void ACardSlot::SetUpDownActive(bool _IsActive)
     UpDownRender->SetActive(_IsActive);
     UpDownText->SetActive(_IsActive);
 }
+void ACardSlot::SetNameTextActive(bool _IsActive)
+{
 
+    MerchandiseNameText->SetActive(_IsActive);
+}
 
 void ACardSlot::OnCollisionEnter(UCollision* _This, UCollision* _Other)
 {

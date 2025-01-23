@@ -48,6 +48,11 @@ void AMerchandise::BeginPlay()
     MerchandiseRender->ColorData.PlusColor.W -= 1.0f;
 }
 
+void AMerchandise::SetSprite(std::string _Sprite, int _Index)
+{
+    MerchandiseRender->SetSprite(_Sprite, _Index);
+}
+
 void AMerchandise::Tick(float _DeltaTime)
 {
     AActor::Tick(_DeltaTime);
@@ -65,6 +70,15 @@ void AMerchandise::Tick(float _DeltaTime)
         Acc = 1.0f;
     }
 
+}
+std::string AMerchandise::GetSpriteName()
+{
+    return MerchandiseRender->GetCurSpriteName();
+}
+
+int AMerchandise::GetSpriteIndex()
+{
+    return MerchandiseRender->GetCurIndex();
 }
 
 void AMerchandise::PlusAlpha(float _DeltaTime)

@@ -21,6 +21,7 @@
 #include "ConversationList.h"
 #include "CardTotalPrice.h"
 #include "Inventory.h"
+#include "InvenInfo.h"
 
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/CameraActor.h>
@@ -268,6 +269,13 @@ void AShopGameMode::Tick(float _DeltaTime)
     if (Calculator->GetIsPushEnter() == true && IsOut == false /*UEngineInput::IsPress('I')*/)
     {
         IsOut = true;
+        std::string GetCurSprite = Merchandise->GetSpriteName();
+        std::string CurMerchandiseName = MerchandiseInfo::GetInst().GetMerchandiseName();
+        int GetSpriteIndex = Merchandise->GetSpriteIndex();
+        InvenInfo::GetInst().SetSlotInfo(0, CurMerchandiseName, GetCurSprite, GetSpriteIndex, Calculator->GetEntirePrice(), TotalPrice);
+
+
+
         Calculator->SetClear();
     }
 
@@ -291,6 +299,8 @@ void AShopGameMode::Tick(float _DeltaTime)
             CardSlot->SetUpDownActive(false);
 
             CardSlot->SetActive(false);
+            CardSlot->SetNameTextActive(false);
+
             CardTotalPrice->SetActive(false);
 
             CardSlot->IsActive = false;
@@ -591,12 +601,16 @@ void AShopGameMode::BuyMerchandise(float _DeltaTime)
 
 void AShopGameMode::MerchandiseActive(float _DeltaTime)
 {
-    MerchandiseInfo::GetInst().SetMerchandiseInfo(false, EMerchandiseType::BAG, 0);
+    MerchandiseInfo::GetInst().SetMerchandiseInfo(false, EMerchandiseType::BAG, 1);
+    Merchandise->SetSprite(MerchandiseInfo::GetInst().GetSpriteName(), 1);
+
     Merchandise->SetActive(true);
     MerchandiseMaterial->SetActive(true);
     MerchandiseMaterial->SetMerchandiseMat(MerchandiseInfo::GetInst().GetTexture());
     Merchandise->SetIsApear(true);
     CardSlot->SetUpDownActive(true);
+    CardSlot->SetNameTextActive(true);
+    CardSlot->SetMerchandiseNameText(MerchandiseInfo::GetInst().GetMerchandiseName());
 
     CardSlot->SetActive(true);
     CardTotalPrice->SetActive(true);

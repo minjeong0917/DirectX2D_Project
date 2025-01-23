@@ -20,6 +20,8 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
 	case EMerchandiseType::NONE:
 		break;
 	case EMerchandiseType::BAG:
+		SpriteName = "Bag";
+
 		if (_Index == 0)
 		{
 			AllBasicCard.resize(3);
@@ -39,9 +41,30 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
 
 			StatusLevel = 36.0f;
 			Texture = 12;
+			MerchandiseName = "아빠가 준 가방";
+		}
+		if (_Index == 1)
+		{
+			AllBasicCard.resize(3);
+
+			AllBasicCard[0].CardType = ECardType::BASIC;
+			AllBasicCard[0].CardColor = ECardColor::Gray;
+			AllBasicCard[0].CardNameNum = 0;
+
+			AllBasicCard[1].CardType = ECardType::TEXTURE;
+			AllBasicCard[1].CardColor = ECardColor::Green;
+			AllBasicCard[1].CardNameNum = 0;
+
+			AllBasicCard[2].CardType = ECardType::CONDITION;
+			AllBasicCard[2].CardColor = ECardColor::Blue;
+			AllBasicCard[2].CardNameNum = 0; // 완벽한 상태
+
+
+			StatusLevel = 36.0f;
+			Texture = 12;
+			MerchandiseName = "엄마가 준 가방";
 
 		}
-
 
 
 		break;

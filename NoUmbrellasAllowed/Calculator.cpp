@@ -141,6 +141,9 @@ void ACalculator::ButtonClickCheck()
         {
             int CurGold = PlayerInfo::GetInst().GetGold();
             IsPushEnter = true;
+
+
+
             PlayerInfo::GetInst().SetGold(CurGold - EntirePrice);
         }
 

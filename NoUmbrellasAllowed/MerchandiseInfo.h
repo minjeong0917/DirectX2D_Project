@@ -54,6 +54,16 @@ public:
 		return Texture;
 	}
 
+	std::string GetSpriteName()
+	{
+		return SpriteName;
+	}
+
+	std::string GetMerchandiseName()
+	{
+		return MerchandiseName;
+	}
+
 protected:
 
 private:
@@ -62,5 +72,7 @@ private:
 	std::vector<struct MBasicCardInfo> AllBasicCard;
 	float StatusLevel = 0.0f;
 	int Texture = 0;
+	std::string SpriteName = "NONE";
+	std::string MerchandiseName = "NONE";
 };
 

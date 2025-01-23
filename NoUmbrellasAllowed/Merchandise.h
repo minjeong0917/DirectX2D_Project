@@ -22,6 +22,11 @@ public:
 	{
 		IsApear = _IsActive;
 	}
+	std::string GetSpriteName();
+	int GetSpriteIndex();
+	void SetSprite(std::string _Sprite, int _Index);
+
+
 protected:
 	void Tick(float _DeltaTime);
 	void BeginPlay();
