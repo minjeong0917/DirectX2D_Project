@@ -91,6 +91,12 @@
     <ClCompile Include="CardTotalPrice.cpp">
       <Filter>Shop\Card</Filter>
     </ClCompile>
+    <ClCompile Include="Slot.cpp">
+      <Filter>Shop\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Shop\Inventory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleGameMode.h">
@@ -186,6 +192,12 @@
     <ClInclude Include="CardTotalPrice.h">
       <Filter>Shop\Card</Filter>
     </ClInclude>
+    <ClInclude Include="Slot.h">
+      <Filter>Shop\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Shop\Inventory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameMode">
@@ -229,6 +241,9 @@
     </Filter>
     <Filter Include="Shop\Balloons">
       <UniqueIdentifier>{328ee535-8d30-4f9e-a744-f343f3799832}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shop\Inventory">
+      <UniqueIdentifier>{38ccb365-0dda-4b52-ae6d-83ef04db3184}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

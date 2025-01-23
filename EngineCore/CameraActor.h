@@ -52,7 +52,10 @@ public:
 		FreeSpeed = _Speed;
 	}
 
-
+	void SetFreeCameraRotSpeed(float _Speed)
+	{
+		RotSpeed = _Speed;
+	}
 
 protected:
 

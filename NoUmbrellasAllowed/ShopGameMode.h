@@ -77,6 +77,7 @@ private:
 	std::vector<FVector> AllCardLocations;
 
 	std::shared_ptr<class ACalculator> Calculator;
+	std::shared_ptr<class AInventory> Inventory;
 	std::shared_ptr<class AItemShelf> ItemShelf;
 	std::shared_ptr<class AMerchandise> Merchandise;
 	std::shared_ptr<class AMerchandiseMaterial> MerchandiseMaterial;

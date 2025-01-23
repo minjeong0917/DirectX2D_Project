@@ -145,6 +145,7 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
         LoadFile(Dir, "Images//UIIntheShop//Book//BookButton");
         LoadFile(Dir, "Images//UIIntheShop//Book//BookSmall");
         LoadFile(Dir, "Images//UIIntheShop//Book//BookIcon");
+        LoadFile(Dir, "Images//UIIntheShop//Inventory");
 
 
     }

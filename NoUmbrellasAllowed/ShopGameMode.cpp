@@ -20,6 +20,7 @@
 #include "PlayerBalloon.h"
 #include "ConversationList.h"
 #include "CardTotalPrice.h"
+#include "Inventory.h"
 
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/CameraActor.h>
@@ -41,6 +42,20 @@ AShopGameMode::AShopGameMode()
     GetWorld()->CreateCollisionProfile("CardSlot");
     GetWorld()->CreateCollisionProfile("SelectedCard");
     GetWorld()->CreateCollisionProfile("Card");
+    GetWorld()->CreateCollisionProfile("InvenButton");
+    GetWorld()->CreateCollisionProfile("Slot");
+
+    GetWorld()->LinkCollisionProfile("Calculator", "Cursor");
+    GetWorld()->LinkCollisionProfile("ItemShelf", "Cursor");
+    GetWorld()->LinkCollisionProfile("Merchandise", "SelectedTool");
+    GetWorld()->LinkCollisionProfile("BookMain", "Cursor");
+    GetWorld()->LinkCollisionProfile("BookSmall", "Cursor");
+    GetWorld()->LinkCollisionProfile("BookSmall", "SelectedTool");
+    GetWorld()->LinkCollisionProfile("CardSlot", "SelectedCard");
+    GetWorld()->LinkCollisionProfile("Card", "Cursor");
+    GetWorld()->LinkCollisionProfile("InvenButton", "Cursor");
+    GetWorld()->LinkCollisionProfile("Slot", "Cursor");
+
 
     for (int i = 0; i < 14; i++)
     {
@@ -56,27 +71,19 @@ AShopGameMode::AShopGameMode()
         GetWorld()->LinkCollisionProfile("Tools_" + std::to_string(i), "Cursor");
 
     }
-
-    GetWorld()->LinkCollisionProfile("Calculator", "Cursor");
-    GetWorld()->LinkCollisionProfile("ItemShelf", "Cursor");
-    GetWorld()->LinkCollisionProfile("Merchandise", "SelectedTool");
-    GetWorld()->LinkCollisionProfile("BookMain", "Cursor");
-    GetWorld()->LinkCollisionProfile("BookSmall", "Cursor");
-    GetWorld()->LinkCollisionProfile("BookSmall", "SelectedTool");
-    GetWorld()->LinkCollisionProfile("CardSlot", "SelectedCard");
-    GetWorld()->LinkCollisionProfile("Card", "Cursor");
-
     for (int i = 0; i < 4; i++)
     {
         GetWorld()->CreateCollisionProfile("BookButton_" + std::to_string(i));
         GetWorld()->LinkCollisionProfile("BookButton_" + std::to_string(i), "Cursor");
     }
+
     for (int i = 0; i <24; i++)
     {
         GetWorld()->CreateCollisionProfile("BookPage_" + std::to_string(i));
         GetWorld()->LinkCollisionProfile("BookPage_" + std::to_string(i), "Cursor");
-
     }
+
+
     // BackGround
     std::shared_ptr<class AUI> BackGround = GetWorld()->SpawnActor<AUI>();
     BackGround->SetUISprite("UI", 2);
@@ -146,19 +153,27 @@ AShopGameMode::AShopGameMode()
 
     ItemShelf = GetWorld()->SpawnActor<AItemShelf>();
 
+    // Merchandise
     Merchandise = GetWorld()->SpawnActor<AMerchandise>();
     Merchandise->SetActive(false);
 
     MerchandiseMaterial = GetWorld()->SpawnActor<AMerchandiseMaterial>();
     MerchandiseMaterial->SetActive(false);
 
+
+    // CardSlot
     CardSlot = GetWorld()->SpawnActor<ACardSlot>();
     CardSlot->SetActive(false);
 
+    // TotalPrice
     CardTotalPrice = GetWorld()->SpawnActor<ACardTotalPrice>();
     CardTotalPrice->SetActive(false);
 
-    
+
+    Inventory = GetWorld()->SpawnActor<AInventory>();
+    //Inventory->SetActive(false);
+
+    // Book
     Book = GetWorld()->SpawnActor<ABook>();
     Book->SetActive(false);
 
@@ -282,12 +297,12 @@ void AShopGameMode::Tick(float _DeltaTime)
                     }
                     else if (CurPrice > TotalPrice)
                     {
-                        CurPrice -= 1;
+                        CurPrice -=1;
                     }
                     else if (CurPrice == TotalPrice && CardSlot->IsUpdownActive == true)
                     {
                         ChangePriceActiveTime += 1.0f * _DeltaTime;
-                        if (ChangePriceActiveTime > 2.5f)
+                        if (ChangePriceActiveTime > 1.5f)
                         {
                             IsPriceChange = 0;
                             ChangePriceActiveTime = 0.0f;
