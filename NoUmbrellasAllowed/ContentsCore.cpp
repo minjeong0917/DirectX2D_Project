@@ -9,7 +9,7 @@
 #include <EngineCore/HUD.h>
 #include "ShopHUD.h"
 #include "TitleHUD.h"
-
+#include "Bob.h"
 
 CreateContentsCoreDefine(UContentsCore);
 
@@ -150,7 +150,7 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 
     }
     UEngineCore::CreateLevel<ATitleGameMode, APawn, ATitleHUD>("Titlelevel");
-    UEngineCore::CreateLevel<AShopGameMode, APawn, AShopHUD>("Shoplevel");
+    UEngineCore::CreateLevel<AShopGameMode, ABob, AShopHUD>("Shoplevel");
     UEngineCore::OpenLevel("Titlelevel");
 
 

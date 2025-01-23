@@ -265,14 +265,42 @@ void AShopGameMode::Tick(float _DeltaTime)
 
 
     // TestCode
-    if (UEngineInput::IsPress('I'))
+    if (Calculator->GetIsPushEnter() == true && IsOut == false /*UEngineInput::IsPress('I')*/)
     {
         IsOut = true;
+        Calculator->SetClear();
     }
 
     // Customer - InOut
     if (IsOut == true)
     {
+
+        if (Merchandise->GetActorLocation().Y > -200.0f)
+        {
+            //Merchandise->PlusAlpha(_DeltaTime);
+            Merchandise->SetIsApear(false);
+            Merchandise->AddActorLocation({ 0.0f, -1.0f * _DeltaTime * 100 , 0.0f });
+            MerchandiseMaterial->AddActorLocation({ 0.0f, -1.0f * _DeltaTime * 100 , 0.0f });
+        }
+        else
+        {
+            IsMerchandisActive = false;
+            Merchandise->SetActive(false);
+            MerchandiseMaterial->SetActive(false);
+
+            CardSlot->SetUpDownActive(false);
+
+            CardSlot->SetActive(false);
+            CardTotalPrice->SetActive(false);
+
+            CardSlot->IsActive = false;
+
+            for (int i = 0; i < 5; i++)
+            {
+                AllCard[i]->SetActive(false);
+            }
+
+        }
         CustomerOut(_DeltaTime);
     }
     if (IsOut == false)
@@ -555,6 +583,11 @@ void AShopGameMode::CardCompareAndChange(float _DeltaTime)
 
 }
 
+void AShopGameMode::BuyMerchandise(float _DeltaTime)
+{
+    Merchandise->SetIsApear(false);
+
+}
 
 void AShopGameMode::MerchandiseActive(float _DeltaTime)
 {
@@ -570,11 +603,7 @@ void AShopGameMode::MerchandiseActive(float _DeltaTime)
     TotalPrice = CardTotalPrice->TotalPriceCheck();
     TotalPrice = CardTotalPrice->TotalPriceCheck();
 
-
     CardSlot->SetUpDownText(TotalPrice);
-
-
-
     CardTotalPrice->SetPrice(CurPrice);
     CardSlot->IsActive = true;
     IsMerchandisActive = true;
@@ -798,7 +827,7 @@ void AShopGameMode::CustomerOut(float _DeltaTime)
              }
              else if (CustomerEnterTime > 2.8)
              {
-                 IsOut = false;
+                 IsOut = true;
                  IsDoorClosed = true;
                  NotExistCustomerTime = 0.0f;
                  CustomerEnterTime = 0.0f;

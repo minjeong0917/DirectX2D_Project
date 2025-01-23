@@ -8,7 +8,7 @@
 #include "Calculator.h"
 #include "CalculatorButton.h"
 #include <EngineCore/FontRenderer.h>
-
+#include "PlayerInfo.h"
 
 ACalculator::ACalculator()
 {
@@ -81,6 +81,14 @@ void ACalculator::Tick(float _DeltaTime)
     CalculatorCollision->SetRelativeLocation({ CalculatorRender->GetTransformRef().WorldLocation.X, CalculatorRender->GetTransformRef().WorldLocation.Y + 231.0f });
 }
 
+void ACalculator::SetClear()
+{
+    PriceText->SetText("0");
+    CurPriceText = "0";
+    CurPrice = 0;
+    EntirePrice = 0;
+}
+
 
 void ACalculator::ButtonClickCheck()
 {
@@ -123,11 +131,19 @@ void ACalculator::ButtonClickCheck()
             }
         }
 
-        if (CurNum == 10) // CE
+        else if (CurNum == 10) // CE
         {
             EntirePriceText = "0";
             EntirePrice = 0;
         }
+
+        else if (CurNum == 11) // Enter
+        {
+            int CurGold = PlayerInfo::GetInst().GetGold();
+            IsPushEnter = true;
+            PlayerInfo::GetInst().SetGold(CurGold - EntirePrice);
+        }
+
         PriceText->SetText(EntirePriceText);
         UEngineDebug::OutPutString(std::to_string(EntirePrice));
     }

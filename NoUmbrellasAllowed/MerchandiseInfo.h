@@ -10,7 +10,6 @@ struct MBasicCardInfo
 };
 
 
-
 // Ό³Έν :
 class MerchandiseInfo
 {

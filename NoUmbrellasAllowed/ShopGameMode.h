@@ -32,6 +32,7 @@ private:
 	void MerchandiseActive(float _DeltaTime);
 	void CardCompareAndChange(float _DeltaTime);
 	void MerchandiseCardCheck(float _DeltaTime);
+	void BuyMerchandise(float _DeltaTime);
 
 	float CardChangeTime = 0.0f;
 	bool IsCardChange = false;

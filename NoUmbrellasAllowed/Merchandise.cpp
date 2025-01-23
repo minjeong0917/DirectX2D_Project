@@ -56,6 +56,10 @@ void AMerchandise::Tick(float _DeltaTime)
     {
         PlusAlpha(_DeltaTime);
     }
+    else if (IsApear == false && MerchandiseRender->ColorData.PlusColor.W >= 1.0f)
+    {
+        PlusAlpha(_DeltaTime * (-1.0f));
+    }
     else
     {
         Acc = 1.0f;

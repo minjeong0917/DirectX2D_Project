@@ -18,7 +18,16 @@ public:
 	ACalculator& operator=(const ACalculator& _Other) = delete;
 	ACalculator& operator=(ACalculator&& _Other) noexcept = delete;
 
-	
+	bool GetIsPushEnter()
+	{
+		return IsPushEnter;
+	}
+
+	void SetIsPushEnter(bool _IsPush)
+	{
+		IsPushEnter = _IsPush;
+	}
+	void SetClear();
 
 protected:
 
@@ -38,6 +47,8 @@ private:
 
 	int EntirePrice = 0;
 	int CurPrice = 0;
+
+	bool IsPushEnter = false;
 
 	bool IsEnter = false;
 	int Acc = 0;
