@@ -12,12 +12,12 @@ ASlot::ASlot()
     RootComponent = Default;
 
     SlotRender = CreateDefaultSubObject<USpriteRenderer>();
-    SlotRender->SetSprite("Inventory", 1);
+    SlotRender->SetSprite("Inventory", 6);
     SlotRender->SetAutoScaleRatio(3.0f);
     SlotRender->SetupAttachment(RootComponent);
 
     SlotItemRender = CreateDefaultSubObject<USpriteRenderer>();
-    SlotItemRender->SetSprite("Inventory", 1);
+    SlotItemRender->SetSprite("Inventory", 6);
     SlotItemRender->SetAutoScale(false);
     SlotItemRender->SetScale3D({ 0.8f,0.8f,1.0f });
     SlotItemRender->SetRelativeLocation({ 0.0f,0.2f,0.0f });

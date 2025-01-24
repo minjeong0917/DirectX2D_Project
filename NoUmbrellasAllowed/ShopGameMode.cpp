@@ -272,10 +272,10 @@ void AShopGameMode::Tick(float _DeltaTime)
         std::string GetCurSprite = Merchandise->GetSpriteName();
         std::string CurMerchandiseName = MerchandiseInfo::GetInst().GetMerchandiseName();
         int GetSpriteIndex = Merchandise->GetSpriteIndex();
-        InvenInfo::GetInst().SetSlotInfo(0, CurMerchandiseName, AllCard, GetCurSprite, GetSpriteIndex, Calculator->GetEntirePrice(), TotalPrice);
+        int TotalCardCount = CurCardCount;
+        InvenInfo::GetInst().SetSlotInfo(0, CurMerchandiseName, AllCard, TotalCardCount, GetCurSprite, GetSpriteIndex, Calculator->GetEntirePrice(), TotalPrice);
 
-
-
+        CurCardCount = 0;
         Calculator->SetClear();
     }
 
@@ -604,16 +604,17 @@ void AShopGameMode::MerchandiseActive(float _DeltaTime)
     MerchandiseInfo::GetInst().SetMerchandiseInfo(false, EMerchandiseType::BAG, 1);
     Merchandise->SetSprite(MerchandiseInfo::GetInst().GetSpriteName(), 1);
 
-    Merchandise->SetActive(true);
     MerchandiseMaterial->SetActive(true);
     MerchandiseMaterial->SetMerchandiseMat(MerchandiseInfo::GetInst().GetTexture());
+    Merchandise->SetActive(true);
     Merchandise->SetIsApear(true);
+
     CardSlot->SetUpDownActive(true);
     CardSlot->SetNameTextActive(true);
     CardSlot->SetMerchandiseNameText(MerchandiseInfo::GetInst().GetMerchandiseName());
-
     CardSlot->SetActive(true);
     CardTotalPrice->SetActive(true);
+
     TotalPrice = CardTotalPrice->TotalPriceCheck();
     TotalPrice = CardTotalPrice->TotalPriceCheck();
 
@@ -626,8 +627,8 @@ void AShopGameMode::MerchandiseActive(float _DeltaTime)
     {
         AllCard[i]->SetActive(true);
         AllCard[i]->SetCardType(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardColor, MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardStep);
-
         AllCard[i]->SetTextActive(true);
+        CurCardCount += 1;
 
         CardInfo::GetInst().SetCardType(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardType);
         CardInfo::GetInst().CardTypeInfo(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardType);

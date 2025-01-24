@@ -16,6 +16,7 @@ public:
 
 
 protected:
+	void BeginPlay();
 	void Tick(float _DeltaTime);
 
 	void OnCollisionStay(class UCollision* _This, class UCollision* _Other);
@@ -29,8 +30,14 @@ private:
 	std::vector<std::shared_ptr<class ASlot>> AllSlots;
 
 	std::shared_ptr<class USpriteRenderer>InvenRender;
+	std::shared_ptr<class USpriteRenderer>InvenSlotRender;
+	std::vector<std::shared_ptr<class USpriteRenderer>> AllInvenSlotRender;
 
 	std::shared_ptr<class UFontRenderer> MerchandiseNameText;
 	std::shared_ptr<class UCollision> InvenButtonCollision;
+
+	std::shared_ptr<class ACard> MerchandiseCard;
+	std::vector<std::shared_ptr<class ACard>> AllMerchandiseCard;
+	std::vector<FVector> AllMerchandiseCardLocations;
 };
 

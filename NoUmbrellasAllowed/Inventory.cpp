@@ -8,11 +8,24 @@
 #include "Slot.h"
 #include "InvenInfo.h"
 #include <EngineCore/FontRenderer.h>
+#include "Card.h"
 
 AInventory::AInventory()
 {
     std::shared_ptr<UDefaultSceneComponent> Default = CreateDefaultSubObject<UDefaultSceneComponent>();
     RootComponent = Default;
+
+
+    for (int i = 0; i < 5; i++)
+    {
+        InvenSlotRender = CreateDefaultSubObject<USpriteRenderer>();
+        InvenSlotRender->SetSprite("Inventory", (i+1));
+        InvenSlotRender->SetAutoScaleRatio(3.0f);
+        InvenSlotRender->SetupAttachment(RootComponent);
+
+        AllInvenSlotRender.push_back(InvenSlotRender);
+        AllInvenSlotRender[i]->SetWorldLocation({ 1230.0f, -345.0f, -130.0f + (i+1) * (-2.0f) });
+    }
 
     InvenRender = CreateDefaultSubObject<USpriteRenderer>();
     InvenRender->SetSprite("Inventory", 0);
@@ -51,15 +64,33 @@ AInventory::AInventory()
 
     MerchandiseNameText = CreateDefaultSubObject<UFontRenderer>();
     MerchandiseNameText->SetFont("DungGeunMo", 26.0f, TColor<unsigned char>(245, 222, 96, 255), FW1_CENTER);
-    MerchandiseNameText->SetWorldLocation({ 0.2f,0.0f,1.0f }); 
+    MerchandiseNameText->SetWorldLocation({ 0.22f, 0.978f, -0.2f });
+    MerchandiseNameText->SetText("아무것도 없음");
     MerchandiseNameText->SetActive(false);
     MerchandiseNameText->SetupAttachment(InvenRender);
 
- 
+    //FVector StartLoc = { -720.0f, -38.0f, -152.0f };
+    //FVector IterLoc = { 0.0f , -48.0f, -2.0f };
+
+    //for (int i = 0; i < 5; i++)
+    //{
+    //    MerchandiseCard = GetWorld()->SpawnActor<ACard>();
+    //    MerchandiseCard->SetActorLocation({ StartLoc.X, StartLoc.Y + IterLoc.Y * i, StartLoc.Z + IterLoc.Z * i });
+    //    MerchandiseCard->SetActive(false);
+    //    AllMerchandiseCard.push_back(MerchandiseCard);
+    //    AllMerchandiseCardLocations.push_back({ StartLoc.X, StartLoc.Y + IterLoc.Y * i, StartLoc.Z + IterLoc.Z * i });
+    //}
+
 }
 
 AInventory::~AInventory()
 {
+
+}
+void AInventory::BeginPlay()
+{
+    AActor::BeginPlay();
+
 }
 
 
@@ -80,7 +111,7 @@ void AInventory::Tick(float _DeltaTime)
 
             if (AllSlots[i]->GetIsStay() == true)
             {
-                AllSlots[i]->SetSlotSprite(2);
+                AllSlots[i]->SetSlotSprite(7);
 
                 if (UEngineInput::IsUp(VK_LBUTTON))
                 {
@@ -90,7 +121,7 @@ void AInventory::Tick(float _DeltaTime)
             }
             if (AllSlots[i]->GetIsStay() == false)
             {
-                AllSlots[i]->SetSlotSprite(1);
+                AllSlots[i]->SetSlotSprite(6);
             }
         }
     }
@@ -114,6 +145,11 @@ void AInventory::ChangeLocation(float _DeltaTime)
     {
         InvenRender->SetWorldLocation({ 1230.0f,-345.0f, -130.0f });
 
+        for (int i = 1; i < 6; i++)
+        {
+            AllInvenSlotRender[i-1]->SetWorldLocation({ 1230.0f, -345.0f, -130.0f + i * (-2.0f) });
+        }
+
         FVector StartPos = { 1037.0f,  224.3f };
         FVector IterPos = { 127.3f,  -119.6f };
 
@@ -130,7 +166,10 @@ void AInventory::ChangeLocation(float _DeltaTime)
     if (IsClick == 1 && InvenRender->GetWorldLocation().X > 950.0f)
     {
         InvenRender->AddWorldLocation({ -1000.f * _DeltaTime , 0.0f,0.0f });
-
+        for (int i = 1; i < 6; i++)
+        {
+            AllInvenSlotRender[i - 1]->AddWorldLocation({ -1000.f * _DeltaTime , 0.0f,0.0f });
+        }
 
         for (int i = 0; i < 10; i++)
         {
@@ -142,6 +181,11 @@ void AInventory::ChangeLocation(float _DeltaTime)
     {
         InvenRender->AddWorldLocation({ 1000.f * _DeltaTime , 0.0f,0.0f });
 
+        for (int i = 1; i < 6; i++)
+        {
+            AllInvenSlotRender[i - 1]->AddWorldLocation({ 1000.f * _DeltaTime , 0.0f,0.0f });
+        }
+
         for (int i = 0; i < 10; i++)
         {
             AllSlots[i]->AddActorLocation({ 1000.f * _DeltaTime , 0.0f,0.0f });
@@ -152,6 +196,10 @@ void AInventory::ChangeLocation(float _DeltaTime)
     {
         InvenRender->AddWorldLocation({ -1000.f * _DeltaTime , 0.0f,0.0f });
 
+        for (int i = 1; i < 6; i++)
+        {
+            AllInvenSlotRender[i - 1]->AddWorldLocation({ -1000.f * _DeltaTime , 0.0f,0.0f });
+        }
 
         for (int i = 0; i < 10; i++)
         {

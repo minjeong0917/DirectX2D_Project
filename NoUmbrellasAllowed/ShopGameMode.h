@@ -76,6 +76,8 @@ private:
 	std::shared_ptr<class ACard> Card;
 	std::vector<std::shared_ptr<class ACard>> AllCard;
 	std::vector<FVector> AllCardLocations;
+	int CurCardCount = 0;
+
 
 	std::shared_ptr<class ACalculator> Calculator;
 	std::shared_ptr<class AInventory> Inventory;
