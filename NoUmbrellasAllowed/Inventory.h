@@ -24,7 +24,10 @@ protected:
 
 private:
 	void ChangeLocation(float _DeltaTime);
-
+	void ShowItemInfo(int _Index);
+	void MerchandiseCardCheck(int _Index, float _DeltaTime);
+	bool IsCardHover = false;
+	int HoverCardNum = 0;
 	int IsClick = 0;
 	int CurClickIndex = 0;
 	std::vector<std::shared_ptr<class ASlot>> AllSlots;

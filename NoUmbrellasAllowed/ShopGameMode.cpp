@@ -253,7 +253,7 @@ void AShopGameMode::Tick(float _DeltaTime)
 {
     AActor::Tick(_DeltaTime);
 
-    //UEngineDebug::OutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
+    UEngineDebug::OutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 
     std::shared_ptr<class ACameraActor> Camera = GetWorld()->GetCamera(0);
     FVector MousePos = Camera->ScreenMousePosToWorldPos();
@@ -273,7 +273,9 @@ void AShopGameMode::Tick(float _DeltaTime)
         std::string CurMerchandiseName = MerchandiseInfo::GetInst().GetMerchandiseName();
         int GetSpriteIndex = Merchandise->GetSpriteIndex();
         int TotalCardCount = CurCardCount;
+        // 0 -> 인벤 0번째임!
         InvenInfo::GetInst().SetSlotInfo(0, CurMerchandiseName, TotalCardCount, GetCurSprite, GetSpriteIndex, Calculator->GetEntirePrice(), TotalPrice);
+        LoadTotalCardInfo(0);
 
         CurCardCount = 0;
         Calculator->SetClear();
@@ -439,7 +441,6 @@ void AShopGameMode::MerchandiseCardCheck(float _DeltaTime)
                 AllCard[i]->SetActorLocation(AllCardLocations[i]);
                 AllCard[i]->SetCollisionActive(true);
 
-
                 continue;
             }
         }
@@ -549,6 +550,7 @@ void AShopGameMode::CardCompareAndChange(float _DeltaTime)
         else if (CardChangeTime > 1.0f && CardChangeTime < 2.0f && AllCard[ChangeCardNum]->GetActorLocation().Y < AllCardLocations[ChangeCardNum].Y + 100.0f)
         {
             int CardNum = Book->GetCurClickNum();
+            AllCard[ChangeCardNum]->SetCurCardNum(CardNum);
 
             TotalPrice = CardTotalPrice->TotalPriceCheck();
             if (CurPrice != TotalPrice && IsPriceChange == 0)
@@ -560,11 +562,11 @@ void AShopGameMode::CardCompareAndChange(float _DeltaTime)
             }
 
 
-
             ECardType CardType = CardInfo::GetInst().GetCardType();
 
             CardInfo::GetInst().SetCardType(CardType);
             CardInfo::GetInst().CardTypeInfo(CardType);
+            AllCard[ChangeCardNum]->SetCurCardType(CardType);
 
             MerchandiseInfo::GetInst().SetCardNameNum(ChangeCardNum, CardNum);
             std::string Name = CardInfo::GetInst().GetAllCardType()[CardNum].CardName;
@@ -626,12 +628,15 @@ void AShopGameMode::MerchandiseActive(float _DeltaTime)
     for (int i = 0; i < MerchandiseInfo::GetInst().GetAllBasicCard().size(); i++)
     {
         AllCard[i]->SetActive(true);
-        AllCard[i]->SetCardType(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardColor, MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardStep);
+        AllCard[i]->SetCardColor(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardColor, MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardStep);
+        AllCard[i]->SetCurCardColor(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardColor);
+        AllCard[i]->SetCurCardStep(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardStep);
         AllCard[i]->SetTextActive(true);
         CurCardCount += 1;
 
         CardInfo::GetInst().SetCardType(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardType);
         CardInfo::GetInst().CardTypeInfo(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardType);
+        AllCard[i]->SetCurCardType(MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardType);
 
         int CardNum = MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardNameNum;
 
@@ -639,17 +644,27 @@ void AShopGameMode::MerchandiseActive(float _DeltaTime)
         std::string Explain = CardInfo::GetInst().GetAllCardType()[CardNum].CardExplanation;
         std::string Percent = CardInfo::GetInst().GetAllCardType()[CardNum].CardPercentText;
 
+        AllCard[i]->SetCurCardNum(CardNum);
         AllCard[i]->SetCardNameText(Name);
         AllCard[i]->SetCardExplainText(Explain);
         AllCard[i]->SetCardPercentText(Percent);
     }
-
-
-
-
-
 }
 
+// 물품을 샀을때 최종 물품의 카드 정보 InvenInfo로 넘기기..
+void AShopGameMode::LoadTotalCardInfo(int _Index)
+{
+    for (int i = 0; i < CurCardCount; i++)
+    {
+        ECardColor CardColor = AllCard[i]->GetCardColor();
+        ECardType CardType = AllCard[i]->GetCurCardType();
+        int CardStep =  AllCard[i]->GetCardStep();
+        int CardNum = AllCard[i]->GetCurCardNum();
+
+        InvenInfo::GetInst().SetCardInfo(_Index, i, CardColor, CardStep, CardType, CardNum);
+
+    }
+}
 
 void AShopGameMode::PeopleMove(float _DeltaTime, std::shared_ptr<class AUI> _People, bool _IsRight)
 {

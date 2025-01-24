@@ -52,7 +52,7 @@ public:
 		return CardStep;
 	}
 
-	std::vector<struct CardType> GetAllCardType()
+	const std::vector<CardType>& GetAllCardType() const
 	{
 		return AllCardType;
 	}

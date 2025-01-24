@@ -143,7 +143,6 @@ void ABook::Tick(float _DeltaTime)
                 SelectedCard->SetCardExplainText(CardInfo::GetInst().GetAllCardType()[ClickNum].CardExplanation);
                 SelectedCard->SetCardPercentText(CardInfo::GetInst().GetAllCardType()[ClickNum].CardPercentText);
                 SelectedCard->SetCardType(CardInfo::GetInst().GetCardColor(), CardInfo::GetInst().GetCardStep());
-
                 CurCardName = CardInfo::GetInst().GetAllCardType()[ClickNum].CardName;
 
                 CurClickNum = ClickNum;

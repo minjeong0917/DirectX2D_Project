@@ -33,17 +33,18 @@ private:
 	void CardCompareAndChange(float _DeltaTime);
 	void MerchandiseCardCheck(float _DeltaTime);
 	void BuyMerchandise(float _DeltaTime);
+	void LoadTotalCardInfo(int _Index);
 
 	float CardChangeTime = 0.0f;
 	bool IsCardChange = false;
 	int ChangeCardNum = 0;
 	bool IsMerchandisActive = false;
 
-	int CurPrice = 0.0f;
-	int TotalPrice = 0.0f;
+	int CurPrice = 0;
+	int TotalPrice = 0;
 	bool IsCardHover = false;
 	int HoverCardNum = 0;
-	bool IsPriceChange = false;
+	int IsPriceChange = 0;
 	float ChangePriceActiveTime = 0.0f;
 
 

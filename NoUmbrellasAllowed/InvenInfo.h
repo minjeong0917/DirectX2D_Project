@@ -1,9 +1,9 @@
 #pragma once
-
+#include "ContentsEnums.h"
 
 struct SlotInfo
 {
-	std::vector<std::shared_ptr<class ACard>> Cards;
+	std::vector<struct SlotCardInfo> Cards;
 	std::string MerchandiseName = "NONE";
 	std::string SpriteName = "NONE";
 	int TotalCardCount = 0;
@@ -12,6 +12,13 @@ struct SlotInfo
 	int BuyPrice = 0;
 };
 
+struct SlotCardInfo
+{
+	ECardColor CardColor = ECardColor::Gray ;
+	ECardType CardType = ECardType::NONE;
+	int CardStep = 0 ;
+	int CardNum = 0;
+};
 
 // Ό³Έν :
 class InvenInfo
@@ -34,8 +41,8 @@ public:
 	}
 
 	void SetSlotInfo(int _SlotNum, std::string _MerchandiseName, int _TotalCardCount, std::string _SpriteName, int _SpriteIndex, int _BuyPrice, int _CardPrice);
-
-	std::vector<struct SlotInfo> GetAllSlotInfos()
+	void SetCardInfo(int _SlotNum, int _CardCount, ECardColor _Color, int CardStep, ECardType _CardType, int CardNum);
+	const std::vector<SlotInfo>& GetAllSlotInfos() const
 	{
 		return AllSlotInfos;
 	}
@@ -45,6 +52,7 @@ protected:
 private:
 	InvenInfo();
 	std::vector<struct SlotInfo> AllSlotInfos;
+	std::vector<struct SlotCardInfo> AllSlotCardInfos;
 
 };
 

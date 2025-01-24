@@ -85,8 +85,9 @@ void ACard::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 }
 
 
-void ACard::SetCardType(ECardColor _CardTye, int _CardStep)
+void ACard::SetCardColor(ECardColor _CardTye, int _CardStep)
 {
+
     switch (_CardTye)
     {
     case ECardColor::Blue:

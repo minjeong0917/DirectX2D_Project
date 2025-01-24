@@ -74,6 +74,6 @@ int ACardTotalPrice::TotalPriceCheck()
         }
 
     }
-    TotalPrice = (TotalPrice + TexturePlusPrice) * ConditionPercent;
+    TotalPrice = static_cast<int>((TotalPrice + TexturePlusPrice) * ConditionPercent);
     return TotalPrice;
 }

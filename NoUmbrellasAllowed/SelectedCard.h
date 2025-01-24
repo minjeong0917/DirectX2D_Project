@@ -16,7 +16,7 @@ public:
 	ASelectedCard& operator=(const ASelectedCard& _Other) = delete;
 	ASelectedCard& operator=(ASelectedCard&& _Other) noexcept = delete;
 
-	void SetCardType(ECardColor _CardTye, int _CardStep) override;
+	void SetCardType(ECardColor _CardTye, int _CardStep);
 	void SetCardNameText(std::string _Text);
 	void SetCardExplainText(std::string _Text);
 	void SetCardPercentText(std::string _Text);

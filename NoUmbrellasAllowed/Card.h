@@ -14,7 +14,7 @@ public:
 	ACard(ACard&& _Other) noexcept = delete;
 	ACard& operator=(const ACard& _Other) = delete;
 	ACard& operator=(ACard&& _Other) noexcept = delete;
-	virtual void SetCardType(ECardColor _CardTye, int _CardStep);
+	void SetCardColor(ECardColor _CardTye, int _CardStep);
 
 	void SetCardNameText(std::string _Text);
 	void SetCardExplainText(std::string _Text);
@@ -30,8 +30,46 @@ public:
 	{
 		return IsEnter;
 	}
+	
+	ECardColor GetCardColor()
+	{
+		return CurCardColor;
+	}
 
+	int GetCardStep()
+	{
+		return CurCardStep;
+	}
 
+	void SetCurCardType(ECardType _CardType)
+	{
+		CurCardType = _CardType;
+	}
+	
+	ECardType GetCurCardType()
+	{
+		return CurCardType;
+	}
+
+	int GetCurCardNum()
+	{
+		return CurCardNum;
+	}
+
+	void SetCurCardNum(int _CardNum)
+	{
+		CurCardNum = _CardNum;
+	}
+	
+	void SetCurCardColor(ECardColor _CardColor)
+	{
+		CurCardColor = _CardColor;
+	}
+
+	void SetCurCardStep(int _CardStep)
+	{
+		CurCardStep = _CardStep;
+	}
 protected:
 	void BeginPlay();
 	void Tick(float _DeltaTime);
@@ -40,6 +78,10 @@ protected:
 private:
 	bool IsEnter = false;
 	int percent = 0;
+	ECardColor CurCardColor = ECardColor::Gray;
+	ECardType CurCardType = ECardType::NONE;
+	int CurCardStep = 0;
+	int CurCardNum = 0;
 
 	std::shared_ptr<class USpriteRenderer> CardRender;
 	std::shared_ptr<class UCollision> CardCollision;

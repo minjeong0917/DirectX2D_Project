@@ -30,10 +30,12 @@ public:
 
 	void SetMerchandiseInfo(bool _IsFake, EMerchandiseType _MerchandiseType, int _Index);
 
-	std::vector<struct MBasicCardInfo> GetAllBasicCard()
+
+	const std::vector<MBasicCardInfo>& GetAllBasicCard() const
 	{
 		return AllBasicCard;
 	}
+
 	
 	void SetCardNameNum(int _th, int _CardNum)
 	{
