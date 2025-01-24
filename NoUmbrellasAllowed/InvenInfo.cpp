@@ -12,7 +12,6 @@ InvenInfo::~InvenInfo()
 }
 
 void InvenInfo::SetSlotInfo(int _SlotNum, std::string _MerchandiseName, 
-	std::vector<std::shared_ptr<class ACard>> Cards,
 	int _TotalCardCount,
 	std::string _SpriteName, 
 	int _SpriteIndex, 
@@ -24,7 +23,6 @@ void InvenInfo::SetSlotInfo(int _SlotNum, std::string _MerchandiseName,
 	AllSlotInfos[_SlotNum].SpriteName = _SpriteName;
 	AllSlotInfos[_SlotNum].SpriteIndex = _SpriteIndex;
 	AllSlotInfos[_SlotNum].MerchandiseName = _MerchandiseName;
-	AllSlotInfos[_SlotNum].Cards = Cards;
 	AllSlotInfos[_SlotNum].TotalCardCount = _TotalCardCount;
 
 }

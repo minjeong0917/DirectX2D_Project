@@ -65,7 +65,7 @@ AInventory::AInventory()
     MerchandiseNameText = CreateDefaultSubObject<UFontRenderer>();
     MerchandiseNameText->SetFont("DungGeunMo", 26.0f, TColor<unsigned char>(245, 222, 96, 255), FW1_CENTER);
     MerchandiseNameText->SetWorldLocation({ 0.22f, 0.978f, -0.2f });
-    MerchandiseNameText->SetText("아무것도 없음");
+    //MerchandiseNameText->SetText("아무것도 없음");
     MerchandiseNameText->SetActive(false);
     MerchandiseNameText->SetupAttachment(InvenRender);
 
