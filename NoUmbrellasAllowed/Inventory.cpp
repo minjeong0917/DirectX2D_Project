@@ -17,7 +17,6 @@ AInventory::AInventory()
     std::shared_ptr<UDefaultSceneComponent> Default = CreateDefaultSubObject<UDefaultSceneComponent>();
     RootComponent = Default;
 
-
     for (int i = 0; i < 5; i++)
     {
         InvenSlotRender = CreateDefaultSubObject<USpriteRenderer>();
@@ -64,12 +63,6 @@ AInventory::AInventory()
         }
     }
 
-    MerchandiseNameText = CreateDefaultSubObject<UFontRenderer>();
-    MerchandiseNameText->SetFont("DungGeunMo", 26.0f, TColor<unsigned char>(245, 222, 96, 255), FW1_CENTER);
-    MerchandiseNameText->SetWorldLocation({ 0.22f, 0.978f, -0.2f });
-    MerchandiseNameText->SetActive(false);
-    MerchandiseNameText->SetupAttachment(InvenRender);
-
     FVector StartLoc = { 1390.0f, -200.0f, -131.0f };
     FVector IterLoc = { 0.0f , -48.0f, -2.0f };
 
@@ -82,18 +75,59 @@ AInventory::AInventory()
         AllMerchandiseCardLocations.push_back({ StartLoc.X, StartLoc.Y + IterLoc.Y * i, StartLoc.Z + IterLoc.Z * i });
     }
 
+    MerchandiseNameText = CreateDefaultSubObject<UFontRenderer>();
+    MerchandiseNameText->SetFont("DungGeunMo", 26.0f, TColor<unsigned char>(245, 222, 96, 255), FW1_CENTER);
+    MerchandiseNameText->SetWorldLocation({ 0.22f, 0.978f, -0.2f });
+    MerchandiseNameText->SetActive(false);
+    MerchandiseNameText->SetupAttachment(InvenRender);
+
+    InvenText1 = CreateDefaultSubObject<UFontRenderer>();
+    InvenText1->SetFont("DungGeunMo", 20.0f, TColor<unsigned char>(81, 64, 60, 255), FW1_CENTER);
+    InvenText1->SetWorldLocation({ 0.15f, 0.61f, -0.01f });
+    InvenText1->SetText("감정가");
+    InvenText1->SetActive(false);
+    InvenText1->SetupAttachment(InvenRender);
+
+    InvenText2 = CreateDefaultSubObject<UFontRenderer>();
+    InvenText2->SetFont("DungGeunMo", 20.0f, TColor<unsigned char>(81, 64, 60, 255), FW1_CENTER);
+    InvenText2->SetWorldLocation({ 0.15f, 0.51f, -0.01f });
+    InvenText2->SetText("매입가");
+    InvenText2->SetActive(false);
+    InvenText2->SetupAttachment(InvenRender);
+
+    TotalPriceText = CreateDefaultSubObject<UFontRenderer>();
+    TotalPriceText->SetFont("DungGeunMo", 32.0f, TColor<unsigned char>(75, 71, 70, 255), FW1_RIGHT);
+    TotalPriceText->SetWorldLocation({ 0.43f, 0.57f, -0.01f });
+    TotalPriceText->SetText("0");
+    TotalPriceText->SetActive(false);
+    TotalPriceText->SetupAttachment(InvenRender);
+
+    BuyPriceText = CreateDefaultSubObject<UFontRenderer>();
+    BuyPriceText->SetFont("DungGeunMo", 32.0f, TColor<unsigned char>(75, 71, 70, 255), FW1_RIGHT);
+    BuyPriceText->SetWorldLocation({ 0.43f, 0.47f, -0.01f });
+    BuyPriceText->SetText("0");
+    BuyPriceText->SetActive(false);
+    BuyPriceText->SetupAttachment(InvenRender);
+
+    ItemRenderer = CreateDefaultSubObject<USpriteRenderer>();
+    ItemRenderer->SetSprite("Inventory", 0);
+    ItemRenderer->SetAutoScaleRatio(2.5f);
+    ItemRenderer->SetWorldLocation({ 1383.0f, 146.0f, -133.0f });
+    ItemRenderer->SetActive(false);
+    ItemRenderer->SetupAttachment(RootComponent);
+
 }
 
 AInventory::~AInventory()
 {
 
 }
+
 void AInventory::BeginPlay()
 {
     AActor::BeginPlay();
 
 }
-
 
 void AInventory::Tick(float _DeltaTime)
 {
@@ -130,12 +164,25 @@ void AInventory::Tick(float _DeltaTime)
     if (IsClick == 2)
     {
         MerchandiseNameText->SetActive(true);
+        InvenText1->SetActive(true);
+        InvenText2->SetActive(true);
+        TotalPriceText->SetActive(true);
+        BuyPriceText->SetActive(true);
+        ItemRenderer->SetActive(true);
+
+
         ShowItemInfo(CurClickIndex);
         MerchandiseCardCheck(CurClickIndex, _DeltaTime);
     }
     else if(InvenRender->GetWorldLocation().X > 1230.0f)
     {
         MerchandiseNameText->SetActive(false);
+        InvenText1->SetActive(false);
+        InvenText2->SetActive(false);
+        TotalPriceText->SetActive(false);
+        BuyPriceText->SetActive(false);
+        ItemRenderer->SetActive(false);
+
         for (int i = 0; i < AllMerchandiseCard.size(); i++)
         {
             AllMerchandiseCard[i]->SetActive(false);
@@ -208,7 +255,10 @@ void AInventory::ShowItemInfo(int _Index)
 {
     std::string MerchandiseName = InvenInfo::GetInst().GetAllSlotInfos()[_Index].MerchandiseName;
     int TotalCardCount = InvenInfo::GetInst().GetAllSlotInfos()[_Index].TotalCardCount;
-
+    int TotalCardPrice = InvenInfo::GetInst().GetAllSlotInfos()[_Index].CardPrice;
+    int BuyPrice = InvenInfo::GetInst().GetAllSlotInfos()[_Index].BuyPrice;
+    std::string SpriteName = InvenInfo::GetInst().GetAllSlotInfos()[_Index].SpriteName;
+    int SpriteIndex = InvenInfo::GetInst().GetAllSlotInfos()[_Index].SpriteIndex;
 
     for (int i = 0; i < TotalCardCount; i++)
     {
@@ -235,8 +285,10 @@ void AInventory::ShowItemInfo(int _Index)
 
     }
 
+    ItemRenderer->SetSprite(SpriteName, SpriteIndex);
     MerchandiseNameText->SetText(MerchandiseName);
-
+    BuyPriceText->SetText(std::to_string(BuyPrice));
+    TotalPriceText->SetText(std::to_string(TotalCardPrice));
 }
 
 void AInventory::ChangeLocation(float _DeltaTime)
@@ -277,6 +329,7 @@ void AInventory::ChangeLocation(float _DeltaTime)
     if (IsClick == 1 && InvenRender->GetWorldLocation().X > 950.0f)
     {
         InvenRender->AddWorldLocation({ -1000.f * _DeltaTime , 0.0f,0.0f });
+        ItemRenderer->AddWorldLocation({ -1000.f * _DeltaTime , 0.0f,0.0f });
         for (int i = 1; i < 6; i++)
         {
             AllInvenSlotRender[i - 1]->AddWorldLocation({ -1000.f * _DeltaTime , 0.0f,0.0f });
@@ -296,6 +349,7 @@ void AInventory::ChangeLocation(float _DeltaTime)
     else if (IsClick == 0 && InvenRender->GetWorldLocation().X < 1230.0f)
     {
         InvenRender->AddWorldLocation({ 1000.f * _DeltaTime , 0.0f,0.0f });
+        ItemRenderer->AddWorldLocation({ 1000.f * _DeltaTime , 0.0f,0.0f });
 
         for (int i = 1; i < 6; i++)
         {
@@ -315,6 +369,7 @@ void AInventory::ChangeLocation(float _DeltaTime)
     else if (IsClick == 2 && InvenRender->GetWorldLocation().X > 650.0f)
     {
         InvenRender->AddWorldLocation({ -1000.f * _DeltaTime , 0.0f,0.0f });
+        ItemRenderer->AddWorldLocation({ -1000.f * _DeltaTime , 0.0f,0.0f });
 
         for (int i = 1; i < 6; i++)
         {

@@ -603,8 +603,9 @@ void AShopGameMode::BuyMerchandise(float _DeltaTime)
 
 void AShopGameMode::MerchandiseActive(float _DeltaTime)
 {
-    MerchandiseInfo::GetInst().SetMerchandiseInfo(false, EMerchandiseType::BAG, 1);
-    Merchandise->SetSprite(MerchandiseInfo::GetInst().GetSpriteName(), 1);
+    // 0번 가방임 ->랜덤으로 돌려야함.. 
+    MerchandiseInfo::GetInst().SetMerchandiseInfo(false, EMerchandiseType::BAG, 0);
+    Merchandise->SetSprite(MerchandiseInfo::GetInst().GetSpriteName(), 0);
 
     MerchandiseMaterial->SetActive(true);
     MerchandiseMaterial->SetMerchandiseMat(MerchandiseInfo::GetInst().GetTexture());

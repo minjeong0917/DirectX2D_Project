@@ -40,12 +40,12 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 
     // Font
     Dir.Append("Fonts");
+    UEngineFont::Load("PFttf", "PFStardust.ttf");
 
     UEngineFont::Load("PF", "PF Stardust");
     UEngineFont::Load("PFEXBold", "PF Stardust ExtraBold");
     UEngineFont::Load("OrangeKid", "Orange Kid");
     UEngineFont::Load("DungGeunMo", "DungGeunMo");
-    UEngineFont::Load("PFttf", "PFStardust.ttf");
 
 
     // TitleImage

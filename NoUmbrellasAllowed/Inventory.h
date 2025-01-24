@@ -35,9 +35,15 @@ private:
 	std::shared_ptr<class USpriteRenderer>InvenRender;
 	std::shared_ptr<class USpriteRenderer>InvenSlotRender;
 	std::vector<std::shared_ptr<class USpriteRenderer>> AllInvenSlotRender;
+	std::shared_ptr<class UCollision> InvenButtonCollision;
 
 	std::shared_ptr<class UFontRenderer> MerchandiseNameText;
-	std::shared_ptr<class UCollision> InvenButtonCollision;
+
+	std::shared_ptr<class UFontRenderer> InvenText1;
+	std::shared_ptr<class UFontRenderer> InvenText2;
+	std::shared_ptr<class UFontRenderer> TotalPriceText;
+	std::shared_ptr<class UFontRenderer> BuyPriceText;
+	std::shared_ptr<class USpriteRenderer> ItemRenderer;
 
 	std::shared_ptr<class ACard> MerchandiseCard;
 	std::vector<std::shared_ptr<class ACard>> AllMerchandiseCard;
