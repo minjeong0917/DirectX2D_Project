@@ -273,7 +273,7 @@ void AShopGameMode::Tick(float _DeltaTime)
         std::string CurMerchandiseName = MerchandiseInfo::GetInst().GetMerchandiseName();
         int GetSpriteIndex = Merchandise->GetSpriteIndex();
         int TotalCardCount = CurCardCount;
-        
+        FVector SpriteScale = MerchandiseInfo::GetInst().GetSpriteScale();
         for (int i = 0; i < InvenInfo::GetInst().GetAllSlotInfos().size(); i++)
         {
             if (InvenInfo::GetInst().GetAllSlotInfos()[SlotIndex].MerchandiseName != "NONE")
@@ -282,7 +282,7 @@ void AShopGameMode::Tick(float _DeltaTime)
             }
         }
 
-        InvenInfo::GetInst().SetSlotInfo(SlotIndex, CurMerchandiseName, TotalCardCount, GetCurSprite, GetSpriteIndex, Calculator->GetEntirePrice(), TotalPrice);
+        InvenInfo::GetInst().SetSlotInfo(SlotIndex, CurMerchandiseName, TotalCardCount, GetCurSprite, GetSpriteIndex, Calculator->GetEntirePrice(), TotalPrice, SpriteScale);
         LoadTotalCardInfo(SlotIndex);
         
         CurCardCount = 0;

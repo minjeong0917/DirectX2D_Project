@@ -140,8 +140,9 @@ void AInventory::Tick(float _DeltaTime)
         {
             std::string SpriteName = InvenInfo::GetInst().GetAllSlotInfos()[i].SpriteName;
             int Index =InvenInfo::GetInst().GetAllSlotInfos()[i].SpriteIndex;
+            FVector Scale = InvenInfo::GetInst().GetAllSlotInfos()[i].Scale;
 
-            AllSlots[i]->SetSlotItemSetting(SpriteName, Index, {0.6f ,0.6f,1.0f});
+            AllSlots[i]->SetSlotItemSetting(SpriteName, Index, Scale);
             AllSlots[i]->SetItemActive(true);
 
             if (AllSlots[i]->GetIsStay() == true)

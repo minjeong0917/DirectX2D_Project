@@ -10,6 +10,7 @@ struct SlotInfo
 	int SpriteIndex = 0;
 	int CardPrice = 0;
 	int BuyPrice = 0;
+	FVector Scale = {1.0f,1.0f,1.0f};
 };
 
 struct SlotCardInfo
@@ -40,7 +41,7 @@ public:
 		return Inst;
 	}
 
-	void SetSlotInfo(int _SlotNum, std::string _MerchandiseName, int _TotalCardCount, std::string _SpriteName, int _SpriteIndex, int _BuyPrice, int _CardPrice);
+	void SetSlotInfo(int _SlotNum, std::string _MerchandiseName, int _TotalCardCount, std::string _SpriteName, int _SpriteIndex, int _BuyPrice, int _CardPrice, FVector _Scale);
 	void SetCardInfo(int _SlotNum, int _CardCount, ECardColor _Color, int CardStep, ECardType _CardType, int CardNum);
 	const std::vector<SlotInfo>& GetAllSlotInfos() const
 	{

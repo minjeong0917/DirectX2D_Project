@@ -66,6 +66,11 @@ public:
 		return MerchandiseName;
 	}
 
+	FVector GetSpriteScale()
+	{
+		return SpriteScale;
+	}
+
 protected:
 
 private:
@@ -74,6 +79,8 @@ private:
 	std::vector<struct MBasicCardInfo> AllBasicCard;
 	float StatusLevel = 0.0f;
 	int Texture = 0;
+
+	FVector SpriteScale = { 1.0f,1.0f,1.0f };
 	std::string SpriteName = "NONE";
 	std::string MerchandiseName = "NONE";
 };

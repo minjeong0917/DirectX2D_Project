@@ -19,7 +19,8 @@ void InvenInfo::SetSlotInfo(
 	std::string _SpriteName, 
 	int _SpriteIndex, 
 	int _BuyPrice, 
-	int _CardPrice)
+	int _CardPrice,
+	FVector _Scale)
 {
 	AllSlotInfos[_SlotNum].BuyPrice = _BuyPrice;
 	AllSlotInfos[_SlotNum].CardPrice = _CardPrice;
@@ -27,6 +28,7 @@ void InvenInfo::SetSlotInfo(
 	AllSlotInfos[_SlotNum].SpriteIndex = _SpriteIndex;
 	AllSlotInfos[_SlotNum].MerchandiseName = _MerchandiseName;
 	AllSlotInfos[_SlotNum].TotalCardCount = _TotalCardCount;
+	AllSlotInfos[_SlotNum].Scale = _Scale;
 
 }
 

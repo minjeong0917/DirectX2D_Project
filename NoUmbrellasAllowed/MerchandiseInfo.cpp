@@ -21,7 +21,7 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
         break;
     case EMerchandiseType::BAG:
         SpriteName = "Bag";
-
+        SpriteScale = { 0.6f,0.6f,1.0f };
         if (_Index == 0)
         {
             AllBasicCard.resize(3);
@@ -155,6 +155,7 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
         break;
     case EMerchandiseType::UMBRELLA:
         SpriteName = "Umbrella";
+        SpriteScale = { 0.6f,0.3f,1.0f };
 
         if (_Index == 0)
         {

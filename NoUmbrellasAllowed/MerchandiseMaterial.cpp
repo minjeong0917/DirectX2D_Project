@@ -29,7 +29,6 @@ AMerchandiseMaterial::AMerchandiseMaterial()
 AMerchandiseMaterial::~AMerchandiseMaterial()
 {
 
-
 }
 
 void AMerchandiseMaterial::Tick(float _DeltaTime)
@@ -52,7 +51,9 @@ void AMerchandiseMaterial::Tick(float _DeltaTime)
 
 void AMerchandiseMaterial::SetMerchandiseMat(int _Index)
 {
+
     MerchandiseMaterialRender->SetSprite("Material", _Index);
+
     if (_Index < 10)
     {
         std::shared_ptr<UEngineTexture> Texture = UEngineTexture::Find<UEngineTexture>("00" + std::to_string(_Index) + ".png");
@@ -65,6 +66,4 @@ void AMerchandiseMaterial::SetMerchandiseMat(int _Index)
         MatSize = Texture->GetTextureSize() * 3.0f;
         ViewSize = MerchandiseMaterialRender->GetWorldScale3D();
     }
-
-
 }
