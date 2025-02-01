@@ -24,6 +24,10 @@ public:
 	{
 		return CurButtonIndex;
 	}
+	void SetIsMerchandiseActive(bool _IsMerchandiseActive)
+	{
+		IsMerchandiseActive = _IsMerchandiseActive;
+	}
 
 protected:
 	void Tick(float _DeltaTime);
@@ -33,7 +37,7 @@ protected:
 
 	void CollisionSet(std::shared_ptr<class UCollision> _Collision);
 
-
+	int MerchandiseActive = 0;
 
 private:
 	std::shared_ptr<class USpriteRenderer> ButtonRender;
@@ -58,6 +62,7 @@ private:
 	std::string ProfileName = "NONE";
 	std::string PrevProfileName = "NONE";
 
+	bool IsMerchandiseActive = false;
 	bool IsEnter = false;
 	int CurButtonIndex = 0;
 	std::vector<std::shared_ptr<class USpriteRenderer>> AllCalculatorButtonRenders;

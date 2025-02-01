@@ -96,7 +96,8 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 
         // Merchandise
         LoadFile(Dir, "Images//Shop//Merchandise//Bag");
-            LoadFile(Dir, "Images//Shop//Merchandise//Material"); 
+        LoadFile(Dir, "Images//Shop//Merchandise//Umbrella");
+        LoadFile(Dir, "Images//Shop//Merchandise//Material"); 
 
     }
 

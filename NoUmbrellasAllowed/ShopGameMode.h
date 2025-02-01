@@ -1,4 +1,5 @@
 #pragma once
+#include "ContentsEnums.h"
 
 // Ό³Έν :
 class AShopGameMode : public AGameMode
@@ -46,7 +47,7 @@ private:
 	int HoverCardNum = 0;
 	int IsPriceChange = 0;
 	float ChangePriceActiveTime = 0.0f;
-
+	int SlotIndex = 0;
 
 	int CustomerActive = 0;
 
@@ -95,5 +96,7 @@ private:
 	std::shared_ptr<class AButton> NumButton;
 	std::shared_ptr<class AUI> DoorUp;
 	std::shared_ptr<class AUI> DoorDown;
+
+	std::vector<std::pair<EMerchandiseType, int>> UsedMerchandise;
 };
 

@@ -107,7 +107,7 @@ ACalculatorButton::ACalculatorButton()
     // Enter
     {
         EnterButtonRender = CreateDefaultSubObject<USpriteRenderer>();
-        EnterButtonRender->SetSprite("Buttons", 4);
+        EnterButtonRender->SetSprite("Buttons", 5);
         EnterButtonRender->SetAutoScaleRatio(3.0f);
         EnterButtonRender->SetWorldLocation({ 720.0f, -730.0f, -151.0f });
         EnterButtonRender->SetupAttachment(RootComponent);
@@ -194,8 +194,19 @@ ACalculatorButton::~ACalculatorButton()
 
 void ACalculatorButton::Tick(float _DeltaTime)
 {
-    AActor::Tick(_DeltaTime);
+    AUI::Tick(_DeltaTime);
 
+    if (IsMerchandiseActive == true && MerchandiseActive == 0)
+    {
+        EnterButtonRender->SetSprite("Buttons", 4);
+        MerchandiseActive += 1;
+    }
+    else if (IsMerchandiseActive == false)
+    {
+        EnterButtonRender->SetSprite("Buttons", 5);
+
+        MerchandiseActive = 0;
+    }
 }
 void ACalculatorButton::OnCollisionEnter(UCollision* _This, UCollision* _Other)
 {
@@ -237,7 +248,7 @@ void ACalculatorButton::OnCollisionStay(class UCollision* _This, class UCollisio
     }
     else if (UEngineInput::IsUp(VK_LBUTTON))
     {
-        IsEnter = false;
+        IsEnter = true;
 
 
         if (Index < 10)
@@ -248,7 +259,7 @@ void ACalculatorButton::OnCollisionStay(class UCollision* _This, class UCollisio
         {
             AllCalculatorButtonRenders[Index]->SetSprite("Buttons", 2);
         }
-        else if (Index == 11)
+        else if (Index == 11 && IsMerchandiseActive == true)
         {
             AllCalculatorButtonRenders[Index]->SetSprite("Buttons", 4);
         }
@@ -258,6 +269,8 @@ void ACalculatorButton::OnCollisionStay(class UCollision* _This, class UCollisio
         }
     }
 }
+
+
 
 void ACalculatorButton::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 {
@@ -276,7 +289,7 @@ void ACalculatorButton::OnCollisionEnd(UCollision* _This, UCollision* _Other)
     {
         AllCalculatorButtonRenders[Index]->SetSprite("Buttons", 2);
     }
-    else if (Index == 11)
+    else if (Index == 11 && IsMerchandiseActive == true)
     {
         AllCalculatorButtonRenders[Index]->SetSprite("Buttons", 4);
     }

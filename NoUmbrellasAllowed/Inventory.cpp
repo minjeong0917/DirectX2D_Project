@@ -63,7 +63,7 @@ AInventory::AInventory()
         }
     }
 
-    FVector StartLoc = { 1390.0f, -200.0f, -131.0f };
+    FVector StartLoc = { 1390.3f, -200.0f, -131.0f };
     FVector IterLoc = { 0.0f , -48.0f, -2.0f };
 
     for (int i = 0; i < 5; i++)
@@ -111,7 +111,7 @@ AInventory::AInventory()
 
     ItemRenderer = CreateDefaultSubObject<USpriteRenderer>();
     ItemRenderer->SetSprite("Inventory", 0);
-    ItemRenderer->SetAutoScaleRatio(2.5f);
+    ItemRenderer->SetAutoScaleRatio(2.0f);
     ItemRenderer->SetWorldLocation({ 1383.0f, 146.0f, -133.0f });
     ItemRenderer->SetActive(false);
     ItemRenderer->SetupAttachment(RootComponent);
@@ -199,10 +199,11 @@ void AInventory::MerchandiseCardCheck(int _Index,float _DeltaTime)
     {
         if (AllMerchandiseCard[i]->GetIsEnter() == false && InvenRender->GetWorldLocation().X <= 650.0f)
         {
+
             if (IsCardHover == false && AllMerchandiseCard[i]->GetActorLocation().Y <= AllMerchandiseCardLocations[i].Y)
             {
-                AllMerchandiseCard[i]->SetActorLocation({ 811.0f,-200.0f +  - 48.0f * i, AllMerchandiseCardLocations[i].Z});
                 AllMerchandiseCard[i]->SetCollisionActive(true);
+                AllMerchandiseCard[i]->SetActorLocation({ AllMerchandiseCard[i]->GetActorLocation().X, -200.0f + -48.0f * i, AllMerchandiseCardLocations[i].Z});
 
                 continue;
             }
@@ -294,9 +295,10 @@ void AInventory::ShowItemInfo(int _Index)
 void AInventory::ChangeLocation(float _DeltaTime)
 {
     
-    if (InvenRender->GetWorldLocation().X > 1230.0f)
+    if (InvenRender->GetWorldLocation().X >= 1230.0f)
     {
         InvenRender->SetWorldLocation({ 1230.0f,-345.0f, -130.0f });
+        ItemRenderer->SetWorldLocation({ 1383.0f, 146.0f, -133.0f });
 
         for (int i = 1; i < 6; i++)
         {
@@ -315,7 +317,7 @@ void AInventory::ChangeLocation(float _DeltaTime)
             }
         }
 
-        FVector StartLoc = { 1390.0f, -200.0f, -131.0f };
+        FVector StartLoc = { 1390.3f, -200.0f, -131.0f };
         FVector IterLoc = { 0.0f , -48.0f, -2.0f };
 
         for (int i = 0; i < 5; i++)
@@ -325,6 +327,7 @@ void AInventory::ChangeLocation(float _DeltaTime)
         }
 
     }
+
 
     if (IsClick == 1 && InvenRender->GetWorldLocation().X > 950.0f)
     {
@@ -386,6 +389,7 @@ void AInventory::ChangeLocation(float _DeltaTime)
         }
 
     }
+
 }
 
 

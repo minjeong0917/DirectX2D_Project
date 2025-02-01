@@ -103,6 +103,9 @@
     <ClCompile Include="InvenInfo.cpp">
       <Filter>Shop\Inventory</Filter>
     </ClCompile>
+    <ClCompile Include="Display.cpp">
+      <Filter>Shop\Inventory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleGameMode.h">
@@ -208,6 +211,9 @@
       <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="InvenInfo.h">
+      <Filter>Shop\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Display.h">
       <Filter>Shop\Inventory</Filter>
     </ClInclude>
   </ItemGroup>

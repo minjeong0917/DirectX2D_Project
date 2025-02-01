@@ -15,13 +15,13 @@
 #include "Card.h"
 #include "CardInfo.h"
 #include "Merchandise.h"
-#include "MerchandiseMaterial.h"
 #include "MerchandiseInfo.h"
 #include "PlayerBalloon.h"
 #include "ConversationList.h"
 #include "CardTotalPrice.h"
 #include "Inventory.h"
 #include "InvenInfo.h"
+#include "MerchandiseMaterial.h"
 
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/CameraActor.h>
@@ -62,7 +62,7 @@ AShopGameMode::AShopGameMode()
     {
         GetWorld()->CreateCollisionProfile("Button_" + std::to_string(i));
         GetWorld()->LinkCollisionProfile("Button_" + std::to_string(i), "Cursor");
-        GetWorld()->LinkCollisionProfile("Cursor","Button_" + std::to_string(i));
+        GetWorld()->LinkCollisionProfile("Cursor", "Button_" + std::to_string(i));
 
     }
 
@@ -78,7 +78,7 @@ AShopGameMode::AShopGameMode()
         GetWorld()->LinkCollisionProfile("BookButton_" + std::to_string(i), "Cursor");
     }
 
-    for (int i = 0; i <24; i++)
+    for (int i = 0; i < 24; i++)
     {
         GetWorld()->CreateCollisionProfile("BookPage_" + std::to_string(i));
         GetWorld()->LinkCollisionProfile("BookPage_" + std::to_string(i), "Cursor");
@@ -180,7 +180,7 @@ AShopGameMode::AShopGameMode()
 
 
     BookSmall = GetWorld()->SpawnActor<ABookSmall>();
- 
+
     // Hue
     std::shared_ptr<class AUI> HueBodyAnimation = GetWorld()->SpawnActor<AUI>();
     HueBodyAnimation->CreateAnimation("Idle", "companion_idle_loop.png", 3.1f, 0, 13, 0.2f);
@@ -204,7 +204,7 @@ AShopGameMode::AShopGameMode()
     Cursor = GetWorld()->SpawnActor<ACursor>();
 
     FVector StartLoc = { -720.0f, -38.0f, -152.0f };
-    FVector IterLoc = {0.0f , -48.0f, -2.0f };
+    FVector IterLoc = { 0.0f , -48.0f, -2.0f };
 
     for (int i = 0; i < 5; i++)
     {
@@ -273,11 +273,20 @@ void AShopGameMode::Tick(float _DeltaTime)
         std::string CurMerchandiseName = MerchandiseInfo::GetInst().GetMerchandiseName();
         int GetSpriteIndex = Merchandise->GetSpriteIndex();
         int TotalCardCount = CurCardCount;
-        // 0 -> 인벤 0번째임!
-        InvenInfo::GetInst().SetSlotInfo(0, CurMerchandiseName, TotalCardCount, GetCurSprite, GetSpriteIndex, Calculator->GetEntirePrice(), TotalPrice);
-        LoadTotalCardInfo(0);
+        
+        for (int i = 0; i < InvenInfo::GetInst().GetAllSlotInfos().size(); i++)
+        {
+            if (InvenInfo::GetInst().GetAllSlotInfos()[SlotIndex].MerchandiseName != "NONE")
+            {
+                SlotIndex += 1;
+            }
+        }
 
+        InvenInfo::GetInst().SetSlotInfo(SlotIndex, CurMerchandiseName, TotalCardCount, GetCurSprite, GetSpriteIndex, Calculator->GetEntirePrice(), TotalPrice);
+        LoadTotalCardInfo(SlotIndex);
+        
         CurCardCount = 0;
+        SlotIndex = 0;
         Calculator->SetClear();
     }
 
@@ -294,6 +303,8 @@ void AShopGameMode::Tick(float _DeltaTime)
         }
         else
         {
+            Calculator->SetIsMerchandiseActive(false);
+
             IsMerchandisActive = false;
             Merchandise->SetActive(false);
             MerchandiseMaterial->SetActive(false);
@@ -318,7 +329,7 @@ void AShopGameMode::Tick(float _DeltaTime)
     if (IsOut == false)
     {
         NotExistCustomerTime += _DeltaTime;
-        if(NotExistCustomerTime > 3.0f)
+        if (NotExistCustomerTime > 3.0f)
         {
             CustomerEnter(_DeltaTime);
             if (IsExistCustomer == true)
@@ -329,15 +340,17 @@ void AShopGameMode::Tick(float _DeltaTime)
                 }
                 else if (IsMerchandisActive == true)
                 {
+                    Calculator->SetIsMerchandiseActive(true);
+
                     if (CurPrice < TotalPrice)
                     {
-                      
+
                         CurPrice += 1;
-                        
+
                     }
                     else if (CurPrice > TotalPrice)
                     {
-                        CurPrice -=1;
+                        CurPrice -= 1;
                     }
                     else if (CurPrice == TotalPrice && CardSlot->IsUpdownActive == true)
                     {
@@ -359,6 +372,7 @@ void AShopGameMode::Tick(float _DeltaTime)
                     Merchandise->AddActorLocation({ 0.0f, -1.0f * _DeltaTime * 100 , 0.0f });
                     MerchandiseMaterial->AddActorLocation({ 0.0f, -1.0f * _DeltaTime * 100 , 0.0f });
                 }
+
             }
         }
     }
@@ -390,7 +404,7 @@ void AShopGameMode::Tick(float _DeltaTime)
     CardCompareAndChange(_DeltaTime);
     MerchandiseCardCheck(_DeltaTime);
 
-  
+
     // Book - Active
     if (Book->GetIsBack() == true)
     {
@@ -400,7 +414,7 @@ void AShopGameMode::Tick(float _DeltaTime)
         Book->SetButtonActive(false);
         Book->SetIsBack(false);
         Book->SetButtonActive(false);
-    } 
+    }
     else if ((Merchandise->GetIsEnter() == true && Merchandise->IsActive() == true && ItemShelf->IsSelectedToolActive() == true) || (BookSmall->GetIsEnter() == true && UEngineInput::IsDown(VK_LBUTTON)))
     {
         Book->SetActive(true);
@@ -414,7 +428,7 @@ void AShopGameMode::Tick(float _DeltaTime)
     {
         MerchandiseMaterial->SetActive(false);
     }
-    
+
     if (Merchandise->GetIsEnter() == true && ItemShelf->IsSelectedToolActive() == true)
     {
         MerchandiseCheck = true;
@@ -469,12 +483,12 @@ void AShopGameMode::MerchandiseCardCheck(float _DeltaTime)
         if (AllCard[HoverCardNum]->GetActorLocation().Y < AllCardLocations[HoverCardNum].Y + 80.0f && AllCard[HoverCardNum]->GetIsEnter() == true)
         {
             AllCard[HoverCardNum]->AddActorLocation({ 0.0f, 800.0f * _DeltaTime, 0.0f });
-            AllCard[HoverCardNum]->SetCollisionYScale(0.5f );
+            AllCard[HoverCardNum]->SetCollisionYScale(0.5f);
             AllCard[HoverCardNum]->SetCollisionYLocation(0.4f);
-        } 
+        }
         else if (AllCard[HoverCardNum]->GetActorLocation().Y >= AllCardLocations[HoverCardNum].Y && AllCard[HoverCardNum]->GetIsEnter() == false)
         {
-   
+
             AllCard[HoverCardNum]->AddActorLocation({ 0.0f, -1000.0f * _DeltaTime, 0.0f });
             AllCard[HoverCardNum]->SetCollisionYScale(0.0f);
             AllCard[HoverCardNum]->SetCollisionYLocation(0.15f);
@@ -603,12 +617,39 @@ void AShopGameMode::BuyMerchandise(float _DeltaTime)
 
 void AShopGameMode::MerchandiseActive(float _DeltaTime)
 {
-    // 0번 가방임 ->랜덤으로 돌려야함.. 
-    MerchandiseInfo::GetInst().SetMerchandiseInfo(false, EMerchandiseType::BAG, 0);
-    Merchandise->SetSprite(MerchandiseInfo::GetInst().GetSpriteName(), 0);
+
+    UEngineRandom Random;
+
+    EMerchandiseType NewMerchandiseType;
+    int RandMerchandise;
+    bool isDuplicate = true;
+
+    for (int attempt = 0; attempt < 10; attempt++) { // 최대 10번 시도
+        NewMerchandiseType = static_cast<EMerchandiseType>(Random.RandomInt(1, 2)); // BAG(1) ~ UMBRELLA(2)
+        RandMerchandise = Random.RandomInt(0, 5); // 0 ~ 5
+
+        isDuplicate = false;
+        for (const std::pair<EMerchandiseType, int>& item : UsedMerchandise) {
+            if (item.first == NewMerchandiseType && item.second == RandMerchandise) {
+                isDuplicate = true;
+                break;
+            }
+        }
+
+        if (!isDuplicate) break; // 중복이 없으면 선택 완료
+    }
+
+    MerchandiseInfo::GetInst().SetMerchandiseInfo(false, NewMerchandiseType, RandMerchandise);
+    Merchandise->SetSprite(MerchandiseInfo::GetInst().GetSpriteName(), RandMerchandise);
+
+
+    UsedMerchandise.push_back({ NewMerchandiseType, RandMerchandise });
+
+    if (UsedMerchandise.size() >= 12) UsedMerchandise.clear();
 
     MerchandiseMaterial->SetActive(true);
     MerchandiseMaterial->SetMerchandiseMat(MerchandiseInfo::GetInst().GetTexture());
+
     Merchandise->SetActive(true);
     Merchandise->SetIsApear(true);
 
@@ -650,6 +691,8 @@ void AShopGameMode::MerchandiseActive(float _DeltaTime)
         AllCard[i]->SetCardExplainText(Explain);
         AllCard[i]->SetCardPercentText(Percent);
     }
+
+
 }
 
 // 물품을 샀을때 최종 물품의 카드 정보 InvenInfo로 넘기기..
@@ -659,7 +702,7 @@ void AShopGameMode::LoadTotalCardInfo(int _Index)
     {
         ECardColor CardColor = AllCard[i]->GetCardColor();
         ECardType CardType = AllCard[i]->GetCurCardType();
-        int CardStep =  AllCard[i]->GetCardStep();
+        int CardStep = AllCard[i]->GetCardStep();
         int CardNum = AllCard[i]->GetCurCardNum();
 
         InvenInfo::GetInst().SetCardInfo(_Index, i, CardColor, CardStep, CardType, CardNum);
@@ -812,7 +855,7 @@ void AShopGameMode::CustomerEnter(float _DeltaTime)
                 IsDoorClosed = true;
                 IsDoorDown = false;
                 NotExistCustomerTime = 0.0f;
-                DoorOpenTime = 0.0f; 
+                DoorOpenTime = 0.0f;
                 DoorClosedTime = 0.0f;
                 DoorAcc = 1.0f;
                 CustomerEnterTime = 0.0f;
@@ -847,38 +890,34 @@ void AShopGameMode::CustomerOut(float _DeltaTime)
 
     }
 
-     if (IsExistCustomer == false)
+    if (IsExistCustomer == false)
     {
-         if (IsDoorClosed == false)
-         {
-             CustomerEnterTime += _DeltaTime;
-             if (CustomerEnterTime < 2.8)
-             {
-                 DoorClose(_DeltaTime);
-             }
-             else if (CustomerEnterTime > 2.8)
-             {
-                 IsOut = true;
-                 IsDoorClosed = true;
-                 NotExistCustomerTime = 0.0f;
-                 CustomerEnterTime = 0.0f;
-                 DoorOpenTime = 0.0f;
-                 DoorClosedTime = 0.0f;
-                 DoorAcc = 1.0f;
-                 IsDoorDown = false;
-             }
-
-         }
-
+        if (IsDoorClosed == false)
+        {
+            CustomerEnterTime += _DeltaTime;
+            if (CustomerEnterTime < 2.8)
+            {
+                DoorClose(_DeltaTime);
+            }
+            else if (CustomerEnterTime > 2.8)
+            {
+                IsOut = false;
+                IsDoorClosed = true;
+                IsDoorDown = false;
+                NotExistCustomerTime = 0.0f;
+                CustomerEnterTime = 0.0f;
+                DoorOpenTime = 0.0f;
+                DoorClosedTime = 0.0f;
+                DoorAcc = 1.0f;
+                Merchandise->SetActorLocation({ 0.0f,0.0f,0.0f });
+            }
+        }
     }
-
 }
-
 
 void AShopGameMode::DoorOpen(float _DeltaTime)
 {
-
-    DoorOpenTime += _DeltaTime ;
+    DoorOpenTime += _DeltaTime;
     if (DoorOpenTime > 1.0f && DoorOpenTime < 1.1f)
     {
         DoorUp->AddRelativeLocation({ 0.0f, -100.0f * _DeltaTime, 0.0f });
@@ -907,7 +946,7 @@ void AShopGameMode::DoorClose(float _DeltaTime)
     if (DoorClosedTime > 1.0f && IsDoorDown == false)
     {
         DoorAcc += _DeltaTime * 6;
-   
+
         DoorUp->AddRelativeLocation({ 0.0f, -100.0f * _DeltaTime * DoorAcc ,0.0f });
         DoorDown->AddRelativeLocation({ 0.0f, 100.0f * _DeltaTime * DoorAcc,0.0f });
     }

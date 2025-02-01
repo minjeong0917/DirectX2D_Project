@@ -24,7 +24,7 @@ ACalculator::ACalculator()
 
     CalculatorCollision = CreateDefaultSubObject<UCollision>();
     CalculatorCollision->SetCollisionProfileName("Calculator");
-    CalculatorCollision->SetScale3D({330.0f,462.0f,0.0f});
+    CalculatorCollision->SetScale3D({ 330.0f,462.0f,0.0f });
     CalculatorCollision->SetRelativeLocation({ CalculatorRender->GetTransformRef().WorldLocation.X, CalculatorRender->GetTransformRef().WorldLocation.Y + 231.0f , CalculatorRender->GetTransformRef().WorldLocation.Z, });
     CalculatorCollision->SetupAttachment(RootComponent);
 
@@ -57,6 +57,16 @@ void ACalculator::Tick(float _DeltaTime)
     AUI::Tick(_DeltaTime);
     ButtonClickCheck();
 
+    if (IsMerchandiseActive == true)
+    {
+        Button->SetIsMerchandiseActive(true);
+    }
+    else if (IsMerchandiseActive == false)
+    {
+        Button->SetIsMerchandiseActive(false);
+
+    }
+
     if (IsEnter == true)
     {
         if (CalculatorRender->GetTransformRef().WorldLocation.Y < -440.0f)
@@ -86,6 +96,7 @@ void ACalculator::SetClear()
     PriceText->SetText("0");
     CurPriceText = "0";
     CurPrice = 0;
+    EntirePriceText = "0";
     EntirePrice = 0;
 }
 
@@ -117,34 +128,38 @@ void ACalculator::ButtonClickCheck()
             {
                 EntirePriceText = EntirePriceText + CurPriceText;
 
-                if (CurPrice >= 0 && CurPrice <= 9) 
+                if (CurPrice >= 0 && CurPrice <= 9)
                 {
-                    if (EntirePrice == 0) 
+                    if (EntirePrice == 0)
                     {
                         EntirePrice = CurPrice;
                     }
                     else
                     {
-                        EntirePrice = EntirePrice * 10 + CurPrice; 
+                        EntirePrice = EntirePrice * 10 + CurPrice;
                     }
                 }
             }
         }
-
         else if (CurNum == 10) // CE
         {
             EntirePriceText = "0";
             EntirePrice = 0;
         }
-
         else if (CurNum == 11) // Enter
         {
-            int CurGold = PlayerInfo::GetInst().GetGold();
-            IsPushEnter = true;
+            if (IsMerchandiseActive == true)
+            {
+                int CurGold = PlayerInfo::GetInst().GetGold();
+                IsPushEnter = true;
 
 
+                PlayerInfo::GetInst().SetGold(CurGold - EntirePrice);
 
-            PlayerInfo::GetInst().SetGold(CurGold - EntirePrice);
+
+            }
+    
+
         }
 
         PriceText->SetText(EntirePriceText);
@@ -161,5 +176,6 @@ void ACalculator::OnCollisionEnter(UCollision* _This, UCollision* _Other)
 void ACalculator::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 {
     IsEnter = false;
+    IsPushEnter = false;
 }
 

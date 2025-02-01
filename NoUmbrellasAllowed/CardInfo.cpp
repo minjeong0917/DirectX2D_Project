@@ -50,6 +50,12 @@ void CardInfo::CardTypeInfo(ECardType _CardType)
         AllCardType[0].CardPercent = 20;
         AllCardType[0].CardNameTextSize = NameTextSize;
 
+        AllCardType[1].CardName = "우산";
+        AllCardType[1].CardExplanation = "있으면 불편하고 없으면 허전하다.";
+        AllCardType[1].CardPercentText = "20V";
+        AllCardType[1].CardPercent = 20;
+        AllCardType[1].CardNameTextSize = NameTextSize;
+
         break;
 
     case ECardType::CONDITION:

@@ -33,6 +33,12 @@ public:
 	{
 		return EntirePrice;
 	}
+	void ButtonClickCheck();
+
+	void SetIsMerchandiseActive(bool _IsMerchandiseActive)
+	{
+		IsMerchandiseActive = _IsMerchandiseActive;
+	}
 
 protected:
 
@@ -40,7 +46,6 @@ protected:
 	void OnCollisionEnter(class UCollision* _This, class UCollision* _Other);
 	void OnCollisionEnd(class UCollision* _This, class UCollision* _Other);
 private:
-	void ButtonClickCheck();
 
 	std::shared_ptr<class USpriteRenderer> CalculatorRender;
 	std::shared_ptr<class UCollision> CalculatorCollision;
@@ -54,6 +59,9 @@ private:
 	int CurPrice = 0;
 
 	bool IsPushEnter = false;
+
+	bool IsMerchandiseActive = false;
+
 
 	bool IsEnter = false;
 	int Acc = 0;
