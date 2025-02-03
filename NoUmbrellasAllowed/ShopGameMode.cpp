@@ -17,6 +17,7 @@
 #include "Merchandise.h"
 #include "MerchandiseInfo.h"
 #include "PlayerBalloon.h"
+#include "CustomerBalloon.h"
 #include "ConversationList.h"
 #include "CardTotalPrice.h"
 #include "Inventory.h"
@@ -108,6 +109,10 @@ AShopGameMode::AShopGameMode()
     // PlayerBalloons
     PlayerBalloon = GetWorld()->SpawnActor<APlayerBalloon>();
     PlayerBalloon->SetActive(false);
+
+    // CustomerBalloons
+    CustomerBalloon = GetWorld()->SpawnActor<ACustomerBalloon>();
+    CustomerBalloon->SetActive(false);
 
     // WalkCustomer
     for (int i = 0; i < 8; i++)
@@ -264,8 +269,6 @@ void AShopGameMode::Tick(float _DeltaTime)
     PeopleMove(_DeltaTime, WalkCustomer2, false);
 
 
-
-    // TestCode
     if (Calculator->GetIsPushEnter() == true && IsOut == false /*UEngineInput::IsPress('I')*/)
     {
         IsOut = true;
@@ -290,6 +293,13 @@ void AShopGameMode::Tick(float _DeltaTime)
         Calculator->SetClear();
     }
 
+
+    CustomerInOut(_DeltaTime);
+    ActorActive(_DeltaTime);
+}
+
+void AShopGameMode::CustomerInOut(float _DeltaTime)
+{
     // Customer - InOut
     if (IsOut == true)
     {
@@ -376,7 +386,10 @@ void AShopGameMode::Tick(float _DeltaTime)
             }
         }
     }
+}
 
+void AShopGameMode::ActorActive(float _DeltaTime)
+{
     // Cursor - Active
     if (ItemShelf != nullptr)
     {
@@ -442,6 +455,18 @@ void AShopGameMode::Tick(float _DeltaTime)
         MerchandiseCheck = false;
 
     }
+
+    if (CustomerBalloonAcitve == true)
+    {
+        CustomerBalloonAcitveTime += _DeltaTime;
+        if (CustomerBalloonAcitveTime > 3.0f)
+        {
+            Customer->CustomerFSMChange(CustomerFSM::Idle);
+            CustomerBalloon->SetActive(false);
+            CustomerBalloonAcitve = false;
+            CustomerBalloonAcitveTime = 0.0f;
+        }
+    }
 }
 
 void AShopGameMode::MerchandiseCardCheck(float _DeltaTime)
@@ -479,7 +504,6 @@ void AShopGameMode::MerchandiseCardCheck(float _DeltaTime)
     if (IsCardHover == true)
     {
 
-
         if (AllCard[HoverCardNum]->GetActorLocation().Y < AllCardLocations[HoverCardNum].Y + 80.0f && AllCard[HoverCardNum]->GetIsEnter() == true)
         {
             AllCard[HoverCardNum]->AddActorLocation({ 0.0f, 800.0f * _DeltaTime, 0.0f });
@@ -504,6 +528,8 @@ void AShopGameMode::MerchandiseCardCheck(float _DeltaTime)
 
 void AShopGameMode::CardCompareAndChange(float _DeltaTime)
 {
+    UEngineRandom Random;
+
     // Card Compare
     for (int i = 0; i < MerchandiseInfo::GetInst().GetAllBasicCard().size(); i++)
     {
@@ -540,15 +566,16 @@ void AShopGameMode::CardCompareAndChange(float _DeltaTime)
         std::string MerchandiseCardName = CardInfo::GetInst().GetAllCardType()[CardNum].CardName;
         ECardType CardType = CardInfo::GetInst().GetCardType();
         int CardIndex = Book->GetCurClickNum();
-
+        
 
         if (Book->GetCurCardName() != MerchandiseCardName && UEngineInput::IsUp(VK_LBUTTON))
         {
             IsCardChange = true;
 
             PlayerBalloon->SetActive(true);
-            ConversationList::GetInst().SetPlayerConverastion(CardType, CardIndex);
+            ConversationList::GetInst().SetPlayerConversation(CardType, CardIndex);
             PlayerBalloon->SetPlayerBalloonAndText();
+
         }
     }
 
@@ -560,24 +587,20 @@ void AShopGameMode::CardCompareAndChange(float _DeltaTime)
         if (CardChangeTime < 1.0f && Book->GetIsDrawCard() == false && AllCard[ChangeCardNum]->GetActorLocation().Y > AllCardLocations[ChangeCardNum].Y)
         {
             AllCard[ChangeCardNum]->AddActorLocation({ 0.0f, -1000.0f * _DeltaTime, 0.0f });
+            Customer->CustomerFSMChange(CustomerFSM::Startled);
         }
         else if (CardChangeTime > 1.0f && CardChangeTime < 2.0f && AllCard[ChangeCardNum]->GetActorLocation().Y < AllCardLocations[ChangeCardNum].Y + 100.0f)
         {
+
+            CustomerBalloon->SetActive(true);
+            CustomerBalloonAcitve = true;
+
             int CardNum = Book->GetCurClickNum();
             AllCard[ChangeCardNum]->SetCurCardNum(CardNum);
 
             TotalPrice = CardTotalPrice->TotalPriceCheck();
-            if (CurPrice != TotalPrice && IsPriceChange == 0)
-            {
-                CardSlot->SetUpDownActive(true);
-                int ChangePrice = TotalPrice - CurPrice;
-                CardSlot->SetUpDownText(ChangePrice);
-                IsPriceChange += 1;
-            }
 
-
-            ECardType CardType = CardInfo::GetInst().GetCardType();
-
+             ECardType CardType = CardInfo::GetInst().GetCardType();
             CardInfo::GetInst().SetCardType(CardType);
             CardInfo::GetInst().CardTypeInfo(CardType);
             AllCard[ChangeCardNum]->SetCurCardType(CardType);
@@ -594,8 +617,27 @@ void AShopGameMode::CardCompareAndChange(float _DeltaTime)
             AllCard[ChangeCardNum]->SetCardExplainText(Explain);
             AllCard[ChangeCardNum]->SetCardPercentText(Percent);
             AllCard[ChangeCardNum]->ChangeTextSize(ChangeTextSize);
-
             AllCard[ChangeCardNum]->AddActorLocation({ 0.0f, 1000.0f * _DeltaTime, 0.0f });
+
+
+            bool IsUpPrice = false;
+            int RandomConversation = Random.RandomInt(0, 2);
+
+            if (TotalPrice - CurPrice > 0)
+            {
+                IsUpPrice = true;
+            }
+
+            ConversationList::GetInst().SetCustomerCardConversation(CardType, IsUpPrice, RandomConversation);
+            CustomerBalloon->SetCustomerBalloonAndText();
+
+            if (CurPrice != TotalPrice && IsPriceChange == 0)
+            {
+                CardSlot->SetUpDownActive(true);
+                int ChangePrice = TotalPrice - CurPrice;
+                CardSlot->SetUpDownText(ChangePrice);
+                IsPriceChange += 1;
+            }
 
         }
         else if (CardChangeTime > 2.0f && AllCard[ChangeCardNum]->GetActorLocation().Y >= AllCardLocations[ChangeCardNum].Y + 50.0f)
@@ -603,9 +645,12 @@ void AShopGameMode::CardCompareAndChange(float _DeltaTime)
             IsCardChange = false;
             CardChangeTime = 0.0f;
             PlayerBalloon->SetActive(false);
+
         }
 
     }
+
+
 
 }
 

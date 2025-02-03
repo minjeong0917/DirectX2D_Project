@@ -35,6 +35,8 @@ private:
 	void MerchandiseCardCheck(float _DeltaTime);
 	void BuyMerchandise(float _DeltaTime);
 	void LoadTotalCardInfo(int _Index);
+	void ActorActive(float _DeltaTime);
+	void CustomerInOut(float _DeltaTime);
 
 	float CardChangeTime = 0.0f;
 	bool IsCardChange = false;
@@ -74,6 +76,10 @@ private:
 	std::shared_ptr<class AUI> WalkCustomer2;
 	std::shared_ptr<class ACustomer> Customer;
 	std::shared_ptr<class APlayerBalloon> PlayerBalloon;
+	std::shared_ptr<class ACustomerBalloon> CustomerBalloon;
+	bool CustomerBalloonAcitve = false;
+	float CustomerBalloonAcitveTime = 0.0f;
+
 
 	std::shared_ptr<class ACard> Card;
 	std::vector<std::shared_ptr<class ACard>> AllCard;

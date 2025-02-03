@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include <EngineBase/FSMStateManager.h>
+#include "ContentsEnums.h"
 
 struct PartsInfo
 {
@@ -9,13 +10,7 @@ public:
 	FVector Location = { 0.0f, 0.0f, 0.0f };
 };
 
-enum class CustomerFSM
-{
-	Idle,
-	Startled,
-	Angry,
-	
-};
+
 
 
 // Ό³Έν :
@@ -32,6 +27,7 @@ public:
 	ACustomer& operator=(const ACustomer& _Other) = delete;
 	ACustomer& operator=(ACustomer&& _Other) noexcept = delete;
 	void RandomCustomer(int _Gender, int _HairRand, int _Head, int _Body, int _Eyes, int _EyeBrow, int _Nose, int _Mouse);
+	void CustomerFSMChange(CustomerFSM _FSM);
 
 
 

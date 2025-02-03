@@ -20,7 +20,8 @@ public:
 		static ConversationList Inst = ConversationList();
 		return Inst;
 	}
-	void SetPlayerConverastion(ECardType _CardType, int _Index);
+	void SetPlayerConversation(ECardType _CardType, int _Index);
+	void SetCustomerCardConversation(ECardType _CardType, bool _IsPriceUp, int _RandomConversation);
 
 	std::string GetPlayerConversation()
 	{
@@ -32,11 +33,28 @@ public:
 		return PlayerBalloonXSize;
 	}
 
+	std::string GetCustomerConversation()
+	{
+		return CustomerConversation;
+	}
+
+	float GetCustomerBalloonXSize()
+	{
+		return CustomerBalloonXSize;
+	}
+	float GetCustomerBalloonYSize()
+	{
+		return CustomerBalloonYSize;
+	}
 protected:
 
 private:
 	ConversationList();
 	std::string PlayerConversation = "NONE";
 	float PlayerBalloonXSize = 0.0f;
+
+	std::string CustomerConversation = "NONE";
+	float CustomerBalloonXSize = 0.0f;
+	float CustomerBalloonYSize = 0.0f;
 };
 

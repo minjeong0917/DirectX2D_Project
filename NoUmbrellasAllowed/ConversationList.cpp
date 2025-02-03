@@ -10,7 +10,7 @@ ConversationList::~ConversationList()
 {
 }
 
-void ConversationList::SetPlayerConverastion(ECardType _CardType, int _Index)
+void ConversationList::SetPlayerConversation(ECardType _CardType, int _Index)
 {
 	switch (_CardType)
 	{
@@ -165,6 +165,133 @@ void ConversationList::SetPlayerConverastion(ECardType _CardType, int _Index)
 		{
 			PlayerConversation = "밀랍이네요.";
 			PlayerBalloonXSize = 160.0f;
+		}
+		break;
+	default:
+		break;
+	}
+
+}
+
+
+void ConversationList::SetCustomerCardConversation(ECardType _CardType, bool _IsPriceUp, int _RandomConversation)
+{
+	switch (_CardType)
+	{
+	case ECardType::NONE:
+		break;
+	case ECardType::BASIC:
+		break;
+	case ECardType::CONDITION:
+		if (_IsPriceUp == true)
+		{
+			switch (_RandomConversation)
+			{
+			case 0:
+				CustomerConversation = "돈을 더 받을 수 있다는 얘기군요!";
+				CustomerBalloonXSize = 400.0f;
+				CustomerBalloonYSize = 100.0f;
+
+				break;
+			case 1:
+				CustomerConversation = "내가 괜히 저평가하고 있었나봐요. 사실대로 \n알려줘서 고마워요!";
+				CustomerBalloonXSize = 400.0f;
+				CustomerBalloonYSize = 120.0f;
+
+				break;
+			case 2:
+				CustomerConversation = "사실 그쯤일 줄 알았어요.";
+				CustomerBalloonXSize = 250.0f;
+				CustomerBalloonYSize = 100.0f;
+
+				break;
+			default:
+				break;
+			}
+		}
+		else if (_IsPriceUp == false)
+		{
+			switch (_RandomConversation)
+			{
+			case 0:
+				CustomerConversation = "이 정도면 그냥 넘어갈 법도 한데... 알았어요.";
+				CustomerBalloonXSize = 400.0f;
+				CustomerBalloonYSize = 100.0f;
+
+				break;
+			case 1:
+				CustomerConversation = "어, 내가 틀렸나 보네요.";
+				CustomerBalloonXSize = 250.0f;
+				CustomerBalloonYSize = 100.0f;
+
+				break;
+			case 2:
+				CustomerConversation = "어, 내가 틀렸나 보네요.";
+				CustomerBalloonXSize = 250.0f;
+				CustomerBalloonYSize = 100.0f;
+
+				break;
+			default:
+				break;
+			}
+
+		}
+
+		break;
+
+	case ECardType::TEXTURE:
+		if (_IsPriceUp == true)
+		{
+			switch (_RandomConversation)
+			{
+			case 0:
+				CustomerConversation = "돈을 더 받을 수 있다는 얘기군요!";
+				CustomerBalloonXSize = 400.0f;
+				CustomerBalloonYSize = 100.0f;
+
+				break;
+			case 1:
+				CustomerConversation = "내가 괜히 저평가하고 있었나봐요. 사실대로\n알려줘서 고마워요!";
+				CustomerBalloonXSize = 400.0f;
+				CustomerBalloonYSize = 120.0f;
+
+				break;
+			case 2:
+				CustomerConversation = "내가 실수했나 봐요.";
+				CustomerBalloonXSize = 250.0f;
+				CustomerBalloonYSize = 100.0f;
+
+				break;
+			default:
+				break;
+			}
+		}
+		else if (_IsPriceUp == false)
+		{
+			switch (_RandomConversation)
+			{
+			case 0:
+				CustomerConversation = "어쩐지 재질이 좀 찝찝하긴 했는데... 알겠어요.";
+				CustomerBalloonXSize = 420.0f;
+				CustomerBalloonYSize = 100.0f;
+
+				break;
+			case 1:
+				CustomerConversation = "어, 내가 틀렸나 보네요.";
+				CustomerBalloonXSize = 250.0f;
+				CustomerBalloonYSize = 100.0f;
+
+				break;
+			case 2:
+				CustomerConversation = "뭐, 난 전문가가 아니잖아요.";
+				CustomerBalloonXSize = 250.0f;
+				CustomerBalloonYSize = 100.0f;
+
+				break;
+			default:
+				break;
+			}
+
 		}
 		break;
 	default:

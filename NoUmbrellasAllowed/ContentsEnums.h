@@ -25,3 +25,11 @@ enum class EMerchandiseType : int8
 	UMBRELLA,
 
 };
+
+enum class CustomerFSM : int8
+{
+	Idle,
+	Startled,
+	Angry,
+
+};

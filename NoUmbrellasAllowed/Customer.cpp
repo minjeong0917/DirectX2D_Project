@@ -4,6 +4,7 @@
 #include <EngineCore/DefaultSceneComponent.h>
 #include "Customer.h"
 #include <EnginePlatform/EngineInput.h>
+
 ACustomer::ACustomer()
 {
     std::shared_ptr<UDefaultSceneComponent> Default = CreateDefaultSubObject<UDefaultSceneComponent>();
@@ -130,8 +131,8 @@ ACustomer::ACustomer()
 
     MouseRenderer = CreateDefaultSubObject<USpriteRenderer>();
     //MouseRenderer->SetSprite("MouseNeutral", 0);
-    MouseRenderer->SetWorldLocation({ 0.0f, 10.0f, 2.0f });
     //MouseRenderer->SetAutoScaleRatio(3.0f);
+    MouseRenderer->SetWorldLocation({ 0.0f, 10.0f, 2.0f });
     MouseRenderer->SetupAttachment(RootComponent);
 
     CreateAnimation(MouseRenderer, "Idle_000", "000_Mneutral_loop.png", 3.1f, { 0}, { 0.1f });
@@ -156,8 +157,6 @@ ACustomer::ACustomer()
     HairRenderer->SetAutoScaleRatio(3.0f);
     HairRenderer->SetupAttachment(RootComponent);
 
-
-
     FSM.CreateState(CustomerFSM::Idle, std::bind(&ACustomer::Idle, this, std::placeholders::_1),
         [this]()
         {
@@ -166,8 +165,6 @@ ACustomer::ACustomer()
             RightEyeRenderer->ChangeAnimation("Idle_00" + std::to_string(CurEyesState));
             LeftEyeRenderer->ChangeAnimation("Idle_00" + std::to_string(CurEyesState));
             MouseRenderer->ChangeAnimation("Idle_00" + std::to_string(CurMouseState));
-
-
         }
     );
 
@@ -239,6 +236,11 @@ void ACustomer::Tick(float _DeltaTime)
 
     FSM.Update(_DeltaTime);
 
+}
+
+void ACustomer::CustomerFSMChange(CustomerFSM _FSM)
+{
+    FSM.ChangeState(_FSM);
 }
 
 void ACustomer::Idle(float _DeltaTime)
@@ -327,7 +329,7 @@ void ACustomer::RandomCustomer(int _Gender, int _HairRand, int _Head, int _Body,
     int Test = 1;
 
     CurMouseState = _Mouse;
-    CurMouseState = Test;
+    //CurMouseState = Test;
 
     if (_Gender == 0)
     {
