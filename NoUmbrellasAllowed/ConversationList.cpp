@@ -172,6 +172,105 @@ void ConversationList::SetPlayerConversation(ECardType _CardType, int _Index)
 	}
 
 }
+void ConversationList::SetPlayerOfferPriceConvo(int _Price, int _RandomConvo)
+{
+	switch (_RandomConvo)
+	{
+	case 0:
+		PlayerConversation = std::to_string(_Price) + "V 드릴게요.";
+		PlayerBalloonXSize = 170.0f;
+		break;
+	case 1:
+		PlayerConversation = std::to_string(_Price) + "V쯤이 좋겠군요.";
+		PlayerBalloonXSize = 190.0f;
+		break;
+	case 2:
+		PlayerConversation = std::to_string(_Price) + "V면 될 것 같은데요.";
+		PlayerBalloonXSize = 200.0f;
+		break;
+	case 3:
+		PlayerConversation = std::to_string(_Price) + "V 어떠세요?";
+		PlayerBalloonXSize = 200.0f;
+		break;
+	case 4:
+		PlayerConversation = std::to_string(_Price) + "V는 괜찮나요?";
+		PlayerBalloonXSize = 200.0f;
+		break;
+	case 5:
+		PlayerConversation = std::to_string(_Price) + "V가 최선이네요.";
+		PlayerBalloonXSize = 200.0f;
+		break;
+	default:
+		break;
+	}
+}
+
+
+void ConversationList::SetPlayerNotDealConvo(int _RandomConvo)
+{
+	switch (_RandomConvo)
+	{
+	case 0:
+		PlayerConversation = "안 사는 게 나을 것 같네요.";
+		PlayerBalloonXSize = 200.0f;
+		break;
+	case 1:
+		PlayerConversation = "그냥 안 살게요.";
+		PlayerBalloonXSize = 200.0f;
+		break;
+	case 2:
+		PlayerConversation = "죄송하지만, 여기서 그만 둘게요.";
+		PlayerBalloonXSize = 200.0f;
+		break;
+	default:
+		break;
+	}
+}
+
+void ConversationList::SetCustomerDealConvo(int _Price, int _RandomConvo)
+{
+	switch (_RandomConvo)
+	{
+	case 0:
+		CustomerConversation = std::to_string(_Price) + "V면 정말 괜찮네요!";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 1:
+		CustomerConversation = "굳이 마다할 필요가 없죠! 좋아요.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 2:
+		CustomerConversation = "나야 좋죠!";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 3:
+		CustomerConversation = std::to_string(_Price) + "V를 누가 마다하겠어요?";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 4:
+		CustomerConversation = std::to_string(_Price) + "V라니. 생각보다 인심이 후하시네요.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 5:
+		CustomerConversation = std::to_string(_Price) + "V! 아싸!";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 6:
+		CustomerConversation = std::to_string(_Price) + "V는 기대도 안 했는데!";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	
+	default:
+		break;
+	}
+}
 
 
 void ConversationList::SetCustomerCardConversation(ECardType _CardType, bool _IsPriceUp, int _RandomConversation)
@@ -226,7 +325,7 @@ void ConversationList::SetCustomerCardConversation(ECardType _CardType, bool _Is
 
 				break;
 			case 2:
-				CustomerConversation = "어, 내가 틀렸나 보네요.";
+				CustomerConversation = "깐깐하시네요. 알겠어요.";
 				CustomerBalloonXSize = 250.0f;
 				CustomerBalloonYSize = 100.0f;
 
@@ -245,7 +344,7 @@ void ConversationList::SetCustomerCardConversation(ECardType _CardType, bool _Is
 			switch (_RandomConversation)
 			{
 			case 0:
-				CustomerConversation = "돈을 더 받을 수 있다는 얘기군요!";
+				CustomerConversation = "어쩐지 나도 긴가민가했어요.";
 				CustomerBalloonXSize = 400.0f;
 				CustomerBalloonYSize = 100.0f;
 

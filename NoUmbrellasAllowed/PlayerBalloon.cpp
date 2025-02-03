@@ -19,8 +19,9 @@ APlayerBalloon::APlayerBalloon()
     PlayerBaloonRender->SetupAttachment(RootComponent);
 
     PlayerText = CreateDefaultSubObject<UFontRenderer>();
-    PlayerText->SetFont("PF", 20.0f, TColor<unsigned char>(39, 37, 43, 255), FW1_CENTER);
+    PlayerText->SetFont("PF", 20.0f, TColor<unsigned char>(39, 37, 43, 255), FW1_LEFT);
     PlayerText->SetWorldLocation({ 0.0f, -415.0f, -820.0f });
+    PlayerText->SetText(" ");
     PlayerText->SetupAttachment(RootComponent);
 }
 
@@ -34,12 +35,43 @@ void APlayerBalloon::BeginPlay()
 
 
 }
+void APlayerBalloon::Tick(float _DeltaTime)
+{
+    AActor::Tick(_DeltaTime);
 
+    if (IsStartEffect == true)
+    {
+        static float Timer = 0.0f;
+        Timer += _DeltaTime;
+
+        if (Timer >= 0.03f && CurrentTextIndex < FullText.size())
+        {
+            Timer = 0.0f; 
+            CurrentDisplayedText += FullText[CurrentTextIndex]; 
+            PlayerText->SetText(CurrentDisplayedText);
+            CurrentTextIndex++; 
+        }
+
+        if (CurrentTextIndex >= FullText.size())
+        {
+            IsStartEffect = false;
+        }
+    }
+
+}
 void APlayerBalloon::SetPlayerBalloonAndText()
 {
     BoxXScale = ConversationList::GetInst().GetPlayerBalloonXSize();
-    Text = ConversationList::GetInst().GetPlayerConversation();
+    FullText = ConversationList::GetInst().GetPlayerConversation();
 
     PlayerBaloonRender->SetScale3D({ BoxXScale, 117.0f, 1.0f });
-    PlayerText->SetText(Text);
+    PlayerText->SetWorldLocation({ 30.0f - BoxXScale/2, -415.0f, -820.0f });
+
+    CurrentDisplayedText = " ";
+    PlayerText->SetText(CurrentDisplayedText);
+    CurrentDisplayedText = "";
+
+    IsStartEffect = true;
+    CurrentTextIndex = 0;
+    //PlayerText->SetText(Text);
 }

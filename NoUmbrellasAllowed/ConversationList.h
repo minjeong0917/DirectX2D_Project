@@ -20,9 +20,18 @@ public:
 		static ConversationList Inst = ConversationList();
 		return Inst;
 	}
+	// Player Convo
 	void SetPlayerConversation(ECardType _CardType, int _Index);
-	void SetCustomerCardConversation(ECardType _CardType, bool _IsPriceUp, int _RandomConversation);
+	void SetPlayerOfferPriceConvo(int _Price, int _RandomConvo);
+	void SetPlayerNotDealConvo(int _RandomConvo);
 
+	// Customer Convo
+	void SetCustomerCardConversation(ECardType _CardType, bool _IsPriceUp, int _RandomConversation);
+	void SetCustomerDealConvo(int _Price, int _RandomConvo);
+	void SetCustomerDealConvo2(int _RandomConvo);
+
+
+	
 	std::string GetPlayerConversation()
 	{
 		return PlayerConversation;

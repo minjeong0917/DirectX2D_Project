@@ -49,8 +49,6 @@ int ACardTotalPrice::TotalPriceCheck()
     for (size_t i = 0; i < MerchandiseInfo::GetInst().GetAllBasicCard().size(); i++)
     {
         ECardType CardType = MerchandiseInfo::GetInst().GetAllBasicCard()[i].CardType;
- 
-        
         CardInfo::GetInst().CardTypeInfo(CardType);
 
 

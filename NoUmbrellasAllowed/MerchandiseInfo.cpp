@@ -84,7 +84,7 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
 
             StatusLevel = 24.0f;
             Texture = 9;
-            MerchandiseName = "엄마가 준 가방";
+            MerchandiseName = "성공의 가방";
 
         }
         if (_Index == 3)

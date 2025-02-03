@@ -269,10 +269,12 @@ void ACustomer::Idle(float _DeltaTime)
 
 
 }
+
 void ACustomer::Angry(float _DeltaTime)
 {
 
 }
+
 void ACustomer::Startled(float _DeltaTime)
 {
     FVector DownLoc = { 0.0f,-2.0f,0.0f };

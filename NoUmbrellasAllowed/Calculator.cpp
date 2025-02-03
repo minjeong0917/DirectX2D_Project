@@ -150,18 +150,38 @@ void ACalculator::ButtonClickCheck()
         {
             if (IsMerchandiseActive == true)
             {
-                int CurGold = PlayerInfo::GetInst().GetGold();
+                //int CurGold = PlayerInfo::GetInst().GetGold();
                 IsPushEnter = true;
-
-
-                PlayerInfo::GetInst().SetGold(CurGold - EntirePrice);
-
-
+                EntirePriceText = "0";
+                DealPrice = EntirePrice;
+                EntirePrice = 0;
             }
     
 
         }
+        else if (CurNum == 12) // 거래 포기
+        {
+            if (IsMerchandiseActive == true)
+            {
 
+                IsPushNotDeal = true;
+
+            }
+
+
+        }
+        else if (CurNum == 13) // 거래수락
+        {
+            if (IsMerchandiseActive == true)
+            {
+                int CurGold = PlayerInfo::GetInst().GetGold();
+                IsPushDeal = true;
+
+                PlayerInfo::GetInst().SetGold(CurGold - DealPrice);
+
+            }
+
+        }
         PriceText->SetText(EntirePriceText);
         UEngineDebug::OutPutString(std::to_string(EntirePrice));
     }
@@ -177,5 +197,8 @@ void ACalculator::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 {
     IsEnter = false;
     IsPushEnter = false;
+    IsPushDeal = false;
+    IsPushNotDeal = false;
+
 }
 

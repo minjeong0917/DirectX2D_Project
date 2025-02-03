@@ -258,18 +258,22 @@ void AShopGameMode::Tick(float _DeltaTime)
 {
     AActor::Tick(_DeltaTime);
 
+    UEngineRandom Random;
+
     UEngineDebug::OutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 
     std::shared_ptr<class ACameraActor> Camera = GetWorld()->GetCamera(0);
     FVector MousePos = Camera->ScreenMousePosToWorldPos();
     Cursor->SetActorLocation({ MousePos.X + 8.0f,MousePos.Y - 30.0f, -1000.0f });
 
-
     PeopleMove(_DeltaTime, WalkCustomer1, true);
     PeopleMove(_DeltaTime, WalkCustomer2, false);
 
+    CalculatorPushButtonCheck(_DeltaTime);
+    CustomerInOut(_DeltaTime);
+    ActorActive(_DeltaTime);
 
-    if (Calculator->GetIsPushEnter() == true && IsOut == false /*UEngineInput::IsPress('I')*/)
+    if (IsDeal == true && IsOut == false && CustomerBalloonAcitveTime > 1.0f)
     {
         IsOut = true;
         std::string GetCurSprite = Merchandise->GetSpriteName();
@@ -287,15 +291,90 @@ void AShopGameMode::Tick(float _DeltaTime)
 
         InvenInfo::GetInst().SetSlotInfo(SlotIndex, CurMerchandiseName, TotalCardCount, GetCurSprite, GetSpriteIndex, Calculator->GetEntirePrice(), TotalPrice, SpriteScale);
         LoadTotalCardInfo(SlotIndex);
-        
+
         CurCardCount = 0;
         SlotIndex = 0;
         Calculator->SetClear();
     }
 
+    if (IsPlayerOffer == true && PlayerBalloonAcitveTime > 2.0f)
+    {
+        int OfferPrice = Calculator->GetDealPrice();
+        int CardPrice = TotalPrice;
+        
+        int FairPrice = CardPrice - OfferPrice;
+        
+        int RandomConvo = Random.RandomInt(0, 5);
 
-    CustomerInOut(_DeltaTime);
-    ActorActive(_DeltaTime);
+        if (std::abs(FairPrice) < CardPrice * 0.3)
+        {
+            CustomerBalloon->SetActive(true);
+            ConversationList::GetInst().SetCustomerDealConvo(OfferPrice, RandomConvo);
+            CustomerBalloon->SetCustomerBalloonAndText();
+
+            IsDeal = true;
+            CustomerBalloonAcitve = true;
+            IsPlayerOffer = false;
+        }
+    }
+}
+
+void AShopGameMode::CalculatorPushButtonCheck(float _DeltaTime)
+{
+    UEngineRandom Random;
+
+    if (Calculator->GetIsPushEnter() == true && PlayerBalloonAcitve == false)
+    {
+        int OfferPrice = Calculator->GetDealPrice();
+        int RandomConvo = Random.RandomInt(0, 5);
+
+        ConversationList::GetInst().SetPlayerOfferPriceConvo(OfferPrice, RandomConvo);
+        PlayerBalloon->SetPlayerBalloonAndText();
+        PlayerBalloon->SetActive(true);
+
+        Calculator->SetIsPushEnter(false);
+        PlayerBalloonAcitve = true;
+        IsPlayerOffer = true;
+    }
+    else if (Calculator->GetIsPushDeal() == true && IsOut == false /*UEngineInput::IsPress('I')*/)
+    {
+        IsOut = true;
+        std::string GetCurSprite = Merchandise->GetSpriteName();
+        std::string CurMerchandiseName = MerchandiseInfo::GetInst().GetMerchandiseName();
+        int GetSpriteIndex = Merchandise->GetSpriteIndex();
+        int TotalCardCount = CurCardCount;
+        FVector SpriteScale = MerchandiseInfo::GetInst().GetSpriteScale();
+        for (int i = 0; i < InvenInfo::GetInst().GetAllSlotInfos().size(); i++)
+        {
+            if (InvenInfo::GetInst().GetAllSlotInfos()[SlotIndex].MerchandiseName != "NONE")
+            {
+                SlotIndex += 1;
+            }
+        }
+
+        InvenInfo::GetInst().SetSlotInfo(SlotIndex, CurMerchandiseName, TotalCardCount, GetCurSprite, GetSpriteIndex, Calculator->GetEntirePrice(), TotalPrice, SpriteScale);
+        LoadTotalCardInfo(SlotIndex);
+
+        CurCardCount = 0;
+        SlotIndex = 0;
+        Calculator->SetClear();
+    }
+    else if (Calculator->GetIsPushNotDeal() == true && IsOut == false)
+    {
+        IsOut = true;
+        int RandomConvo = Random.RandomInt(0, 2);
+        PlayerBalloonAcitve = true;
+
+        ConversationList::GetInst().SetPlayerNotDealConvo(RandomConvo);
+        PlayerBalloon->SetPlayerBalloonAndText();
+        PlayerBalloon->SetActive(true);
+
+
+        CurCardCount = 0;
+        SlotIndex = 0;
+        Calculator->SetClear();
+    }
+
 }
 
 void AShopGameMode::CustomerInOut(float _DeltaTime)
@@ -304,12 +383,19 @@ void AShopGameMode::CustomerInOut(float _DeltaTime)
     if (IsOut == true)
     {
 
-        if (Merchandise->GetActorLocation().Y > -200.0f)
+        if (Calculator->GetIsPushDeal() == true && Merchandise->GetActorLocation().Y > -200.0f)
         {
             //Merchandise->PlusAlpha(_DeltaTime);
             Merchandise->SetIsApear(false);
             Merchandise->AddActorLocation({ 0.0f, -1.0f * _DeltaTime * 100 , 0.0f });
             MerchandiseMaterial->AddActorLocation({ 0.0f, -1.0f * _DeltaTime * 100 , 0.0f });
+        }
+        else if (Calculator->GetIsPushNotDeal() == true && Merchandise->GetActorLocation().Y < 0.0f)
+        {
+            //Merchandise->PlusAlpha(_DeltaTime);
+            Merchandise->SetIsApear(false);
+            Merchandise->AddActorLocation({ 0.0f, 1.0f * _DeltaTime * 100 , 0.0f });
+            MerchandiseMaterial->AddActorLocation({ 0.0f, 1.0f * _DeltaTime * 100 , 0.0f });
         }
         else
         {
@@ -467,6 +553,17 @@ void AShopGameMode::ActorActive(float _DeltaTime)
             CustomerBalloonAcitveTime = 0.0f;
         }
     }
+
+    if (PlayerBalloonAcitve == true)
+    {
+        PlayerBalloonAcitveTime += _DeltaTime;
+        if (PlayerBalloonAcitveTime > 2.5f)
+        {
+            PlayerBalloon->SetActive(false);
+            PlayerBalloonAcitve = false;
+            PlayerBalloonAcitveTime = 0.0f;
+        }
+    }
 }
 
 void AShopGameMode::MerchandiseCardCheck(float _DeltaTime)
@@ -572,9 +669,9 @@ void AShopGameMode::CardCompareAndChange(float _DeltaTime)
         {
             IsCardChange = true;
 
-            PlayerBalloon->SetActive(true);
             ConversationList::GetInst().SetPlayerConversation(CardType, CardIndex);
             PlayerBalloon->SetPlayerBalloonAndText();
+            PlayerBalloon->SetActive(true);
 
         }
     }

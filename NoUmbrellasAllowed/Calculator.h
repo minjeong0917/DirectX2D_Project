@@ -22,6 +22,15 @@ public:
 	{
 		return IsPushEnter;
 	}
+	bool GetIsPushDeal()
+	{
+		return IsPushDeal;
+	}
+	bool GetIsPushNotDeal()
+	{
+		return IsPushNotDeal;
+	}
+
 
 	void SetIsPushEnter(bool _IsPush)
 	{
@@ -33,6 +42,16 @@ public:
 	{
 		return EntirePrice;
 	}
+
+	int GetDealPrice()
+	{
+		return DealPrice;
+	}
+	void SetDealPrice(int _DealPrice)
+	{
+		DealPrice = _DealPrice;
+	}
+
 	void ButtonClickCheck();
 
 	void SetIsMerchandiseActive(bool _IsMerchandiseActive)
@@ -57,8 +76,11 @@ private:
 
 	int EntirePrice = 0;
 	int CurPrice = 0;
+	int DealPrice = 0;
 
 	bool IsPushEnter = false;
+	bool IsPushDeal = false;
+	bool IsPushNotDeal = false;
 
 	bool IsMerchandiseActive = false;
 
