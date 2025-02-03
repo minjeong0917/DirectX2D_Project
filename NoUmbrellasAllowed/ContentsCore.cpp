@@ -104,7 +104,8 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
     // Customer
     {
         LoadFile(Dir, "Images//Customer//Eyes");
-        UEngineSprite::CreateSpriteToMeta("000_happy_loop.png", ".sdata");
+        //UEngineSprite::CreateSpriteToMeta("000_happy_loop.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("000_neutral_loop.png", ".sdata");
         UEngineSprite::CreateSpriteToMeta("001_neutral_loop.png", ".sdata");
         UEngineSprite::CreateSpriteToMeta("002_neutral_loop.png", ".sdata");
         UEngineSprite::CreateSpriteToMeta("003_neutral_loop.png", ".sdata");
@@ -112,6 +113,15 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
         UEngineSprite::CreateSpriteToMeta("005_neutral_loop.png", ".sdata");
         UEngineSprite::CreateSpriteToMeta("006_neutral_loop.png", ".sdata");
         UEngineSprite::CreateSpriteToMeta("007_neutral_loop.png", ".sdata");
+
+        UEngineSprite::CreateSpriteToMeta("000_startled_entry.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("001_startled_entry.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("002_startled_entry.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("003_startled_entry.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("004_startled_entry.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("005_startled_entry.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("006_startled_entry.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("007_startled_entry.png", ".sdata");
 
         // Head
         LoadFile(Dir, "Images//Customer//Head");
@@ -125,7 +135,26 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
         // Nose
         LoadFile(Dir, "Images//Customer//Nose");
         // Mouse
-        LoadFile(Dir, "Images//Customer//Mouse");
+        LoadFile(Dir, "Images//Customer//Mouse//MouseNeutral");
+        UEngineSprite::CreateSpriteToMeta("000_Mneutral_loop.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("001_Mneutral_loop.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("002_Mneutral_loop.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("003_Mneutral_loop.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("004_Mneutral_loop.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("005_Mneutral_loop.png", ".sdata");
+
+
+
+        LoadFile(Dir, "Images//Customer//Mouse//MouseStartled");
+        UEngineSprite::CreateSpriteToMeta("000_Mstartled_entry.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("001_Mstartled_entry.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("002_Mstartled_entry.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("003_Mstartled_entry.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("004_Mstartled_entry.png", ".sdata");
+        UEngineSprite::CreateSpriteToMeta("005_Mstartled_entry.png", ".sdata");
+
+
+
     }
     // UI
     {

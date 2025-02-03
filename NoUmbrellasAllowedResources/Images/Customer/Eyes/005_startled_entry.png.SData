@@ -1,21 +1,24 @@
 fileFormatVersion: 2
-guid: 7e0e619b294a6e046a56246c83c4a45e
+guid: 0f6dea6e56f1cb74eaba83d5c88b3fc2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8586665409169059519
-    second: 000_happy_loop #316887_0
+      213: 1308684531234097561
+    second: 005_neutral_loop_0
   - first:
-      213: 1512503705750837586
-    second: 000_happy_loop #316887_1
+      213: 2378761019529894177
+    second: 005_neutral_loop_1
   - first:
-      213: -5768848265469853843
-    second: 000_happy_loop #316887_2
+      213: -3962232591656786776
+    second: 005_neutral_loop_2
   - first:
-      213: 2818350786020345207
-    second: 000_happy_loop #316887_3
+      213: 8488505987861319011
+    second: 005_neutral_loop_3
+  - first:
+      213: -3436257749818666376
+    second: 005_neutral_loop_4
   externalObjects: {}
-  serializedVersion: 13
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -32,12 +35,10 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -47,11 +48,11 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: 1
-    mipBias: 0
+    aniso: -1
+    mipBias: -100
     wrapU: 1
     wrapV: 1
-    wrapW: 1
+    wrapW: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -76,10 +77,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
-  swizzle: 50462976
-  cookieLightType: 0
   platformSettings:
-  - serializedVersion: 4
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 8192
     resizeAlgorithm: 0
@@ -89,12 +88,11 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
+  - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -102,120 +100,129 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 000_happy_loop #316887_0
+      name: 005_neutral_loop_0
       rect:
         serializedVersion: 2
         x: 0
         y: 14
-        width: 19
+        width: 21
         height: 14
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1411851fd4906d880800000000000000
-      internalID: -8586665409169059519
+      spriteID: 999c14fb5a1692210800000000000000
+      internalID: 1308684531234097561
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 000_happy_loop #316887_1
+      name: 005_neutral_loop_1
       rect:
         serializedVersion: 2
-        x: 19
+        x: 21
         y: 14
-        width: 19
+        width: 21
         height: 14
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2599db65b1e7df410800000000000000
-      internalID: 1512503705750837586
+      spriteID: 12910a64b8e030120800000000000000
+      internalID: 2378761019529894177
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 000_happy_loop #316887_2
+      name: 005_neutral_loop_2
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 14
+        width: 21
+        height: 14
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a462d063725309c0800000000000000
+      internalID: -3962232591656786776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 005_neutral_loop_3
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 19
+        width: 21
         height: 14
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d6f7a85311fe0ffa0800000000000000
-      internalID: -5768848265469853843
+      spriteID: 36d0040d83b3dc570800000000000000
+      internalID: 8488505987861319011
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 000_happy_loop #316887_3
+      name: 005_neutral_loop_4
       rect:
         serializedVersion: 2
-        x: 19
+        x: 21
         y: 0
-        width: 19
+        width: 21
         height: 14
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7758f2d8b1bcc1720800000000000000
-      internalID: 2818350786020345207
+      spriteID: 872106958c5ff40d0800000000000000
+      internalID: -3436257749818666376
       vertices: []
       indices: 
       edges: []
       weights: []
     outline: []
-    customData: 
     physicsShape: []
     bones: []
-    spriteID: 897273fd5f3a3de4694788ee03e2aa9e
+    spriteID: 0d5a5faaecf45804aa82f39367b3aec0
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    spriteCustomMetadata:
-      entries: []
-    nameFileIdTable:
-      000_happy_loop #316887_0: -8586665409169059519
-      000_happy_loop #316887_1: 1512503705750837586
-      000_happy_loop #316887_2: -5768848265469853843
-      000_happy_loop #316887_3: 2818350786020345207
-  mipmapLimitGroupName: 
+  spritePackingTag: 
   pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

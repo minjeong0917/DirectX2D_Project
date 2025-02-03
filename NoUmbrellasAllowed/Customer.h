@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EngineBase/FSMStateManager.h>
 
 struct PartsInfo
 {
@@ -7,6 +8,15 @@ public:
 	FVector Scale = { 1.0f, 1.0f, 1.0f };
 	FVector Location = { 0.0f, 0.0f, 0.0f };
 };
+
+enum class CustomerFSM
+{
+	Idle,
+	Startled,
+	Angry,
+	
+};
+
 
 // Ό³Έν :
 class ACustomer : public AActor
@@ -27,6 +37,12 @@ public:
 
 protected:
 	void Tick(float _DeltaTime);
+
+	void Idle(float _DeltaTime);
+	void Angry(float _DeltaTime);
+	void Startled(float _DeltaTime);
+
+
 private:
 	void CreateAnimation(std::shared_ptr<class USpriteRenderer>& _Render, std::string_view _AnimationName, std::string_view _SpriteName, float _Scale, std::vector<int> _Indexs, std::vector<float> _Frame, bool _Loop = true);
 
@@ -45,6 +61,13 @@ private:
 	std::shared_ptr<class USpriteRenderer> NoseRenderer;
 	std::shared_ptr<class USpriteRenderer> MouseRenderer;
 
+	int CurEyesState = 0;
+	int CurHairState = 0;
+	int CurMouseState = 0;
+
+	float StartledSpeed = 7.0f;
+	float StartledTime = 0.0f;
+	UFSMStateManager FSM;
 
 };
 
