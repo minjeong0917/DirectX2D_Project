@@ -64,47 +64,28 @@ ACustomer::ACustomer()
 
     RightEyeRenderer = CreateDefaultSubObject<USpriteRenderer>();
 
-    CreateAnimation(RightEyeRenderer, "Idle_000", "000_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
-    CreateAnimation(RightEyeRenderer, "Idle_001", "001_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
-    CreateAnimation(RightEyeRenderer, "Idle_002", "002_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
-    CreateAnimation(RightEyeRenderer, "Idle_003", "003_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
-    CreateAnimation(RightEyeRenderer, "Idle_004", "004_neutral_loop.png", 3.1f, { 0,1,2, 3 ,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
-    CreateAnimation(RightEyeRenderer, "Idle_005", "005_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
-    CreateAnimation(RightEyeRenderer, "Idle_006", "006_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
-    CreateAnimation(RightEyeRenderer, "Idle_007", "007_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
+    for (int i = 0; i < 8; i++)
+    {
+        CreateAnimation(RightEyeRenderer, "Idle_00" + std::to_string(i), "00" + std::to_string(i) + "_neutral_loop.png", 3.1f, {0,1,2, 3,4}, {0.1f,0.1f,0.1f, 0.1f,4.0f});
+        CreateAnimation(RightEyeRenderer, "Startled_00" + std::to_string(i), "00" + std::to_string(i) + "_startled_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
+        CreateAnimation(RightEyeRenderer, "Happy_00" + std::to_string(i), "00" + std::to_string(i) + "_happy_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
+    }
+
     RightEyeRenderer->ChangeAnimation("Idle_000");
 
-    CreateAnimation(RightEyeRenderer, "Startled_000", "000_startled_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
-    CreateAnimation(RightEyeRenderer, "Startled_001", "001_startled_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
-    CreateAnimation(RightEyeRenderer, "Startled_002", "002_startled_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
-    CreateAnimation(RightEyeRenderer, "Startled_003", "003_startled_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
-    CreateAnimation(RightEyeRenderer, "Startled_004", "004_startled_entry.png", 3.1f, { 0,1,2, 3 ,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
-    CreateAnimation(RightEyeRenderer, "Startled_005", "005_startled_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
-    CreateAnimation(RightEyeRenderer, "Startled_006", "006_startled_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
-    CreateAnimation(RightEyeRenderer, "Startled_007", "007_startled_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
 
     RightEyeRenderer->SetWorldLocation({ 27.0f, 63.0f, 2.0f });
     RightEyeRenderer->SetupAttachment(RootComponent);
 
     LeftEyeRenderer = CreateDefaultSubObject<USpriteRenderer>();
-    CreateAnimation(LeftEyeRenderer, "Idle_000", "000_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f,0.1f, 4.0f });
-    CreateAnimation(LeftEyeRenderer, "Idle_001", "001_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f,0.1f, 4.0f });
-    CreateAnimation(LeftEyeRenderer, "Idle_002", "002_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f,0.1f, 4.0f });
-    CreateAnimation(LeftEyeRenderer, "Idle_003", "003_neutral_loop.png", 3.1f, { 0,1,2, 3 ,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
-    CreateAnimation(LeftEyeRenderer, "Idle_004", "004_neutral_loop.png", 3.1f, { 0,1,2, 3 ,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
-    CreateAnimation(LeftEyeRenderer, "Idle_005", "005_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
-    CreateAnimation(LeftEyeRenderer, "Idle_006", "006_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
-    CreateAnimation(LeftEyeRenderer, "Idle_007", "007_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
+    for (int i = 0; i < 8; i++)
+    {
+        CreateAnimation(LeftEyeRenderer, "Idle_00" + std::to_string(i), "00" + std::to_string(i) + "_neutral_loop.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f });
+        CreateAnimation(LeftEyeRenderer, "Startled_00" + std::to_string(i), "00" + std::to_string(i) + "_startled_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
+        CreateAnimation(LeftEyeRenderer, "Happy_00" + std::to_string(i), "00" + std::to_string(i) + "_happy_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
+    }
 
     LeftEyeRenderer->ChangeAnimation("Idle_000");
-    CreateAnimation(LeftEyeRenderer, "Startled_000", "000_startled_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f,0.1f, 4.0f }, false);
-    CreateAnimation(LeftEyeRenderer, "Startled_001", "001_startled_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
-    CreateAnimation(LeftEyeRenderer, "Startled_002", "002_startled_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
-    CreateAnimation(LeftEyeRenderer, "Startled_003", "003_startled_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
-    CreateAnimation(LeftEyeRenderer, "Startled_004", "004_startled_entry.png", 3.1f, { 0,1,2, 3 ,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
-    CreateAnimation(LeftEyeRenderer, "Startled_005", "005_startled_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
-    CreateAnimation(LeftEyeRenderer, "Startled_006", "006_startled_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
-    CreateAnimation(LeftEyeRenderer, "Startled_007", "007_startled_entry.png", 3.1f, { 0,1,2, 3,4 }, { 0.1f,0.1f,0.1f, 0.1f,4.0f }, false);
 
     LeftEyeRenderer->SetWorldLocation({ -27.0f, 63.0f, -2.0f });
     LeftEyeRenderer->SetRotation({ 0.0f, -180.0f, 0.0f });
@@ -125,7 +106,7 @@ ACustomer::ACustomer()
 
     NoseRenderer = CreateDefaultSubObject<USpriteRenderer>();
     NoseRenderer->SetSprite("Nose", 0);
-    NoseRenderer->SetWorldLocation({ 0.0f, 45.0f, 0.0f });
+    NoseRenderer->SetWorldLocation({ 0.0f, 45.0f, -20.0f });
     NoseRenderer->SetAutoScaleRatio(3.0f);
     NoseRenderer->SetupAttachment(RootComponent);
 
@@ -135,21 +116,17 @@ ACustomer::ACustomer()
     MouseRenderer->SetWorldLocation({ 0.0f, 10.0f, 2.0f });
     MouseRenderer->SetupAttachment(RootComponent);
 
-    CreateAnimation(MouseRenderer, "Idle_000", "000_Mneutral_loop.png", 3.1f, { 0}, { 0.1f });
-    CreateAnimation(MouseRenderer, "Idle_001", "001_Mneutral_loop.png", 3.1f, { 0}, { 0.1f });
-    CreateAnimation(MouseRenderer, "Idle_002", "002_Mneutral_loop.png", 3.1f, { 0}, { 0.1f });
-    CreateAnimation(MouseRenderer, "Idle_003", "003_Mneutral_loop.png", 3.1f, { 0}, { 0.1f });
-    CreateAnimation(MouseRenderer, "Idle_004", "004_Mneutral_loop.png", 3.1f, { 0}, { 0.1f });
-    CreateAnimation(MouseRenderer, "Idle_005", "005_Mneutral_loop.png", 3.1f, { 0}, { 0.1f });
+    for (int i = 0; i < 6; i++)
+    {
+        CreateAnimation(MouseRenderer, "Idle_00" + std::to_string(i), "00" + std::to_string(i) +"_Mneutral_loop.png", 3.1f, {0}, {0.1f});
+        CreateAnimation(MouseRenderer, "Startled_00" + std::to_string(i), "00" + std::to_string(i) + "_Mstartled_entry.png", 3.1f, { 0, 1, 2, 3, 4 }, { 0.05f, 0.05f, 0.05f, 0.05f, 0.05f }, false);
+        CreateAnimation(MouseRenderer, "Happy_00" + std::to_string(i), "00" + std::to_string(i) + "_Mhappy_entry.png", 3.1f, { 0, 1, 2, 3, 4 }, { 0.05f, 0.05f, 0.05f, 0.05f, 0.05f }, false);
+    }
+
+
+
     MouseRenderer->ChangeAnimation("Idle_000");
 
-
-    CreateAnimation(MouseRenderer, "Startled_000", "000_Mstartled_entry.png", 3.1f, { 0, 1, 2, 3, 4 }, { 0.05f, 0.05f, 0.05f, 0.05f, 0.05f }, false);
-    CreateAnimation(MouseRenderer, "Startled_001", "001_Mstartled_entry.png", 3.1f, { 0, 1, 2, 3, 4 }, { 0.05f, 0.05f, 0.05f, 0.05f, 0.05f }, false);
-    CreateAnimation(MouseRenderer, "Startled_002", "002_Mstartled_entry.png", 3.1f, { 0, 1, 2, 3, 4 }, { 0.05f, 0.05f, 0.05f, 0.05f, 0.05f }, false);
-    CreateAnimation(MouseRenderer, "Startled_003", "003_Mstartled_entry.png", 3.1f, { 0, 1, 2, 3, 4 }, { 0.05f, 0.05f, 0.05f, 0.05f, 0.05f }, false);
-    CreateAnimation(MouseRenderer, "Startled_004", "004_Mstartled_entry.png", 3.1f, { 0, 1, 2, 3, 4 }, { 0.05f, 0.05f, 0.05f, 0.05f, 0.05f }, false);
-    CreateAnimation(MouseRenderer, "Startled_005", "005_Mstartled_entry.png", 3.1f, { 0, 1, 2, 3, 4 }, { 0.05f, 0.05f, 0.05f, 0.05f, 0.05f }, false);
 
     HairRenderer = CreateDefaultSubObject<USpriteRenderer>();
     HairRenderer->SetSprite("MainHair", HairNum);
@@ -204,10 +181,50 @@ ACustomer::ACustomer()
         }
     );
 
-    FSM.CreateState(CustomerFSM::Angry, std::bind(&ACustomer::Angry, this, std::placeholders::_1),
+    FSM.CreateState(CustomerFSM::Happy, std::bind(&ACustomer::Happy, this, std::placeholders::_1),
         [this]()
         {
-            //SpriteRenderer->ChangeAnimation("Run" + DirString);
+            Idle(0.0f);
+
+            if (CurEyesState == 1)
+            {
+                RightEyeRenderer->AddWorldLocation({ 3.0f, 0.0f,0.0f });
+                LeftEyeRenderer->AddWorldLocation({ -3.0f, 0.0f,0.0f });
+            }
+            else if (CurEyesState == 2)
+            {
+                RightEyeRenderer->AddWorldLocation({ 3.0f, -3.0f,0.0f });
+                LeftEyeRenderer->AddWorldLocation({ -3.0f,-3.0f,0.0f });
+            }
+            else if (CurEyesState == 3)
+            {
+                RightEyeRenderer->AddWorldLocation({ 0.0f, -3.0f,0.0f });
+                LeftEyeRenderer->AddWorldLocation({ -0.0f,-3.0f,0.0f });
+            }
+            else if (CurEyesState == 4)
+            {
+                RightEyeRenderer->AddWorldLocation({ 5.0f, -2.0f,0.0f });
+                LeftEyeRenderer->AddWorldLocation({ -5.0f,-2.0f,0.0f });
+            }
+            else if (CurEyesState == 5)
+            {
+                RightEyeRenderer->AddWorldLocation({ 6.0f, -3.0f,0.0f });
+                LeftEyeRenderer->AddWorldLocation({ -6.0f, -3.0f,0.0f });
+            }
+            else if (CurEyesState == 6)
+            {
+                RightEyeRenderer->AddWorldLocation({ 6.0f, -3.0f,0.0f });
+                LeftEyeRenderer->AddWorldLocation({ -6.0f, -3.0f,0.0f });
+            }
+            else if (CurEyesState == 7)
+            {
+                RightEyeRenderer->AddWorldLocation({ 6.0f, -3.0f,0.0f });
+                LeftEyeRenderer->AddWorldLocation({ -6.0f, -3.0f,0.0f });
+            }
+            RightEyeRenderer->ChangeAnimation("Happy_00" + std::to_string(CurEyesState));
+            LeftEyeRenderer->ChangeAnimation("Happy_00" + std::to_string(CurEyesState));
+            MouseRenderer->ChangeAnimation("Happy_00" + std::to_string(CurMouseState));
+
         }
     );
 
@@ -263,7 +280,7 @@ void ACustomer::Idle(float _DeltaTime)
     RightEyebrowRenderer->SetWorldLocation({ 23.0f, 85.0f, 1.0f });
     LeftEyebrowRenderer->SetWorldLocation({ -23.0f, 85.0f, -3.0f });
 
-    NoseRenderer->SetWorldLocation({ 0.0f, 45.0f, 0.0f });
+    NoseRenderer->SetWorldLocation({ 0.0f, 45.0f,  -20.0f });
 
     MouseRenderer->SetWorldLocation({ 0.0f, 10.0f, 2.0f });
 
@@ -274,7 +291,10 @@ void ACustomer::Angry(float _DeltaTime)
 {
 
 }
+void ACustomer::Happy(float _DeltaTime)
+{
 
+}
 void ACustomer::Startled(float _DeltaTime)
 {
     FVector DownLoc = { 0.0f,-2.0f,0.0f };
@@ -328,7 +348,7 @@ void ACustomer::RandomCustomer(int _Gender, int _HairRand, int _Head, int _Body,
 {
     UEngineDebug::OutPutString("_EyeBrow : " + std::to_string(_EyeBrow));
 
-    int Test = 1;
+    int Test = 7;
 
     CurMouseState = _Mouse;
     //CurMouseState = Test;

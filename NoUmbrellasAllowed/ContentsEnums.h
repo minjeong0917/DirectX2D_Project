@@ -30,6 +30,7 @@ enum class CustomerFSM : int8
 {
 	Idle,
 	Startled,
+	Happy,
 	Angry,
 
 };

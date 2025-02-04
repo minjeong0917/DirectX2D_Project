@@ -36,6 +36,7 @@ protected:
 
 	void Idle(float _DeltaTime);
 	void Angry(float _DeltaTime);
+	void Happy(float _DeltaTime);
 	void Startled(float _DeltaTime);
 
 

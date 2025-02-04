@@ -30,6 +30,26 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
     _Data.WindowPos = { -10, 0 };
     _Data.WindowSize = WindowSize;
 
+    // Font
+    {
+        UEngineDirectory Dir;
+        if (false == Dir.MoveParentToDirectory("NoUmbrellasAllowedResources"))
+        {
+            MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+            return;
+        }
+        Dir.Append("Fonts");
+
+        UEngineFile FontFiles = Dir.GetFile("PFStardust.ttf");
+
+        UEngineFont::Load("PFttf", FontFiles.GetPathToString());
+    }
+
+    UEngineFont::Load("PF", "PF Stardust");
+    UEngineFont::Load("PFEXBold", "PF Stardust ExtraBold");
+    UEngineFont::Load("OrangeKid", "Orange Kid");
+    UEngineFont::Load("DungGeunMo", "DungGeunMo");
+
 
     UEngineDirectory Dir;
     if (false == Dir.MoveParentToDirectory("NoUmbrellasAllowedResources"))
@@ -37,16 +57,6 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
         MSGASSERT("리소스 폴더를 찾지 못했습니다.");
         return;
     }
-
-    // Font
-    Dir.Append("Fonts");
-    UEngineFont::Load("PFttf", "PFStardust.ttf");
-
-    UEngineFont::Load("PF", "PF Stardust");
-    UEngineFont::Load("PFEXBold", "PF Stardust ExtraBold");
-    UEngineFont::Load("OrangeKid", "Orange Kid");
-    UEngineFont::Load("DungGeunMo", "DungGeunMo");
-
 
     // TitleImage
     LoadFile(Dir, "Images//TitleImage");
@@ -105,23 +115,13 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
     {
         LoadFile(Dir, "Images//Customer//Eyes");
         //UEngineSprite::CreateSpriteToMeta("000_happy_loop.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("000_neutral_loop.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("001_neutral_loop.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("002_neutral_loop.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("003_neutral_loop.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("004_neutral_loop.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("005_neutral_loop.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("006_neutral_loop.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("007_neutral_loop.png", ".sdata");
+        for (int i = 0; i < 8; i++)
+        {
+            UEngineSprite::CreateSpriteToMeta("00" + std::to_string(i) + "_neutral_loop.png", ".sdata");
+            UEngineSprite::CreateSpriteToMeta("00" + std::to_string(i) + "_startled_entry.png", ".sdata");
+            UEngineSprite::CreateSpriteToMeta("00" + std::to_string(i) + "_happy_entry.png", ".sdata");
+        }
 
-        UEngineSprite::CreateSpriteToMeta("000_startled_entry.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("001_startled_entry.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("002_startled_entry.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("003_startled_entry.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("004_startled_entry.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("005_startled_entry.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("006_startled_entry.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("007_startled_entry.png", ".sdata");
 
         // Head
         LoadFile(Dir, "Images//Customer//Head");
@@ -136,24 +136,22 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
         LoadFile(Dir, "Images//Customer//Nose");
         // Mouse
         LoadFile(Dir, "Images//Customer//Mouse//MouseNeutral");
-        UEngineSprite::CreateSpriteToMeta("000_Mneutral_loop.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("001_Mneutral_loop.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("002_Mneutral_loop.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("003_Mneutral_loop.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("004_Mneutral_loop.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("005_Mneutral_loop.png", ".sdata");
-
-
+        for (int i = 0; i < 6; i++)
+        {
+            UEngineSprite::CreateSpriteToMeta("00" + std::to_string(i) + "_Mneutral_loop.png", ".sdata");
+        }
 
         LoadFile(Dir, "Images//Customer//Mouse//MouseStartled");
-        UEngineSprite::CreateSpriteToMeta("000_Mstartled_entry.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("001_Mstartled_entry.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("002_Mstartled_entry.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("003_Mstartled_entry.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("004_Mstartled_entry.png", ".sdata");
-        UEngineSprite::CreateSpriteToMeta("005_Mstartled_entry.png", ".sdata");
+        for (int i = 0; i < 6; i++)
+        {
+            UEngineSprite::CreateSpriteToMeta("00" + std::to_string(i) + "_Mstartled_entry.png", ".sdata");
+        }
 
-
+        LoadFile(Dir, "Images//Customer//Mouse//MouseHappy");
+        for (int i = 0; i < 6; i++)
+        {
+            UEngineSprite::CreateSpriteToMeta("00" + std::to_string(i) + "_Mhappy_entry.png", ".sdata");
+        }
 
     }
     // UI

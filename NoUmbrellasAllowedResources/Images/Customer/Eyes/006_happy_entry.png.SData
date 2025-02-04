@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: 454c4fc93d7381f4fa126e4933978395
+guid: b1a27c02e0af606478b34bc6915e0306
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3882843084453549023
-    second: 002_Mstartled_entry_0
+      213: 1268346061722994453
+    second: 006_neutral_loop_0
   - first:
-      213: 6024320574913092938
-    second: 002_Mstartled_entry_1
+      213: 8453089179936535389
+    second: 006_neutral_loop_1
   - first:
-      213: 172541007370569631
-    second: 002_Mstartled_entry_2
+      213: -1241858005721411205
+    second: 006_neutral_loop_2
   - first:
-      213: 9158207592490914803
-    second: 002_Mstartled_entry_3
+      213: 277970674742857838
+    second: 006_neutral_loop_3
   - first:
-      213: 6052526001432617856
-    second: 002_Mstartled_entry_4
+      213: -9001984841642045152
+    second: 006_neutral_loop_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -80,7 +80,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -92,7 +92,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 8192
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -106,12 +106,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 002_Mstartled_entry_0
+      name: 006_neutral_loop_0
       rect:
         serializedVersion: 2
         x: 0
         y: 12
-        width: 17
+        width: 21
         height: 12
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -120,19 +120,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fd39f6f8631a2e530800000000000000
-      internalID: 3882843084453549023
+      spriteID: 517c34de5021a9110800000000000000
+      internalID: 1268346061722994453
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 002_Mstartled_entry_1
+      name: 006_neutral_loop_1
       rect:
         serializedVersion: 2
-        x: 17
+        x: 21
         y: 12
-        width: 17
+        width: 21
         height: 12
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -141,19 +141,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4d95c805afaa9350800000000000000
-      internalID: 6024320574913092938
+      spriteID: d53b0d0a2d76f4570800000000000000
+      internalID: 8453089179936535389
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 002_Mstartled_entry_2
+      name: 006_neutral_loop_2
       rect:
         serializedVersion: 2
-        x: 34
+        x: 42
         y: 12
-        width: 17
+        width: 21
         height: 12
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -162,19 +162,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f97c28dc12df46200800000000000000
-      internalID: 172541007370569631
+      spriteID: b71108339b804cee0800000000000000
+      internalID: -1241858005721411205
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 002_Mstartled_entry_3
+      name: 006_neutral_loop_3
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 17
+        width: 21
         height: 12
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -183,19 +183,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f3d4b9784d781f70800000000000000
-      internalID: 9158207592490914803
+      spriteID: e60160e1bdc8bd300800000000000000
+      internalID: 277970674742857838
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 002_Mstartled_entry_4
+      name: 006_neutral_loop_4
       rect:
         serializedVersion: 2
-        x: 17
+        x: 21
         y: 0
-        width: 17
+        width: 21
         height: 12
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -204,8 +204,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 083e435a454eef350800000000000000
-      internalID: 6052526001432617856
+      spriteID: 02199782b76821380800000000000000
+      internalID: -9001984841642045152
       vertices: []
       indices: 
       edges: []
@@ -213,7 +213,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 3095396166067764a8046d8911635350
+    spriteID: 9a28e7f90ed3e5b4d84e84b2c86b6322
     internalID: 0
     vertices: []
     indices: 

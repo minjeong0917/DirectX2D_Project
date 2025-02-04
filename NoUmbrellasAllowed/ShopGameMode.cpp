@@ -289,7 +289,7 @@ void AShopGameMode::Tick(float _DeltaTime)
             }
         }
 
-        InvenInfo::GetInst().SetSlotInfo(SlotIndex, CurMerchandiseName, TotalCardCount, GetCurSprite, GetSpriteIndex, Calculator->GetEntirePrice(), TotalPrice, SpriteScale);
+        InvenInfo::GetInst().SetSlotInfo(SlotIndex, CurMerchandiseName, TotalCardCount, GetCurSprite, GetSpriteIndex, Calculator->GetDealPrice(), TotalPrice, SpriteScale);
         LoadTotalCardInfo(SlotIndex);
 
         CurCardCount = 0;
@@ -311,6 +311,7 @@ void AShopGameMode::Tick(float _DeltaTime)
             CustomerBalloon->SetActive(true);
             ConversationList::GetInst().SetCustomerDealConvo(OfferPrice, RandomConvo);
             CustomerBalloon->SetCustomerBalloonAndText();
+            Customer->CustomerFSMChange(CustomerFSM::Happy);
 
             IsDeal = true;
             CustomerBalloonAcitve = true;
@@ -352,7 +353,7 @@ void AShopGameMode::CalculatorPushButtonCheck(float _DeltaTime)
             }
         }
 
-        InvenInfo::GetInst().SetSlotInfo(SlotIndex, CurMerchandiseName, TotalCardCount, GetCurSprite, GetSpriteIndex, Calculator->GetEntirePrice(), TotalPrice, SpriteScale);
+        InvenInfo::GetInst().SetSlotInfo(SlotIndex, CurMerchandiseName, TotalCardCount, GetCurSprite, GetSpriteIndex, Calculator->GetDealPrice(), TotalPrice, SpriteScale);
         LoadTotalCardInfo(SlotIndex);
 
         CurCardCount = 0;
@@ -688,6 +689,7 @@ void AShopGameMode::CardCompareAndChange(float _DeltaTime)
         }
         else if (CardChangeTime > 1.0f && CardChangeTime < 2.0f && AllCard[ChangeCardNum]->GetActorLocation().Y < AllCardLocations[ChangeCardNum].Y + 100.0f)
         {
+
 
             CustomerBalloon->SetActive(true);
             CustomerBalloonAcitve = true;
@@ -1044,6 +1046,7 @@ void AShopGameMode::CustomerOut(float _DeltaTime)
             else if (CustomerEnterTime > 2.8)
             {
                 IsOut = false;
+                IsDeal = false;
                 IsDoorClosed = true;
                 IsDoorDown = false;
                 NotExistCustomerTime = 0.0f;
