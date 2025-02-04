@@ -304,18 +304,42 @@ void AShopGameMode::Tick(float _DeltaTime)
         
         int FairPrice = CardPrice - OfferPrice;
         
-        int RandomConvo = Random.RandomInt(0, 5);
 
-        if (std::abs(FairPrice) < CardPrice * 0.3)
+        if (std::abs(FairPrice) < CardPrice * 0.25 && ConvoCount == 0)
         {
+            int RandomConvo = Random.RandomInt(0, 5);
             CustomerBalloon->SetActive(true);
-            ConversationList::GetInst().SetCustomerDealConvo(OfferPrice, RandomConvo);
+            ConversationList::GetInst().SetCustomerGoodDealConvo(OfferPrice, RandomConvo);
             CustomerBalloon->SetCustomerBalloonAndText();
             Customer->CustomerFSMChange(CustomerFSM::Happy);
 
             IsDeal = true;
             CustomerBalloonAcitve = true;
             IsPlayerOffer = false;
+        }
+        else if (std::abs(FairPrice) < CardPrice * 0.25 && ConvoCount == 1)
+        {
+            int RandomConvo = Random.RandomInt(0, 5);
+
+            CustomerBalloon->SetActive(true);
+            ConversationList::GetInst().SetCustomerGoodDealConvo2(RandomConvo);
+            CustomerBalloon->SetCustomerBalloonAndText();
+            Customer->CustomerFSMChange(CustomerFSM::Happy);
+
+            IsDeal = true;
+            CustomerBalloonAcitve = true;
+            IsPlayerOffer = false;
+        }
+        else if (std::abs(FairPrice) >= CardPrice * 0.25)
+        {
+            int RandomConvo = Random.RandomInt(0, 6);
+
+            CustomerBalloon->SetActive(true);
+            ConversationList::GetInst().SetCustomerRefuseConvo(OfferPrice, RandomConvo);
+            CustomerBalloon->SetCustomerBalloonAndText();
+
+            IsPlayerOffer = false;
+            ConvoCount += 1;
         }
     }
 }
@@ -340,6 +364,8 @@ void AShopGameMode::CalculatorPushButtonCheck(float _DeltaTime)
     else if (Calculator->GetIsPushDeal() == true && IsOut == false /*UEngineInput::IsPress('I')*/)
     {
         IsOut = true;
+        Calculator->SetIsPushDeal(false);
+
         std::string GetCurSprite = Merchandise->GetSpriteName();
         std::string CurMerchandiseName = MerchandiseInfo::GetInst().GetMerchandiseName();
         int GetSpriteIndex = Merchandise->GetSpriteIndex();
@@ -362,18 +388,45 @@ void AShopGameMode::CalculatorPushButtonCheck(float _DeltaTime)
     }
     else if (Calculator->GetIsPushNotDeal() == true && IsOut == false)
     {
-        IsOut = true;
-        int RandomConvo = Random.RandomInt(0, 2);
-        PlayerBalloonAcitve = true;
 
+        int RandomConvo = Random.RandomInt(0, 2);
         ConversationList::GetInst().SetPlayerNotDealConvo(RandomConvo);
         PlayerBalloon->SetPlayerBalloonAndText();
         PlayerBalloon->SetActive(true);
+        PlayerBalloonAcitve = true;
+        Calculator->SetIsPushNotDeal(false);
+        IsPlayerNotDeal = true;
 
 
-        CurCardCount = 0;
-        SlotIndex = 0;
-        Calculator->SetClear();
+
+    }
+
+    if (IsPlayerNotDeal == true)
+    {
+        if (PlayerNotDealTime >= 1.5f && PlayerNotDealTime < 1.6f)
+        {
+
+            int RandomConvo = Random.RandomInt(0, 3);
+
+            ConversationList::GetInst().SetCustomerPlayerNotDealConvo(RandomConvo);
+
+            CustomerBalloon->SetCustomerBalloonAndText();
+            CustomerBalloon->SetActive(true);
+            CustomerBalloonAcitve = true;
+
+            CurCardCount = 0;
+            SlotIndex = 0;
+            Calculator->SetClear();
+
+        }
+        else if (PlayerNotDealTime >= 2.0f)
+        {
+            IsOut = true;
+            IsPlayerNotDeal = false;
+            PlayerNotDealTime = 0.0f;
+        }
+
+        PlayerNotDealTime += _DeltaTime;
     }
 
 }
@@ -1047,6 +1100,7 @@ void AShopGameMode::CustomerOut(float _DeltaTime)
             {
                 IsOut = false;
                 IsDeal = false;
+                ConvoCount = 0;
                 IsDoorClosed = true;
                 IsDoorDown = false;
                 NotExistCustomerTime = 0.0f;

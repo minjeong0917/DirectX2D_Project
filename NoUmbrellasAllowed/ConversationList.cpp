@@ -178,15 +178,15 @@ void ConversationList::SetPlayerOfferPriceConvo(int _Price, int _RandomConvo)
 	{
 	case 0:
 		PlayerConversation = std::to_string(_Price) + "V 드릴게요.";
-		PlayerBalloonXSize = 170.0f;
+		PlayerBalloonXSize = 200.0f;
 		break;
 	case 1:
 		PlayerConversation = std::to_string(_Price) + "V쯤이 좋겠군요.";
-		PlayerBalloonXSize = 190.0f;
+		PlayerBalloonXSize = 225.0f;
 		break;
 	case 2:
 		PlayerConversation = std::to_string(_Price) + "V면 될 것 같은데요.";
-		PlayerBalloonXSize = 200.0f;
+		PlayerBalloonXSize = 250.0f;
 		break;
 	case 3:
 		PlayerConversation = std::to_string(_Price) + "V 어떠세요?";
@@ -194,11 +194,11 @@ void ConversationList::SetPlayerOfferPriceConvo(int _Price, int _RandomConvo)
 		break;
 	case 4:
 		PlayerConversation = std::to_string(_Price) + "V는 괜찮나요?";
-		PlayerBalloonXSize = 200.0f;
+		PlayerBalloonXSize = 225.0f;
 		break;
 	case 5:
 		PlayerConversation = std::to_string(_Price) + "V가 최선이네요.";
-		PlayerBalloonXSize = 200.0f;
+		PlayerBalloonXSize = 225.0f;
 		break;
 	default:
 		break;
@@ -212,22 +212,24 @@ void ConversationList::SetPlayerNotDealConvo(int _RandomConvo)
 	{
 	case 0:
 		PlayerConversation = "안 사는 게 나을 것 같네요.";
-		PlayerBalloonXSize = 200.0f;
+		PlayerBalloonXSize = 300.0f;
 		break;
 	case 1:
 		PlayerConversation = "그냥 안 살게요.";
-		PlayerBalloonXSize = 200.0f;
+		PlayerBalloonXSize = 225.0f;
 		break;
 	case 2:
 		PlayerConversation = "죄송하지만, 여기서 그만 둘게요.";
-		PlayerBalloonXSize = 200.0f;
+		PlayerBalloonXSize = 300.0f;
 		break;
 	default:
 		break;
 	}
 }
 
-void ConversationList::SetCustomerDealConvo(int _Price, int _RandomConvo)
+
+
+void ConversationList::SetCustomerGoodDealConvo(int _Price, int _RandomConvo)
 {
 	switch (_RandomConvo)
 	{
@@ -243,7 +245,7 @@ void ConversationList::SetCustomerDealConvo(int _Price, int _RandomConvo)
 		break;
 	case 2:
 		CustomerConversation = "나야 좋죠!";
-		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonXSize = 200.0f;
 		CustomerBalloonYSize = 100.0f;
 		break;
 	case 3:
@@ -258,7 +260,7 @@ void ConversationList::SetCustomerDealConvo(int _Price, int _RandomConvo)
 		break;
 	case 5:
 		CustomerConversation = std::to_string(_Price) + "V! 아싸!";
-		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonXSize = 200.0f;
 		CustomerBalloonYSize = 100.0f;
 		break;
 	case 6:
@@ -266,12 +268,228 @@ void ConversationList::SetCustomerDealConvo(int _Price, int _RandomConvo)
 		CustomerBalloonXSize = 400.0f;
 		CustomerBalloonYSize = 100.0f;
 		break;
-	
+
+	default:
+		break;
+	}
+}
+void ConversationList::SetCustomerGoodDealConvo2(int _RandomConvo)
+{
+	switch (_RandomConvo)
+	{
+	case 0:
+		CustomerConversation = "처음부터 그렇게 해주지. 어쨌든 사주니 다행이네요!";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 1:
+		CustomerConversation = "솔직히 좀 긴장했는데, 걱정할 게 없었네요.";
+		CustomerBalloonXSize = 200.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 2:
+		CustomerConversation = "괜히 쫄았네요. 이렇게 쉽게 풀릴 거였으면!";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 3:
+		CustomerConversation = "생각보다 거래가 쉬웠네요. 괜히 쫄았나 봐요, 내가!";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 4:
+		CustomerConversation = "둘다 만족할 만한 가격이네요.";
+		CustomerBalloonXSize = 200.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 5:
+		CustomerConversation = "그 정도면 우리 둘다 만족하겠네요.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+
+	default:
+		break;
+	}
+}
+void ConversationList::SetCustomerOfferPriceConvo(int _Price, int _RandomConvo)
+{
+	switch (_RandomConvo)
+	{
+	case 0:
+		CustomerConversation = "적당히 서로 양보해서" + std::to_string(_Price) + "V로 가죠.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 1:
+		CustomerConversation = "굳이 마다할 필요가 없죠! 좋아요.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 2:
+		CustomerConversation = "나야 좋죠!";
+		CustomerBalloonXSize = 200.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 3:
+		CustomerConversation = std::to_string(_Price) + "V를 누가 마다하겠어요?";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 4:
+		CustomerConversation = std::to_string(_Price) + "V라니. 생각보다 인심이 후하시네요.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 5:
+		CustomerConversation = std::to_string(_Price) + "V! 아싸!";
+		CustomerBalloonXSize = 200.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 6:
+		CustomerConversation = std::to_string(_Price) + "V는 기대도 안 했는데!";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+
 	default:
 		break;
 	}
 }
 
+void ConversationList::SetCustomerRefuseConvo(int _Price, int _RandomConvo)
+{
+	switch (_RandomConvo)
+	{
+	case 0:
+		CustomerConversation = std::to_string(_Price) + "V? 어이가 없어서 말이 안 나오네요.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 1:
+		CustomerConversation = "말도 안 되는 소리. 그 돈 받곤 못 팔아요.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 2:
+		CustomerConversation = "뭐라고요?" + std::to_string(_Price) + "V ? 웃기지도 않네요.";
+		CustomerBalloonXSize = 200.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 3:
+		CustomerConversation = std::to_string(_Price) + "V? 장난해요?";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 4:
+		CustomerConversation = std::to_string(_Price) + "V은 너무 적은데요.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 5:
+		CustomerConversation = std::to_string(_Price) + "V은 심하네요.";
+		CustomerBalloonXSize = 200.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 6:
+		CustomerConversation = std::to_string(_Price) + "V는 좀 적네요.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+
+	default:
+		break;
+	}
+}
+
+void ConversationList::SetCustomerNotDealConvo(int _Price, int _RandomConvo)
+{
+	switch (_RandomConvo)
+	{
+	case 0:
+		CustomerConversation = "여기에 온 것 자체가 시간 낭비였네요.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 1:
+		CustomerConversation = "못해 먹겠네요. 안 팔고 말지, 그냥.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 2:
+		CustomerConversation = "짜증나서 못 해먹겠네요. 그냥 안 팔게요.";
+		CustomerBalloonXSize = 200.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 3:
+		CustomerConversation = "어휴, 속 터져. 이제 그만 할래요.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 4:
+		CustomerConversation = "괜한 기대를 한 내 잘못이죠.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 5:
+		CustomerConversation = "처음부터 못 산다고 말을 하지 그랬어요.";
+		CustomerBalloonXSize = 200.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 6:
+		CustomerConversation = "별 도움 안 되는 중고상점이네요.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 7:
+		CustomerConversation = "픽시보다도 융통성 없는 인간을 만나다니!";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 8:
+		CustomerConversation = "지치네요. 그만 해요.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 9:
+		CustomerConversation = "싫으면 그냥 거절하지, 왜 사람 열을 올려요? 관둬요!";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	default:
+		break;
+	}
+}
+
+void ConversationList::SetCustomerPlayerNotDealConvo( int _RandomConvo)
+{
+	switch (_RandomConvo)
+	{
+	case 0:
+		CustomerConversation = "좀 빨리 포기하시는 감이 있지만... 알겠어요.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 1:
+		CustomerConversation = "거절당할 거라곤 생각 못했는데. 좀 슬프네요.";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 2:
+		CustomerConversation = "아, 안 사겠다구요? ...어쩔 수 없죠.";
+		CustomerBalloonXSize = 200.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+	case 3:
+		CustomerConversation = "좀 더 얘기해볼 수 있는데...";
+		CustomerBalloonXSize = 400.0f;
+		CustomerBalloonYSize = 100.0f;
+		break;
+
+	default:
+		break;
+	}
+}
 
 void ConversationList::SetCustomerCardConversation(ECardType _CardType, bool _IsPriceUp, int _RandomConversation)
 {

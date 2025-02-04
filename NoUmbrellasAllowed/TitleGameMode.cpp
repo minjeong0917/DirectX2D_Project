@@ -13,7 +13,7 @@
 #include <EngineCore/EngineCamera.h>
 #include "Cursor.h"
 #include<EnginePlatform/EngineWindow.h>
-
+#include<EngineBase/EngineDebug.h>
 
 class TestWindow : public UEngineGUIWindow
 {
@@ -25,10 +25,13 @@ public:
 			GetWorld()->GetMainCamera()->FreeCameraSwitch();
 		}
 		//ImGui::SameLine(); // ÇÑ°£ ¶ç±â
-		if (true == ImGui::Button("Exit"))
+		if (true == ImGui::Button("OnCollisionRender"))
 		{
-			UEngineWindow::ApplicationOff();
-
+			GetWorld()->SetIsCollisionRender(true);
+		}
+		if (true == ImGui::Button("OffCollisionRender"))
+		{
+			GetWorld()->SetIsCollisionRender(false);
 		}
 	}
 };

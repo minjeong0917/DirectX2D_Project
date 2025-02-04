@@ -36,6 +36,14 @@ public:
 	{
 		IsPushEnter = _IsPush;
 	}
+	void SetIsPushDeal(bool _IsPush)
+	{
+		IsPushDeal = _IsPush;
+	}
+	void SetIsPushNotDeal(bool _IsPush)
+	{
+		IsPushNotDeal = _IsPush;
+	}
 	void SetClear();
 
 	int GetEntirePrice()

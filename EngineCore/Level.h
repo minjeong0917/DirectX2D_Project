@@ -58,7 +58,10 @@ public:
 		return HUD;
 	}
 
-
+	void SetIsCollisionRender(bool _IsCollsionRender)
+	{
+		IsCollisionRender = _IsCollsionRender;
+	}
 
 	void Tick(float _DeltaTime);
 	void Render(float _DeltaTime);
@@ -194,6 +197,7 @@ private:
 
 	std::map<std::string, std::list<std::string>> CollisionLinks;
 
+	bool IsCollisionRender = false;
 
 	ENGINEAPI void InitLevel(AGameMode* _GameMode, APawn* _Pawn, AHUD* _HUD);
 };

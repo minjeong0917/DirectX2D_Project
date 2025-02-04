@@ -27,8 +27,13 @@ public:
 
 	// Customer Convo
 	void SetCustomerCardConversation(ECardType _CardType, bool _IsPriceUp, int _RandomConversation);
-	void SetCustomerDealConvo(int _Price, int _RandomConvo);
-	void SetCustomerDealConvo2(int _RandomConvo);
+	void SetCustomerGoodDealConvo(int _Price, int _RandomConvo);
+	void SetCustomerGoodDealConvo2(int _RandomConvo);
+	void SetCustomerOfferPriceConvo(int _Price, int _RandomConvo);
+	void SetCustomerRefuseConvo(int _Price, int _RandomConvo);
+	void SetCustomerNotDealConvo(int _Price, int _RandomConvo); // Customer가 거래 포기
+	void SetCustomerPlayerNotDealConvo(int _RandomConvo); // Player가 거래 포기 시
+
 
 
 	

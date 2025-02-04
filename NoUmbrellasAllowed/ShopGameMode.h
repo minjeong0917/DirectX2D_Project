@@ -39,26 +39,27 @@ private:
 	void CustomerInOut(float _DeltaTime);
 	void CalculatorPushButtonCheck(float _DeltaTime);
 
-	float CardChangeTime = 0.0f;
 	bool IsCardChange = false;
 	int ChangeCardNum = 0;
 	bool IsMerchandisActive = false;
+
 
 	int CurPrice = 0;
 	int TotalPrice = 0;
 	bool IsCardHover = false;
 	int HoverCardNum = 0;
 	int IsPriceChange = 0;
-	float ChangePriceActiveTime = 0.0f;
 	int SlotIndex = 0;
 
 	int CustomerActive = 0;
 
 	bool IsExistCustomer = false;
-
+	bool IsPlayerNotDeal = false;
+	float PlayerNotDealTime = 0.0f;
+	float CardChangeTime = 0.0f;
+	float ChangePriceActiveTime = 0.0f;
 	float NotExistCustomerTime = 0.0f;
 	float CustomerEnterTime = 0.0f;
-
 	float DoorClosedTime = 0.0f;
 	float DoorOpenTime = 0.0f;
 
@@ -68,6 +69,7 @@ private:
 	float DoorAcc = 1.0f;
 	bool IsOut = false;
 	std::shared_ptr<class ACursor> Cursor;
+	int ConvoCount = 0;
 
 	float CustomerSpeed = 120;
 	std::shared_ptr<class UTimeEventComponent> TimeEventComponent;

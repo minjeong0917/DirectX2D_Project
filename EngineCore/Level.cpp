@@ -184,8 +184,11 @@ void ULevel::Render(float _DeltaTime)
 				{
 					continue;
 				}
+				if (IsCollisionRender == true)
+				{
+					_Collision->DebugRender(Camera->GetCameraComponent().get(), _DeltaTime);
+				}
 
-				_Collision->DebugRender(Camera->GetCameraComponent().get(), _DeltaTime);
 			}
 		}
 	}

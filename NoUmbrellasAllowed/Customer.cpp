@@ -228,9 +228,6 @@ ACustomer::ACustomer()
         }
     );
 
-
-
-
     FSM.ChangeState(CustomerFSM::Idle);
 
 }
@@ -293,12 +290,18 @@ void ACustomer::Angry(float _DeltaTime)
 }
 void ACustomer::Happy(float _DeltaTime)
 {
-
+    CustomerUpAndDown(_DeltaTime);
 }
+
 void ACustomer::Startled(float _DeltaTime)
 {
+    CustomerUpAndDown(_DeltaTime);
+}
+
+void ACustomer::CustomerUpAndDown(float _DeltaTime)
+{
     FVector DownLoc = { 0.0f,-2.0f,0.0f };
-    FVector UPLoc = {0.0f,3.0f,0.0f};
+    FVector UPLoc = { 0.0f,3.0f,0.0f };
     StartledTime += _DeltaTime;
 
     if (StartledTime < 0.1f)

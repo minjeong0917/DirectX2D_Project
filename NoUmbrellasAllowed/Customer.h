@@ -40,7 +40,9 @@ protected:
 	void Startled(float _DeltaTime);
 
 
+
 private:
+	void CustomerUpAndDown(float _DeltaTime);
 	void CreateAnimation(std::shared_ptr<class USpriteRenderer>& _Render, std::string_view _AnimationName, std::string_view _SpriteName, float _Scale, std::vector<int> _Indexs, std::vector<float> _Frame, bool _Loop = true);
 
 	std::shared_ptr<class USpriteRenderer> HeadRenderer;
