@@ -9,6 +9,9 @@
     <ClInclude Include="EngineWinImage.h" />
     <ClInclude Include="EngineThread.h" />
     <ClInclude Include="EngineWorkThreadPool.h" />
+    <ClInclude Include="EngineSound.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineWindow.cpp" />
@@ -19,10 +22,47 @@
     <ClCompile Include="EngineWinImage.cpp" />
     <ClCompile Include="EngineThread.cpp" />
     <ClCompile Include="EngineWorkThreadPool.cpp" />
+    <ClCompile Include="EngineSound.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
       <UniqueIdentifier>{2b5069a7-6611-48ca-bb99-e9076094ba9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{8d7b904f-58eb-49bf-ba73-2d7c7b7aca08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\FMOD">
+      <UniqueIdentifier>{167a7dc9-0ee6-46d3-9242-739fc40b3b3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\FMOD\Debug">
+      <UniqueIdentifier>{f5131d71-21e2-4c89-882a-c7bd1bd591d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\FMOD\Release">
+      <UniqueIdentifier>{0e2b073c-70db-444a-9d25-d36a1ca8d086}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\FMOD\Inc">
+      <UniqueIdentifier>{da408979-f553-41c8-86d8-3be8c5bf39bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{648c7557-c25a-4d63-9ae3-4615149d08c7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="ThirdParty\FMOD\Debug\fmodL_vc.lib">
+      <Filter>ThirdParty\FMOD\Debug</Filter>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="ThirdParty\FMOD\Debug\fmodL.dll">
+      <Filter>ThirdParty\FMOD\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FMOD\Release\fmod.dll">
+      <Filter>ThirdParty\FMOD\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FMOD\Release\fmod_vc.lib">
+      <Filter>ThirdParty\FMOD\Release</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>
