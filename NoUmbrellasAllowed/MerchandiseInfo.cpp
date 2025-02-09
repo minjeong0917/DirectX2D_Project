@@ -79,7 +79,7 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
 
             AllBasicCard[2].CardType = ECardType::CONDITION;
             AllBasicCard[2].CardColor = ECardColor::Blue;
-            AllBasicCard[2].CardNameNum = 0; // 완벽한 상태
+            AllBasicCard[2].CardNameNum = 1; // 완벽한 상태
 
 
             StatusLevel = 24.0f;
@@ -97,16 +97,16 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
 
             AllBasicCard[1].CardType = ECardType::TEXTURE;
             AllBasicCard[1].CardColor = ECardColor::Green;
-            AllBasicCard[1].CardNameNum = 9;
+            AllBasicCard[1].CardNameNum = 3;
 
             AllBasicCard[2].CardType = ECardType::CONDITION;
             AllBasicCard[2].CardColor = ECardColor::Blue;
-            AllBasicCard[2].CardNameNum = 0; // 완벽한 상태
+            AllBasicCard[2].CardNameNum = 3; // 완벽한 상태
 
 
             StatusLevel = 24.0f;
-            Texture = 9;
-            MerchandiseName = "엄마가 준 가방";
+            Texture = 3;
+            MerchandiseName = "가방";
 
         }
         if (_Index == 4)
@@ -119,16 +119,16 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
 
             AllBasicCard[1].CardType = ECardType::TEXTURE;
             AllBasicCard[1].CardColor = ECardColor::Green;
-            AllBasicCard[1].CardNameNum = 9;
+            AllBasicCard[1].CardNameNum = 19;
 
             AllBasicCard[2].CardType = ECardType::CONDITION;
             AllBasicCard[2].CardColor = ECardColor::Blue;
-            AllBasicCard[2].CardNameNum = 0; // 완벽한 상태
+            AllBasicCard[2].CardNameNum = 1; // 완벽한 상태
 
 
             StatusLevel = -1.0f;
-            Texture = 9;
-            MerchandiseName = "엄마가 준 가방";
+            Texture = 19;
+            MerchandiseName = "가방";
 
         }
         if (_Index == 5)
@@ -147,9 +147,9 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
             AllBasicCard[2].CardColor = ECardColor::Blue;
             AllBasicCard[2].CardNameNum = 0; // 완벽한 상태
 
-            StatusLevel = 24.0f;
+            StatusLevel = -24.0f;
             Texture = 9;
-            MerchandiseName = "엄마가 준 가방";
+            MerchandiseName = "가방";
 
         }
         break;
@@ -176,7 +176,7 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
 
             StatusLevel = 36.0f;
             Texture = 12;
-            MerchandiseName = "아빠가 준 우산";
+            MerchandiseName = "하늘색 우산";
         }
         if (_Index == 1)
         {
@@ -196,8 +196,8 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
 
 
             StatusLevel = 24.0f;
-            Texture = 9;
-            MerchandiseName = "엄마가 준 우산";
+            Texture = 1;
+            MerchandiseName = "노란색 우산";
 
         }
         if (_Index == 2)
@@ -217,9 +217,9 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
             AllBasicCard[2].CardNameNum = 0; // 완벽한 상태
 
 
-            StatusLevel = 24.0f;
-            Texture = 9;
-            MerchandiseName = "엄마가 준 우산";
+            StatusLevel = 12.0f;
+            Texture = 11;
+            MerchandiseName = "보라색 우산";
 
         }
         if (_Index == 3)
@@ -239,9 +239,9 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
             AllBasicCard[2].CardNameNum = 0; // 완벽한 상태
 
 
-            StatusLevel = 24.0f;
-            Texture = 9;
-            MerchandiseName = "엄마가 준 우산";
+            StatusLevel = -2.0f;
+            Texture = 18;
+            MerchandiseName = "우산";
 
         }
         if (_Index == 4)
@@ -262,7 +262,7 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
 
 
             StatusLevel = -1.0f;
-            Texture = 9;
+            Texture = 14;
             MerchandiseName = "엄마가 준 우산";
 
         }
@@ -282,9 +282,9 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
             AllBasicCard[2].CardColor = ECardColor::Blue;
             AllBasicCard[2].CardNameNum = 0; // 완벽한 상태
 
-            StatusLevel = 24.0f;
-            Texture = 9;
-            MerchandiseName = "엄마가 준 우산";
+            StatusLevel = 2.0f;
+            Texture = 16;
+            MerchandiseName = "초록색 우산";
 
         }
 

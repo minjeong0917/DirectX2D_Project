@@ -1,5 +1,6 @@
 #pragma once
 #include "ContentsEnums.h"
+#include <EnginePlatform/EngineSound.h>
 
 // Ό³Έν :
 class AShopGameMode : public AGameMode
@@ -23,6 +24,9 @@ protected:
 	void Tick(float _DeltaTime);
 
 private:
+
+	USoundPlayer SoundPlayer;
+
 	void PeopleMove(float _DeltaTime, std::shared_ptr<class AUI> _Customer, bool _IsRight);
 	void PeopleCreateAni(std::shared_ptr<class AUI> _Customer);
 	void RandomPeopleAnimation(std::shared_ptr<class AUI> _Customer);

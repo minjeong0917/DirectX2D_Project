@@ -1,5 +1,6 @@
 #pragma once
 #include "ContentsEnums.h"
+#include <EnginePlatform/EngineSound.h>
 
 // Ό³Έν :
 class ACard : public AActor
@@ -76,6 +77,9 @@ protected:
 	void OnCollisionEnter(class UCollision* _This, class UCollision* _Other);
 	void OnCollisionEnd(class UCollision* _This, class UCollision* _Other);
 private:
+	USoundPlayer SoundPlayer;
+
+
 	bool IsEnter = false;
 	int percent = 0;
 	ECardColor CurCardColor = ECardColor::Gray;

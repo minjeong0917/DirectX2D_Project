@@ -1,4 +1,5 @@
 #pragma once
+#include <EnginePlatform/EngineSound.h>
 
 // Ό³Έν :
 class ATitleGameMode : public AGameMode
@@ -20,8 +21,10 @@ protected:
 	void BeginPlay();
 
 	void Tick(float _DeltaTime);
+	void LevelChangeEnd();
 
 private:
+	USoundPlayer SoundPlayer;
 	std::shared_ptr<class ALogo> Logo;
 	std::shared_ptr<class AUI> Background;
 	std::shared_ptr<class ACursor> Cursor;

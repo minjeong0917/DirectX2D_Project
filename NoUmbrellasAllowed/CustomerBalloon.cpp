@@ -39,14 +39,24 @@ void ACustomerBalloon::Tick(float _DeltaTime)
         static float Timer = 0.0f;
         Timer += _DeltaTime;
 
+        static float SoundTimer = 0.0f;
+        SoundTimer += _DeltaTime;
+
+
         if (Timer >= 0.01f && CurrentTextIndex < FullText.size())
         {
             Timer = 0.0f;
             CurrentDisplayedText += FullText[CurrentTextIndex];
             CustomerText->SetText(CurrentDisplayedText);
             CurrentTextIndex++;
-        }
 
+
+        }
+        if (SoundTimer > 0.1f)
+        {
+            SoundTimer = 0.0f;
+            SoundPlayer = UEngineSound::Play("Blip_Neutral.wav");
+        }
         if (CurrentTextIndex >= FullText.size())
         {
             IsStartEffect = false;

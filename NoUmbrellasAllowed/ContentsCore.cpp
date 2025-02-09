@@ -10,6 +10,7 @@
 #include "ShopHUD.h"
 #include "TitleHUD.h"
 #include "Bob.h"
+#include <EnginePlatform/EngineSound.h>
 
 CreateContentsCoreDefine(UContentsCore);
 
@@ -32,23 +33,41 @@ void UContentsCore::EngineStart(UEngineInitData& _Data)
 
     // Font
     {
+        {
+            UEngineDirectory Dir;
+            if (false == Dir.MoveParentToDirectory("NoUmbrellasAllowedResources"))
+            {
+                MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+                return;
+            }
+            Dir.Append("Fonts");
+
+            UEngineFile FontFiles = Dir.GetFile("PFStardust.ttf");
+
+            UEngineFont::Load("PFttf", FontFiles.GetPathToString());
+        }
+
+        UEngineFont::Load("PF", "PF Stardust");
+        UEngineFont::Load("PFEXBold", "PF Stardust ExtraBold");
+        UEngineFont::Load("OrangeKid", "Orange Kid");
+        UEngineFont::Load("DungGeunMo", "DungGeunMo");
+    }
+    {
         UEngineDirectory Dir;
         if (false == Dir.MoveParentToDirectory("NoUmbrellasAllowedResources"))
         {
             MSGASSERT("리소스 폴더를 찾지 못했습니다.");
             return;
         }
-        Dir.Append("Fonts");
+        Dir.Append("Sounds");
+        std::vector<UEngineFile> ImageFiles = Dir.GetAllFile(true, { ".wav", ".mp3" });
 
-        UEngineFile FontFiles = Dir.GetFile("PFStardust.ttf");
-
-        UEngineFont::Load("PFttf", FontFiles.GetPathToString());
+        for (size_t i = 0; i < ImageFiles.size(); i++)
+        {
+            std::string FilePath = ImageFiles[i].GetPathToString();
+            UEngineSound::Load(FilePath);
+        }
     }
-
-    UEngineFont::Load("PF", "PF Stardust");
-    UEngineFont::Load("PFEXBold", "PF Stardust ExtraBold");
-    UEngineFont::Load("OrangeKid", "Orange Kid");
-    UEngineFont::Load("DungGeunMo", "DungGeunMo");
 
 
     UEngineDirectory Dir;

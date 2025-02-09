@@ -234,7 +234,8 @@ void AShopGameMode::BeginPlay()
 {
     AActor::BeginPlay();
     UEngineRandom Random;
-
+    SoundPlayer = UEngineSound::Play("Buy or Bye.wav");
+    SoundPlayer.Loop(5);
 
     {
         WalkCustomer1->SetRelativeLocation({ 840.0f, -300.0f, 800.0f });
@@ -317,7 +318,7 @@ void AShopGameMode::Tick(float _DeltaTime)
             CustomerBalloonAcitve = true;
             IsPlayerOffer = false;
         }
-        else if (std::abs(FairPrice) < CardPrice * 0.25 && ConvoCount == 1)
+        else if (std::abs(FairPrice) < CardPrice * 0.25 && ConvoCount > 0)
         {
             int RandomConvo = Random.RandomInt(0, 5);
 
@@ -330,6 +331,17 @@ void AShopGameMode::Tick(float _DeltaTime)
             CustomerBalloonAcitve = true;
             IsPlayerOffer = false;
         }
+        //else if (ConvoCount >= 3)
+        //{
+        //    int RandomConvo = Random.RandomInt(0, 9);
+
+        //    CustomerBalloon->SetActive(true);
+        //    ConversationList::GetInst().SetCustomerNotDealConvo(OfferPrice, RandomConvo);
+        //    CustomerBalloon->SetCustomerBalloonAndText();
+
+        //    CustomerBalloonAcitve = true;
+        //    IsPlayerOffer = false;
+        //}
         else if (std::abs(FairPrice) >= CardPrice * 0.25)
         {
             int RandomConvo = Random.RandomInt(0, 6);
@@ -341,6 +353,7 @@ void AShopGameMode::Tick(float _DeltaTime)
             IsPlayerOffer = false;
             ConvoCount += 1;
         }
+
     }
 }
 
@@ -361,31 +374,31 @@ void AShopGameMode::CalculatorPushButtonCheck(float _DeltaTime)
         PlayerBalloonAcitve = true;
         IsPlayerOffer = true;
     }
-    else if (Calculator->GetIsPushDeal() == true && IsOut == false /*UEngineInput::IsPress('I')*/)
-    {
-        IsOut = true;
-        Calculator->SetIsPushDeal(false);
+    //else if (Calculator->GetIsPushDeal() == true && IsOut == false /*UEngineInput::IsPress('I')*/)
+    //{
+    //    IsOut = true;
+    //    Calculator->SetIsPushDeal(false);
 
-        std::string GetCurSprite = Merchandise->GetSpriteName();
-        std::string CurMerchandiseName = MerchandiseInfo::GetInst().GetMerchandiseName();
-        int GetSpriteIndex = Merchandise->GetSpriteIndex();
-        int TotalCardCount = CurCardCount;
-        FVector SpriteScale = MerchandiseInfo::GetInst().GetSpriteScale();
-        for (int i = 0; i < InvenInfo::GetInst().GetAllSlotInfos().size(); i++)
-        {
-            if (InvenInfo::GetInst().GetAllSlotInfos()[SlotIndex].MerchandiseName != "NONE")
-            {
-                SlotIndex += 1;
-            }
-        }
+    //    std::string GetCurSprite = Merchandise->GetSpriteName();
+    //    std::string CurMerchandiseName = MerchandiseInfo::GetInst().GetMerchandiseName();
+    //    int GetSpriteIndex = Merchandise->GetSpriteIndex();
+    //    int TotalCardCount = CurCardCount;
+    //    FVector SpriteScale = MerchandiseInfo::GetInst().GetSpriteScale();
+    //    for (int i = 0; i < InvenInfo::GetInst().GetAllSlotInfos().size(); i++)
+    //    {
+    //        if (InvenInfo::GetInst().GetAllSlotInfos()[SlotIndex].MerchandiseName != "NONE")
+    //        {
+    //            SlotIndex += 1;
+    //        }
+    //    }
 
-        InvenInfo::GetInst().SetSlotInfo(SlotIndex, CurMerchandiseName, TotalCardCount, GetCurSprite, GetSpriteIndex, Calculator->GetDealPrice(), TotalPrice, SpriteScale);
-        LoadTotalCardInfo(SlotIndex);
+    //    InvenInfo::GetInst().SetSlotInfo(SlotIndex, CurMerchandiseName, TotalCardCount, GetCurSprite, GetSpriteIndex, Calculator->GetDealPrice(), TotalPrice, SpriteScale);
+    //    LoadTotalCardInfo(SlotIndex);
 
-        CurCardCount = 0;
-        SlotIndex = 0;
-        Calculator->SetClear();
-    }
+    //    CurCardCount = 0;
+    //    SlotIndex = 0;
+    //    Calculator->SetClear();
+    //}
     else if (Calculator->GetIsPushNotDeal() == true && IsOut == false)
     {
 

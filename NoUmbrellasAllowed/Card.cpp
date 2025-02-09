@@ -77,6 +77,8 @@ void ACard::Tick(float _DeltaTime)
 void ACard::OnCollisionEnter(UCollision* _This, UCollision* _Other)
 {
     IsEnter = true;
+    SoundPlayer = UEngineSound::Play("DM-CGS-20 - Snap.wav");
+
 }
 
 void ACard::OnCollisionEnd(UCollision* _This, UCollision* _Other)

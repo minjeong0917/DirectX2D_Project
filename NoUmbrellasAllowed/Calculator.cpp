@@ -172,14 +172,14 @@ void ACalculator::ButtonClickCheck()
         }
         else if (CurNum == 13) // 거래수락
         {
-            if (IsMerchandiseActive == true)
-            {
-                int CurGold = PlayerInfo::GetInst().GetGold();
-                IsPushDeal = true;
+            //if (IsMerchandiseActive == true)
+            //{
+            //    int CurGold = PlayerInfo::GetInst().GetGold();
+            //    IsPushDeal = true;
 
-                PlayerInfo::GetInst().SetGold(CurGold - DealPrice);
+            //    PlayerInfo::GetInst().SetGold(CurGold - DealPrice);
 
-            }
+            //}
 
         }
         PriceText->SetText(EntirePriceText);

@@ -1,4 +1,5 @@
 #pragma once
+#include <EnginePlatform/EngineSound.h>
 
 // Ό³Έν :
 class APlayerBalloon : public AActor
@@ -21,6 +22,9 @@ protected:
 	void Tick(float _DeltaTime);
 
 private:
+	USoundPlayer SoundPlayer;
+
+
 	float BoxXScale = 0.0f;
 	std::string Text = "NONE";
 

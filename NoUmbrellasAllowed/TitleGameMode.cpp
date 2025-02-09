@@ -201,6 +201,7 @@ ATitleGameMode::~ATitleGameMode()
 void ATitleGameMode::BeginPlay()
 {
 	AActor::BeginPlay();
+	SoundPlayer = UEngineSound::Play("No Umbrellas Allowed.wav");
 
 }
 
@@ -221,3 +222,8 @@ void ATitleGameMode::Tick(float _DeltaTime)
 
 }
 
+void ATitleGameMode::LevelChangeEnd()
+{
+	AGameMode::LevelChangeEnd();
+	SoundPlayer.Off();
+}
