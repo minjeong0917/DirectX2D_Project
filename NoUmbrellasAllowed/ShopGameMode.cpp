@@ -23,13 +23,13 @@
 #include "Inventory.h"
 #include "InvenInfo.h"
 #include "MerchandiseMaterial.h"
+#include "PlayerInfo.h"
 
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/CameraActor.h>
 #include <EngineCore/EngineCamera.h>
 #include <EngineCore/TimeEventComponent.h>
 #include <EngineBase/EngineRandom.h>
-
 AShopGameMode::AShopGameMode()
 {
     TimeEventComponent = CreateDefaultSubObject<UTimeEventComponent>();
@@ -281,6 +281,8 @@ void AShopGameMode::Tick(float _DeltaTime)
         std::string CurMerchandiseName = MerchandiseInfo::GetInst().GetMerchandiseName();
         int GetSpriteIndex = Merchandise->GetSpriteIndex();
         int TotalCardCount = CurCardCount;
+        int OfferPrice = Calculator->GetDealPrice();
+
         FVector SpriteScale = MerchandiseInfo::GetInst().GetSpriteScale();
         for (int i = 0; i < InvenInfo::GetInst().GetAllSlotInfos().size(); i++)
         {
@@ -292,6 +294,10 @@ void AShopGameMode::Tick(float _DeltaTime)
 
         InvenInfo::GetInst().SetSlotInfo(SlotIndex, CurMerchandiseName, TotalCardCount, GetCurSprite, GetSpriteIndex, Calculator->GetDealPrice(), TotalPrice, SpriteScale);
         LoadTotalCardInfo(SlotIndex);
+
+        int CurGold = PlayerInfo::GetInst().GetGold();
+
+         PlayerInfo::GetInst().SetGold(CurGold - OfferPrice);
 
         CurCardCount = 0;
         SlotIndex = 0;
