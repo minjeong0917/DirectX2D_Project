@@ -28,7 +28,7 @@ private:
 	std::shared_ptr<class ALogo> Logo;
 	std::shared_ptr<class AUI> Background;
 	std::shared_ptr<class ACursor> Cursor;
+	std::shared_ptr<class ATitleButton> TitleButton;
 	std::vector<std::shared_ptr<class AUI>> AllPlants;
-
 };
 

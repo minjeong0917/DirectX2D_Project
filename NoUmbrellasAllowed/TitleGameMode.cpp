@@ -14,6 +14,7 @@
 #include "Cursor.h"
 #include<EnginePlatform/EngineWindow.h>
 #include<EngineBase/EngineDebug.h>
+#include"TitleButton.h"
 
 class TestWindow : public UEngineGUIWindow
 {
@@ -40,6 +41,9 @@ ATitleGameMode::ATitleGameMode()
 {
 	FVector Size = UEngineCore::GetScreenScale();
 	GetWorld()->CreateCollisionProfile("Cursor");
+	GetWorld()->CreateCollisionProfile("TitleButton");
+
+	GetWorld()->LinkCollisionProfile("TitleButton", "Cursor");
 
 	float UIYPos = -310.0f;
 	{
@@ -187,11 +191,16 @@ ATitleGameMode::ATitleGameMode()
 
 	Cursor = GetWorld()->SpawnActor<ACursor>();
 
+	TitleButton = GetWorld()->SpawnActor<ATitleButton>();
+	TitleButton->SetActorLocation({ -500.0f,-350.f,1.0f });
+
 	// Camera
 	std::shared_ptr<ACameraActor> Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation({ 0.0f, 0.0f, -1000.0f, 1.0f });
 	Camera->GetCameraComponent()->SetZSort(0, true);
 	UEngineGUI::CreateGUIWindow<TestWindow>("TestWindow");
+
+
 
 }
 
@@ -211,6 +220,14 @@ void ATitleGameMode::Tick(float _DeltaTime)
 	if (UEngineInput::IsPress(VK_SPACE))
 	{
 		UEngineCore::OpenLevel("Shoplevel");
+	}
+	if (TitleButton->GetIsEnter() == true)
+	{
+		if (UEngineInput::IsPress(VK_LBUTTON))
+		{
+			UEngineCore::OpenLevel("Shoplevel");
+
+		}
 	}
 
 

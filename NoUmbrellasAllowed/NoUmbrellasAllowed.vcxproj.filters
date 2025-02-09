@@ -109,6 +109,9 @@
     <ClCompile Include="CustomerBalloon.cpp">
       <Filter>Shop\Balloons</Filter>
     </ClCompile>
+    <ClCompile Include="TitleButton.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleGameMode.h">
@@ -221,6 +224,9 @@
     </ClInclude>
     <ClInclude Include="CustomerBalloon.h">
       <Filter>Shop\Balloons</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleButton.h">
+      <Filter>Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
