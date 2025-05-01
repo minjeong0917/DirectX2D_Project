@@ -228,6 +228,42 @@ ACustomer::ACustomer()
         }
     );
 
+    FSM.CreateState(CustomerFSM::Angry, std::bind(&ACustomer::Startled, this, std::placeholders::_1),
+        [this]()
+        {
+            Idle(0.0f);
+            // StartledÀÓ..¹Ù²ã¾ßÇÔ..
+            if (CurEyesState == 1)
+            {
+                RightEyeRenderer->AddWorldLocation({ 6.0f, 0.0f,0.0f });
+                LeftEyeRenderer->AddWorldLocation({ -6.0f, 0.0f,0.0f });
+            }
+            else if (CurEyesState == 2)
+            {
+                RightEyeRenderer->AddWorldLocation({ 3.0f, -3.0f,0.0f });
+                LeftEyeRenderer->AddWorldLocation({ -3.0f,-3.0f,0.0f });
+            }
+            else if (CurEyesState == 3)
+            {
+                RightEyeRenderer->AddWorldLocation({ 3.0f, -3.0f,0.0f });
+                LeftEyeRenderer->AddWorldLocation({ -3.0f,-3.0f,0.0f });
+            }
+            else if (CurEyesState == 4)
+            {
+                RightEyeRenderer->AddWorldLocation({ 5.0f, 0.0f,0.0f });
+                LeftEyeRenderer->AddWorldLocation({ -5.0f,0.0f,0.0f });
+            }
+            else if (CurEyesState == 5)
+            {
+                RightEyeRenderer->AddWorldLocation({ 4.0f, 0.0f,0.0f });
+                LeftEyeRenderer->AddWorldLocation({ -4.0f,0.0f,0.0f });
+            }
+            RightEyeRenderer->ChangeAnimation("Startled_00" + std::to_string(CurEyesState));
+            LeftEyeRenderer->ChangeAnimation("Startled_00" + std::to_string(CurEyesState));
+            MouseRenderer->ChangeAnimation("Startled_00" + std::to_string(CurMouseState));
+        }
+    );
+
     FSM.ChangeState(CustomerFSM::Idle);
 
 }
@@ -286,6 +322,7 @@ void ACustomer::Idle(float _DeltaTime)
 
 void ACustomer::Angry(float _DeltaTime)
 {
+    CustomerUpAndDown(_DeltaTime);
 
 }
 void ACustomer::Happy(float _DeltaTime)

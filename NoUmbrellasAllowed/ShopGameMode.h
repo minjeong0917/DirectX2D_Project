@@ -43,6 +43,21 @@ private:
 	void CustomerInOut(float _DeltaTime);
 	void CalculatorPushButtonCheck(float _DeltaTime);
 
+	void CheckSuccessDeal();
+	void DoDeal();
+	void HandleSuccessfulDeal(int OfferPrice, class UEngineRandom& Random);
+	void HandleRefuseDeal(int OfferPrice, class UEngineRandom& Random);
+	void HandleCustomerGiveUp(int OfferPrice, class UEngineRandom& Random);
+
+
+
+	float CustomerMinAcceptPercent = 0.0f;
+	int CustomerMinAcceptPrice = 0;
+	int CustomerMaxAttempts = 3;
+	int CustomerAttemptCount = 0;
+
+
+
 	bool IsCardChange = false;
 	int ChangeCardNum = 0;
 	bool IsMerchandisActive = false;

@@ -25,6 +25,7 @@ public:
 	std::string GetSpriteName();
 	int GetSpriteIndex();
 	void SetSprite(std::string _Sprite, int _Index);
+	float GetRealPrice();
 
 
 protected:
@@ -38,6 +39,20 @@ private:
 	bool IsApear = false;
 	float Speed = 0.5f;
 	float Acc = 1.0f;
+	int RealPrice = 0;
+
+
+	float CheckRealStatusPrice();
+	float CheckRealTexturePercent();
+
+
+
+	// 35이상 -> 완벽 , 31-15 -> 조금손상 , 15 - -20 -> 심한손상 , 나머지 가치상실
+	float PerfectStatus = 35.0f;
+	float LittleDamageStatus = 15.0f;
+	float DamageStatus = -20.0f;
+	float LossValueStatus = -30.0f;
+
 	std::shared_ptr<class USpriteRenderer> MerchandiseRender;
 	std::shared_ptr<class UCollision> MerchandiseCollision;
 

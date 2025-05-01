@@ -295,3 +295,4 @@ void MerchandiseInfo::SetMerchandiseInfo(bool _IsFake, EMerchandiseType _Merchan
 
 
 }
+ 
