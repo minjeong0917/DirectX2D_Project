@@ -68,8 +68,8 @@ void APlayerBalloon::Tick(float _DeltaTime)
 }
 void APlayerBalloon::SetPlayerBalloonAndText()
 {
-    BoxXScale = ConversationList::GetInst().GetPlayerBalloonXSize();
     FullText = ConversationList::GetInst().GetPlayerConversation();
+    BoxXScale = FullText.size() * 10 + 30;
 
     PlayerBaloonRender->SetScale3D({ BoxXScale, 117.0f, 1.0f });
     PlayerText->SetWorldLocation({ 30.0f - BoxXScale/2, -415.0f, -820.0f });

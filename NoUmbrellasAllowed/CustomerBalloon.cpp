@@ -66,9 +66,10 @@ void ACustomerBalloon::Tick(float _DeltaTime)
 }
 void ACustomerBalloon::SetCustomerBalloonAndText()
 {
-    BoxXScale = ConversationList::GetInst().GetCustomerBalloonXSize();
-    BoxYScale = ConversationList::GetInst().GetCustomerBalloonYSize();
     FullText = ConversationList::GetInst().GetCustomerConversation();
+
+    BoxXScale = FullText.size() * 10 + 30;
+    BoxYScale = ConversationList::GetInst().GetCustomerBalloonYSize();
 
     CustomerBaloonRender->SetScale3D({ BoxXScale, BoxYScale , 1.0f });
     CustomerText->SetWorldLocation({ 30.0f - BoxXScale / 2, 210.0f + BoxYScale , -820.0f });

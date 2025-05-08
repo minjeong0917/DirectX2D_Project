@@ -159,6 +159,7 @@ void ABook::Tick(float _DeltaTime)
         }
     }
 }
+
 void ABook::CollsionSetting(int _Page)
 {
     BookPageInfo::GetInst().SetPageInfo(_Page);
@@ -172,7 +173,6 @@ void ABook::CollsionSetting(int _Page)
         
         if (BookPageInfo::GetInst().GetHasNextPage() == false)
         {
-
             FVector Loc = BookPageInfo::GetInst().GetAllCollsionLocation(i);
             FVector Scale = BookPageInfo::GetInst().GetAllCollisionScale();
             AllBookIconRender[i]->SetActive(true);
@@ -180,10 +180,8 @@ void ABook::CollsionSetting(int _Page)
             AllBookIconRender[i]->SetScale3D(Scale);
 
             BookIconEnter(i);
-
         }
     }
-  
 }
 
 void ABook::OnCollisionEnter(UCollision* _This, UCollision* _Other)

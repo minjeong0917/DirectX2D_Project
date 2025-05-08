@@ -32,5 +32,4 @@ enum class CustomerFSM : int8
 	Startled,
 	Happy,
 	Angry,
-
 };

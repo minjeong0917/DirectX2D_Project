@@ -19,6 +19,11 @@ public:
 	{
 		return IsEnter;
 	}
+	void SetButtonIsEnter(bool _Value)
+	{
+		IsEnter = _Value;
+	}
+
 
 	int GetCurButtonIndex()
 	{
@@ -28,6 +33,7 @@ public:
 	{
 		IsMerchandiseActive = _IsMerchandiseActive;
 	}
+
 
 protected:
 	void Tick(float _DeltaTime);
@@ -64,6 +70,8 @@ private:
 
 	bool IsMerchandiseActive = false;
 	bool IsEnter = false;
+	bool IsPushEnter = false;
+
 	int CurButtonIndex = 0;
 	std::vector<std::shared_ptr<class USpriteRenderer>> AllCalculatorButtonRenders;
 };

@@ -211,7 +211,7 @@ void ACalculatorButton::Tick(float _DeltaTime)
 void ACalculatorButton::OnCollisionEnter(UCollision* _This, UCollision* _Other)
 {
 
-    IsEnter = true;
+    //IsEnter = true;
 
 }
 
@@ -234,6 +234,7 @@ void ACalculatorButton::OnCollisionStay(class UCollision* _This, class UCollisio
         }
         else if (Index == 11)
         {
+            IsPushEnter = true;
             AllCalculatorButtonRenders[Index]->SetSprite("Buttons", 5);
         }
         else if (Index == 12)
@@ -276,7 +277,7 @@ void ACalculatorButton::OnCollisionEnd(UCollision* _This, UCollision* _Other)
 {
 
     IsEnter = false;
-
+    IsPushEnter = false;
 
     std::string EndProfileName = _This->GetCollisionProfileName();
 
